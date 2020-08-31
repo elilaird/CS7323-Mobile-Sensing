@@ -10,6 +10,6 @@
 
 @interface ViewController : UIViewController
 
-
+- (NSString *) getDataFrom:(NSString *)url;
 @end
 
