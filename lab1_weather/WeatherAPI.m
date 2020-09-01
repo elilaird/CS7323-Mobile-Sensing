@@ -10,48 +10,13 @@
 
 @interface WeatherAPI ()
 
-//@property (strong, nonatomic) NSString* url;
-//@property (strong, nonatomic) NSString* apiString;
-
-- (NSString *) getDataFrom:(NSString *)targetUrl;
-
+- (NSString *) getDataFor:(NSString *)location;
 
 @end
 
 @implementation WeatherAPI
 
-//@synthesize url = _url;
-//@synthesize apiString = _apiString;
-
-//-(void)url:(NSString *)url {
-//    if(!_url)
-//        _url = @"https://api.openweathermap.org/data/2.5/weather";
-//}
-//
-//-(NSString *)apiString{
-//    if(!_apiString)
-//        _apiString = @"dd12273b23df1d19ad59652762894830";
-//    return _apiString;
-//}
-
-//taken from here: https://stackoverflow.com/questions/9404104/simple-objective-c-get-request
-- (NSString *) getDataFrom:(NSString *)targetUrl{
-    __block NSString *myString = nil;
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"GET"];
-    [request setURL:[NSURL URLWithString:targetUrl]];
-
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
-      ^(NSData * _Nullable data,
-        NSURLResponse * _Nullable response,
-        NSError * _Nullable error) {
-
-          myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-          NSLog(@"Data received: %@", myString);
-    }] resume];
-    
-    return myString;
-}
+//* Private Facing Functions *
 
 - (NSString *) getDataFor:(NSString *)location{
     __block NSString *jsonData = nil;
@@ -62,7 +27,7 @@
     NSString *appid = @"dd12273b23df1d19ad59652762894830";
     NSString *targetUrl = [NSString stringWithFormat:@"%@?q=%@&appid=%@", baseUrl, location, appid];
     
-    NSLog(targetUrl);
+    NSLog(@"%@", targetUrl);
     
     [request setURL:[NSURL URLWithString:targetUrl]];
     
@@ -75,13 +40,12 @@
           NSLog(@"Data received: %@", jsonData);
     }] resume];
     
-
-    
     return jsonData;
 }
 
-+ (NSString *) test:(NSString *)str {
-    return @"test";
+//* Public Facing Methods *
+- (NSString *) getWeatherFor:(NSString *)location{
+    return [self getDataFor:location];
 }
 
 @end

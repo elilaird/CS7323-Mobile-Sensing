@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		05B3A2CF24F84E7200016A78 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3A2CE24F84E7200016A78 /* AppDelegate.m */; };
 		05B3A2D224F84E7200016A78 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3A2D124F84E7200016A78 /* SceneDelegate.m */; };
-		05B3A2D524F84E7200016A78 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3A2D424F84E7200016A78 /* ViewController.m */; };
 		05B3A2D824F84E7200016A78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05B3A2D624F84E7200016A78 /* Main.storyboard */; };
 		05B3A2DA24F84E7400016A78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05B3A2D924F84E7400016A78 /* Assets.xcassets */; };
 		05B3A2DD24F84E7400016A78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05B3A2DB24F84E7400016A78 /* LaunchScreen.storyboard */; };
@@ -43,8 +42,6 @@
 		05B3A2CE24F84E7200016A78 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		05B3A2D024F84E7200016A78 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		05B3A2D124F84E7200016A78 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		05B3A2D324F84E7200016A78 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		05B3A2D424F84E7200016A78 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		05B3A2D724F84E7200016A78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		05B3A2D924F84E7400016A78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05B3A2DC24F84E7400016A78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -114,8 +111,6 @@
 				05B3A2CE24F84E7200016A78 /* AppDelegate.m */,
 				05B3A2D024F84E7200016A78 /* SceneDelegate.h */,
 				05B3A2D124F84E7200016A78 /* SceneDelegate.m */,
-				05B3A2D324F84E7200016A78 /* ViewController.h */,
-				05B3A2D424F84E7200016A78 /* ViewController.m */,
 				05B3A2D624F84E7200016A78 /* Main.storyboard */,
 				05B3A2D924F84E7400016A78 /* Assets.xcassets */,
 				05B3A2DB24F84E7400016A78 /* LaunchScreen.storyboard */,
@@ -278,7 +273,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05B3A2D524F84E7200016A78 /* ViewController.m in Sources */,
 				45A38DB824FDFBDE00DEE52A /* WeatherAPI.m in Sources */,
 				45A38DB324FDF20A00DEE52A /* WeatherTableViewController.swift in Sources */,
 				05B3A2CF24F84E7200016A78 /* AppDelegate.m in Sources */,

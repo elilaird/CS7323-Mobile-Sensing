@@ -9,21 +9,31 @@
 import UIKit
 
 
-class WeatherTableViewController: UITableViewController {
+class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
 
-  
+
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    var weatherAPI = WeatherAPI()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         
-        var weatherAPI = WeatherAPI()
-        print(weatherAPI.getDataFor("Dallas"))
+        searchBar.delegate = self
+        
+        print(weatherAPI.getWeatherFor("Dallas"))
 
     }
 
     // MARK: - Table view data source
     
+     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let locationString = searchBar.text, !locationString.isEmpty{
+            print(weatherAPI.getWeatherFor(locationString))
+            //print(locationString)
+        }
+    }
 
     
     func getWeatherForLocation(location:String) {

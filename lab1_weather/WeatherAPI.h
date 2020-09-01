@@ -12,8 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WeatherAPI : NSObject
 
-    - (NSString *) getDataFor:(NSString *)location;
-    + (NSString *) test:(NSString *)str;
+    - (NSString *) getWeatherFor:(NSString *)location;
 
 @end
 
