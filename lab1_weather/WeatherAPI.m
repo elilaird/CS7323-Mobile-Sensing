@@ -25,9 +25,11 @@
     
     NSString *baseUrl = @"https://api.openweathermap.org/data/2.5/weather";
     NSString *appid = @"dd12273b23df1d19ad59652762894830";
-    NSString *targetUrl = [NSString stringWithFormat:@"%@?q=%@&appid=%@", baseUrl, location, appid];
+    NSString *targetUrl = [[NSString stringWithFormat:@"%@?q=%@&appid=%@", baseUrl, location, appid] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
-    NSLog(@"%@", targetUrl);
+    NSLog(@"Target Url: %@", targetUrl);
+    
+  
     
     [request setURL:[NSURL URLWithString:targetUrl]];
     
