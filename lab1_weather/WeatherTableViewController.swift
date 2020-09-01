@@ -38,6 +38,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
      
     @IBAction func recognizeTopGesture(_ sender: Any) {
         searchBar.resignFirstResponder()
+        if let locationString = searchBar.text, !locationString.isEmpty{
+            print(weatherAPI.getWeatherFor(locationString))
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
