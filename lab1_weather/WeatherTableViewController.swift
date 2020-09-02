@@ -21,8 +21,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         
         searchBar.delegate = self
         
-        print(weatherAPI.getWeatherFor("Dallas"))
-
+        print(weatherAPI.getCurrentWeather(for: "Dallas"))
+        
     }
 
     // MARK: - Table view data source
@@ -30,7 +30,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let locationString = searchBar.text, !locationString.isEmpty{
-            print(weatherAPI.getWeatherFor(locationString))
+            print(weatherAPI.getCurrentWeather(for: locationString))
             //print(locationString)
         }
     }

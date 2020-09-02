@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+//@import Foundation
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WeatherAPI : NSObject
 
-    - (NSString *) getWeatherFor:(NSString *)location;
+- (NSString *) getWeatherFor:(NSString *)location;
+- (NSDictionary *) getCurrentWeatherFor:(NSString *) location;
 
 @end
 
