@@ -15,14 +15,18 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     var weatherAPI = WeatherAPI()
-
+    var city = City(cityName: "Dallas")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         searchBar.delegate = self
         
-//        print(weatherAPI.getCurrentWeather(for: "Dallas"))
-        print(weatherAPI.getForecastFor("Dallas"))
+
+        
+        print("***********************************")
+        print(city.getForecastDict()) // Clay: NEED TO MAKE THIS WAIT FOR THE DATA TO ARRIVE
+        print("***********************************")
         
     }
 
@@ -31,8 +35,10 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let locationString = searchBar.text, !locationString.isEmpty{
-            print(weatherAPI.getCurrentWeather(for: locationString))
-            //print(locationString)
+            city = City(cityName: locationString)
+            print("New City!")
+            print(city.getForecastDict())
+            print(locationString)
         }
     }
 
