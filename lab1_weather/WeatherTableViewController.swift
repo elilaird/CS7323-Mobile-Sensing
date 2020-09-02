@@ -21,7 +21,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         
         searchBar.delegate = self
         
-        print(weatherAPI.getCurrentWeather(for: "Dallas"))
+//        print(weatherAPI.getCurrentWeather(for: "Dallas"))
+        print(weatherAPI.getForecastFor("Dallas"))
         
     }
 
