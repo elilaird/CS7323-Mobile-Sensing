@@ -28,8 +28,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(id)initWithCityName:(NSString *)location;
 
-- (NSDictionary *) getCurrentWeatherDict;
-- (NSDictionary *) getForecastDict;
+// Current Weather
+- (NSDictionary *) getDict; // remove this guy later.  This is just to check that the api calls work
+- (void) logAllKeys; // remove later.  this is for testing
+
+- (double) getCurrentWindSpeed;
+- (double) getCurrentWindDirection;
+- (double) getCurrentTemp;
+- (double) getCurrentFeelsLike;
+- (double) getCurrentHumidity;
+- (double) getCurrentPressure;
+- (NSString *) getCurrentWeather;
+- (NSString *) getCurrentWeatherDesc;
+- (double) getLongatude;
+- (double) getLatitude;
+
+// Forecast
+- (NSDictionary *) getForecast;
+
 
 @end
 
