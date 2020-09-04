@@ -29,11 +29,13 @@
 
 //* Public Facing Methods *
 - (NSDictionary *) getCurrentWeatherDict{
-    return [_cityWeatherAPI getCurrentWeatherFor:_location];
+//    return [_cityWeatherAPI getCurrentWeatherFor:_location];
+    return [self.cityWeatherAPI getCurrentWeatherFor:self.location];
 }
 
 - (NSDictionary *) getForecastDict{
-    return [_cityWeatherAPI getForecastFor:_location];
+//    return [_cityWeatherAPI getForecastFor:_location];
+    return [self.cityWeatherAPI getForecastFor:self.location];
 }
 
 
