@@ -22,12 +22,19 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         
         searchBar.delegate = self
         
-
-        
-        print("***********************************")
-        print(city.getForecastDict()) // Clay: NEED TO MAKE THIS WAIT FOR THE DATA TO ARRIVE
-        print("***********************************")
-        
+        /*
+            Example city function calls for current weather:
+         
+                city.logAllKeys()
+                print(city.getCurrentPressure())
+                print(city.getLongatude())
+                print(city.getLatitude())
+                print(city.getCurrentWindSpeed())
+                print(city.getCurrentWindDirection())
+                print(city.getCurrentWeather())
+                print(city.getCurrentWeatherDesc())
+         */
+ 
     }
 
     // MARK: - Table view data source
@@ -37,7 +44,6 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         if let locationString = searchBar.text, !locationString.isEmpty{
             city = City(cityName: locationString)
             print("New City!")
-            print(city.getForecastDict())
             print(locationString)
         }
     }

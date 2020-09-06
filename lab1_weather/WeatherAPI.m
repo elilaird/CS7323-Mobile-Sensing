@@ -23,19 +23,15 @@
     NSString *baseUrl = @"https://api.openweathermap.org/data/2.5/weather";
     NSString *appid = @"dd12273b23df1d19ad59652762894830";
     NSString *targetUrl = [NSString stringWithFormat:@"%@?q=%@&appid=%@", baseUrl, location, appid];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:targetUrl]];
+    NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:targetUrl]];
+    
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData * jsonData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+   
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
 
-    __block NSDictionary *jsonData = nil;
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               jsonData = [NSJSONSerialization JSONObjectWithData:data
-                                                                      options:0
-                                                                        error:nil];
-                               NSLog(@"Async JSON: %@", jsonData);
-                           }];
-
-    return jsonData;
+    return jsonDict;
 }
 
 - (NSDictionary *) requestForecastFor:(NSString *)location{
@@ -43,19 +39,15 @@
     NSString *baseUrl = @"https://api.openweathermap.org/data/2.5/forecast";
     NSString *appid = @"dd12273b23df1d19ad59652762894830";
     NSString *targetUrl = [NSString stringWithFormat:@"%@?q=%@&appid=%@", baseUrl, location, appid];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:targetUrl]];
+    NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:targetUrl]];
+    
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData * jsonData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+    
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
 
-    __block NSDictionary *jsonData = nil;
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               jsonData = [NSJSONSerialization JSONObjectWithData:data
-                                                                      options:0
-                                                                        error:nil];
-                               NSLog(@"Async JSON: %@", jsonData);
-                           }];
-
-    return jsonData;
+    return jsonDict;
 }
 
 //* Public Facing Methods *
