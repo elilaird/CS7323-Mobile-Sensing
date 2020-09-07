@@ -26,14 +26,27 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
             Example city function calls for current weather:
          
                 city.logAllKeys()
-                print(city.getCurrentPressure())
-                print(city.getLongatude())
-                print(city.getLatitude())
-                print(city.getCurrentWindSpeed())
-                print(city.getCurrentWindDirection())
-                print(city.getCurrentWeather())
-                print(city.getCurrentWeatherDesc())
+                print(city.currentDay.getCurrentPressure())
+                print(city.currentDay.getLongatude())
+                print(city.currentDay.getLatitude())
+                print(city.currentDay.getCurrentWindSpeed())
+                print(city.currentDay.getCurrentWindDirection())
+                print(city.currentDay.getCurrentWeather())
+                print(city.currentDay.getCurrentWeatherDesc())
+         
          */
+        
+        /*
+           Example city function calls for forecast weather:
+        
+               // First make a swift array in order to use
+               let swiftarray = city.forecast as AnyObject as! [Day]
+               print(swiftarray[7].getCurrentTemp())  // gets 7th day in forecast's temperature
+         
+           Note: all function calls are the same as the current day's weather, but
+           you must specify the 'Day' object in the swift array.
+        
+        */
  
     }
 

@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSDictionary *forecastDict;
 - (NSDictionary *) getCurrentWeatherDict;
 - (NSDictionary *) getForecastDict;
+- (NSMutableArray *) getForecast;
 
 @end
 
@@ -26,6 +27,10 @@
         _cityWeatherAPI = [[WeatherAPI alloc] init];
         _currentWeatherDict = [self getCurrentWeatherDict];
         _forecastDict = [self getForecastDict];
+        
+        
+        _currentDay = [[Day alloc] initWithDayDict:self.currentWeatherDict];
+        _forecast = [self getForecast];
     }
     return self;
 }
@@ -44,6 +49,17 @@
     return [self.cityWeatherAPI getForecastFor:self.location];
 }
 
+- (NSMutableArray *) getForecast{
+    NSArray *forecastDayList = [self.forecastDict objectForKey:@"list"];
+    NSMutableArray *forecastDays = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i < forecastDayList.count; i++){
+        [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i]]];
+    }
+    
+    return forecastDays;
+}
+
 
 //* Public Facing Methods *
 
@@ -55,104 +71,12 @@
     return self.forecastDict;
 }
 
-
-/*
- Current Weather Calls
- */
-
-- (double) getCurrentWindSpeed{
-    /*
-     Returns the current wind speed in mph
-     */
-    NSDictionary *wind = [self.currentWeatherDict objectForKey:@"wind"];
-    double speedMS = [[wind objectForKey:@"speed"] doubleValue];
-    return speedMS * 2.237;
-}
-
-- (double) getCurrentWindDirection{
-    /*
-     Returns the current wind direction in degrees
-     */
-    NSDictionary *wind = [self.currentWeatherDict objectForKey:@"wind"];
-    return [[wind objectForKey:@"deg"] doubleValue];
-}
-
-- (double) getCurrentTemp{
-    /*
-     Returns the current temperature for a city in Fahrenheit
-     */
-    NSDictionary *main = [self.currentWeatherDict objectForKey:@"main"];
-    double tempKelvin = [[main objectForKey:@"temp"] doubleValue];
-    return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
-}
-
-- (double) getCurrentFeelsLike{
-    /*
-     Returns the current feels like temperature for a city in Fahrenheit
-     */
-    NSDictionary *main = [self.currentWeatherDict objectForKey:@"main"];
-    double tempKelvin = [[main objectForKey:@"feels_like"] doubleValue];
-    return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
-}
-
-- (double) getCurrentHumidity{
-    /*
-     Returns the current humidity (%) in a city
-     */
-    NSDictionary *main = [self.currentWeatherDict objectForKey:@"main"];
-    return [[main objectForKey:@"humidity"] doubleValue];
-}
-
-- (double) getCurrentPressure{
-    /*
-     Returns the current atmospheric pressure (hPa)
-     */
-    NSDictionary *main = [self.currentWeatherDict objectForKey:@"main"];
-    return [[main objectForKey:@"pressure"] doubleValue];
-}
-
-- (NSString *) getCurrentWeather{
-    /*
-     Returns the city's weather condition (e.g. Clouds)
-     */
-    NSDictionary *weather = [[self.currentWeatherDict objectForKey:@"weather"] objectAtIndex:0];
-    return [weather objectForKey:@"main"];
-}
-
-- (NSString *) getCurrentWeatherDesc{
-    /*
-     Returns the city's weather condition (e.g. Clouds)
-     */
-    NSDictionary *weather = [[self.currentWeatherDict objectForKey:@"weather"] objectAtIndex:0];
-    return [weather objectForKey:@"description"];
-}
-
-- (double) getLongatude{
-    /*
-     Returns the city's longatude
-     */
-    NSDictionary *coord = [self.currentWeatherDict objectForKey:@"coord"];
-    return [[coord objectForKey:@"lon"] doubleValue];
-}
-
-- (double) getLatitude{
-    /*
-     Returns the city's latitude
-     */
-    NSDictionary *coord = [self.currentWeatherDict objectForKey:@"coord"];
-    return [[coord objectForKey:@"lat"] doubleValue];
-}
-
-
-/*
- Forecast Weather calls
- */
-
-- (NSDictionary *) getForecast{
-    /*
-     Returns the city's weather condition (e.g. Clouds)
-     */
-    return self.forecastDict;
+- (void) logList{
+    id list = [self.forecastDict objectForKey:@"list"];
+    NSLog(@"List type: %@",  NSStringFromClass([list class]));
+    
+    id days = list[0];
+    NSLog(@"Days type: %@",  NSStringFromClass([days class]));
 }
 
 

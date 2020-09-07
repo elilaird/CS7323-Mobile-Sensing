@@ -14,6 +14,7 @@
 //@import Foundation
 #import <Foundation/Foundation.h>
 #import "WeatherAPI.h"
+#import "Day.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,26 +26,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) WeatherAPI *cityWeatherAPI;
 @property (strong, nonatomic) NSString *location;
+@property (strong, nonatomic) Day *currentDay;
+@property (strong, nonatomic) NSMutableArray *forecast;
+
 
 -(id)initWithCityName:(NSString *)location;
 
 // Current Weather
 - (NSDictionary *) getDict; // remove this guy later.  This is just to check that the api calls work
 - (void) logAllKeys; // remove later.  this is for testing
-
-- (double) getCurrentWindSpeed;
-- (double) getCurrentWindDirection;
-- (double) getCurrentTemp;
-- (double) getCurrentFeelsLike;
-- (double) getCurrentHumidity;
-- (double) getCurrentPressure;
-- (NSString *) getCurrentWeather;
-- (NSString *) getCurrentWeatherDesc;
-- (double) getLongatude;
-- (double) getLatitude;
-
-// Forecast
-- (NSDictionary *) getForecast;
+- (void) logList; // remove later.  this is for testing
 
 
 @end
