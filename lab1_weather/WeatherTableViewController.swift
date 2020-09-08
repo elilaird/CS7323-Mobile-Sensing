@@ -13,14 +13,20 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
 
 
     
+    @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     var weatherAPI = WeatherAPI()
     var city = City(cityName: "Dallas")
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar.delegate = self
+        //searchBar.delegate = self
+        
+        self.cityName.text = self.city.getLocation()
+        self.forecast = city.forecast
         
         /*
             Example city function calls for current weather:
@@ -51,6 +57,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     // MARK: - Table view data source
+    var forecast:NSMutableArray = []
     
      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -62,6 +69,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     func updateWeather(to location: String) {
         print(weatherAPI.getCurrentWeather(for: location))
         city = City(cityName: location)
+        cityName.text = city.getLocation()
         self.tableView.reloadData()
     }
      
@@ -73,12 +81,13 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return city.forecast.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = city.getLocation()
+        var day:Day = forecast[indexPath.row] as! Day
+        cell.textLabel?.text = String(day.getCurrentWeather())
         return cell
     }
     
