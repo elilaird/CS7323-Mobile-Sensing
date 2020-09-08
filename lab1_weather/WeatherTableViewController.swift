@@ -55,9 +55,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let locationString = searchBar.text, !locationString.isEmpty{
-            city = City(cityName: locationString)
-            print("New City!")
-            print(locationString)
+            self.updateWeather(to: locationString)
         }
     }
     
