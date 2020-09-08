@@ -18,14 +18,26 @@
                         <gestureRecognizers/>
                         <color key="separatorColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="Dallas" id="2Wt-Y8-nOV">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="02C-L6-sAm">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="229"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiJ-zI-d0z">
+                                    <rect key="frame" x="165" y="32" width="89" height="43"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" updatesFrequently="YES" searchField="YES" header="YES"/>
+                            </accessibility>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="0v0-aG-NdQ" detailTextLabel="2TC-Bg-1Ve" rowHeight="82" style="IBUITableViewCellStyleSubtitle" id="LUd-fX-rio">
-                                <rect key="frame" x="0.0" y="72" width="414" height="82"/>
+                                <rect key="frame" x="0.0" y="257" width="414" height="82"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LUd-fX-rio" id="RNe-Na-nRu">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
@@ -59,7 +71,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="bRZ-Ck-Uwu"/>
                     <connections>
-                        <outlet property="searchBar" destination="2Wt-Y8-nOV" id="KUm-Ei-fFC"/>
+                        <outlet property="cityName" destination="MiJ-zI-d0z" id="04E-1A-aTR"/>
                         <segue destination="lkY-4J-cgM" kind="show" identifier="SpecificWeather" id="yqn-cO-xvQ"/>
                     </connections>
                 </tableViewController>
@@ -70,7 +82,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="914" y="72"/>
+            <point key="canvasLocation" x="913.04347826086962" y="71.651785714285708"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="w4N-EV-AiV">
