@@ -86,8 +86,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        var day:Day = forecast[indexPath.row] as! Day
+        let day:Day = forecast[indexPath.row] as! Day
         cell.textLabel?.text = String(day.getCurrentWeather())
+        print(day.dayDict)
         return cell
     }
     
