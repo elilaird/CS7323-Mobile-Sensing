@@ -49,6 +49,24 @@
     return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
 }
 
+- (double) getHighTemp{
+    /*
+     Returns the high temperature for a city on a day in Fahrenheit
+     */
+    NSDictionary *main = [self.dayDict objectForKey:@"main"];
+    double tempKelvin = [[main objectForKey:@"temp_max"] doubleValue];
+    return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
+}
+
+- (double) getLowTemp{
+    /*
+     Returns the low temperature for a city on a day in Fahrenheit
+     */
+    NSDictionary *main = [self.dayDict objectForKey:@"main"];
+    double tempKelvin = [[main objectForKey:@"temp_min"] doubleValue];
+    return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
+}
+
 - (double) getCurrentFeelsLike{
     /*
      Returns the current feels like temperature for a city in Fahrenheit
