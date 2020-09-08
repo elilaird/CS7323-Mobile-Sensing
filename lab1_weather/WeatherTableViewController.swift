@@ -15,6 +15,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     var weatherAPI = WeatherAPI()
+    var currentLocation: String = "Dallas"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,28 +32,41 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let locationString = searchBar.text, !locationString.isEmpty{
-            print(weatherAPI.getWeatherFor(locationString))
+            updateWeather(to: locationString)
         }
     }
     
+    func updateWeather(to location: String) {
+        print(weatherAPI.getWeatherFor(location))
+        currentLocation = location
+        self.tableView.reloadData()
+    }
      
-    @IBAction func recognizeTopGesture(_ sender: Any) {
+    @IBAction func recognizeTapGesture(_ sender: Any) {
         searchBar.resignFirstResponder()
-        if let locationString = searchBar.text, !locationString.isEmpty{
-            print(weatherAPI.getWeatherFor(locationString))
-        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 3
     }
 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = currentLocation
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //self.performSegue(withIdentifier: "SpecificWeather", sender: self)
+        print("Selected \(indexPath.row)" )
+    }
+    
     
 
 }

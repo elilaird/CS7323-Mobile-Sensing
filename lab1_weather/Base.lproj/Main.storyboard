@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,10 +14,10 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8IE-gR-Mtk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.54188980200000003" green="0.81593200079999995" blue="0.97500091310000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <color key="separatorColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                        <color key="sectionIndexBackgroundColor" red="0.54188980197072512" green="0.81593200082897421" blue="0.97500091307054315" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="Dallas" id="2Wt-Y8-nOV">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -33,21 +34,22 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0v0-aG-NdQ">
                                             <rect key="frame" x="20" y="21" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <gestureRecognizers/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2TC-Bg-1Ve">
                                             <rect key="frame" x="20" y="44.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.57121719389623993" green="0.81001967292578947" blue="0.93630550022657744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -59,16 +61,51 @@
                     <navigationItem key="navigationItem" id="bRZ-Ck-Uwu"/>
                     <connections>
                         <outlet property="searchBar" destination="2Wt-Y8-nOV" id="KUm-Ei-fFC"/>
+                        <segue destination="lkY-4J-cgM" kind="show" identifier="SpecificWeather" id="yqn-cO-xvQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLK-SI-3ni" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="Yzd-eg-7Ak">
                     <connections>
-                        <action selector="recognizeTopGesture:" destination="zbw-Ly-1U1" id="vPo-Ya-LdG"/>
+                        <action selector="recognizeTapGesture:" destination="zbw-Ly-1U1" id="Qgu-xg-1Vc"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="914" y="72"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="w4N-EV-AiV">
+            <objects>
+                <viewController id="lkY-4J-cgM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gFr-Zy-cq6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B90-GQ-ThW">
+                                <rect key="frame" x="175" y="438" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="B90-GQ-ThW" firstAttribute="top" secondItem="gY6-EQ-CM6" secondAttribute="top" constant="350" id="1EO-eS-KWp"/>
+                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="trailing" secondItem="B90-GQ-ThW" secondAttribute="trailing" constant="174" id="Qi3-R4-66K"/>
+                            <constraint firstItem="B90-GQ-ThW" firstAttribute="leading" secondItem="gY6-EQ-CM6" secondAttribute="leading" constant="186" id="VYA-x1-UXe"/>
+                            <constraint firstItem="B90-GQ-ThW" firstAttribute="leading" secondItem="gY6-EQ-CM6" secondAttribute="leading" constant="175" id="WH6-Dt-gjf"/>
+                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="bottom" secondItem="B90-GQ-ThW" secondAttribute="bottom" constant="403" id="hLA-Vr-7pX"/>
+                            <constraint firstItem="B90-GQ-ThW" firstAttribute="top" secondItem="gY6-EQ-CM6" secondAttribute="top" constant="350" id="ixM-f5-OcM"/>
+                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="bottom" secondItem="B90-GQ-ThW" secondAttribute="bottom" constant="403" id="sK2-pz-twI"/>
+                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="trailing" secondItem="B90-GQ-ThW" secondAttribute="trailing" constant="163" id="vpO-NP-266"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gY6-EQ-CM6"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="psg-wy-PnJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JPX-lq-c5o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1693" y="73"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MFS-OL-fNd">
