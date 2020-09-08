@@ -62,8 +62,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func updateWeather(to location: String) {
-        print(weatherAPI.getWeatherFor(location))
-        currentLocation = location
+        print(weatherAPI.getCurrentWeather(for: location))
+        city = City(cityName: location)
         self.tableView.reloadData()
     }
      
@@ -80,7 +80,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = currentLocation
+        cell.textLabel?.text = city.getLocation()
         return cell
     }
     
