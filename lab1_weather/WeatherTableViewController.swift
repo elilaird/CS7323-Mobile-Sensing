@@ -15,16 +15,39 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     var weatherAPI = WeatherAPI()
-    var currentLocation: String = "Dallas"
-
+    var city = City(cityName: "Dallas")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         searchBar.delegate = self
         
+        /*
+            Example city function calls for current weather:
+         
+                city.logAllKeys()
+                print(city.currentDay.getCurrentPressure())
+                print(city.currentDay.getLongatude())
+                print(city.currentDay.getLatitude())
+                print(city.currentDay.getCurrentWindSpeed())
+                print(city.currentDay.getCurrentWindDirection())
+                print(city.currentDay.getCurrentWeather())
+                print(city.currentDay.getCurrentWeatherDesc())
+         
+         */
         
-        print(weatherAPI.getWeatherFor("Dallas"))
-
+        /*
+           Example city function calls for forecast weather:
+        
+               // First make a swift array in order to use
+               let swiftarray = city.forecast as AnyObject as! [Day]
+               print(swiftarray[7].getCurrentTemp())  // gets 7th day in forecast's temperature
+         
+           Note: all function calls are the same as the current day's weather, but
+           you must specify the 'Day' object in the swift array.
+        
+        */
+ 
     }
 
     // MARK: - Table view data source
@@ -32,7 +55,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let locationString = searchBar.text, !locationString.isEmpty{
-            updateWeather(to: locationString)
+            city = City(cityName: locationString)
+            print("New City!")
+            print(locationString)
         }
     }
     

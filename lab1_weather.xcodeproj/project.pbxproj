@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05952D1F25058D7A00507C97 /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = 05952D1E25058D7A00507C97 /* Day.m */; };
+		05B3922424FFF43900ECEC97 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3922324FFF43900ECEC97 /* City.m */; };
 		05B3A2CF24F84E7200016A78 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3A2CE24F84E7200016A78 /* AppDelegate.m */; };
 		05B3A2D224F84E7200016A78 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3A2D124F84E7200016A78 /* SceneDelegate.m */; };
 		05B3A2D824F84E7200016A78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05B3A2D624F84E7200016A78 /* Main.storyboard */; };
@@ -37,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05952D1D25058D7A00507C97 /* Day.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Day.h; sourceTree = "<group>"; };
+		05952D1E25058D7A00507C97 /* Day.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Day.m; sourceTree = "<group>"; };
+		05B3922224FFF43900ECEC97 /* City.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
+		05B3922324FFF43900ECEC97 /* City.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 		05B3A2CA24F84E7200016A78 /* lab1_weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lab1_weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B3A2CD24F84E7200016A78 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		05B3A2CE24F84E7200016A78 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -120,6 +126,10 @@
 				45A38DB124FDF20900DEE52A /* lab1_weather-Bridging-Header.h */,
 				45A38DB624FDFBDE00DEE52A /* WeatherAPI.h */,
 				45A38DB724FDFBDE00DEE52A /* WeatherAPI.m */,
+				05B3922224FFF43900ECEC97 /* City.h */,
+				05B3922324FFF43900ECEC97 /* City.m */,
+				05952D1D25058D7A00507C97 /* Day.h */,
+				05952D1E25058D7A00507C97 /* Day.m */,
 			);
 			path = lab1_weather;
 			sourceTree = "<group>";
@@ -273,8 +283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05952D1F25058D7A00507C97 /* Day.m in Sources */,
 				45A38DB824FDFBDE00DEE52A /* WeatherAPI.m in Sources */,
 				45A38DB324FDF20A00DEE52A /* WeatherTableViewController.swift in Sources */,
+				05B3922424FFF43900ECEC97 /* City.m in Sources */,
 				05B3A2CF24F84E7200016A78 /* AppDelegate.m in Sources */,
 				05B3A2E024F84E7400016A78 /* main.m in Sources */,
 				05B3A2D224F84E7200016A78 /* SceneDelegate.m in Sources */,

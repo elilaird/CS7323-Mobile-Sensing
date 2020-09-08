@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WeatherAPI : NSObject
 
-    - (NSString *) getWeatherFor:(NSString *)location;
+- (NSDictionary *) getCurrentWeatherFor:(NSString *) location;
+- (NSDictionary *) getForecastFor:(NSString *) location;
 
 @end
 

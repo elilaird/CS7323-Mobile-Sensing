@@ -10,44 +10,53 @@
 
 @interface WeatherAPI ()
 
-- (NSString *) getDataFor:(NSString *)location;
+- (NSDictionary *) requestCurrentWeatherFor:(NSString *)location;
+- (NSDictionary *) requestForecastFor:(NSString *)location;
 
 @end
 
 @implementation WeatherAPI
 
 //* Private Facing Functions *
+- (NSDictionary *) requestCurrentWeatherFor:(NSString *)location{
 
-- (NSString *) getDataFor:(NSString *)location{
-    __block NSString *jsonData = nil;
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"GET"];
-    
     NSString *baseUrl = @"https://api.openweathermap.org/data/2.5/weather";
     NSString *appid = @"dd12273b23df1d19ad59652762894830";
-    NSString *targetUrl = [[NSString stringWithFormat:@"%@?q=%@&appid=%@", baseUrl, location, appid] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString *targetUrl = [NSString stringWithFormat:@"%@?q=%@&appid=%@", baseUrl, location, appid];
+    NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:targetUrl]];
     
-    NSLog(@"Target Url: %@", targetUrl);
-    
-  
-    
-    [request setURL:[NSURL URLWithString:targetUrl]];
-    
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
-      ^(NSData * _Nullable data,
-        NSURLResponse * _Nullable response,
-        NSError * _Nullable error) {
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData * jsonData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+   
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
 
-          jsonData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-          NSLog(@"Data received: %@", jsonData);
-    }] resume];
+    return jsonDict;
+}
+
+- (NSDictionary *) requestForecastFor:(NSString *)location{
+
+    NSString *baseUrl = @"https://api.openweathermap.org/data/2.5/forecast";
+    NSString *appid = @"dd12273b23df1d19ad59652762894830";
+    NSString *targetUrl = [NSString stringWithFormat:@"%@?q=%@&appid=%@", baseUrl, location, appid];
+    NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:targetUrl]];
     
-    return jsonData;
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData * jsonData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+    
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+
+    return jsonDict;
 }
 
 //* Public Facing Methods *
-- (NSString *) getWeatherFor:(NSString *)location{
-    return [self getDataFor:location];
+- (NSDictionary *) getCurrentWeatherFor:(NSString *) location {
+    return [self requestCurrentWeatherFor:location];
+}
+
+- (NSDictionary *) getForecastFor:(NSString *) location {
+    return [self requestForecastFor:location];
 }
 
 @end
