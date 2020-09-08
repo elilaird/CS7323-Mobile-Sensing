@@ -49,6 +49,10 @@
     return [self.cityWeatherAPI getForecastFor:self.location];
 }
 
+- (NSString *) getLocation{
+    return _location;
+}
+
 - (NSMutableArray *) getForecast{
     NSArray *forecastDayList = [self.forecastDict objectForKey:@"list"];
     NSMutableArray *forecastDays = [[NSMutableArray alloc] init];
