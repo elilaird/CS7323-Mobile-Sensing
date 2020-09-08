@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bfq-rr-N9S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bfq-rr-N9S">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -55,7 +55,6 @@
                         <connections>
                             <outlet property="dataSource" destination="zbw-Ly-1U1" id="WfE-mm-xGE"/>
                             <outlet property="delegate" destination="zbw-Ly-1U1" id="r3A-mq-jL0"/>
-                            <outletCollection property="gestureRecognizers" destination="Yzd-eg-7Ak" appends="YES" id="Ly2-FT-bV9"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="bRZ-Ck-Uwu"/>
@@ -67,7 +66,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLK-SI-3ni" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="Yzd-eg-7Ak">
                     <connections>
-                        <action selector="recognizeTapGesture:" destination="zbw-Ly-1U1" id="Qgu-xg-1Vc"/>
+                        <segue destination="lkY-4J-cgM" kind="show" id="pIs-b4-GX6"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -90,14 +89,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="B90-GQ-ThW" firstAttribute="top" secondItem="gY6-EQ-CM6" secondAttribute="top" constant="350" id="1EO-eS-KWp"/>
-                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="trailing" secondItem="B90-GQ-ThW" secondAttribute="trailing" constant="174" id="Qi3-R4-66K"/>
-                            <constraint firstItem="B90-GQ-ThW" firstAttribute="leading" secondItem="gY6-EQ-CM6" secondAttribute="leading" constant="186" id="VYA-x1-UXe"/>
-                            <constraint firstItem="B90-GQ-ThW" firstAttribute="leading" secondItem="gY6-EQ-CM6" secondAttribute="leading" constant="175" id="WH6-Dt-gjf"/>
-                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="bottom" secondItem="B90-GQ-ThW" secondAttribute="bottom" constant="403" id="hLA-Vr-7pX"/>
-                            <constraint firstItem="B90-GQ-ThW" firstAttribute="top" secondItem="gY6-EQ-CM6" secondAttribute="top" constant="350" id="ixM-f5-OcM"/>
-                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="bottom" secondItem="B90-GQ-ThW" secondAttribute="bottom" constant="403" id="sK2-pz-twI"/>
-                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="trailing" secondItem="B90-GQ-ThW" secondAttribute="trailing" constant="163" id="vpO-NP-266"/>
+                            <constraint firstItem="B90-GQ-ThW" firstAttribute="leading" secondItem="gY6-EQ-CM6" secondAttribute="leading" constant="175" id="JEW-HN-Wbp"/>
+                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="bottom" secondItem="B90-GQ-ThW" secondAttribute="bottom" constant="403" id="Oaz-Xk-4hL"/>
+                            <constraint firstItem="gY6-EQ-CM6" firstAttribute="trailing" secondItem="B90-GQ-ThW" secondAttribute="trailing" constant="163" id="VQB-A9-ut9"/>
+                            <constraint firstItem="B90-GQ-ThW" firstAttribute="top" secondItem="gY6-EQ-CM6" secondAttribute="top" constant="350" id="d4t-od-E8a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gY6-EQ-CM6"/>
                     </view>
@@ -126,4 +121,7 @@
             <point key="canvasLocation" x="-35" y="72"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="yqn-cO-xvQ"/>
+    </inferredMetricsTieBreakers>
 </document>

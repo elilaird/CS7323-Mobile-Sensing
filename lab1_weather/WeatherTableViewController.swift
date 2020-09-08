@@ -42,9 +42,6 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         self.tableView.reloadData()
     }
      
-    @IBAction func recognizeTapGesture(_ sender: Any) {
-        searchBar.resignFirstResponder()
-    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -63,8 +60,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //self.performSegue(withIdentifier: "SpecificWeather", sender: self)
-        print("Selected \(indexPath.row)" )
+        performSegue(withIdentifier: "SpecificWeather", sender: self)
     }
     
     
