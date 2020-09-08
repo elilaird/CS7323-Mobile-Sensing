@@ -16,7 +16,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     var weatherAPI = WeatherAPI()
-    var city = City(cityName: "Dallas")
+    var city = City(cityName: "Dallas", andMetric: false)
     
     
     
@@ -32,13 +32,13 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
             Example city function calls for current weather:
          
                 city.logAllKeys()
-                print(city.currentDay.getCurrentPressure())
+                print(city.currentDay.getPressure())
                 print(city.currentDay.getLongatude())
                 print(city.currentDay.getLatitude())
-                print(city.currentDay.getCurrentWindSpeed())
-                print(city.currentDay.getCurrentWindDirection())
-                print(city.currentDay.getCurrentWeather())
-                print(city.currentDay.getCurrentWeatherDesc())
+                print(city.currentDay.getWindSpeed())
+                print(city.currentDay.getWindDirection())
+                print(city.currentDay.getWeather())
+                print(city.currentDay.getWeatherDesc())
          
          */
         
@@ -47,7 +47,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         
                // First make a swift array in order to use
                let swiftarray = city.forecast as AnyObject as! [Day]
-               print(swiftarray[7].getCurrentTemp())  // gets 7th day in forecast's temperature
+               print(swiftarray[7].getTemp())  // gets 7th day in forecast's temperature
          
            Note: all function calls are the same as the current day's weather, but
            you must specify the 'Day' object in the swift array.
@@ -67,8 +67,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func updateWeather(to location: String) {
-        print(weatherAPI.getCurrentWeather(for: location))
-        city = City(cityName: location)
+//        print(weatherAPI.getCurrentWeather(for: location))
+        city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
         cityName.text = city.getLocation()
         self.tableView.reloadData()
     }
@@ -87,8 +87,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let day:Day = forecast[indexPath.row] as! Day
-        cell.textLabel?.text = String(day.getCurrentWeather())
-        print(day.dayDict)
+        cell.textLabel?.text = String(day.getWeather())
+//        print(day.dayDict)
         return cell
     }
     

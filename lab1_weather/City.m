@@ -19,24 +19,24 @@
 
 @implementation City
 
-
-- (instancetype)initWithCityName:(NSString *)location{
+- (instancetype)initWithCityName:(NSString *)location andMetric:(BOOL) isMetric{
     self = [super init];
     if(self) {
         _location = location;
         _cityWeatherAPI = [[WeatherAPI alloc] init];
         _currentWeatherDict = [self getCurrentWeatherDict];
         _forecastDict = [self getForecastDict];
+        _isMetric = isMetric;
         
         
-        _currentDay = [[Day alloc] initWithDayDict:self.currentWeatherDict];
+        _currentDay = [[Day alloc] initWithDayDict:self.currentWeatherDict andMetric:isMetric];
         _forecast = [self getForecast];
     }
     return self;
 }
 
 - (instancetype)init {
-    self = [self initWithCityName:@""];
+    self = [self initWithCityName:@"" andMetric:FALSE];
     return self;
 }
 
@@ -58,7 +58,8 @@
     NSMutableArray *forecastDays = [[NSMutableArray alloc] init];
     
     for (int i=0; i < forecastDayList.count; i++){
-        [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i]]];
+//        [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i]]];
+        [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i] andMetric:self.isMetric]];
     }
     
     return forecastDays;

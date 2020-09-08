@@ -13,21 +13,22 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Day : NSObject
 
 @property (strong, nonatomic) NSDictionary *dayDict;
+@property (nonatomic, assign) BOOL isMetric;
 
-- (instancetype)initWithDayDict:(NSDictionary *)dayDict;
+- (instancetype)initWithDayDict:(NSDictionary *)dayDict andMetric:(BOOL) isMetric;
 
 
 // Current Weather
-- (double) getCurrentWindSpeed;
-- (double) getCurrentWindDirection;
-- (double) getCurrentTemp;
+- (double) getWindSpeed;
+- (double) getWindDirection;
+- (double) getTemp;
 - (double) getHighTemp;
 - (double) getLowTemp;
-- (double) getCurrentFeelsLike;
-- (double) getCurrentHumidity;
-- (double) getCurrentPressure;
-- (NSString *) getCurrentWeather;
-- (NSString *) getCurrentWeatherDesc;
+- (double) getFeelsLike;
+- (double) getHumidity;
+- (double) getPressure;
+- (NSString *) getWeather;
+- (NSString *) getWeatherDesc;
 - (double) getLongatude;
 - (double) getLatitude;
 

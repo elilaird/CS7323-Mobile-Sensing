@@ -11,28 +11,33 @@
 @implementation Day
 
 
-- (instancetype)initWithDayDict:(NSDictionary *)dayDict{
+- (instancetype)initWithDayDict:(NSDictionary *)dayDict andMetric:(BOOL) isMetric{
     self = [super init];
     if(self) {
         _dayDict = dayDict;
+        _isMetric = isMetric;
     }
     return self;
 }
 
 /*
- Current Weather Calls
+ Weather Calls
  */
 
-- (double) getCurrentWindSpeed{
+- (double) getWindSpeed{
     /*
      Returns the current wind speed in mph
      */
     NSDictionary *wind = [self.dayDict objectForKey:@"wind"];
     double speedMS = [[wind objectForKey:@"speed"] doubleValue];
-    return speedMS * 2.237;
+    
+    if(self.isMetric)
+        return speedMS;
+    return speedMS * 2.237;;
+    
 }
 
-- (double) getCurrentWindDirection{
+- (double) getWindDirection{
     /*
      Returns the current wind direction in degrees
      */
@@ -40,12 +45,14 @@
     return [[wind objectForKey:@"deg"] doubleValue];
 }
 
-- (double) getCurrentTemp{
+- (double) getTemp{
     /*
      Returns the current temperature for a city in Fahrenheit
      */
     NSDictionary *main = [self.dayDict objectForKey:@"main"];
     double tempKelvin = [[main objectForKey:@"temp"] doubleValue];
+    if(self.isMetric)
+        return tempKelvin - 273.15;
     return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
 }
 
@@ -55,6 +62,8 @@
      */
     NSDictionary *main = [self.dayDict objectForKey:@"main"];
     double tempKelvin = [[main objectForKey:@"temp_max"] doubleValue];
+    if(self.isMetric)
+        return tempKelvin - 273.15;
     return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
 }
 
@@ -64,19 +73,23 @@
      */
     NSDictionary *main = [self.dayDict objectForKey:@"main"];
     double tempKelvin = [[main objectForKey:@"temp_min"] doubleValue];
+    if(self.isMetric)
+        return tempKelvin - 273.15;
     return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
 }
 
-- (double) getCurrentFeelsLike{
+- (double) getFeelsLike{
     /*
      Returns the current feels like temperature for a city in Fahrenheit
      */
     NSDictionary *main = [self.dayDict objectForKey:@"main"];
     double tempKelvin = [[main objectForKey:@"feels_like"] doubleValue];
+    if(self.isMetric)
+        return tempKelvin - 273.15;
     return ((tempKelvin - 273.15) * (9.0/5.0)) + 32.0;
 }
 
-- (double) getCurrentHumidity{
+- (double) getHumidity{
     /*
      Returns the current humidity (%) in a city
      */
@@ -84,7 +97,7 @@
     return [[main objectForKey:@"humidity"] doubleValue];
 }
 
-- (double) getCurrentPressure{
+- (double) getPressure{
     /*
      Returns the current atmospheric pressure (hPa)
      */
@@ -92,7 +105,7 @@
     return [[main objectForKey:@"pressure"] doubleValue];
 }
 
-- (NSString *) getCurrentWeather{
+- (NSString *) getWeather{
     /*
      Returns the city's weather condition (e.g. Clouds)
      */
@@ -100,7 +113,7 @@
     return [weather objectForKey:@"main"];
 }
 
-- (NSString *) getCurrentWeatherDesc{
+- (NSString *) getWeatherDesc{
     /*
      Returns the city's weather condition description (e.g. broken clouds)
      */
