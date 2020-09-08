@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (double) getCurrentWindSpeed;
 - (double) getCurrentWindDirection;
 - (double) getCurrentTemp;
+- (double) getHighTemp;
+- (double) getLowTemp;
 - (double) getCurrentFeelsLike;
 - (double) getCurrentHumidity;
 - (double) getCurrentPressure;
