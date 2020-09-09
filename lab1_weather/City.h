@@ -28,9 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) Day *currentDay;
 @property (strong, nonatomic) NSMutableArray *forecast;
+@property (nonatomic, assign) BOOL isMetric;
 
 
--(id)initWithCityName:(NSString *)location;
+- (instancetype)initWithCityName:(NSString *)location andMetric:(BOOL) isMetric;
 
 // Current Weather
 - (NSDictionary *) getDict; // remove this guy later.  This is just to check that the api calls work
