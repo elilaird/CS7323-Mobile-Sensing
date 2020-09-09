@@ -17,6 +17,8 @@
 		05B3A2E024F84E7400016A78 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3A2DF24F84E7400016A78 /* main.m */; };
 		05B3A2EA24F84E7400016A78 /* lab1_weatherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3A2E924F84E7400016A78 /* lab1_weatherTests.m */; };
 		05B3A2F524F84E7400016A78 /* lab1_weatherUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B3A2F424F84E7400016A78 /* lab1_weatherUITests.m */; };
+		3444E7BC25086004008A9875 /* WeatherCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444E7BB25086004008A9875 /* WeatherCollectionController.swift */; };
+		3444E7BE25086009008A9875 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444E7BD25086008008A9875 /* ModalViewController.swift */; };
 		45A38DB324FDF20A00DEE52A /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A38DB224FDF20A00DEE52A /* WeatherTableViewController.swift */; };
 		45A38DB824FDFBDE00DEE52A /* WeatherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A38DB724FDFBDE00DEE52A /* WeatherAPI.m */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		05B3A2F024F84E7400016A78 /* lab1_weatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lab1_weatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B3A2F424F84E7400016A78 /* lab1_weatherUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lab1_weatherUITests.m; sourceTree = "<group>"; };
 		05B3A2F624F84E7400016A78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3444E7BB25086004008A9875 /* WeatherCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherCollectionController.swift; path = "../../../CS7323-Mobile-Sensing-navigation_layout/lab1_weather/WeatherCollectionController.swift"; sourceTree = "<group>"; };
+		3444E7BD25086008008A9875 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModalViewController.swift; path = "../../../CS7323-Mobile-Sensing-navigation_layout/lab1_weather/ModalViewController.swift"; sourceTree = "<group>"; };
 		45A38DB124FDF20900DEE52A /* lab1_weather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lab1_weather-Bridging-Header.h"; sourceTree = "<group>"; };
 		45A38DB224FDF20A00DEE52A /* WeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewController.swift; sourceTree = "<group>"; };
 		45A38DB624FDFBDE00DEE52A /* WeatherAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherAPI.h; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				05B3A2CD24F84E7200016A78 /* AppDelegate.h */,
 				05B3A2CE24F84E7200016A78 /* AppDelegate.m */,
 				05B3A2D024F84E7200016A78 /* SceneDelegate.h */,
+				3444E7BB25086004008A9875 /* WeatherCollectionController.swift */,
+				3444E7BD25086008008A9875 /* ModalViewController.swift */,
 				05B3A2D124F84E7200016A78 /* SceneDelegate.m */,
 				05B3A2D624F84E7200016A78 /* Main.storyboard */,
 				05B3A2D924F84E7400016A78 /* Assets.xcassets */,
@@ -287,8 +293,10 @@
 				45A38DB824FDFBDE00DEE52A /* WeatherAPI.m in Sources */,
 				45A38DB324FDF20A00DEE52A /* WeatherTableViewController.swift in Sources */,
 				05B3922424FFF43900ECEC97 /* City.m in Sources */,
+				3444E7BC25086004008A9875 /* WeatherCollectionController.swift in Sources */,
 				05B3A2CF24F84E7200016A78 /* AppDelegate.m in Sources */,
 				05B3A2E024F84E7400016A78 /* main.m in Sources */,
+				3444E7BE25086009008A9875 /* ModalViewController.swift in Sources */,
 				05B3A2D224F84E7200016A78 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
