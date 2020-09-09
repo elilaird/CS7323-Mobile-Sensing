@@ -81,17 +81,84 @@
                     <navigationItem key="navigationItem" id="f6P-gZ-CXE"/>
                     <connections>
                         <outlet property="cityName" destination="MiJ-zI-d0z" id="04E-1A-aTR"/>
-                        <segue destination="4No-B7-axi" kind="show" identifier="SpecificWeather" id="CA0-3j-R59"/>
+                        <segue destination="LYl-ng-9ma" kind="show" identifier="SpecificWeather" id="6gN-ir-fY9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLK-SI-3ni" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="Yzd-eg-7Ak">
                     <connections>
-                        <segue destination="4No-B7-axi" kind="show" id="dY6-gv-rf2"/>
+                        <segue destination="LYl-ng-9ma" kind="show" identifier="SpecificWeather" id="N5I-M7-eMo"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="913.04347826086962" y="71.651785714285708"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3kX-sX-L2W">
+            <objects>
+                <viewController id="LYl-ng-9ma" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iba-IT-DmR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIw-oD-JnJ">
+                                <rect key="frame" x="20" y="279" width="374" height="617"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="dXp-hj-C0w" kind="embed" id="8zx-V7-LA5"/>
+                                </connections>
+                            </containerView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xXJ-SN-nw8">
+                                <rect key="frame" x="20" y="88" width="374" height="183"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="snx-h4-jzU"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="TiV-aq-S5m"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="PFW-PF-Pqw"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rWr-AD-RYp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="blS-kf-jxp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1911.594202898551" y="71.651785714285708"/>
+        </scene>
+        <!--Weather Collection Controller-->
+        <scene sceneID="LC5-pz-7Ja">
+            <objects>
+                <collectionViewController id="dXp-hj-C0w" customClass="WeatherCollectionController" customModule="lab1_weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="RCk-B8-XVS">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="617"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g94-lI-Yzs">
+                            <size key="itemSize" width="200" height="200"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="AttributeTile" id="io8-jH-Mdl">
+                                <rect key="frame" x="87" y="0.0" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gRG-IX-y0p">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                                <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <size key="customSize" width="200" height="200"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="dXp-hj-C0w" id="aJf-W7-Rpp"/>
+                            <outlet property="delegate" destination="dXp-hj-C0w" id="a2b-IQ-5CJ"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o1k-qe-479" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2906" y="72"/>
         </scene>
         <!--Modal View Controller-->
         <scene sceneID="9Zr-qK-LZY">
@@ -118,49 +185,6 @@
             </objects>
             <point key="canvasLocation" x="911.59420289855075" y="879.91071428571422"/>
         </scene>
-        <!--Weather Collection Controller-->
-        <scene sceneID="FyI-tn-FAh">
-            <objects>
-                <collectionViewController id="4No-B7-axi" customClass="WeatherCollectionController" customModule="lab1_weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qas-Lb-Tq5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NTr-xv-p7U">
-                            <size key="itemSize" width="128" height="128"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AttributeTile" id="ECl-9M-ZIz">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CMQ-yQ-qSo">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hello" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6V8-VF-Pcz">
-                                            <rect key="frame" x="16" y="47" width="97" height="34"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                </collectionViewCellContentView>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="4No-B7-axi" id="IV3-gq-bC4"/>
-                            <outlet property="delegate" destination="4No-B7-axi" id="CRL-Am-pzF"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" id="MBl-VF-Lfw"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hCg-Np-EAF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1946" y="72"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="MFS-OL-fNd">
             <objects>
@@ -181,6 +205,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CA0-3j-R59"/>
+        <segue reference="N5I-M7-eMo"/>
     </inferredMetricsTieBreakers>
 </document>
