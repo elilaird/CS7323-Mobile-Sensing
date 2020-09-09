@@ -62,9 +62,6 @@
                                     <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <segue destination="4No-B7-axi" kind="show" id="1B3-xH-2Sc"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -75,10 +72,15 @@
                     <navigationItem key="navigationItem" id="bRZ-Ck-Uwu"/>
                     <connections>
                         <outlet property="cityName" destination="MiJ-zI-d0z" id="04E-1A-aTR"/>
+                        <segue destination="4No-B7-axi" kind="show" identifier="SpecificWeather" id="CA0-3j-R59"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLK-SI-3ni" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Yzd-eg-7Ak"/>
+                <tapGestureRecognizer id="Yzd-eg-7Ak">
+                    <connections>
+                        <segue destination="4No-B7-axi" kind="show" id="dY6-gv-rf2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="913.04347826086962" y="71.651785714285708"/>
         </scene>
@@ -144,4 +146,7 @@
             <point key="canvasLocation" x="-35" y="72"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="CA0-3j-R59"/>
+    </inferredMetricsTieBreakers>
 </document>
