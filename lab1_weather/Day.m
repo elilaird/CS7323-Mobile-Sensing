@@ -8,17 +8,31 @@
 
 #import "Day.h"
 
+@interface Day()
+@property (strong, nonatomic) NSString *dayOfWeek;
+
+@end
+
 @implementation Day
 
 
-- (instancetype)initWithDayDict:(NSDictionary *)dayDict andMetric:(BOOL) isMetric{
+- (instancetype)initWithDayDict:(NSDictionary *)dayDict andMetric:(BOOL) isMetric andWeeday:(NSString *) dayOfWeek{
     self = [super init];
     if(self) {
         _dayDict = dayDict;
         _isMetric = isMetric;
+        _dayOfWeek = dayOfWeek;
     }
     return self;
 }
+
+/*
+ Day information calls
+ */
+- (NSString *) getTheDayOfWeek{
+    return self.dayOfWeek;
+}
+
 
 /*
  Weather Calls
