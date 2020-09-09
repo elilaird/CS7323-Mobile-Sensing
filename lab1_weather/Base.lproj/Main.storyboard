@@ -23,7 +23,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="229"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiJ-zI-d0z">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dallas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiJ-zI-d0z">
                                     <rect key="frame" x="165" y="32" width="89" height="43"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -37,7 +37,7 @@
                             </accessibility>
                         </view>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vu6-Bl-zl6">
-                            <rect key="frame" x="0.0" y="367" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="428" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Settings"/>
                             <connections>
@@ -45,32 +45,49 @@
                             </connections>
                         </button>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="0v0-aG-NdQ" detailTextLabel="2TC-Bg-1Ve" rowHeight="82" style="IBUITableViewCellStyleSubtitle" id="LUd-fX-rio">
-                                <rect key="frame" x="0.0" y="257" width="414" height="82"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="143" id="LUd-fX-rio" customClass="CustomTableViewCell" customModule="lab1_weather" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="257" width="414" height="143"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LUd-fX-rio" id="RNe-Na-nRu">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0v0-aG-NdQ">
-                                            <rect key="frame" x="20" y="21" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <gestureRecognizers/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJV-Mi-ICw">
+                                            <rect key="frame" x="20" y="41" width="29.5" height="61"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2TC-Bg-1Ve">
-                                            <rect key="frame" x="20" y="44.5" width="44" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwd-sY-dRu" userLabel="TemperatueLabel">
+                                            <rect key="frame" x="159" y="40" width="97.5" height="61"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rIk-3U-4Kf">
+                                            <rect key="frame" x="336" y="40" width="58" height="61"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="jJV-Mi-ICw" secondAttribute="bottom" constant="41" id="0pB-nQ-GcP"/>
+                                        <constraint firstItem="rIk-3U-4Kf" firstAttribute="trailing" secondItem="RNe-Na-nRu" secondAttribute="trailingMargin" id="Qpk-8B-zOf"/>
+                                        <constraint firstItem="Fwd-sY-dRu" firstAttribute="leading" secondItem="jJV-Mi-ICw" secondAttribute="trailing" constant="109.5" id="RBC-hI-Zut"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="rIk-3U-4Kf" secondAttribute="bottom" constant="42" id="Tdz-g7-naY"/>
+                                        <constraint firstItem="Fwd-sY-dRu" firstAttribute="top" secondItem="RNe-Na-nRu" secondAttribute="topMargin" constant="18" id="cH5-EI-ylS"/>
+                                        <constraint firstItem="jJV-Mi-ICw" firstAttribute="top" secondItem="RNe-Na-nRu" secondAttribute="topMargin" constant="19" id="eHR-kM-TKe"/>
+                                        <constraint firstItem="jJV-Mi-ICw" firstAttribute="leading" secondItem="RNe-Na-nRu" secondAttribute="leadingMargin" id="l6z-6W-geR"/>
+                                        <constraint firstItem="rIk-3U-4Kf" firstAttribute="leading" secondItem="Fwd-sY-dRu" secondAttribute="trailing" constant="79.5" id="rj3-17-fCL"/>
+                                        <constraint firstItem="rIk-3U-4Kf" firstAttribute="top" secondItem="RNe-Na-nRu" secondAttribute="topMargin" constant="18" id="tYk-MY-Oso"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Fwd-sY-dRu" secondAttribute="bottom" constant="42" id="vZz-fz-1KM"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="day_label" destination="jJV-Mi-ICw" id="gUD-X8-vOs"/>
+                                    <outlet property="temperature_label" destination="Fwd-sY-dRu" id="LBB-n5-mi1"/>
+                                    <outlet property="weather_icon" destination="rIk-3U-4Kf" id="cWZ-8L-saX"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

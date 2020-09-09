@@ -87,10 +87,12 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let day:Day = forecast[indexPath.row] as! Day
-        cell.textLabel?.text = String(day.getWeather())
-//        print(day.dayDict)
+
+        cell.day_label.text = String(day.getTheDayOfWeek())
+        cell.temperature_label.text = String(round(day.getTemp()))
+        
         return cell
     }
     

@@ -68,7 +68,7 @@
             return @"Thursday";
         case 6:
             return @"Friday";
-        case 7:
+        case 0:
             return @"Saturday";
         default:
             return @"Unable to get date information";
