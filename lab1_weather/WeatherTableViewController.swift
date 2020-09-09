@@ -40,6 +40,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
                 print(city.currentDay.getWeather())
                 print(city.currentDay.getWeatherDesc())
          
+                print(city.currentDay.getTheDayOfWeek())
+         
          */
         
         /*

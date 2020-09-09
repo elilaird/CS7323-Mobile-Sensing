@@ -15,10 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSDictionary *dayDict;
 @property (nonatomic, assign) BOOL isMetric;
 
-- (instancetype)initWithDayDict:(NSDictionary *)dayDict andMetric:(BOOL) isMetric;
+- (instancetype)initWithDayDict:(NSDictionary *)dayDict andMetric:(BOOL) isMetric andWeeday:(NSString *) dayOfWeek;
 
+// Get day information
+- (NSString *) getTheDayOfWeek;
 
-// Current Weather
+// Weather info
 - (double) getWindSpeed;
 - (double) getWindDirection;
 - (double) getTemp;

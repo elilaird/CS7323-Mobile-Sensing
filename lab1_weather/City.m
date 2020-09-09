@@ -11,9 +11,13 @@
 @interface City()
 @property (strong, nonatomic) NSDictionary *currentWeatherDict;
 @property (strong, nonatomic) NSDictionary *forecastDict;
+@property (nonatomic, assign) NSInteger currentDayOfWeekInt;
+
 - (NSDictionary *) getCurrentWeatherDict;
 - (NSDictionary *) getForecastDict;
 - (NSMutableArray *) getForecast;
+- (NSInteger) getCurrentDayOfWeek;
+- (NSString *) getCurrentDayOfWeekString: (NSInteger)dayInt;
 
 @end
 
@@ -28,9 +32,10 @@
         _forecastDict = [self getForecastDict];
         _isMetric = isMetric;
         
-        
-        _currentDay = [[Day alloc] initWithDayDict:self.currentWeatherDict andMetric:isMetric];
+        _currentDayOfWeekInt = [self getCurrentDayOfWeek];
+        _currentDay = [[Day alloc] initWithDayDict:self.currentWeatherDict andMetric:self.isMetric andWeeday:[self getCurrentDayOfWeekString:self.currentDayOfWeekInt]];
         _forecast = [self getForecast];
+
     }
     return self;
 }
@@ -41,6 +46,35 @@
 }
 
 //* Private Facing Functions *
+- (NSInteger) getCurrentDayOfWeek{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    //Get the day number
+    return [calendar component:NSCalendarUnitWeekday fromDate:[NSDate date]];
+}
+
+- (NSString *) getCurrentDayOfWeekString: (NSInteger)dayInt{
+    NSInteger modDay = dayInt%7;
+    
+    switch (modDay) {
+        case 1:
+            return @"Sunday";
+        case 2:
+            return @"Monday";
+        case 3:
+            return @"Tuesday";
+        case 4:
+            return @"Wednesday";
+        case 5:
+            return @"Thursday";
+        case 6:
+            return @"Friday";
+        case 7:
+            return @"Saturday";
+        default:
+            return @"Unable to get date information";
+    }
+}
+
 - (NSDictionary *) getCurrentWeatherDict{
     return [self.cityWeatherAPI getCurrentWeatherFor:self.location];
 }
@@ -58,8 +92,7 @@
     NSMutableArray *forecastDays = [[NSMutableArray alloc] init];
     
     for (int i=0; i < forecastDayList.count; i++){
-//        [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i]]];
-        [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i] andMetric:self.isMetric]];
+        [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i] andMetric:self.isMetric andWeeday:[self getCurrentDayOfWeekString:self.currentDayOfWeekInt + i + 1]]];
     }
     
     return forecastDays;
