@@ -63,7 +63,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <segue destination="4No-B7-axi" kind="show" identifier="SpecificWeather" id="pZH-Jv-U9k"/>
+                                    <segue destination="4No-B7-axi" kind="show" id="1B3-xH-2Sc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

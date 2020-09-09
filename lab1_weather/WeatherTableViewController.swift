@@ -94,10 +94,6 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "SpecificWeather", sender: self)
-    }
-    
     
 
 }
