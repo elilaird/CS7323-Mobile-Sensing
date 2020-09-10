@@ -15,6 +15,10 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     @IBOutlet weak var cityPicker: UIPickerView!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var labelViewContainer: UIView!
+    @IBOutlet weak var currentDetailsView: UIView!
+    @IBOutlet weak var dismissDetailsButton: UIButton!
+    @IBOutlet weak var humidityLabel: UILabel!
+    
     
     var weatherAPI = WeatherAPI()
     var city = City(cityName: "Dallas", andMetric: false)
@@ -27,6 +31,14 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         
         //searchBar.delegate = self
         timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeBackground), userInfo: nil, repeats: true)
+        
+        // hide current weather details
+        self.currentDetailsView.isHidden = true
+        
+        // make label clickable
+        currentTempLabel.isUserInteractionEnabled = true
+        let tapCurrentTemp = UITapGestureRecognizer.init(target: self, action: #selector(showCurrentWeatherDetail))
+        currentTempLabel.addGestureRecognizer(tapCurrentTemp)
         
         self.forecast = self.city.forecast
 //        self.currentTempLabel.text = String(Int(self.city.currentDay.getTemp()))
@@ -84,9 +96,18 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         }
     }
     
+    
     /*
      Current city display
      */
+    
+    @objc func showCurrentWeatherDetail(){
+        self.currentDetailsView.isHidden = !self.currentDetailsView.isHidden
+    }
+    
+    @IBAction func dismissCurrentDetails(_ sender: Any) {
+        self.currentDetailsView.isHidden = true
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -131,7 +152,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     func updateCurrentWeather(){
         self.currentTempLabel.text = String(Int(self.city.currentDay.getTemp())) + "\u{00B0}"
         
-//        "\u{00B0}"
+        self.humidityLabel.text = String(Int(self.city.currentDay.getHumidity())) + "%"
         
     }
     
