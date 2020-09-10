@@ -33,7 +33,7 @@
 }
 
 - (instancetype)init {
-    self = [self initWithCityName:@"" andMetric:FALSE];
+//    self = [self initWithCityName:@"" andMetric:FALSE];
     return self;
 }
 

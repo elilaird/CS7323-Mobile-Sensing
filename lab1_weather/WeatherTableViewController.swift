@@ -12,6 +12,7 @@ import UIKit
 class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var searchBar: UISearchBar!
+
     @IBOutlet weak var cityPicker: UIPickerView!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var labelViewContainer: UIView!
@@ -24,6 +25,15 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     var city = City(cityName: "Dallas", andMetric: false)
     var pickerCities: [String] = [String]()
     var timer: Timer!
+
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        displayLoadingAlert()
+        super.viewWillAppear(animated)
+        dismiss(animated: false, completion: nil)
+    }
+
     
     
     override func viewDidLoad() {
@@ -78,6 +88,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
            you must specify the 'Day' object in the swift array.
         
         */
+        
+        print(city.currentDay.getTheDayOfWeek())
  
     }
     
@@ -169,6 +181,23 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
             self.tableView.reloadData()
             self.updateCurrentWeather()
         }
+        displayLoadingAlert()
+        city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
+        cityName.text = city.getLocation()
+        self.tableView.reloadData()
+        dismiss(animated: false, completion: nil)
+    }
+    
+    func displayLoadingAlert(){
+        let alert = UIAlertController(title: nil, message: "Loading Weather...", preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
     }
      
     
