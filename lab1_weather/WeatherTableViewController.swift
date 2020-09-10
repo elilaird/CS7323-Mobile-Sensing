@@ -11,26 +11,31 @@ import UIKit
 
 class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var cityPicker: UIPickerView!
+    @IBOutlet weak var currentTempLabel: UILabel!
+    @IBOutlet weak var labelViewContainer: UIView!
     
     var weatherAPI = WeatherAPI()
     var city = City(cityName: "Dallas", andMetric: false)
     var pickerCities: [String] = [String]()
+    var timer: Timer!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //searchBar.delegate = self
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeBackground), userInfo: nil, repeats: true)
         
-        self.cityName.text = self.city.getLocation()
-        self.forecast = city.forecast
+        self.forecast = self.city.forecast
+//        self.currentTempLabel.text = String(Int(self.city.currentDay.getTemp()))
         
+        self.updateCurrentWeather()
         // Connect data:
         self.cityPicker.delegate = self
         self.cityPicker.dataSource = self
+//        self.tableView.tableHeaderView = self.createTableHeader()
         
         
         pickerCities = ["Dallas", "London", "Chicago"]
@@ -66,6 +71,20 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     }
     
     /*
+     Timer
+     */
+    @objc func changeBackground(){
+        let currColor = self.labelViewContainer.backgroundColor
+        
+        if currColor == .gray{
+            self.labelViewContainer.backgroundColor = .systemIndigo
+        }
+        else{
+            self.labelViewContainer.backgroundColor = .gray
+        }
+    }
+    
+    /*
      Current city display
      */
     
@@ -87,13 +106,34 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        updateWeather(to: pickerCities[row])
+        self.updateWeather(to: pickerCities[row])
     }
+    
+    // formatting later.  If using this function, can't use 'titleForRow' as well
+//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+//        let pickerLabel = UILabel()
+//        pickerLabel.font = UIFont.systemFont(ofSize: 40)
+//        pickerLabel.text = pickerCities[row]
+//        return pickerLabel
+//    }
     
     
     /*
      Current weather display
      */
+    
+//    func createTableHeader() -> UIView{
+//        let headerView = UIView(frame: CGRect(x: 0, y: -75, width: view.frame.size.width, height: view.frame.size.width))
+//        headerView.backgroundColor = .red
+//        return headerView
+//    }
+    
+    func updateCurrentWeather(){
+        self.currentTempLabel.text = String(Int(self.city.currentDay.getTemp())) + "\u{00B0}"
+        
+//        "\u{00B0}"
+        
+    }
     
     
     
@@ -111,8 +151,11 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     func updateWeather(to location: String) {
 //        print(weatherAPI.getCurrentWeather(for: location))
         city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
-        cityName.text = city.getLocation()
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.updateCurrentWeather()
+//            self.tableView.tableHeaderView = self.createTableHeader()
+        }
     }
      
     
