@@ -41,13 +41,12 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         currentTempLabel.addGestureRecognizer(tapCurrentTemp)
         
         self.forecast = self.city.forecast
-//        self.currentTempLabel.text = String(Int(self.city.currentDay.getTemp()))
         
         self.updateCurrentWeather()
+        
         // Connect data:
         self.cityPicker.delegate = self
         self.cityPicker.dataSource = self
-//        self.tableView.tableHeaderView = self.createTableHeader()
         
         
         pickerCities = ["Dallas", "London", "Chicago"]
@@ -143,12 +142,6 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
      Current weather display
      */
     
-//    func createTableHeader() -> UIView{
-//        let headerView = UIView(frame: CGRect(x: 0, y: -75, width: view.frame.size.width, height: view.frame.size.width))
-//        headerView.backgroundColor = .red
-//        return headerView
-//    }
-    
     func updateCurrentWeather(){
         self.currentTempLabel.text = String(Int(self.city.currentDay.getTemp())) + "\u{00B0}"
         
@@ -170,13 +163,11 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     }
     
     func updateWeather(to location: String) {
-//        print(weatherAPI.getCurrentWeather(for: location))
         city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
         forecast = self.city.forecast
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.updateCurrentWeather()
-//            self.tableView.tableHeaderView = self.createTableHeader()
         }
     }
      
