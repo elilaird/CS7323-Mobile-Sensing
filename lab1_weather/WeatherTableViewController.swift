@@ -151,6 +151,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     func updateWeather(to location: String) {
 //        print(weatherAPI.getCurrentWeather(for: location))
         city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
+        forecast = self.city.forecast
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.updateCurrentWeather()
