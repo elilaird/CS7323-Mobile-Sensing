@@ -9,23 +9,16 @@
 import UIKit
 
 
-class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
+
+
     
+    @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
+    
 
-    @IBOutlet weak var cityPicker: UIPickerView!
-    @IBOutlet weak var currentTempLabel: UILabel!
-    @IBOutlet weak var labelViewContainer: UIView!
-    @IBOutlet weak var currentDetailsView: UIView!
-    @IBOutlet weak var dismissDetailsButton: UIButton!
-    @IBOutlet weak var humidityLabel: UILabel!
-    
-    
     var weatherAPI = WeatherAPI()
-    var city = City(cityName: "Dallas", andMetric: false)
-    var pickerCities: [String] = [String]()
-    var timer: Timer!
-
+    lazy var city = City()
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,33 +26,16 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         super.viewWillAppear(animated)
         dismiss(animated: false, completion: nil)
     }
-
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //searchBar.delegate = self
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeBackground), userInfo: nil, repeats: true)
         
-        // hide current weather details
-        self.currentDetailsView.isHidden = true
-        
-        // make label clickable
-        currentTempLabel.isUserInteractionEnabled = true
-        let tapCurrentTemp = UITapGestureRecognizer.init(target: self, action: #selector(showCurrentWeatherDetail))
-        currentTempLabel.addGestureRecognizer(tapCurrentTemp)
-        
-        self.forecast = self.city.forecast
-        
-        self.updateCurrentWeather()
-        
-        // Connect data:
-        self.cityPicker.delegate = self
-        self.cityPicker.dataSource = self
-        
-        
-        pickerCities = ["Dallas", "London", "Chicago"]
+        city = City(cityName: "Dallas", andMetric: false)
+        self.cityName.text = self.city.getLocation()
+        self.forecast = city.forecast
         
         /*
             Example city function calls for current weather:
@@ -92,77 +68,6 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         print(city.currentDay.getTheDayOfWeek())
  
     }
-    
-    /*
-     Timer
-     */
-    @objc func changeBackground(){
-        let currColor = self.labelViewContainer.backgroundColor
-        
-        if currColor == .gray{
-            self.labelViewContainer.backgroundColor = .systemIndigo
-        }
-        else{
-            self.labelViewContainer.backgroundColor = .gray
-        }
-    }
-    
-    
-    /*
-     Current city display
-     */
-    
-    @objc func showCurrentWeatherDetail(){
-        self.currentDetailsView.isHidden = !self.currentDetailsView.isHidden
-    }
-    
-    @IBAction func dismissCurrentDetails(_ sender: Any) {
-        self.currentDetailsView.isHidden = true
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerCities.count
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerCities[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.updateWeather(to: pickerCities[row])
-    }
-    
-    // formatting later.  If using this function, can't use 'titleForRow' as well
-//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-//        let pickerLabel = UILabel()
-//        pickerLabel.font = UIFont.systemFont(ofSize: 40)
-//        pickerLabel.text = pickerCities[row]
-//        return pickerLabel
-//    }
-    
-    
-    /*
-     Current weather display
-     */
-    
-    func updateCurrentWeather(){
-        self.currentTempLabel.text = String(Int(self.city.currentDay.getTemp())) + "\u{00B0}"
-        
-        self.humidityLabel.text = String(Int(self.city.currentDay.getHumidity())) + "%"
-        
-    }
-    
-    
-    
 
     // MARK: - Table view data source
     var forecast:NSMutableArray = []
@@ -175,12 +80,6 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     }
     
     func updateWeather(to location: String) {
-        city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
-        forecast = self.city.forecast
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.updateCurrentWeather()
-        }
         displayLoadingAlert()
         city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
         cityName.text = city.getLocation()
@@ -212,12 +111,10 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let day:Day = forecast[indexPath.row] as! Day
-
-        cell.day_label.text = String(day.getTheDayOfWeek())
-        cell.temperature_label.text = String(round(day.getTemp()))
-        
+        cell.textLabel?.text = String(day.getWeather())
+//        print(day.dayDict)
         return cell
     }
     
