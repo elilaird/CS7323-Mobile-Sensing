@@ -15,9 +15,17 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
-    var weatherAPI = WeatherAPI()
-    var city = City(cityName: "Dallas", andMetric: false)
     
+
+    var weatherAPI = WeatherAPI()
+    lazy var city = City()
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        displayLoadingAlert()
+        super.viewWillAppear(animated)
+        dismiss(animated: false, completion: nil)
+    }
     
     
     override func viewDidLoad() {
@@ -25,6 +33,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         
         //searchBar.delegate = self
         
+        city = City(cityName: "Dallas", andMetric: false)
         self.cityName.text = self.city.getLocation()
         self.forecast = city.forecast
         
@@ -55,6 +64,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
            you must specify the 'Day' object in the swift array.
         
         */
+        
+        print(city.currentDay.getTheDayOfWeek())
  
     }
 
@@ -69,10 +80,23 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func updateWeather(to location: String) {
-//        print(weatherAPI.getCurrentWeather(for: location))
+        displayLoadingAlert()
         city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
         cityName.text = city.getLocation()
         self.tableView.reloadData()
+        dismiss(animated: false, completion: nil)
+    }
+    
+    func displayLoadingAlert(){
+        let alert = UIAlertController(title: nil, message: "Loading Weather...", preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
     }
      
     
