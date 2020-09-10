@@ -9,15 +9,15 @@
 import UIKit
 
 
-class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
-
-
+class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var cityPicker: UIPickerView!
+    
     var weatherAPI = WeatherAPI()
     var city = City(cityName: "Dallas", andMetric: false)
-    
+    var pickerCities: [String] = [String]()
     
     
     override func viewDidLoad() {
@@ -27,6 +27,13 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         
         self.cityName.text = self.city.getLocation()
         self.forecast = city.forecast
+        
+        // Connect data:
+        self.cityPicker.delegate = self
+        self.cityPicker.dataSource = self
+        
+        
+        pickerCities = ["Dallas", "London", "Chicago"]
         
         /*
             Example city function calls for current weather:
@@ -57,6 +64,39 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
         */
  
     }
+    
+    /*
+     Current city display
+     */
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerCities.count
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerCities[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        updateWeather(to: pickerCities[row])
+    }
+    
+    
+    /*
+     Current weather display
+     */
+    
+    
+    
 
     // MARK: - Table view data source
     var forecast:NSMutableArray = []
