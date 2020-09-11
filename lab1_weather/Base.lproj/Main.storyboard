@@ -80,12 +80,26 @@
                                                         <action selector="segmentSelected:" destination="zbw-Ly-1U1" eventType="valueChanged" id="bMz-LI-Aex"/>
                                                     </connections>
                                                 </segmentedControl>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Pressure:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCW-rc-YKj">
+                                                    <rect key="frame" x="201" y="45" width="72" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="P" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSF-qD-Orx">
+                                                    <rect key="frame" x="289" y="45" width="11" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="a4d-0P-2qK" firstAttribute="bottom" secondItem="sTg-EY-XDM" secondAttribute="bottom" id="6Hw-qj-7wM"/>
                                                 <constraint firstItem="1Ke-sV-S6v" firstAttribute="centerY" secondItem="sHy-2z-EZH" secondAttribute="centerY" id="RVU-46-dfr"/>
                                                 <constraint firstItem="sTg-EY-XDM" firstAttribute="top" secondItem="a4d-0P-2qK" secondAttribute="top" constant="131" id="Uzk-8w-Nsy"/>
+                                                <constraint firstItem="YCW-rc-YKj" firstAttribute="leading" secondItem="sHy-2z-EZH" secondAttribute="trailing" constant="30" id="fj1-ke-Jkc"/>
+                                                <constraint firstItem="DSF-qD-Orx" firstAttribute="leading" secondItem="YCW-rc-YKj" secondAttribute="trailing" constant="16" id="sSw-1k-dyp"/>
                                                 <constraint firstItem="sHy-2z-EZH" firstAttribute="leading" secondItem="1Ke-sV-S6v" secondAttribute="trailing" constant="15" id="xoB-mZ-hpe"/>
                                             </constraints>
                                             <viewLayoutGuide key="safeArea" id="a4d-0P-2qK"/>
@@ -306,6 +320,7 @@
                         <outlet property="dismissDetailsButton" destination="sTg-EY-XDM" id="6hZ-Ea-Eka"/>
                         <outlet property="humidityLabel" destination="sHy-2z-EZH" id="hbB-ju-ahm"/>
                         <outlet property="labelViewContainer" destination="IkN-No-PAj" id="8Jb-Pj-DR8"/>
+                        <outlet property="pressureLabel" destination="DSF-qD-Orx" id="6yO-gz-dLq"/>
                         <segue destination="LYl-ng-9ma" kind="show" identifier="SpecificWeather" id="6gN-ir-fY9"/>
                     </connections>
                 </tableViewController>
