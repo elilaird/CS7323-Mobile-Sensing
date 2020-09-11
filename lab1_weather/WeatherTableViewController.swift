@@ -20,7 +20,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     @IBOutlet weak var currentDetailsView: UIView!
     @IBOutlet weak var dismissDetailsButton: UIButton!
     @IBOutlet weak var humidityLabel: UILabel!
-    
+    @IBOutlet weak var pressureLabel: UILabel!
     
     var weatherAPI = WeatherAPI()
     var city = City(cityName: "Dallas", andMetric: false)
@@ -157,7 +157,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         self.currentTempLabel.text = String(Int(self.city.currentDay.getTemp())) + "\u{00B0}"
         
         self.humidityLabel.text = String(Int(self.city.currentDay.getHumidity())) + "%"
-        
+        self.pressureLabel.text = "\(self.city.currentDay.getPressure())"
     }
     
     @IBAction func segmentSelected(_ sender: Any) {

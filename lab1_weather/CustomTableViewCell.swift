@@ -60,6 +60,7 @@ class CustomTableViewCell: UITableViewCell {
         default:
             self.weather_icon.image = UIImage(named:"clear")
         }
+        
     }
 
 }
