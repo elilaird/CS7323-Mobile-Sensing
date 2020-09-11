@@ -224,4 +224,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         performSegue(withIdentifier: "SpecificWeather", sender: self)
     }
 
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = .white
+    }
 }

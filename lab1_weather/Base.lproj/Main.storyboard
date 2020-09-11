@@ -18,7 +18,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <color key="separatorColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                        <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="02C-L6-sAm">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="229"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -69,7 +69,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="a4d-0P-2qK" firstAttribute="bottom" secondItem="sTg-EY-XDM" secondAttribute="bottom" id="6Hw-qj-7wM"/>
                                                 <constraint firstItem="1Ke-sV-S6v" firstAttribute="centerY" secondItem="sHy-2z-EZH" secondAttribute="centerY" id="RVU-46-dfr"/>
@@ -103,10 +103,6 @@
                                 <constraint firstItem="zkX-h7-gTU" firstAttribute="leading" secondItem="02C-L6-sAm" secondAttribute="leadingMargin" id="OLn-P3-W0z"/>
                             </constraints>
                         </view>
-                        <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" axis="vertical" id="sCM-ef-cPX">
-                            <rect key="frame" x="0.0" y="428" width="414" height="200"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </stackView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="143" id="LUd-fX-rio" customClass="CustomTableViewCell" customModule="lab1_weather" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="257" width="414" height="143"/>
@@ -279,6 +275,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="I6U-LH-sxX">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
