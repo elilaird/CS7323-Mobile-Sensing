@@ -26,7 +26,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     var city = City(cityName: "Dallas", andMetric: false)
     var pickerCities: [String] = [String]()
     var timer: Timer!
-
+    var settingsButton: UIImageView!
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +37,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.settingsButton = UIImageView.init(image: UIImage(systemName: "gear"))
+
         
         //searchBar.delegate = self
         timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeBackground), userInfo: nil, repeats: true)

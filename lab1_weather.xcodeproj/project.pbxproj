@@ -20,6 +20,7 @@
 		345AD3612509756E00C68355 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345AD3602509756E00C68355 /* ModalViewController.swift */; };
 		347132A6250B09CB00361091 /* WeatherAttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347132A5250B09CB00361091 /* WeatherAttributeViewController.swift */; };
 		347132AC250B44DB00361091 /* AttributeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347132AB250B44DB00361091 /* AttributeCollectionViewCell.swift */; };
+		34E2991B250C1886001991C6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2991A250C1886001991C6 /* SettingsViewController.swift */; };
 		459C944F2509A109009000F9 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C944E2509A109009000F9 /* CustomTableViewCell.swift */; };
 		45A38DB324FDF20A00DEE52A /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A38DB224FDF20A00DEE52A /* WeatherTableViewController.swift */; };
 		45A38DB824FDFBDE00DEE52A /* WeatherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A38DB724FDFBDE00DEE52A /* WeatherAPI.m */; };
@@ -66,6 +67,7 @@
 		345AD3602509756E00C68355 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		347132A5250B09CB00361091 /* WeatherAttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAttributeViewController.swift; sourceTree = "<group>"; };
 		347132AB250B44DB00361091 /* AttributeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeCollectionViewCell.swift; sourceTree = "<group>"; };
+		34E2991A250C1886001991C6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		459C944E2509A109009000F9 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		45A38DB124FDF20900DEE52A /* lab1_weather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lab1_weather-Bridging-Header.h"; sourceTree = "<group>"; };
 		45A38DB224FDF20A00DEE52A /* WeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				05B3A2CD24F84E7200016A78 /* AppDelegate.h */,
 				05B3A2CE24F84E7200016A78 /* AppDelegate.m */,
 				05B3A2D024F84E7200016A78 /* SceneDelegate.h */,
+				34E2991A250C1886001991C6 /* SettingsViewController.swift */,
 				345AD3602509756E00C68355 /* ModalViewController.swift */,
 				05B3A2D124F84E7200016A78 /* SceneDelegate.m */,
 				05B3A2D624F84E7200016A78 /* Main.storyboard */,
@@ -306,6 +309,7 @@
 				347132AC250B44DB00361091 /* AttributeCollectionViewCell.swift in Sources */,
 				05B3A2E024F84E7400016A78 /* main.m in Sources */,
 				05B3A2D224F84E7200016A78 /* SceneDelegate.m in Sources */,
+				34E2991B250C1886001991C6 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
