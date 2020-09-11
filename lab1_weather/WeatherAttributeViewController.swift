@@ -7,9 +7,11 @@
 //
 import UIKit
 
-class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate{
+class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
     
     @IBOutlet weak var cityImageScrollView: UIScrollView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     
     var city = "Dallas"
     var day:Day? = nil
@@ -20,6 +22,8 @@ class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
 
         // Do any additional setup after loading the view.
         if let size = self.headerImage?.image?.size{
@@ -32,7 +36,13 @@ class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate{
             self.cityImageScrollView.zoomScale = scale
             
         }
-        print(day?.getTheDayOfWeek())
+        
+        
+        
+        
+        //self.children[2].day = self.day
+        
+        
         
     }
     
@@ -47,7 +57,28 @@ class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+    }*/
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        print("hi")
+        return 1
     }
-    */
+
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AttributeTile", for: indexPath) as! AttributeCollectionViewCell
+        cell.backgroundColor = UIColor.blue
+        cell.attributeTitle.text = "Yo"
+        cell.attributeValue.text = "Yo"
+        print("yo")
+            
+        return cell
+    }
 
 }
+

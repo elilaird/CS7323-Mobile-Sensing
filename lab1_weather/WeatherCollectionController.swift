@@ -10,6 +10,8 @@ import UIKit
 
 class WeatherCollectionController: UICollectionViewController {
     
+    var day:Day? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,8 +31,10 @@ class WeatherCollectionController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AttributeTile", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AttributeTile", for: indexPath) as! AttributeCollectionViewCell
         cell.backgroundColor = UIColor.blue
+        cell.attributeTitle.text = "Yo"
+        cell.attributeValue.text = "Yo"
             
             
         return cell
