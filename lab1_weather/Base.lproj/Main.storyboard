@@ -273,7 +273,6 @@
                                     <constraints>
                                         <constraint firstItem="INf-gh-eJn" firstAttribute="top" secondItem="Oph-zw-aXY" secondAttribute="topMargin" constant="29" id="9TM-Dd-TdR"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="INf-gh-eJn" secondAttribute="bottom" constant="31" id="GOt-og-e21"/>
-                                        <constraint firstItem="INf-gh-eJn" firstAttribute="trailing" secondItem="Oph-zw-aXY" secondAttribute="trailingMargin" id="Hux-Rd-v3G"/>
                                         <constraint firstItem="INf-gh-eJn" firstAttribute="leading" secondItem="Oph-zw-aXY" secondAttribute="leading" constant="335.5" id="Jj2-tr-Ybo"/>
                                         <constraint firstItem="Qcw-Pc-tlI" firstAttribute="leading" secondItem="Oph-zw-aXY" secondAttribute="leadingMargin" id="MPL-bP-JjL"/>
                                         <constraint firstItem="Qcw-Pc-tlI" firstAttribute="centerY" secondItem="Oph-zw-aXY" secondAttribute="centerY" id="SRD-8B-GK0"/>
