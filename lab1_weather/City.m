@@ -27,7 +27,15 @@
     self = [super init];
     if(self) {
         _location = location;
+        _cityWeatherAPI = [[WeatherAPI alloc] init];
+        _currentWeatherDict = [self getCurrentWeatherDict];
+        _forecastDict = [self getForecastDict];
         _isMetric = isMetric;
+        
+        _currentDayOfWeekInt = [self getCurrentDayOfWeek];
+        _currentDay = [[Day alloc] initWithDayDict:self.currentWeatherDict andMetric:self.isMetric andWeeday:[self getCurrentDayOfWeekString:self.currentDayOfWeekInt]];
+        _forecast = [self getForecast];
+
     }
     return self;
 }
@@ -36,56 +44,6 @@
 //    self = [self initWithCityName:@"" andMetric:FALSE];
     return self;
 }
-
-/*
- Lazy instantiation
- */
-
-- (Day *) currentDay{
-    if(!_currentDay)
-        _currentDay = [[Day alloc] initWithDayDict:self.currentWeatherDict andMetric:self.isMetric andWeeday:[self getCurrentDayOfWeekString:self.currentDayOfWeekInt]];
-    
-    return _currentDay;
-}
-
-- (WeatherAPI *) cityWeatherAPI{
-    if(!_cityWeatherAPI)
-        _cityWeatherAPI = [[WeatherAPI alloc] init];
-    
-    return _cityWeatherAPI;
-}
-
-- (NSDictionary *) currentWeatherDict{
-    if(!_currentWeatherDict)
-        _currentWeatherDict = [self getCurrentWeatherDict];
-    
-    return _currentWeatherDict;
-}
-
-- (NSDictionary *) forecastDict{
-    if(!_forecastDict)
-        _forecastDict = [self getForecastDict];
-    
-    return _forecastDict;
-}
-
-- (NSInteger) currentDayOfWeekInt{
-    if(!_currentDayOfWeekInt)
-        _currentDayOfWeekInt = [self getCurrentDayOfWeek];
-
-    return _currentDayOfWeekInt;
-}
-
-- (NSMutableArray *) forecast{
-    if(!_forecast)
-        _forecast = [self getForecast];
-        
-    return _forecast;
-}
-
-
-
-
 
 //* Private Facing Functions *
 - (NSInteger) getCurrentDayOfWeek{
