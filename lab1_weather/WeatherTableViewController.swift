@@ -121,10 +121,15 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         }
     }
     
+    func updateForecast(){
+        self.forecast = self.city.forecast
+    }
+    
     func updateWeather(to location: String) {
         displayLoadingAlert()
         city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
         cityName.text = city.getLocation()
+        updateForecast()
         self.tableView.reloadData()
         dismiss(animated: false, completion: nil)
     }
