@@ -32,6 +32,8 @@ class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate{
             self.cityImageScrollView.zoomScale = scale
             
         }
+        print(day?.getTheDayOfWeek())
+        
     }
     
     func viewForZooming(in cityImageScrollView: UIScrollView) -> UIView? {
