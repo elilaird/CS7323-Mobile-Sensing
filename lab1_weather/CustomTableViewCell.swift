@@ -13,6 +13,8 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var day_label: UILabel!
     @IBOutlet weak var weather_icon: UIImageView!
     @IBOutlet weak var temperature_label: UILabel!
+    @IBOutlet weak var lowTemp: UILabel!
+    @IBOutlet weak var feelsLike: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,10 +27,21 @@ class CustomTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(with day:Day){
+    func configure(with day:Day, as identifier:String){
         self.day_label.text = String(day.getTheDayOfWeek())
-        self.temperature_label.text = "\(round(day.getTemp()))°"
-       
+        
+        
+        switch identifier{
+        case "Cell1":
+            self.temperature_label.text = "\(round(day.getTemp()))°"
+        case "Cell2":
+            self.lowTemp.text = "\(round(day.getLowTemp()))°"
+            self.temperature_label.text = "\(round(day.getHighTemp()))°"
+        default:
+            self.feelsLike.text = "\(round(day.getFeelsLike()))°"
+        }
+  
+  
         let weather_condition = day.getWeather()
         
         switch weather_condition {

@@ -13,6 +13,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     
     @IBOutlet weak var searchBar: UISearchBar!
 
+    @IBOutlet weak var cellControl: UISegmentedControl!
     @IBOutlet weak var cityPicker: UIPickerView!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var labelViewContainer: UIView!
@@ -56,7 +57,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         self.cityPicker.delegate = self
         self.cityPicker.dataSource = self
         
-        
+
         pickerCities = ["Dallas", "London", "Chicago"]
         
         /*
@@ -159,6 +160,11 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         
     }
     
+    @IBAction func segmentSelected(_ sender: Any) {
+        self.updateForecast()
+        self.tableView.reloadData()
+    }
+
     
     
 
@@ -171,6 +177,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
             self.updateWeather(to: locationString)
         }
     }
+    
+    
     
     func updateForecast(){
         self.forecast = self.city.forecast
@@ -212,10 +220,24 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        
+        var cell_identifier:String
+        
+        switch self.cellControl.selectedSegmentIndex {
+        case 0:
+            cell_identifier = "Cell1"
+        case 1:
+            cell_identifier = "Cell2"
+        case 2:
+            cell_identifier = "Cell3"
+        default:
+            cell_identifier = "Cell1"
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cell_identifier, for: indexPath) as! CustomTableViewCell
         let day:Day = forecast[indexPath.row] as! Day
 
-        cell.configure(with: day)
+        cell.configure(with: day, as: cell_identifier)
         
         return cell
     }
