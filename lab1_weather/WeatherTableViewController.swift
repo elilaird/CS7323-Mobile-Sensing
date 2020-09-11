@@ -9,7 +9,8 @@
 import UIKit
 
 
-class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, settingsDelegateProtocol{
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
 
@@ -27,6 +28,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     var pickerCities: [String] = [String]()
     var timer: Timer!
     var settingsButton: UIImageView!
+    var fontSize: Int!
+    var daysToDisplay: Int!
+    var isMetric: Bool!
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +43,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         super.viewDidLoad()
         
         self.settingsButton = UIImageView.init(image: UIImage(systemName: "gear"))
-
+        self.fontSize = 17
+        self.daysToDisplay = 10
+        self.isMetric = false
         
         //searchBar.delegate = self
         timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeBackground), userInfo: nil, repeats: true)
@@ -189,7 +195,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     
     
     func updateWeather(to location: String) {
-        city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
+        city = City(cityName: location, andMetric: self.isMetric) // until we get the toggle, I am setting this false
         DispatchQueue.main.async {
             self.updateForecast()
             self.tableView.reloadData()
@@ -219,7 +225,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return city.forecast.count
+        return self.daysToDisplay
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -241,7 +247,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         let day:Day = forecast[indexPath.row] as! Day
 
         cell.configure(with: day, as: cell_identifier)
-        
+        cell.day_label.font = cell.day_label.font.withSize(CGFloat(self.fontSize))
         return cell
     }
     
@@ -257,6 +263,13 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
             attributeView?.day = self.forecast[dayIndex!.row] as? Day
             
         }
+        if segue.identifier == "settings"{
+            let secondVC: SettingsViewController = segue.destination as! SettingsViewController
+            secondVC.delegate = self
+            secondVC.fontSize = Float(self.fontSize)
+            secondVC.daysToDisplay = Double(self.daysToDisplay)
+            secondVC.isMetric = self.city.isMetric
+        }
         /*
         if let attributeView = segue.destination as? WeatherAttributeViewController,
            let cell = sender as? CustomTableViewCell,
@@ -270,5 +283,14 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .white
+    }
+    
+    
+    func saveSettings(fontSize: Int, metric: Bool, daysToDisplay: Int) {
+        self.fontSize = fontSize
+        self.isMetric = metric
+        self.daysToDisplay = daysToDisplay
+        self.updateWeather(to: self.city.getLocation())
+        self.tableView.reloadData()
     }
 }

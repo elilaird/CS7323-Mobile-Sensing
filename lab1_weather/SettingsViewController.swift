@@ -15,9 +15,9 @@ protocol settingsDelegateProtocol {
 class SettingsViewController: UIViewController {
     
     var delegate: settingsDelegateProtocol? = nil
-    var fontSize: Int! = nil
+    var fontSize: Float! = nil
     var isMetric: Bool! = nil
-    var daysToDisplay: Int! = nil
+    var daysToDisplay: Double! = nil
 
     @IBOutlet weak var fontSlider: UISlider!
     @IBOutlet weak var tempSwitch: UISwitch!
@@ -28,10 +28,12 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.dayStepper.value = 10
+        self.dayStepper.value = self.daysToDisplay
+        self.fontSlider.value = self.fontSize
+        self.tempSwitch.isOn = self.isMetric
+        self.daysDisplay.text = Int(self.daysToDisplay).description
         self.dayStepper.maximumValue = 15
         self.dayStepper.minimumValue = 5
-        self.daysDisplay.text = Int(self.dayStepper.value).description
     }
     
     @IBAction func stepperValueChange(_ sender: UIStepper) {
@@ -44,7 +46,6 @@ class SettingsViewController: UIViewController {
             let font = Int(self.fontSlider.value)
             let metric = self.tempSwitch.isOn
             let days = Int(self.dayStepper.value)
-            print(font,metric,days)
             self.delegate?.saveSettings(fontSize: font, metric: metric, daysToDisplay: days)
         }
         dismiss(animated: true, completion: nil)
