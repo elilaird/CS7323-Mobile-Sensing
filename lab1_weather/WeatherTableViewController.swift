@@ -55,7 +55,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
            you must specify the 'Day' object in the swift array.
         
         */
- 
+        print("\(self.city.currentDay.getWeather())")
+        print("\(self.city.currentDay.getWeatherDesc())")
     }
 
     // MARK: - Table view data source
@@ -88,11 +89,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        let day:Day = forecast[indexPath.row] as! Day
-
-        cell.day_label.text = String(day.getTheDayOfWeek())
-        cell.temperature_label.text = String(round(day.getTemp()))
-        
+        cell.configure(with: forecast[indexPath.row] as! Day)
         return cell
     }
     
