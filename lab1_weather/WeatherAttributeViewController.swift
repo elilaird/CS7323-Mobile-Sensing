@@ -12,6 +12,7 @@ class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate{
     @IBOutlet weak var cityImageScrollView: UIScrollView!
     
     var city = "Dallas"
+    var day:Day? = nil
     
     lazy private var headerImage: UIImageView? = {
         return UIImageView.init(image: UIImage(named: "\(city)_Sky.jpg"))
