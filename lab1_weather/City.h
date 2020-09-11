@@ -34,9 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithCityName:(NSString *)location andMetric:(BOOL) isMetric;
 
 // Current Weather
-- (NSDictionary *) getDict; // remove this guy later.  This is just to check that the api calls work
-- (void) logAllKeys; // remove later.  this is for testing
-- (void) logList; // remove later.  this is for testing
 - (NSString *) getLocation;
 
 
