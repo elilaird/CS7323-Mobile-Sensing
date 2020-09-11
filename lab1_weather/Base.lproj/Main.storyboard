@@ -56,16 +56,14 @@
                                                         <action selector="dismissCurrentDetails:" destination="zbw-Ly-1U1" eventType="touchUpInside" id="LhI-bp-yfp"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Humidity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ke-sV-S6v">
-                                                    <rect key="frame" x="8" y="17" width="74" height="49"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Humidity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ke-sV-S6v">
+                                                    <rect key="frame" x="8" y="45.5" width="74" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHy-2z-EZH">
-                                                    <rect key="frame" x="90" y="17" width="74" height="49"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHy-2z-EZH">
+                                                    <rect key="frame" x="97" y="31" width="74" height="49"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -73,10 +71,10 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="sTg-EY-XDM" firstAttribute="bottom" secondItem="a4d-0P-2qK" secondAttribute="bottom" id="70j-40-Him"/>
-                                                <constraint firstItem="sTg-EY-XDM" firstAttribute="trailing" secondItem="a4d-0P-2qK" secondAttribute="trailing" id="7UU-hV-lwA"/>
-                                                <constraint firstItem="sTg-EY-XDM" firstAttribute="leading" secondItem="a4d-0P-2qK" secondAttribute="leading" id="GOe-yw-gcF"/>
-                                                <constraint firstItem="sTg-EY-XDM" firstAttribute="top" secondItem="a4d-0P-2qK" secondAttribute="top" constant="131" id="mZf-13-b7i"/>
+                                                <constraint firstItem="a4d-0P-2qK" firstAttribute="bottom" secondItem="sTg-EY-XDM" secondAttribute="bottom" id="6Hw-qj-7wM"/>
+                                                <constraint firstItem="1Ke-sV-S6v" firstAttribute="centerY" secondItem="sHy-2z-EZH" secondAttribute="centerY" id="RVU-46-dfr"/>
+                                                <constraint firstItem="sTg-EY-XDM" firstAttribute="top" secondItem="a4d-0P-2qK" secondAttribute="top" constant="131" id="Uzk-8w-Nsy"/>
+                                                <constraint firstItem="sHy-2z-EZH" firstAttribute="leading" secondItem="1Ke-sV-S6v" secondAttribute="trailing" constant="15" id="xoB-mZ-hpe"/>
                                             </constraints>
                                             <viewLayoutGuide key="safeArea" id="a4d-0P-2qK"/>
                                         </view>
@@ -86,6 +84,8 @@
                                         <constraint firstItem="95F-1b-xSJ" firstAttribute="leading" secondItem="IkN-No-PAj" secondAttribute="leading" constant="107" id="FYZ-l6-poB"/>
                                         <constraint firstAttribute="trailing" secondItem="95F-1b-xSJ" secondAttribute="trailing" constant="107" id="ISu-pH-vW2"/>
                                         <constraint firstItem="95F-1b-xSJ" firstAttribute="centerY" secondItem="IkN-No-PAj" secondAttribute="centerY" id="Z4k-Dr-Avb"/>
+                                        <constraint firstAttribute="trailing" secondItem="sTg-EY-XDM" secondAttribute="trailing" constant="8" id="iuS-os-DEQ"/>
+                                        <constraint firstItem="sTg-EY-XDM" firstAttribute="leading" secondItem="IkN-No-PAj" secondAttribute="leading" constant="8" id="r9l-ws-T4Z"/>
                                     </constraints>
                                 </view>
                             </subviews>
