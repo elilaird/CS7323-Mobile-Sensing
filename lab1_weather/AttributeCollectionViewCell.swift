@@ -13,4 +13,6 @@ class AttributeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var attributeValue: UILabel!
     
+    @IBOutlet weak var attributeUnits: UILabel!
+    
 }

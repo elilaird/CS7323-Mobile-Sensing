@@ -15,6 +15,9 @@ class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate, UI
     
     var city = "Dallas"
     var day:Day? = nil
+    var attributes = [String]()
+    var attributeValues = [String]()
+    var attributeUnits = [String]()
     
     lazy private var headerImage: UIImageView? = {
         return UIImageView.init(image: UIImage(named: "\(city)_Sky.jpg"))
@@ -37,12 +40,17 @@ class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate, UI
             
         }
         
+        self.attributes.append("Pressure")
+        self.attributes.append("Wind")
+        self.attributes.append("Humidity")
         
+        self.attributeValues.append(String(self.day!.getPressure()))
+        self.attributeValues.append(String(self.day!.getWindSpeed()))
+        self.attributeValues.append(String(self.day!.getHumidity()))
         
-        
-        //self.children[2].day = self.day
-        
-        
+        self.attributeUnits.append("atm")
+        self.attributeUnits.append("mph")
+        self.attributeUnits.append("%")
         
     }
     
@@ -60,23 +68,21 @@ class WeatherAttributeViewController: UIViewController, UIScrollViewDelegate, UI
     }*/
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        print("hi")
         return 1
     }
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return self.attributes.count
     }
     
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AttributeTile", for: indexPath) as! AttributeCollectionViewCell
         cell.backgroundColor = UIColor.blue
-        cell.attributeTitle.text = "Yo"
-        cell.attributeValue.text = "Yo"
-        print("yo")
-            
+        cell.attributeTitle.text = self.attributes[indexPath.row]
+        cell.attributeValue.text = self.attributeValues[indexPath.row]
+        cell.attributeUnits.text = self.attributeUnits[indexPath.row]
         return cell
     }
 
