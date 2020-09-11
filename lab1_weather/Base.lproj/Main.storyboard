@@ -24,12 +24,16 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dallas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiJ-zI-d0z">
-                                    <rect key="frame" x="165" y="32" width="89" height="43"/>
+                                    <rect key="frame" x="8" y="8" width="158" height="115"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zkX-h7-gTU">
+                                    <rect key="frame" x="195" y="8" width="211" height="115"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                </pickerView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <accessibility key="accessibilityConfiguration">
@@ -101,6 +105,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="f6P-gZ-CXE"/>
                     <connections>
+                        <outlet property="CityPicker" destination="zkX-h7-gTU" id="uwd-CH-Use"/>
                         <outlet property="cityName" destination="MiJ-zI-d0z" id="04E-1A-aTR"/>
                         <segue destination="LYl-ng-9ma" kind="show" identifier="SpecificWeather" id="6gN-ir-fY9"/>
                     </connections>
