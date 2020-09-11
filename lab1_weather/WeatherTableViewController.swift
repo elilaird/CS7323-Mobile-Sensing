@@ -29,9 +29,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
 
     
     override func viewWillAppear(_ animated: Bool) {
-        displayLoadingAlert()
         super.viewWillAppear(animated)
-        dismiss(animated: false, completion: nil)
     }
 
     
@@ -174,10 +172,15 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         }
     }
     
+    func updateForecast(){
+        self.forecast = self.city.forecast
+    }
+    
+    
     func updateWeather(to location: String) {
         city = City(cityName: location, andMetric: false) // until we get the toggle, I am setting this false
-        forecast = self.city.forecast
         DispatchQueue.main.async {
+            self.updateForecast()
             self.tableView.reloadData()
             self.updateCurrentWeather()
         }
@@ -212,8 +215,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let day:Day = forecast[indexPath.row] as! Day
 
-        cell.day_label.text = String(day.getTheDayOfWeek())
-        cell.temperature_label.text = String(round(day.getTemp()))
+        cell.configure(with: day)
         
         return cell
     }
@@ -222,4 +224,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         performSegue(withIdentifier: "SpecificWeather", sender: self)
     }
 
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = .white
+    }
 }
