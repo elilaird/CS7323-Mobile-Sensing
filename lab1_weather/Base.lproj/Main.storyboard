@@ -175,10 +175,10 @@
             </objects>
             <point key="canvasLocation" x="913.04347826086962" y="71.651785714285708"/>
         </scene>
-        <!--View Controller-->
+        <!--Weather Attribute View Controller-->
         <scene sceneID="3kX-sX-L2W">
             <objects>
-                <viewController id="LYl-ng-9ma" sceneMemberID="viewController">
+                <viewController id="LYl-ng-9ma" customClass="WeatherAttributeViewController" customModule="lab1_weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iba-IT-DmR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -191,7 +191,7 @@
                                 </connections>
                             </containerView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xXJ-SN-nw8">
-                                <rect key="frame" x="20" y="88" width="374" height="183"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="183"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="snx-h4-jzU"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="TiV-aq-S5m"/>
@@ -201,6 +201,9 @@
                         <viewLayoutGuide key="safeArea" id="PFW-PF-Pqw"/>
                     </view>
                     <navigationItem key="navigationItem" id="rWr-AD-RYp"/>
+                    <connections>
+                        <outlet property="cityImageScrollView" destination="xXJ-SN-nw8" id="dxx-AJ-es4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blS-kf-jxp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
