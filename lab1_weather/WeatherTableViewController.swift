@@ -26,13 +26,10 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
 
     
     var weatherAPI = WeatherAPI()
-//    var city = City(cityName: "Dallas", andMetric: false)
     var city: City!
     var pickerCities: [String] = [String]()
     var timer: Timer!
     let monitor = NWPathMonitor()
-    var isConnected = false
-    var presenting = false
     
     
     
@@ -166,10 +163,8 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         self.monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 print("We're connected!")
-                self.isConnected = true
             } else {
                 print("No connection.")
-                self.isConnected = false
             }
         }
 
@@ -260,13 +255,11 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         loadingIndicator.startAnimating();
 
         alert.view.addSubview(loadingIndicator)
-        self.presenting = true
         present(alert, animated: true, completion: nil)
     }
     
     func dismissLoadingAlert(){
         dismiss(animated: false, completion: nil)
-        self.presenting = false
     }
      
     
