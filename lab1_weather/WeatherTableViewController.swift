@@ -221,7 +221,25 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "SpecificWeather", sender: self)
+        performSegue(withIdentifier: "SpecificWeather", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SpecificWeather"{
+            let attributeView = segue.destination as? WeatherAttributeViewController
+            let dayIndex = sender as? IndexPath
+            attributeView?.city = self.city.getLocation()
+            attributeView?.day = self.forecast[dayIndex!.row] as? Day
+            
+        }
+        /*
+        if let attributeView = segue.destination as? WeatherAttributeViewController,
+           let cell = sender as? CustomTableViewCell,
+           let day = cell.day_label?.text {
+            attributeView.city = self.city.getLocation()
+            print("worked")
+            
+        }*/
     }
 
     
