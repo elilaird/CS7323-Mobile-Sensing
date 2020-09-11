@@ -33,7 +33,6 @@
 }
 
 - (instancetype)init {
-//    self = [self initWithCityName:@"" andMetric:FALSE];
     return self;
 }
 
@@ -118,11 +117,19 @@
 }
 
 - (NSDictionary *) getCurrentWeatherDict{
-    return [self.cityWeatherAPI getCurrentWeatherFor:self.location];
+    @try {
+        return [self.cityWeatherAPI getCurrentWeatherFor:self.location];
+    } @catch (NSException *exception) {
+        return @{};
+    }
 }
 
 - (NSDictionary *) getForecastDict{
-    return [self.cityWeatherAPI getForecastFor:self.location];
+    @try {
+        return [self.cityWeatherAPI getForecastFor:self.location];
+    } @catch (NSException *exception) {
+        return @{};
+    } 
 }
 
 - (NSString *) getLocation{
@@ -130,33 +137,19 @@
 }
 
 - (NSMutableArray *) getForecast{
-    NSArray *forecastDayList = [self.forecastDict objectForKey:@"list"];
-    NSMutableArray *forecastDays = [[NSMutableArray alloc] init];
-    
-    for (int i=0; i < forecastDayList.count; i++){
-        [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i] andMetric:self.isMetric andWeeday:[self getCurrentDayOfWeekString:self.currentDayOfWeekInt + i + 1]]];
+    @try {
+        NSArray *forecastDayList = [self.forecastDict objectForKey:@"list"];
+        NSMutableArray *forecastDays = [[NSMutableArray alloc] init];
+        
+        for (int i=0; i < forecastDayList.count; i++){
+            [forecastDays addObject:[[Day alloc] initWithDayDict:forecastDayList[i] andMetric:self.isMetric andWeeday:[self getCurrentDayOfWeekString:self.currentDayOfWeekInt + i + 1]]];
+        }
+        
+        return forecastDays;
+    } @catch (NSException *exception) {
+        return [[NSMutableArray alloc] init];
     }
-    
-    return forecastDays;
-}
 
-
-//* Public Facing Methods *
-
-- (void) logAllKeys{
-    NSLog(@"Keys for forecast: %@", [self.forecastDict allKeys]);
-    NSLog(@"Keys for current weather: %@", [self.currentWeatherDict allKeys]);
-}
-- (NSDictionary *) getDict{
-    return self.forecastDict;
-}
-
-- (void) logList{
-    id list = [self.forecastDict objectForKey:@"list"];
-    NSLog(@"List type: %@",  NSStringFromClass([list class]));
-    
-    id days = list[0];
-    NSLog(@"Days type: %@",  NSStringFromClass([days class]));
 }
 
 

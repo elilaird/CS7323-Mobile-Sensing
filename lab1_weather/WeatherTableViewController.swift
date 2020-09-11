@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Network
+import SystemConfiguration
 
 
-class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
 
@@ -21,22 +23,40 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
     @IBOutlet weak var dismissDetailsButton: UIButton!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
+
     
     var weatherAPI = WeatherAPI()
-    var city = City(cityName: "Dallas", andMetric: false)
+//    var city = City(cityName: "Dallas", andMetric: false)
+    var city: City!
     var pickerCities: [String] = [String]()
     var timer: Timer!
+    let monitor = NWPathMonitor()
+    var isConnected = false
+    var presenting = false
+    
+    
+    
 
 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if !connectedToNetwork(){
+            let alertView: UIAlertController = UIAlertController(title: nil, message: "Please enable internet in settings", preferredStyle: .alert)
+            present(alertView, animated: false, completion: nil)
+        }
     }
 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkInternet()
+
+        self.city = City(cityName: "Dallas", andMetric: false)
+
+        
+        
         
         //searchBar.delegate = self
         timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeBackground), userInfo: nil, repeats: true)
@@ -87,8 +107,6 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
            you must specify the 'Day' object in the swift array.
         
         */
-        
-        print(city.currentDay.getTheDayOfWeek())
  
     }
     
@@ -140,13 +158,50 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         self.updateWeather(to: pickerCities[row])
     }
     
-    // formatting later.  If using this function, can't use 'titleForRow' as well
-//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-//        let pickerLabel = UILabel()
-//        pickerLabel.font = UIFont.systemFont(ofSize: 40)
-//        pickerLabel.text = pickerCities[row]
-//        return pickerLabel
-//    }
+    /*
+     Internet check
+     */
+
+    func checkInternet(){
+        self.monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.isConnected = true
+            } else {
+                print("No connection.")
+                self.isConnected = false
+            }
+        }
+
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+    
+    // code from: https://stackoverflow.com/questions/25623272/how-to-use-scnetworkreachability-in-swift Martin R's answer
+    func connectedToNetwork() -> Bool {
+
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+
+        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        }) else {
+            return false
+        }
+
+        var flags: SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return false
+        }
+
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+
+        return (isReachable && !needsConnection)
+    }
     
     
     /*
@@ -193,7 +248,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
             self.updateCurrentWeather()
         }
         displayLoadingAlert()
-        dismiss(animated: false, completion: nil)
+        dismissLoadingAlert()
     }
     
     func displayLoadingAlert(){
@@ -205,7 +260,13 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, UI
         loadingIndicator.startAnimating();
 
         alert.view.addSubview(loadingIndicator)
+        self.presenting = true
         present(alert, animated: true, completion: nil)
+    }
+    
+    func dismissLoadingAlert(){
+        dismiss(animated: false, completion: nil)
+        self.presenting = false
     }
      
     
