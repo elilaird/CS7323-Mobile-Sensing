@@ -24,5 +24,29 @@ class CustomTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func configure(with day:Day){
+        self.day_label.text = String(day.getTheDayOfWeek())
+        self.temperature_label.text = "\(round(day.getTemp()))°"
+       
+        let weather_condition = day.getWeather()
+        
+        switch weather_condition {
+        case "Clear":
+            self.weather_icon.image = UIImage(named:"clear")
+        case "Clouds":
+            self.weather_icon.image = UIImage(named:"Cloudy")
+        case "Snow":
+            self.weather_icon.image = UIImage(named:"Snowy")
+        case "Rain","Drizzle":
+            self.weather_icon.image = UIImage(named:"Rainy")
+        case "Thunderstorm":
+            self.weather_icon.image = UIImage(named:"Thunderstorms")
+        case "Mist","Smoke","Haze","Dust","Fog","Sand","Ash","Squall","Tornado":
+            self.weather_icon.image = UIImage(named:"Wind")
+        default:
+            self.weather_icon.image = UIImage(named:"clear")
+        }
+    }
 
 }
