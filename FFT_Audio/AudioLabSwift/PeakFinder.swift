@@ -39,12 +39,31 @@ class PeakFinder {
         fftData = fftArray
         Fs = samplingFrequency
 //        getPeakFrequencies(withFl: nil, withFh: nil)
+        
 
-        let absences = [0,1,2,3,4,5,6]
+        let absences = [0.0,1.0,2,3,4,5,6]
+        var dataEqualizer = Array.init(repeating: 0.0, count: 20)
         let test = absences[2...5]
-        print("*****************Test: \(test)")
+        
+        
+//        vDSP_vswmaxD(absences, 2, &dataEqualizer, 1, 3, 2)
+        
+        
+//        var tester = Array.init(repeating: 0.0, count: 20)
+//        let nBatches = 20
+//        let stride = Int(BUFFER_SIZE/40)
+//
+//        for i in 0...nBatches-1{
+//
+//            let batchMax = fftData[i*stride...(i+1)*stride].max()
+//            dataEqualizer[i] = batchMax!
+//        }
+        
+        
+        print("*****************Test: \(dataEqualizer)")
         
     }
+    
     
     /*
      Get array of peak frequencies in an fft. Optional low and high cutoff frequencies
@@ -96,16 +115,57 @@ class PeakFinder {
         var m3:Float
     }
     
-    // finds the peaks of an input signal
-    private func findPeaks(samples:ArraySlice<Float>) -> Array<Peak>{
+    // Finds the peaks of an input signal
+    private func findPeaks(samples:ArraySlice<Float>) throws -> Array<Peak> {
         
-        return [Peak(f2: 55, m1: 10, m2: 12, m3: 11)]
+        // Get max magnitudes in the samples array (since we know the output, we know which windows
+        // correspond to which max values...important for determining the peak index
+        
+        // Might need to adjust based on performance (probably still want smaller than/equal to window size...starting wih 0% overlap for simplicity)
+        let stride = 5
+        let windowSize = 5
+        let nWindowPositions = (samples.count - windowSize + 1)/stride
+        
+        // Output array for peak magnitudes
+        var peakMagnitudes: Array<Float> = Array.init(repeating: 0.0, count: nWindowPositions)
+        var peakMagnitudesIndexes = Array.init(repeating: 0, count: nWindowPositions)
+        var peaks: Array<Peak> = []
+        
+        // Convert samples into a float array
+        let arrSamples: Array<Float> = Array(samples)
+        
+        // Calculate peak magnitudes
+        vDSP_vswmax(arrSamples, vDSP_Stride(stride), &peakMagnitudes, vDSP_Stride(1), vDSP_Length(nWindowPositions), vDSP_Length(windowSize))
+        
+        // Find the indexes of the peaks in the samples slice and make a peak
+        for (i, peakMag) in peakMagnitudes.enumerated(){
+            // make slice of array
+            let batch = samples[i*windowSize...(i+1)*windowSize-1] // assuming no overlap
+            
+            // get the index where the peak occurs
+            let indexWherePeakOccurredInBatch = batch.firstIndex(of: peakMag)
+            
+            if indexWherePeakOccurredInBatch == nil {
+                throw NotInWindowError.runtimeError("We did not find the magnitude of the peak in the batch.  Batch computation is not working")
+            }
+            
+            let offset = i*windowSize
+            let indexWherePeakOccurred = indexWherePeakOccurredInBatch! + offset
+            
+            peakMagnitudesIndexes[i] = indexWherePeakOccurred
+            
+            peaks.append(Peak(f2: self.getFrequency(withIndex: indexWherePeakOccurred), m1: samples[indexWherePeakOccurred-1], m2: peakMag,
+                              m3: samples[indexWherePeakOccurred+1]))
+        }
+        
+        
+        return peaks
     }
     
-    // splits an fft array from low and high frequencies (note: returns a view for memory efficiency)
+    // Splits an fft array from low and high frequencies (note: returns a view for memory efficiency)
     private func splitFFT(withFl:Float?, withFh:Float?) -> ArraySlice<Float>{
         
-        // for simplicity in other functions, just returning a view of fftData
+        // For simplicity in other functions, just returning a view of fftData
         if withFl == nil && withFh == nil{
             return self.fftData[0...]
         }
@@ -124,17 +184,24 @@ class PeakFinder {
         return self.fftData[fl...fh]
     }
     
-    // calculates the index position in an fft array for a freqency.
+    // Calculates the frequency for a given index
+    private func getFrequency(withIndex:Int) -> Float {
+        // assumes we are using the sampling frequency and NFFTFrames for this class instance
+        return Float(withIndex)*self.hertzBetweenSamples
+    }
+    
+    // Calculates the index position in an fft array for a freqency.
     private func getIndexForFrequency(withFrequency:Float, roundUp:Bool) -> Int{
         let floatIndex = withFrequency/self.hertzBetweenSamples
         
-        // if the frequency is smaller than the hertzBetweenSamples
+        // If the frequency is smaller than the hertzBetweenSamples
         if floatIndex < 0 {
             return 0
         }
         
-        // if the index is out of bounds of the number of fft frames, return max frequency
+        // If the index is out of bounds of the number of fft frames, return max frequency
         if floatIndex > Float(nFFTFrames) {
+            // should we make this raise an error?
             return nFFTFrames - 1
         }
         
@@ -146,17 +213,25 @@ class PeakFinder {
         return Int(floatIndex.rounded(.down))
     }
     
-    
-    
-    
-    
-    
-    // implement later if time:
+    // Implement later if time:
     private func peakInterpolation(p:Peak) ->Float{
-        // assumes that we are using the points to the left and right of the found max (m2)
+        // Assumes that we are using the points to the left and right of the found max (m2)
         let deltaF = self.hertzBetweenSamples*2
         
         return p.f2 + ((p.m1-p.m3)/(p.m3-2*p.m2+p.m1))*(deltaF/2)
     }
     
+}
+
+// Provided by Yannick here: https://stackoverflow.com/questions/45933149/swift-how-to-get-indexes-of-filtered-items-of-array
+// used so that we can make use of
+extension Array where Element: Equatable {
+    func indexes(of element: Element) -> [Int] {
+        return self.enumerated().filter({ element == $0.element }).map({ $0.offset })
+    }
+}
+
+// Issue finding max value we thought was in window
+enum NotInWindowError: Error {
+    case runtimeError(String)
 }
