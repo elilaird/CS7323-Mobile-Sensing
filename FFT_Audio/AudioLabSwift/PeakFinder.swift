@@ -13,7 +13,7 @@ class PeakFinder {
     
     // MARK: Properties
     let BUFFER_SIZE:Int
-    var fftData:[Float]
+    let fftData:[Float]
     let Fs:Float
     
     // computed property for fft length
@@ -38,7 +38,12 @@ class PeakFinder {
         BUFFER_SIZE = buffer_size
         fftData = fftArray
         Fs = samplingFrequency
-        getPeakFrequencies(withFl: nil, withFh: nil)
+//        getPeakFrequencies(withFl: nil, withFh: nil)
+
+        let absences = [0,1,2,3,4,5,6]
+        let test = absences[2...5]
+        print("*****************Test: \(test)")
+        
     }
     
     /*
@@ -58,10 +63,13 @@ class PeakFinder {
      
         // get peaks between low frequency (500Hz) and high frequency (1KHz) (inclusive on both)
         getPeakFrequencies(withFl: 500, withFh: 1000)
+     
+     With the low and high cuttoff, we can just threshold for Doppler shifts.  Basically make a
+     decision when the max value in the returned array is above/below a threshold
     */
     func getPeakFrequencies(withFl:Float?, withFh:Float?) -> Array<Float>{
         
-        var fftScope = fftData
+        var fftScope = ArraySlice(self.fftData)
         
         if (withFl != nil || withFh != nil){
             fftScope = splitFFT(withFl: withFl, withFh: withFh)
@@ -74,16 +82,46 @@ class PeakFinder {
     
     // MARK: Private Methods
     
-    // finds the peaks of an input signal 
-    private func findPeaks(infftScope:Array<Float>) -> Array<Float>{
-        return [1.0, 1.2]
+    private struct Peak {
+        /*
+            Properties
+                f2: frequency where peak occured
+                m1: magnitude of the value to the left of the peak
+                m2: magnitude of the value of the peak
+                m3: magnitude of the value to the right of the peak
+         */
+        var f2:Float
+        var m1:Float
+        var m2:Float
+        var m3:Float
     }
     
-    // splits an fft array from low and high frequencies
-    private func splitFFT(withFl:Float?, withFh:Float?) -> Array<Float>{
+    // finds the peaks of an input signal
+    private func findPeaks(samples:ArraySlice<Float>) -> Array<Peak>{
         
+        return [Peak(f2: 55, m1: 10, m2: 12, m3: 11)]
+    }
+    
+    // splits an fft array from low and high frequencies (note: returns a view for memory efficiency)
+    private func splitFFT(withFl:Float?, withFh:Float?) -> ArraySlice<Float>{
         
-        return [1.0, 2.0]
+        // for simplicity in other functions, just returning a view of fftData
+        if withFl == nil && withFh == nil{
+            return self.fftData[0...]
+        }
+        
+        var fl = 0
+        var fh = self.nFFTFrames - 1
+        
+        if withFl != nil{
+            fl = getIndexForFrequency(withFrequency: withFl!, roundUp: false)
+        }
+        
+        if withFh != nil{
+            fh = getIndexForFrequency(withFrequency: withFh!, roundUp: true)
+        }
+        
+        return self.fftData[fl...fh]
     }
     
     // calculates the index position in an fft array for a freqency.
@@ -114,6 +152,11 @@ class PeakFinder {
     
     
     // implement later if time:
-    //    func get
+    private func peakInterpolation(p:Peak) ->Float{
+        // assumes that we are using the points to the left and right of the found max (m2)
+        let deltaF = self.hertzBetweenSamples*2
+        
+        return p.f2 + ((p.m1-p.m3)/(p.m3-2*p.m2+p.m1))*(deltaF/2)
+    }
     
 }
