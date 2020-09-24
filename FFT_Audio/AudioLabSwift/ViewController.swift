@@ -43,7 +43,6 @@ class ViewController: UIViewController {
         
         
         
-        
         // start up the audio model here, querying microphone
 //        audio.startMicrophoneProcessing(withFps: 10)
 //        audio.startMicrophoneProcessing(withFps: 10)
