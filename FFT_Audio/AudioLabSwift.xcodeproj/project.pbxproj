@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		053A83D3251C2EF300622046 /* PeakFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053A83D2251C2EF300622046 /* PeakFinder.swift */; };
 		05A3AC8C251410CD00B1162F /* for_thought_answers.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 05A3AC8B251410CD00B1162F /* for_thought_answers.rtf */; };
 		B65B5A5A24F4409F00E74E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B5A5924F4409F00E74E73 /* AppDelegate.swift */; };
 		B65B5A5C24F4409F00E74E73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B5A5B24F4409F00E74E73 /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		053A83D2251C2EF300622046 /* PeakFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakFinder.swift; sourceTree = "<group>"; };
 		05A3AC8B251410CD00B1162F /* for_thought_answers.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = for_thought_answers.rtf; sourceTree = "<group>"; };
 		B65B5A5624F4409F00E74E73 /* AudioLabSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioLabSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65B5A5924F4409F00E74E73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				B65B5A5D24F4409F00E74E73 /* ViewController.swift */,
 				B65B5A8024F4AAB800E74E73 /* MetalGraph.swift */,
 				B65B5A7924F4523C00E74E73 /* AudioModel.swift */,
+				053A83D2251C2EF300622046 /* PeakFinder.swift */,
 				B65B5A5F24F4409F00E74E73 /* Main.storyboard */,
 				B65B5A6224F440A100E74E73 /* Assets.xcassets */,
 				B65B5A6424F440A100E74E73 /* LaunchScreen.storyboard */,
@@ -186,6 +189,7 @@
 				B65B5A5E24F4409F00E74E73 /* ViewController.swift in Sources */,
 				B65B5A5A24F4409F00E74E73 /* AppDelegate.swift in Sources */,
 				B65B5A7F24F4798B00E74E73 /* Shaders.metal in Sources */,
+				053A83D3251C2EF300622046 /* PeakFinder.swift in Sources */,
 				B65B5A7D24F458D700E74E73 /* FFTHelper.m in Sources */,
 				B65B5A5C24F4409F00E74E73 /* SceneDelegate.swift in Sources */,
 			);
@@ -333,14 +337,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = APD62CDC25;
+				DEVELOPMENT_TEAM = J7DYXUH7WP;
 				INFOPLIST_FILE = AudioLabSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = SMU.AudioLabSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = SMU.AudioLabSwift.New;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AudioLabSwift/AudioLabSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -355,14 +359,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = APD62CDC25;
+				DEVELOPMENT_TEAM = J7DYXUH7WP;
 				INFOPLIST_FILE = AudioLabSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = SMU.AudioLabSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = SMU.AudioLabSwift.New;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AudioLabSwift/AudioLabSwift-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

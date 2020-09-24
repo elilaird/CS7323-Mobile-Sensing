@@ -39,7 +39,8 @@ class ViewController: UIViewController {
         graph?.addGraph(withName: "time",
             shouldNormalize: false,
             numPointsInGraph: AUDIO_BUFFER_SIZE)
-        
+        let pf = PeakFinder(buffer_size: 1024, fftArray: [1.0, 1.20], samplingFrequency: 55.5)
+        pf.getPeakFrequencies(withFl: nil, withFh: nil)
         
         
         
