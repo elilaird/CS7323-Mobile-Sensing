@@ -40,6 +40,13 @@ class ViewController: UIViewController {
             shouldNormalize: false,
             numPointsInGraph: AUDIO_BUFFER_SIZE)
         
+//        let test = PeakFinder(buffer_size: 1024, fftArray: [0.0, 1.0], samplingFrequency: 44.1e3)
+        
+        var arrTest: Array<Float> = [2.0, 2.0, 100, 2.0, 2.0, 2.0, 2.0, 900]
+        var one: Float = 1.0
+        vDSP_vsadd(arrTest, 1, &one, &arrTest, 1, vDSP_Length(arrTest.count))
+        print("Test: \(arrTest)")
+//        test.findPeaksUtil(samples: arrTest, windowSize: 3)
         
         
         
