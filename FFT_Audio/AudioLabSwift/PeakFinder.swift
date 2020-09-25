@@ -76,7 +76,7 @@ class PeakFinder {
      With the low and high cuttoff, we can just threshold for Doppler shifts.  Basically make a
      decision when the max value in the returned array is above/below a threshold.
     */
-    func getPeaks(withFl:Float?, withFh:Float?) -> Array<Peak>{
+    func getPeaks(withFl:Float?, withFh:Float?, expectedHzApart:Float) -> Array<Peak>{
         
         var fftScope = ArraySlice(self.fftData)
         
@@ -87,7 +87,10 @@ class PeakFinder {
         
         // Get the peaks in the time series
         var peakIndexesInScope: Array<Int>
-        let maxWindowSize = self.hertzBetweenSamples * 2
+//        let maxWindowSize = self.hertzBetweenSamples * 2
+//        var windowSize = Int(maxWindowSize.rounded(.down))
+        
+        let maxWindowSize = (expectedHzApart/self.hertzBetweenSamples)*2 - 1
         var windowSize = Int(maxWindowSize.rounded(.down))
         
         // Make sure windowSize is odd (so peaks fall right in the middle)
