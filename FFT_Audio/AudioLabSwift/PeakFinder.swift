@@ -12,9 +12,8 @@ import Accelerate
 class PeakFinder {
     
     // MARK: Properties
-    let BUFFER_SIZE:Int
-    let fftData:[Float]
-    let Fs:Float
+    var fftData:[Float]
+    var Fs:Float
     
     // computed property for fft length
     var nFFTFrames: Int {
@@ -34,10 +33,18 @@ class PeakFinder {
     // MARK: Public Methods
     
     // Initialize class instance
-    init(buffer_size:Int, fftArray:Array<Float>, samplingFrequency:Float) {
-        BUFFER_SIZE = buffer_size
+    init(fftArray:Array<Float>, samplingFrequency:Float) {
         fftData = fftArray
         Fs = samplingFrequency
+    }
+    
+    // Setters for changing fftData and Fs (although shouldn't need for this lab)
+    func setFFTData(fftArray:Array<Float>){
+        self.fftData = fftArray
+    }
+    
+    func setFs(samplingFrequency:Float){
+        self.Fs = samplingFrequency
     }
     
     struct Peak {
