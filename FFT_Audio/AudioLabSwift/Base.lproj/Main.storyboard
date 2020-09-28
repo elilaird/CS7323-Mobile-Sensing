@@ -88,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="1070" y="-234"/>
         </scene>
-        <!--View Controller-->
+        <!--Doppler View Controller-->
         <scene sceneID="DKO-Ih-HhN">
             <objects>
-                <viewController id="fm0-hh-dbI" sceneMemberID="viewController">
+                <viewController id="fm0-hh-dbI" customClass="DopplerViewController" customModule="AudioLabSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JM3-Q2-hX2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

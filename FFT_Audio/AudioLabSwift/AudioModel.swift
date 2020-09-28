@@ -13,11 +13,21 @@ class AudioModel {
     
     // MARK: Properties
     private var BUFFER_SIZE:Int
+    private var phase:Float = 0.0
+    private var phaseIncrement:Float = 0.0
+    private var sineWaveRepeatMax:Float = Float(2*Double.pi)
+    
     // thse properties are for interfaceing with the API
     // the user can access these arrays at any time and plot them if they like
     var timeData:[Float]
     var fftData:[Float]
     var dataEqualizer:[Float]
+    
+    var sineFrequency:Float = 0.0 {
+        didSet{
+            self.audioManager?.sineFrequency = sineFrequency
+        }
+    }
     
     
     // MARK: Public Methods
@@ -54,6 +64,11 @@ class AudioModel {
                             repeats: true)
     }
     
+    
+    func startSinewaveProcessing(withFreq:Float=1000){
+        sineFrequency = withFreq
+        self.audioManager?.setOutputBlockToPlaySineWave(sineFrequency) // c for loop
+    }
     
     
     // You must call this when you want the audio to start being handled by our model
@@ -149,8 +164,5 @@ class AudioModel {
             self.inputBuffer?.addNewFloatData(data, withNumSamples: Int64(numFrames))
         }
     }
-    
-    
-    
     
 }
