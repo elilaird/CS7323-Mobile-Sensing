@@ -10,7 +10,7 @@ import UIKit
 import Metal
 
 
-let AUDIO_BUFFER_SIZE = 1024*4
+let AUDIO_BUFFER_SIZE = 14700 //1024*4
 
 
 class ViewController: UIViewController {
@@ -26,11 +26,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // add in graphs for display
-        graph?.addGraph(withName: "equalizer",
-                        shouldNormalize: true,
-                        numPointsInGraph: 20)
         
         graph?.addGraph(withName: "fft",
                         shouldNormalize: true,
@@ -51,10 +46,7 @@ class ViewController: UIViewController {
         
         
         // start up the audio model here, querying microphone
-//        audio.startMicrophoneProcessing(withFps: 10)
-//        audio.startMicrophoneProcessing(withFps: 10)
-        audio.startSongMicrophoneProcessing(withFps: 10)
-
+        audio.startMicrophoneProcessing(withFps: 10.0)
         audio.play()
         
         // run the loop for updating the graph peridocially
@@ -80,11 +72,6 @@ class ViewController: UIViewController {
     // periodically, update the graph with refreshed FFT Data
     @objc
     func updateGraph(){
-        
-        self.graph?.updateGraph(
-            data: self.audio.dataEqualizer,
-            forKey: "equalizer")
-
         
         self.graph?.updateGraph(
             data: self.audio.fftData,
