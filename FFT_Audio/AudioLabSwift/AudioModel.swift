@@ -136,10 +136,15 @@ class AudioModel {
             // the user can now use these variables however they like
             
             peakFinder.setFFTData(fftArray: fftData)
-            let peaks = peakFinder.getPeaks(withFl: 500, withFh: 5000, expectedHzApart: 50)
+            var peaks = peakFinder.getPeaks(withFl: 500, withFh: 5000, expectedHzApart: 50)
+            
             
             if peaks.count > 2 {
-                print("Peak 1: \(peaks[0].f2 ?? 0), Peak 2: \(peaks[1].f2 ?? 0) ")
+                let loudestFreq = peaks.max{ abs($0.m2!) < abs($1.m2!) }
+                let maxIndex = peaks.indices.filter {peaks[$0].f2 == loudestFreq?.f2}[0]
+                peaks.remove(at: maxIndex)
+                let secondLoudestFreq = peaks.max{ abs($0.m2!) < abs($1.m2!) } //peaks.max{ (abs($0.m2!) < abs($1.m2!)) &&  abs($0.m2!) < loudestFreq!.m2! }
+                print("Loudest Freq: \((loudestFreq?.f2)!), Mag1: \(abs((loudestFreq?.m2)!)), Second Loudest Freq: \((secondLoudestFreq?.f2)!), Mag2: \(abs((secondLoudestFreq?.m2!)!))")
             }
         }
     }
