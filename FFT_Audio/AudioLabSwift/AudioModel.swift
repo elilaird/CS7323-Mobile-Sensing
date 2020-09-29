@@ -134,17 +134,13 @@ class AudioModel {
             
             peakFinder.setFFTData(fftArray: fftData)
             let peaks = peakFinder.getPeaks(withFl: nil, withFh: nil, expectedHzApart: 50)
-            
-//            for i in 0...fftData.count-1 {
-//                print("\(fftData[i])-")
-//            }
+
             if peaks.count > 1 {
                 let sortedPeaks = peakFinder.sortPeaksDescendingMagnitude(peaks: peaks, topK: nil)
                 let loudestFreq = sortedPeaks[0]
                 let secondLoudestFreq = sortedPeaks[1]
-                let minFreq = sortedPeaks[sortedPeaks.count-1]
                 
-                print("Loudest Freq: \((loudestFreq.f2)!), Mag1: \((loudestFreq.m2)!), Second Loudest Freq: \((secondLoudestFreq.f2)!), MinFreq: \((minFreq.f2)!), MinMag: \((minFreq.m2)!)")
+                print("Loudest Freq: \((loudestFreq.f2)!), Second Loudest Freq: \((secondLoudestFreq.f2)!)")
             }
             
             

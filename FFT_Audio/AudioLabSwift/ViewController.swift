@@ -10,7 +10,7 @@ import UIKit
 import Metal
 
 
-let AUDIO_BUFFER_SIZE = 14700 //1024*4
+let AUDIO_BUFFER_SIZE = 16384 //1024*4
 
 
 class ViewController: UIViewController {

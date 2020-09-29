@@ -94,8 +94,6 @@ class PeakFinder {
         
         // Get the peaks in the time series
         var peakIndexesInScope: Array<Int>
-//        let maxWindowSize = self.hertzBetweenSamples * 2
-//        var windowSize = Int(maxWindowSize.rounded(.down))
         
         let maxWindowSize = (expectedHzApart/self.hertzBetweenSamples)*2 - 1
         var windowSize = Int(maxWindowSize.rounded(.down))
@@ -109,7 +107,7 @@ class PeakFinder {
         peakIndexesInScope = self.findPeaksUtil(samples:fftScope, windowSize: windowSize)
         
         // Convert peakIndexesInScope to indexes of the FFT signal
-        var lowFreq: Float = 0 //self.getFrequency(withIndex: 1)
+        var lowFreq: Float = 0
         if withFl != nil {
             lowFreq = withFl!
         }
