@@ -18,7 +18,7 @@ class PeakFinder {
     // computed property for fft length
     var nFFTFrames: Int {
         get {
-            return fftData.count
+            return fftData.count*2
         }
     }
     
@@ -104,11 +104,12 @@ class PeakFinder {
         if windowSize % 2 == 0 {
             windowSize = windowSize - 1
         }
+
         
-        peakIndexesInScope = self.findPeaksUtil(samples: fftScope, windowSize: windowSize)
+        peakIndexesInScope = self.findPeaksUtil(samples:fftScope, windowSize: windowSize)
         
         // Convert peakIndexesInScope to indexes of the FFT signal
-        var lowFreq: Float = 0
+        var lowFreq: Float = 0 //self.getFrequency(withIndex: 1)
         if withFl != nil {
             lowFreq = withFl!
         }
@@ -126,6 +127,19 @@ class PeakFinder {
         }
         
         return peaks
+    }
+    
+    func sortPeaksDescendingMagnitude(peaks: Array<Peak>, topK:Int?) -> Array<Peak>{
+        // Sort peaks
+        let sortedPeaks = peaks.sorted { (lhs, rhs) in return lhs.m2! > rhs.m2! } // descending order
+        
+        var kElements = sortedPeaks.count-1
+        if topK != nil {
+            kElements = (topK!-1)
+        }
+        
+        // Return the top K frequency peaks
+        return Array(sortedPeaks[...kElements])
     }
     
     
@@ -167,7 +181,7 @@ class PeakFinder {
         // Iterate over samples to find peaks within the window
         for windowIndex in 0...nWindowPositions-1{
             let window = paddedSamples[windowIndex*stride...(windowIndex*stride)+windowSize-1]
-            
+
             // Get max value in window and check that it is the middle index
             var maxOccurredIndex: UInt = 0
             var maxValue: Float = 0
@@ -191,7 +205,7 @@ class PeakFinder {
         }
         
         var fl = 0
-        var fh = self.nFFTFrames - 1
+        var fh = (self.nFFTFrames/2) - 1
         
         if withFl != nil{
             fl = getIndexForFrequency(withFrequency: withFl!, roundUp: false)
@@ -246,18 +260,7 @@ class PeakFinder {
         return [Peak(f2: nil, m1: nil, m2: nil, m3: nil)]
     }
     
-    private func sortPeaksDescendingMagnitude(peaks: Array<Peak>, topK:Int?) -> Array<Peak>{
-        // Sort peaks
-        let sortedPeaks = peaks.sorted { (lhs, rhs) in return lhs.m2! > rhs.m2! } // descending order
-        
-        var kElements = sortedPeaks.count-1
-        if topK != nil {
-            kElements = topK!
-        }
-        
-        // Return the top K frequency peaks
-        return Array(sortedPeaks[...kElements])
-    }
+   
     
 }
 

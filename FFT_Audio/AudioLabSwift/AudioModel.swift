@@ -130,22 +130,24 @@ class AudioModel {
             // now take FFT
             fftHelper!.performForwardFFT(withData: &timeData,
                                          andCopydBMagnitudeToBuffer: &fftData)
-            // at this point, we have saved the data to the arrays:
-            //   timeData: the raw audio samples
-            //   fftData:  the FFT of those same samples
-            // the user can now use these variables however they like
+
             
             peakFinder.setFFTData(fftArray: fftData)
-            var peaks = peakFinder.getPeaks(withFl: 500, withFh: 5000, expectedHzApart: 50)
+            let peaks = peakFinder.getPeaks(withFl: nil, withFh: nil, expectedHzApart: 50)
             
-            
-            if peaks.count > 2 {
-                let loudestFreq = peaks.max{ abs($0.m2!) < abs($1.m2!) }
-                let maxIndex = peaks.indices.filter {peaks[$0].f2 == loudestFreq?.f2}[0]
-                peaks.remove(at: maxIndex)
-                let secondLoudestFreq = peaks.max{ abs($0.m2!) < abs($1.m2!) } //peaks.max{ (abs($0.m2!) < abs($1.m2!)) &&  abs($0.m2!) < loudestFreq!.m2! }
-                print("Loudest Freq: \((loudestFreq?.f2)!), Mag1: \(abs((loudestFreq?.m2)!)), Second Loudest Freq: \((secondLoudestFreq?.f2)!), Mag2: \(abs((secondLoudestFreq?.m2!)!))")
+//            for i in 0...fftData.count-1 {
+//                print("\(fftData[i])-")
+//            }
+            if peaks.count > 1 {
+                let sortedPeaks = peakFinder.sortPeaksDescendingMagnitude(peaks: peaks, topK: nil)
+                let loudestFreq = sortedPeaks[0]
+                let secondLoudestFreq = sortedPeaks[1]
+                let minFreq = sortedPeaks[sortedPeaks.count-1]
+                
+                print("Loudest Freq: \((loudestFreq.f2)!), Mag1: \((loudestFreq.m2)!), Second Loudest Freq: \((secondLoudestFreq.f2)!), MinFreq: \((minFreq.f2)!), MinMag: \((minFreq.m2)!)")
             }
+            
+            
         }
     }
     
