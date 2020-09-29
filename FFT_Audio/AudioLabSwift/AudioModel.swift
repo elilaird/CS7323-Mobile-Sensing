@@ -16,12 +16,12 @@ class AudioModel {
     private var phase:Float = 0.0
     private var phaseIncrement:Float = 0.0
     private var sineWaveRepeatMax:Float = Float(2*Double.pi)
+    private var peakFinder:PeakFinder
     
     // thse properties are for interfaceing with the API
     // the user can access these arrays at any time and plot them if they like
     var timeData:[Float]
     var fftData:[Float]
-    var dataEqualizer:[Float]
     
     var sineFrequency:Float = 0.0 {
         didSet{
@@ -36,7 +36,7 @@ class AudioModel {
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
-        dataEqualizer = Array.init(repeating: 0.0, count: 20)
+        peakFinder = PeakFinder(fftArray: fftData, samplingFrequency: 44100.0)
     }
     
     // public function for starting processing of microphone data
@@ -130,20 +130,20 @@ class AudioModel {
             // now take FFT
             fftHelper!.performForwardFFT(withData: &timeData,
                                          andCopydBMagnitudeToBuffer: &fftData)
-            // at this point, we have saved the data to the arrays:
-            //   timeData: the raw audio samples
-            //   fftData:  the FFT of those same samples
-            // the user can now use these variables however they like
+
             
-            // max with a stride of buffersize/40 (b/c we want 20 windows, and fftData is size BUFFER_SIZE/2 so (BUFFER_SIZE/(2*20))
-            let nBatches = 20
-            let stride = Int(BUFFER_SIZE/40)
-            
-            for i in 0...nBatches-1{
+            peakFinder.setFFTData(fftArray: fftData)
+            let peaks = peakFinder.getPeaks(withFl: nil, withFh: nil, expectedHzApart: 50)
+
+            if peaks.count > 1 {
+                let sortedPeaks = peakFinder.sortPeaksDescendingMagnitude(peaks: peaks, topK: nil)
+                let loudestFreq = sortedPeaks[0]
+                let secondLoudestFreq = sortedPeaks[1]
                 
-                let batchMax = fftData[i*stride...(i+1)*stride].max()
-                dataEqualizer[i] = batchMax!
+                print("Loudest Freq: \((loudestFreq.f2)!), Second Loudest Freq: \((secondLoudestFreq.f2)!)")
             }
+            
+            
         }
     }
     
