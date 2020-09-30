@@ -74,6 +74,15 @@ class ViewController: UIViewController {
         self.loudestFrequency.text = "\(self.audio.loudestFreq[0].rounded(.down)) Hz"
         self.secondLoudestFrequency.text = "\(self.audio.loudestFreq[1].rounded(.down)) Hz"
         
+        // Make the labels not overflow
+        loudestFrequency.adjustsFontSizeToFitWidth = true
+        loudestFrequency.minimumScaleFactor = 0.2
+        loudestFrequency.numberOfLines = 1
+        
+        secondLoudestFrequency.adjustsFontSizeToFitWidth = true
+        secondLoudestFrequency.minimumScaleFactor = 0.2
+        secondLoudestFrequency.numberOfLines = 1
+        
         self.graph?.updateGraph(
             data: self.audio.fftData,
             forKey: "fft"
