@@ -246,7 +246,7 @@ class PeakFinder {
         return [Peak(f2: nil, m1: nil, m2: nil, m3: nil)]
     }
     
-    private func sortPeaksDescendingMagnitude(peaks: Array<Peak>, topK:Int?) -> Array<Peak>{
+    func sortPeaksDescendingMagnitude(peaks: Array<Peak>, topK:Int?) -> Array<Peak>{
         // Sort peaks
         let sortedPeaks = peaks.sorted { (lhs, rhs) in return lhs.m2! > rhs.m2! } // descending order
         
