@@ -10,11 +10,13 @@ import UIKit
 import Metal
 
 
-let AUDIO_BUFFER_SIZE = 16384 //1024*4
+let AUDIO_BUFFER_SIZE = 16384
 
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var secondLoudestFrequency: UILabel!
+    @IBOutlet weak var loudestFrequency: UILabel!
     // setup audio model
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     
@@ -35,14 +37,10 @@ class ViewController: UIViewController {
             shouldNormalize: false,
             numPointsInGraph: AUDIO_BUFFER_SIZE)
         
-//        let test = PeakFinder(buffer_size: 1024, fftArray: [0.0, 1.0], samplingFrequency: 44.1e3)
-        
-        var arrTest: Array<Float> = [2.0, 2.0, 100, 2.0, 2.0, 2.0, 2.0, 900]
-        var one: Float = 1.0
-        vDSP_vsadd(arrTest, 1, &one, &arrTest, 1, vDSP_Length(arrTest.count))
-        print("Test: \(arrTest)")
-//        test.findPeaksUtil(samples: arrTest, windowSize: 3)
-        
+        //this is used for graph spacing
+        graph?.addGraph(withName: "spaceholder",
+                        shouldNormalize: false,
+                        numPointsInGraph: 1)
         
         
         // start up the audio model here, querying microphone
@@ -72,6 +70,9 @@ class ViewController: UIViewController {
     // periodically, update the graph with refreshed FFT Data
     @objc
     func updateGraph(){
+        
+        self.loudestFrequency.text = "\(self.audio.loudestFreq[0].rounded(.down)) Hz"
+        self.secondLoudestFrequency.text = "\(self.audio.loudestFreq[1].rounded(.down)) Hz"
         
         self.graph?.updateGraph(
             data: self.audio.fftData,

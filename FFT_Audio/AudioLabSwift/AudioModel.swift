@@ -22,6 +22,7 @@ class AudioModel {
     // the user can access these arrays at any time and plot them if they like
     var timeData:[Float]
     var fftData:[Float]
+    var loudestFreq:[Float]
     
     var sineFrequency:Float = 0.0 {
         didSet{
@@ -37,6 +38,7 @@ class AudioModel {
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         peakFinder = PeakFinder(fftArray: fftData, samplingFrequency: 44100.0)
+        loudestFreq = [0.0,0.0]
     }
     
     // public function for starting processing of microphone data
@@ -137,10 +139,10 @@ class AudioModel {
 
             if peaks.count > 1 {
                 let sortedPeaks = peakFinder.sortPeaksDescendingMagnitude(peaks: peaks, topK: nil)
-                let loudestFreq = sortedPeaks[0]
-                let secondLoudestFreq = sortedPeaks[1]
+                self.loudestFreq[0] = sortedPeaks[0].f2!
+                self.loudestFreq[1] = sortedPeaks[1].f2!
                 
-                print("Loudest Freq: \((loudestFreq.f2)!), Second Loudest Freq: \((secondLoudestFreq.f2)!)")
+                print("Loudest Freq: \(loudestFreq[0]), Second Loudest Freq: \(loudestFreq[1])")
             }
             
             
