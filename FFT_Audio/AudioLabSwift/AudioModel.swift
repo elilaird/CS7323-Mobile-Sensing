@@ -164,7 +164,7 @@ class AudioModel {
                 //print("Loudest Freq: \(loudestFreq[0]), Second Loudest Freq: \(loudestFreq[1])")
                 
                 // Determine motion of hand based on magnitude and frequency
-                if(sortedPeaks[1].m2! > Float(-35)){
+                if(sortedPeaks[1].m2! > Float(-38)){
                     if(loudestFreq[1] > self.dopplerFreq){
                         self.dopplerStatus = "Moving Toward"
                     }else{
