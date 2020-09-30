@@ -22,6 +22,9 @@ class AudioModel {
     // the user can access these arrays at any time and plot them if they like
     var timeData:[Float]
     var fftData:[Float]
+    var fftDecibels:[Float]
+    var dataEqualizer:[Float]
+    var dopplerFreq:Float = 17000.0
     var loudestFreq:[Float]
     
     var sineFrequency:Float = 0.0 {
@@ -37,6 +40,8 @@ class AudioModel {
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        fftDecibels = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        dataEqualizer = Array.init(repeating: 0.0, count: 20)
         peakFinder = PeakFinder(fftArray: fftData, samplingFrequency: 44100.0)
         loudestFreq = [0.0,0.0]
     }
@@ -144,8 +149,24 @@ class AudioModel {
                 
                 print("Loudest Freq: \(loudestFreq[0]), Second Loudest Freq: \(loudestFreq[1])")
             }
+            // Convert FFT to Decibels  have to shift values down to make graph fit on screen
+            //fftDecibels = fftData.map({ -20*log10(abs($0)) - 40})
+
+            
+            let peakFinder = PeakFinder(fftArray: fftData, samplingFrequency: Float(audioManager!.samplingRate))
+            
+            let peaks = peakFinder.getPeaks(withFl: Float(self.dopplerFreq-1000), withFh: Float(self.dopplerFreq+1000), expectedHzApart: 50)
+//            print(peaks)
+            //let peakVals = peaks.map({Float($0.m2!)})
+            //print(peakVals.max())
+            let sortedPeaks = peakFinder.sortPeaksDescendingMagnitude(peaks: peaks, topK: nil)
+            print(sortedPeaks[0].f2!)
             
             
+            
+//            if(max > -37){
+//                print("Away")
+//            }
         }
     }
     

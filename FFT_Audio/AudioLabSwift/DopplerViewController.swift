@@ -10,12 +10,12 @@ import UIKit
 
 class DopplerViewController: UIViewController {
     
-    let audio = AudioModel(buffer_size: 1024*4)
+    let audio = AudioModel(buffer_size: 16384)
     let freqSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 300, height: 20))
     let freqLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
     let dopplerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
     let graphView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    var dopplerFrequency:Float = 1000
+    var dopplerFrequency:Float = 17000
     
     lazy var graph:MetalGraph? = {
         return MetalGraph(mainView: self.graphView)
@@ -32,12 +32,12 @@ class DopplerViewController: UIViewController {
         self.view.addSubview(graphView)
         graph?.addGraph(withName: "microphoneDataDecibels",
                         shouldNormalize: true,
-                        numPointsInGraph: 1024*2)
+                        numPointsInGraph: 1350)
         
         // Set up frequency slider
         freqSlider.center = self.view.center
-        freqSlider.minimumValue = 1000
-        freqSlider.maximumValue = 15000
+        freqSlider.minimumValue = 17000
+        freqSlider.maximumValue = 20000
         freqSlider.value = self.dopplerFrequency
         freqSlider.isContinuous = true
         freqSlider.tintColor = UIColor.green
@@ -47,7 +47,7 @@ class DopplerViewController: UIViewController {
         // Set up Decibel Label
         freqLabel.center = CGPoint(x: self.view.frame.width/2, y: self.view.frame.height/2 - 50)
         freqLabel.textAlignment = .center
-        freqLabel.text = self.dopplerFrequency.description + "Decibels"
+        freqLabel.text = self.dopplerFrequency.description + "Hz"
         self.view.addSubview(freqLabel)
         
         // Set up Doppler Label
@@ -60,7 +60,7 @@ class DopplerViewController: UIViewController {
 
         
         audio.startSinewaveProcessing(withFreq: self.dopplerFrequency)
-        audio.startMicrophoneProcessing(withFps: 30)
+        audio.startMicrophoneProcessing(withFps: 60)
         audio.play()
         
         Timer.scheduledTimer(timeInterval: 0.05, target: self,
@@ -79,13 +79,15 @@ class DopplerViewController: UIViewController {
     @objc func onSliderChange(){
         self.audio.sineFrequency = self.freqSlider.value
         self.dopplerFrequency = self.freqSlider.value
-        self.freqLabel.text = self.freqSlider.value.description + " Decibels"
+        self.freqLabel.text = self.freqSlider.value.description + " Hz"
+        self.audio.dopplerFreq = self.freqSlider.value
     }
     
     @objc
     func updateGraph(){
+        let zoomedData = Array(self.audio.fftData[6270...7700])
         self.graph?.updateGraph(
-            data: self.audio.fftData,
+            data: zoomedData,
             forKey: "microphoneDataDecibels")
     }
     
