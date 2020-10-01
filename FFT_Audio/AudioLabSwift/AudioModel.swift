@@ -22,7 +22,12 @@ class AudioModel {
     // the user can access these arrays at any time and plot them if they like
     var timeData:[Float]
     var fftData:[Float]
+    var fftDecibels:[Float]
+    var dataEqualizer:[Float]
+    var dopplerFreq:Float = 15000.0
     var loudestFreq:[Float]
+    var dopplerStatus:String
+    var dopplerView:Bool
     
     var sineFrequency:Float = 0.0 {
         didSet{
@@ -37,8 +42,12 @@ class AudioModel {
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        fftDecibels = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        dataEqualizer = Array.init(repeating: 0.0, count: 20)
         peakFinder = PeakFinder(fftArray: fftData, samplingFrequency: 44100.0)
         loudestFreq = [0.0,0.0]
+        dopplerStatus = "No Motion"
+        dopplerView = false
     }
     
     // public function for starting processing of microphone data
@@ -135,16 +144,37 @@ class AudioModel {
 
             
             peakFinder.setFFTData(fftArray: fftData)
-            let peaks = peakFinder.getPeaks(withFl: nil, withFh: nil, expectedHzApart: 50)
+                        
+            var peaks:[PeakFinder.Peak]? = nil
+            
+            // Set peaks based on module, tighter peak window for doppler
+            if dopplerView{
+                peaks = peakFinder.getPeaks(withFl: Float(self.dopplerFreq-150), withFh: Float(self.dopplerFreq+150), expectedHzApart: 15)
+            }else{
+                peaks = peakFinder.getPeaks(withFl: nil, withFh: nil, expectedHzApart: 50)
+            }
 
-            if peaks.count > 1 {
-                let sortedPeaks = peakFinder.sortPeaksDescendingMagnitude(peaks: peaks, topK: nil)
+            
+
+            if peaks!.count > 1 {
+                let sortedPeaks = peakFinder.sortPeaksDescendingMagnitude(peaks: peaks!, topK: nil)
                 self.loudestFreq[0] = sortedPeaks[0].f2!
                 self.loudestFreq[1] = sortedPeaks[1].f2!
                 
-                print("Loudest Freq: \(loudestFreq[0]), Second Loudest Freq: \(loudestFreq[1])")
+                //print("Loudest Freq: \(loudestFreq[0]), Second Loudest Freq: \(loudestFreq[1])")
+                
+                // Determine motion of hand based on magnitude and frequency
+                if(sortedPeaks[1].m2! > Float(-38)){
+                    if(loudestFreq[1] > self.dopplerFreq){
+                        self.dopplerStatus = "Moving Toward"
+                    }else{
+                        self.dopplerStatus = "Moving Away"
+                    }
+                }else{
+                    self.dopplerStatus = "No Motion"
+                }
+                
             }
-            
             
         }
     }
