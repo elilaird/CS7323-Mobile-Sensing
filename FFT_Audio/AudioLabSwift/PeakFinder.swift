@@ -114,11 +114,12 @@ class PeakFinder {
         let scopeOffset = self.getIndexForFrequency(withFrequency: lowFreq, roundUp: false)
         
         // Add offset to each index
-        peakIndexesInScope = peakIndexesInScope.map({ $0 + scopeOffset }) // This should work, but want to test when we play a known sine wave
+        peakIndexesInScope = peakIndexesInScope.map({ $0 + scopeOffset })
 
         // Make peaks array
         var peaks: Array<Peak> = []
         
+        // Add peaks to peaks array
         for index in peakIndexesInScope{
             peaks.append(Peak(f2: self.getFrequency(withIndex: index), m1: self.fftData[index-1], m2: self.fftData[index],
                               m3: self.fftData[index+1]))
@@ -205,10 +206,12 @@ class PeakFinder {
         var fl = 0
         var fh = (self.nFFTFrames/2) - 1
         
+        // Get index for the low frequency
         if withFl != nil{
             fl = getIndexForFrequency(withFrequency: withFl!, roundUp: false)
         }
         
+        // Get index for the high frequency
         if withFh != nil{
             fh = getIndexForFrequency(withFrequency: withFh!, roundUp: true)
         }
@@ -275,5 +278,16 @@ extension Array where Element == Float {
         let leftSide = Array.init(repeating: 0.0, count: left)
         let rightSide = Array.init(repeating: 0.0, count: right)
         return leftSide + self + rightSide
+    }
+}
+
+// Save indexing for usage when appending into array
+// taken from here: https://stackoverflow.com/questions/25329186/safe-bounds-checked-array-lookup-in-swift-through-optional-bindings
+// using Shaheen Ghiassy's answer
+// modified for arrays
+extension Array {
+    // Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

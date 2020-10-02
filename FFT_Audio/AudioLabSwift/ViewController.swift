@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
+        // Add graphs
         graph?.addGraph(withName: "fft",
                         shouldNormalize: true,
                         numPointsInGraph: AUDIO_BUFFER_SIZE/2)
