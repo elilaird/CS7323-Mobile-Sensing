@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var stepsToday: UILabel!
     @IBOutlet weak var stepGoalSlider: UISlider!
     @IBOutlet weak var activity: UILabel!
+    @IBOutlet weak var stepsTillGoal: UILabel!
     
     
     //core motion
@@ -28,14 +29,16 @@ class ViewController: UIViewController {
     var totalSteps: Float = 0.0 {
         willSet(newtotalSteps){
             DispatchQueue.main.async{
-                self.stepsToday.text = "\(newtotalSteps)"
+                self.stepsToday.text = "\(Int(newtotalSteps))"
+                self.stepsTillGoal.text = "\(self.goalSteps - newtotalSteps)"
+                self.updateProgress()
             }
         }
     }
     var yesterdaySteps: Float = 0.0 {
         willSet(steps){
             DispatchQueue.main.async {
-                self.stepsYesterday.text = "\(steps)"
+                self.stepsYesterday.text = "\(Int(steps))"
             }
         }
     }
@@ -60,16 +63,23 @@ class ViewController: UIViewController {
         self.startActivityMonitoring()
         self.startPedometerMonitoring()
         
-        let today = Date()
+        let today = Calendar.current.startOfDay(for: Date())
         let yesterday = today.addingTimeInterval(-60*60*24)
         
+        self.setTodaySteps(from: today, to: Date())
+        
+        self.stepsTillGoal.text = "\(Int(self.goalSteps - self.totalSteps))"
+        
         self.setYesterdaySteps(from: yesterday, to: today)
+        
 
     }
     
     @IBAction func setGoal(_ sender: Any) {
         self.goalSteps = stepGoalSlider.value
         self.stepGoal.text = "\(Int(self.goalSteps))"
+        self.stepsTillGoal.text = "\(Int(self.goalSteps - self.totalSteps))"
+        self.updateProgress()
     }
     
     
@@ -78,6 +88,7 @@ class ViewController: UIViewController {
     
     func updateProgress(){
         let progress:Float = self.totalSteps / self.goalSteps
+        print(progress)
         circularProgress.setProgressWithAnimation(duration: 1.0, value: progress)
     }
 
@@ -132,7 +143,12 @@ class ViewController: UIViewController {
     func handlePedometer(_ pedData:CMPedometerData?, error:Error?)->(){
         if let steps = pedData?.numberOfSteps {
             self.totalSteps = steps.floatValue
+            print(pedData.debugDescription)
         }
+    }
+    
+    func setTodaySteps(from today:Date, to now:Date){
+        self.pedometer.queryPedometerData(from: today, to: now, withHandler: handlePedometer)
     }
     
     func handleYesterdayPedometer(_ pedData:CMPedometerData?, error:Error?)->(){
