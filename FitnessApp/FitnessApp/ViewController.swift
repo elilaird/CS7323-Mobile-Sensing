@@ -26,7 +26,13 @@ class ViewController: UIViewController {
     let pedometer = CMPedometer()
     
     //steps
-    var goalSteps: Float = 500.0
+    var goalSteps: Float = 500.0 {
+        willSet(newGoal){
+            DispatchQueue.main.async{
+                self.saveGoal()
+            }
+        }
+    }
     var totalSteps: Float = 0.0 {
         willSet(newtotalSteps){
             DispatchQueue.main.async{
@@ -66,6 +72,8 @@ class ViewController: UIViewController {
         
         self.penguinGame.isEnabled = false
         
+        self.loadGoal()
+        
         let today = Calendar.current.startOfDay(for: Date())
         let yesterday = today.addingTimeInterval(-60*60*24)
         
@@ -91,6 +99,17 @@ class ViewController: UIViewController {
         }else{
             self.stepsTillGoal.text = "\(0)"
         }
+    }
+    
+    func saveGoal() {
+        UserDefaults.standard.set(self.goalSteps, forKey:"Goal")
+    }
+    
+    func loadGoal() {
+        if UserDefaults.standard.object(forKey:"Goal") == nil {
+            self.saveGoal()
+        }
+        self.goalSteps = UserDefaults.standard.object(forKey:"Goal") as! Float
     }
     
     //MARK: Circular Progress Utils
