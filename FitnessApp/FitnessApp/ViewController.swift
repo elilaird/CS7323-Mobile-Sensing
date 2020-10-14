@@ -32,6 +32,14 @@ class ViewController: UIViewController {
             }
         }
     }
+    var yesterdaySteps: Float = 0.0 {
+        willSet(steps){
+            DispatchQueue.main.async {
+                self.stepsYesterday.text = "\(steps)"
+            }
+        }
+    }
+
     
     //activity
     var currentActivity: String = "Stationary" {
@@ -51,6 +59,11 @@ class ViewController: UIViewController {
         
         self.startActivityMonitoring()
         self.startPedometerMonitoring()
+        
+        let today = Date()
+        let yesterday = today.addingTimeInterval(-60*60*24)
+        
+        self.setYesterdaySteps(from: yesterday, to: today)
 
     }
     
@@ -120,6 +133,17 @@ class ViewController: UIViewController {
         if let steps = pedData?.numberOfSteps {
             self.totalSteps = steps.floatValue
         }
+    }
+    
+    func handleYesterdayPedometer(_ pedData:CMPedometerData?, error:Error?)->(){
+        if let yestSteps = pedData?.numberOfSteps {
+            self.yesterdaySteps = yestSteps.floatValue
+        }
+    }
+    
+    //get previous steps
+    func setYesterdaySteps(from yesterday:Date, to today:Date){
+        self.pedometer.queryPedometerData(from: yesterday, to: today, withHandler: handleYesterdayPedometer)
     }
 }
 
