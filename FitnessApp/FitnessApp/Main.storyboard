@@ -60,7 +60,7 @@
                                 <rect key="frame" x="87" y="384" width="240" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jd9-VB-Rqb">
-                                        <rect key="frame" x="93" y="50" width="55" height="29"/>
+                                        <rect key="frame" x="65" y="50" width="110" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -122,6 +122,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Zhh-rS-Hjt"/>
                     <connections>
+                        <outlet property="activity" destination="egy-ab-gcH" id="fxr-Uu-dBh"/>
                         <outlet property="circularProgress" destination="j7J-25-pyy" id="7bN-pp-Uee"/>
                         <outlet property="stepGoal" destination="jd9-VB-Rqb" id="SyE-iC-OkZ"/>
                         <outlet property="stepGoalSlider" destination="5yN-TH-Z9N" id="LFY-qV-PS2"/>

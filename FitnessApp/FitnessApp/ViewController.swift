@@ -16,17 +16,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var stepsYesterday: UILabel!
     @IBOutlet weak var stepsToday: UILabel!
     @IBOutlet weak var stepGoalSlider: UISlider!
-    
+    @IBOutlet weak var activity: UILabel!
     
     
     //core motion
     let activityManager = CMMotionActivityManager()
     let pedometer = CMPedometer()
+    
+    //steps
     var goalSteps: Float = 1000.0
     var totalSteps: Float = 0.0 {
         willSet(newtotalSteps){
             DispatchQueue.main.async{
                 self.stepsToday.text = "\(newtotalSteps)"
+            }
+        }
+    }
+    
+    //activity
+    var currentActivity: String = "Stationary" {
+        willSet(newactivity){
+            DispatchQueue.main.async{
+                self.activity.text = "\(newactivity)"
             }
         }
     }
@@ -45,7 +56,7 @@ class ViewController: UIViewController {
     
     @IBAction func setGoal(_ sender: Any) {
         self.goalSteps = stepGoalSlider.value
-        self.stepGoal.text = "\(self.goalSteps)"
+        self.stepGoal.text = "\(Int(self.goalSteps))"
     }
     
     
@@ -71,7 +82,26 @@ class ViewController: UIViewController {
         // unwrap the activity and disp
         if let unwrappedActivity = activity {
             DispatchQueue.main.async{
-//                self.isWalking.text = "Walking: \(unwrappedActivity.walking)\n Still: \(unwrappedActivity.stationary)"
+                let isWalking = unwrappedActivity.walking
+                let isRunning = unwrappedActivity.running
+                let isStationary = unwrappedActivity.stationary
+                let isAutomotive = unwrappedActivity.automotive
+                let isCycling = unwrappedActivity.cycling
+                let unkown = unwrappedActivity.unknown
+                
+                if isWalking{
+                    self.currentActivity = "Walking"
+                } else if isRunning{
+                    self.currentActivity = "Running"
+                } else if isCycling{
+                    self.currentActivity = "Cycling"
+                } else if isAutomotive{
+                    self.currentActivity = "Driving"
+                } else if isStationary{
+                    self.currentActivity = "Stationary"
+                } else if unkown{
+                    self.currentActivity = "Unkown"
+                }
             }
         }
     }
