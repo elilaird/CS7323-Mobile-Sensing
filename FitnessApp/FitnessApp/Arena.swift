@@ -1,0 +1,210 @@
+//
+//  Arena.swift
+//  FitnessApp
+//
+//  Created by Matthew Lee on 10/14/20.
+//
+
+import UIKit
+import SpriteKit
+import CoreMotion
+
+// Use delegation to signal view to return to main screen
+protocol arenaDelegateProtocol {
+    func endGame()
+}
+
+class Arena:SKScene, SKPhysicsContactDelegate {
+
+    //@IBOutlet weak var scoreLabel: UILabel!
+    
+    // MARK: Raw Motion Functions
+    let motion = CMMotionManager()
+    func startMotionUpdates(){
+        
+        if self.motion.isDeviceMotionAvailable{
+            self.motion.deviceMotionUpdateInterval = 0.1
+            self.motion.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: self.handleMotion )
+        }
+    }
+    
+    func handleMotion(_ motionData:CMDeviceMotion?, error:Error?){
+        if let gravity = motionData?.gravity {
+            self.physicsWorld.gravity = CGVector(dx: CGFloat(9.8*gravity.x), dy: CGFloat(9.8*gravity.y))
+        }
+    }
+    
+    // MARK: View Hierarchy Functions
+    let penguin = SKSpriteNode(imageNamed: "penguin")
+    let hotChocolate = SKSpriteNode(imageNamed: "hot_chocolate")
+    let scoreLabel = SKLabelNode(fontNamed: "Verdana-Bold")
+    let livesLabel = SKLabelNode(fontNamed: "Verdana-Bold")
+    
+    // Keep track of score and lives
+    var score:Int = 0 {
+        willSet(newValue){
+            DispatchQueue.main.async{
+                self.scoreLabel.text = "Score: \(newValue)"
+            }
+        }
+    }
+    var lives:Int = 0 {
+        willSet(newValue){
+            DispatchQueue.main.async{
+                self.livesLabel.text = "Lives: \(newValue)"
+            }
+        }
+    }
+    
+    override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
+        backgroundColor = SKColor.white
+        
+        // start motion for gravity
+        self.startMotionUpdates()
+        
+        // make sides to the screen
+        self.addSidesAndTop()
+        
+        // add some stationary blocks
+        self.addObstacleAtPoint(CGPoint(x: size.width * 0.1, y: size.height * 0.25))
+        self.addHotChocolate()
+        //self.addStaticBlockAtPoint(CGPoint(x: size.width * 0.9, y: size.height * 0.25))
+        
+        // add a spinning block
+        //self.addBlockAtPoint(CGPoint(x: size.width * 0.5, y: size.height * 0.35))
+        
+        self.addPenguin()
+        
+        self.addLives()
+        self.addScore()
+    }
+    
+    // MARK: Create Sprites Functions
+    func addScore(){
+        
+        scoreLabel.text = "Score: 0"
+        scoreLabel.fontSize = 30
+        scoreLabel.fontColor = SKColor.white
+        scoreLabel.position = CGPoint(x: size.width*0.25, y: size.height*0.925)
+        
+        self.addChild(scoreLabel)
+    }
+    
+    func addLives(){
+        livesLabel.text = "Lives: 0"
+        livesLabel.fontSize = 30
+        livesLabel.fontColor = SKColor.white
+        livesLabel.position = CGPoint(x: size.width*0.75, y: size.height*0.925)
+        self.addChild(livesLabel)
+    }
+    
+    
+    func addPenguin(){
+        penguin.size = CGSize(width:size.width*0.15,height:size.height * 0.1)
+        penguin.position = CGPoint(x: size.width/2, y: size.height*0.1)
+        
+        penguin.physicsBody = SKPhysicsBody(rectangleOf:penguin.size)
+        penguin.physicsBody?.restitution = 0.5
+        penguin.physicsBody?.isDynamic = true
+        penguin.physicsBody?.contactTestBitMask = 0x00000001
+        penguin.physicsBody?.collisionBitMask = 0x00000001
+        penguin.physicsBody?.categoryBitMask = 0x00000001
+        penguin.physicsBody?.allowsRotation = false
+        
+        self.addChild(penguin)
+    }
+    
+    func addHotChocolate(){
+        hotChocolate.size = CGSize(width:size.width*0.15,height:size.height * 0.07)
+        hotChocolate.position = CGPoint(x: size.width/2, y: size.height*(1-0.1375))
+        hotChocolate.physicsBody = SKPhysicsBody(rectangleOf:hotChocolate.size)
+        hotChocolate.physicsBody?.isDynamic = true
+        hotChocolate.physicsBody?.pinned = true
+        hotChocolate.physicsBody?.allowsRotation = false
+        hotChocolate.name = "hotChocolate"
+        
+        self.addChild(hotChocolate)
+    }
+    
+    func addObstacleAtPoint(_ point:CGPoint){
+        let obstacleType = Bool.random()
+        var obstacleSprite = ""
+        if(obstacleType){
+            obstacleSprite = "orca"
+        }else{
+            obstacleSprite = "hole"
+        }
+        
+        let obstacle = SKSpriteNode(imageNamed: obstacleSprite)
+        obstacle.name = "obstacle"
+        
+        obstacle.color = UIColor.red
+        obstacle.size = CGSize(width:size.width*0.18,height:size.height * 0.1)
+        obstacle.position = point
+        
+        obstacle.physicsBody = SKPhysicsBody(rectangleOf:obstacle.size)
+        obstacle.physicsBody?.isDynamic = true
+        obstacle.physicsBody?.pinned = true
+        obstacle.physicsBody?.allowsRotation = false
+        
+        self.addChild(obstacle)
+        
+    }
+    
+    func addSidesAndTop(){
+        let left = SKSpriteNode()
+        let right = SKSpriteNode()
+        let top = SKSpriteNode()
+        let bottom = SKSpriteNode()
+        
+        left.size = CGSize(width:size.width*0.05,height:size.height)
+        left.position = CGPoint(x:0, y:size.height*0.5)
+        
+        right.size = CGSize(width:size.width*0.05,height:size.height)
+        right.position = CGPoint(x:size.width, y:size.height*0.5)
+        
+        top.size = CGSize(width:size.width,height:size.height*0.2)
+        top.position = CGPoint(x:size.width*0.5, y:size.height)
+        
+        bottom.size = CGSize(width:size.width,height:size.height*0.05)
+        bottom.position = CGPoint(x:size.width*0.5, y:0)
+        
+        for obj in [left,right, top, bottom]{
+            obj.color = UIColor.blue
+            obj.physicsBody = SKPhysicsBody(rectangleOf:obj.size)
+            obj.physicsBody?.isDynamic = true
+            obj.physicsBody?.pinned = true
+            obj.physicsBody?.allowsRotation = false
+            self.addChild(obj)
+        }
+    }
+    
+    func onHitObstacle(){
+        // Return to main screen
+        lives += -1
+    }
+    
+    // MARK: =====Delegate Functions=====
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //self.addPenguin()
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node?.name == "obstacle" || contact.bodyB.node?.name == "obstacle" {
+            onHitObstacle()
+        }else if contact.bodyA.node?.name == "hotChocolate" || contact.bodyB.node?.name == "hotChocolate" {
+            self.score += 1
+        }
+    }
+    
+    // MARK: Utility Functions (thanks ray wenderlich!)
+    func random() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(Int.max))
+    }
+    
+    func random(min: CGFloat, max: CGFloat) -> CGFloat {
+        return random() * (max - min) + min
+    }
+}
+

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wmg-Mo-fNv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -69,7 +70,7 @@
                                 <rect key="frame" x="147.5" y="744" width="119" height="30"/>
                                 <state key="normal" title="Save the Penguin"/>
                                 <connections>
-                                    <segue destination="UuA-LU-dTT" kind="show" id="toN-KD-ciO"/>
+                                    <segue destination="UuA-LU-dTT" kind="presentation" modalPresentationStyle="fullScreen" id="1KN-do-Kj6"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J99-NN-NgD">
@@ -176,12 +177,12 @@
             </objects>
             <point key="canvasLocation" x="-1535" y="131"/>
         </scene>
-        <!--View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="o30-94-JW7">
             <objects>
-                <viewController id="UuA-LU-dTT" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1Au-7k-qF4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                <viewController id="UuA-LU-dTT" customClass="GameViewController" customModule="FitnessApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Au-7k-qF4" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Xrx-I9-b1V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

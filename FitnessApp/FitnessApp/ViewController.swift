@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         self.startActivityMonitoring()
         self.startPedometerMonitoring()
         
-        self.penguinGame.isEnabled = false
+        self.penguinGame.isEnabled = true
         
         self.loadGoal()
         
