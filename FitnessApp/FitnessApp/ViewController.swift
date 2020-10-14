@@ -88,7 +88,6 @@ class ViewController: UIViewController {
     
     func updateProgress(){
         let progress:Float = self.totalSteps / self.goalSteps
-        print(progress)
         circularProgress.setProgressWithAnimation(duration: 1.0, value: progress)
     }
 
