@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var stepGoalSlider: UISlider!
     @IBOutlet weak var activity: UILabel!
     @IBOutlet weak var stepsTillGoal: UILabel!
+    @IBOutlet weak var penguinGame: UIButton!
     
     
     //core motion
@@ -25,12 +26,12 @@ class ViewController: UIViewController {
     let pedometer = CMPedometer()
     
     //steps
-    var goalSteps: Float = 1000.0
+    var goalSteps: Float = 500.0
     var totalSteps: Float = 0.0 {
         willSet(newtotalSteps){
             DispatchQueue.main.async{
                 self.stepsToday.text = "\(Int(newtotalSteps))"
-                self.stepsTillGoal.text = "\(self.goalSteps - newtotalSteps)"
+                self.updateStepsTillGoal()
                 self.updateProgress()
             }
         }
@@ -63,12 +64,14 @@ class ViewController: UIViewController {
         self.startActivityMonitoring()
         self.startPedometerMonitoring()
         
+        self.penguinGame.isEnabled = false
+        
         let today = Calendar.current.startOfDay(for: Date())
         let yesterday = today.addingTimeInterval(-60*60*24)
         
         self.setTodaySteps(from: today, to: Date())
         
-        self.stepsTillGoal.text = "\(Int(self.goalSteps - self.totalSteps))"
+        self.updateStepsTillGoal()
         
         self.setYesterdaySteps(from: yesterday, to: today)
         
@@ -78,17 +81,27 @@ class ViewController: UIViewController {
     @IBAction func setGoal(_ sender: Any) {
         self.goalSteps = stepGoalSlider.value
         self.stepGoal.text = "\(Int(self.goalSteps))"
-        self.stepsTillGoal.text = "\(Int(self.goalSteps - self.totalSteps))"
+        self.updateStepsTillGoal()
         self.updateProgress()
     }
     
-    
+    func updateStepsTillGoal(){
+        if Int(self.goalSteps - self.totalSteps) > 0 {
+            self.stepsTillGoal.text = "\(Int(self.goalSteps - self.totalSteps))"
+        }else{
+            self.stepsTillGoal.text = "\(0)"
+        }
+    }
     
     //MARK: Circular Progress Utils
     
     func updateProgress(){
         let progress:Float = self.totalSteps / self.goalSteps
         circularProgress.setProgressWithAnimation(duration: 1.0, value: progress)
+        
+        if self.totalSteps >= self.goalSteps {
+            self.penguinGame.isEnabled = true
+        }
     }
 
     // MARK: =====Activity Methods=====
@@ -142,7 +155,6 @@ class ViewController: UIViewController {
     func handlePedometer(_ pedData:CMPedometerData?, error:Error?)->(){
         if let steps = pedData?.numberOfSteps {
             self.totalSteps = steps.floatValue
-            print(pedData.debugDescription)
         }
     }
     

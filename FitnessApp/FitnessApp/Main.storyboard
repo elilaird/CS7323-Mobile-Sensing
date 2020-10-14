@@ -22,7 +22,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5000" minValue="1000" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="5yN-TH-Z9N">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5000" minValue="500" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="5yN-TH-Z9N">
                                 <rect key="frame" x="108" y="65" width="198" height="31"/>
                                 <connections>
                                     <action selector="setGoal:" destination="BYZ-38-t0r" eventType="valueChanged" id="WDD-ze-Sl1"/>
@@ -55,7 +55,7 @@
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j7J-25-pyy" customClass="CircularProgressView" customModule="FitnessApp" customModuleProvider="target">
                                 <rect key="frame" x="87" y="293" width="240" height="128"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jd9-VB-Rqb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="500" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jd9-VB-Rqb">
                                         <rect key="frame" x="65" y="50" width="110" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -145,6 +145,7 @@
                     <connections>
                         <outlet property="activity" destination="egy-ab-gcH" id="fxr-Uu-dBh"/>
                         <outlet property="circularProgress" destination="j7J-25-pyy" id="7bN-pp-Uee"/>
+                        <outlet property="penguinGame" destination="2hW-mU-VNg" id="Tlz-iL-fHt"/>
                         <outlet property="stepGoal" destination="jd9-VB-Rqb" id="SyE-iC-OkZ"/>
                         <outlet property="stepGoalSlider" destination="5yN-TH-Z9N" id="LFY-qV-PS2"/>
                         <outlet property="stepsTillGoal" destination="LTp-mi-XwP" id="mgf-c4-7Sm"/>
