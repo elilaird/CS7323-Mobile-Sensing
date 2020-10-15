@@ -70,7 +70,9 @@ class ViewController: UIViewController {
         self.startActivityMonitoring()
         self.startPedometerMonitoring()
         
-        self.penguinGame.isEnabled = true
+        if self.totalSteps >= self.goalSteps{
+            self.penguinGame.isEnabled = false
+        }
         
         self.loadGoal()
         
@@ -95,8 +97,10 @@ class ViewController: UIViewController {
     
     func updateStepsTillGoal(){
         if Int(self.goalSteps - self.totalSteps) > 0 {
+            self.penguinGame.isEnabled = false
             self.stepsTillGoal.text = "\(Int(self.goalSteps - self.totalSteps))"
         }else{
+            self.penguinGame.isEnabled = true
             self.stepsTillGoal.text = "\(0)"
         }
     }
