@@ -15,6 +15,8 @@
 		45D67B652534EA4C000A1A37 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 45D67B622534EA4C000A1A37 /* Base.lproj */; };
 		45D67B662534EA4C000A1A37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D67B632534EA4C000A1A37 /* LaunchScreen.storyboard */; };
 		45D67B672534EA4C000A1A37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D67B642534EA4C000A1A37 /* Main.storyboard */; };
+		E8203FD52537B0C200190FB8 /* Arena.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8203FD42537B0C200190FB8 /* Arena.swift */; };
+		E8203FD82537B0D500190FB8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8203FD72537B0D500190FB8 /* GameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		45D67B622534EA4C000A1A37 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		45D67B632534EA4C000A1A37 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45D67B642534EA4C000A1A37 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E8203FD42537B0C200190FB8 /* Arena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arena.swift; sourceTree = "<group>"; };
+		E8203FD72537B0D500190FB8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +66,9 @@
 			children = (
 				45D67B4A2534E9CB000A1A37 /* AppDelegate.swift */,
 				45D67B4C2534E9CB000A1A37 /* SceneDelegate.swift */,
+				E8203FD42537B0C200190FB8 /* Arena.swift */,
 				45D67B4E2534E9CB000A1A37 /* ViewController.swift */,
+				E8203FD72537B0D500190FB8 /* GameViewController.swift */,
 				45D67B5F2534EA2D000A1A37 /* CircularProgressView.swift */,
 				45D67B622534EA4C000A1A37 /* Base.lproj */,
 				45D67B632534EA4C000A1A37 /* LaunchScreen.storyboard */,
@@ -144,7 +150,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8203FD52537B0C200190FB8 /* Arena.swift in Sources */,
 				45D67B4F2534E9CB000A1A37 /* ViewController.swift in Sources */,
+				E8203FD82537B0D500190FB8 /* GameViewController.swift in Sources */,
 				45D67B4B2534E9CB000A1A37 /* AppDelegate.swift in Sources */,
 				45D67B602534EA2D000A1A37 /* CircularProgressView.swift in Sources */,
 				45D67B4D2534E9CB000A1A37 /* SceneDelegate.swift in Sources */,
@@ -205,7 +213,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -260,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -276,7 +284,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F69WJ27LN4;
+				DEVELOPMENT_TEAM = FD7K8L5U3W;
 				INFOPLIST_FILE = FitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -295,7 +303,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F69WJ27LN4;
+				DEVELOPMENT_TEAM = FD7K8L5U3W;
 				INFOPLIST_FILE = FitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
