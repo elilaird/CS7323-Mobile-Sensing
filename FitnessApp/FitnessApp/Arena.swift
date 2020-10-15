@@ -15,6 +15,8 @@ protocol arenaDelegateProtocol {
 }
 
 class Arena:SKScene, SKPhysicsContactDelegate {
+    
+    var gameController: arenaDelegateProtocol? = nil
 
     //@IBOutlet weak var scoreLabel: UILabel!
     
@@ -39,6 +41,7 @@ class Arena:SKScene, SKPhysicsContactDelegate {
     let hotChocolate = SKSpriteNode(imageNamed: "hot_chocolate")
     let scoreLabel = SKLabelNode(fontNamed: "Verdana-Bold")
     let livesLabel = SKLabelNode(fontNamed: "Verdana-Bold")
+    //var playingField = Array(repeating: Array(repeating: false, count: 5), count: 5)
     
     // Keep track of score and lives
     var score:Int = 0 {
@@ -62,22 +65,14 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         
         // start motion for gravity
         self.startMotionUpdates()
-        
-        // make sides to the screen
+        self.generatePlayingField()
         self.addSidesAndTop()
-        
-        // add some stationary blocks
-        self.addObstacleAtPoint(CGPoint(x: size.width * 0.1, y: size.height * 0.25))
         self.addHotChocolate()
-        //self.addStaticBlockAtPoint(CGPoint(x: size.width * 0.9, y: size.height * 0.25))
-        
-        // add a spinning block
-        //self.addBlockAtPoint(CGPoint(x: size.width * 0.5, y: size.height * 0.35))
-        
         self.addPenguin()
         
         self.addLives()
         self.addScore()
+
     }
     
     // MARK: Create Sprites Functions
@@ -99,9 +94,9 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         self.addChild(livesLabel)
     }
     
-    
+    // Add penguin to scene
     func addPenguin(){
-        penguin.size = CGSize(width:size.width*0.15,height:size.height * 0.1)
+        penguin.size = CGSize(width:size.width*0.1,height:size.height * 0.08)
         penguin.position = CGPoint(x: size.width/2, y: size.height*0.1)
         
         penguin.physicsBody = SKPhysicsBody(rectangleOf:penguin.size)
@@ -115,6 +110,7 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         self.addChild(penguin)
     }
     
+    // Add hot chocolate goal
     func addHotChocolate(){
         hotChocolate.size = CGSize(width:size.width*0.15,height:size.height * 0.07)
         hotChocolate.position = CGPoint(x: size.width/2, y: size.height*(1-0.1375))
@@ -127,6 +123,7 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         self.addChild(hotChocolate)
     }
     
+    // Generate orca or hole in the ice at a location
     func addObstacleAtPoint(_ point:CGPoint){
         let obstacleType = Bool.random()
         var obstacleSprite = ""
@@ -149,9 +146,9 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         obstacle.physicsBody?.allowsRotation = false
         
         self.addChild(obstacle)
-        
     }
     
+    // Create borders of arena
     func addSidesAndTop(){
         let left = SKSpriteNode()
         let right = SKSpriteNode()
@@ -180,9 +177,52 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         }
     }
     
+//
+    
+    func generatePlayingField(){
+        // Set up obstacles
+        var playingField = Array(repeating: Array(repeating: false, count: 5), count: 4)
+        for i in Range(0...min(self.score,3)){
+            playingField[i][Int.random(in: Range(0...4))] = true
+        }
+        print(playingField)
+        for (i, row) in playingField.enumerated(){
+            for (j, col) in row.enumerated(){
+                if col == true {
+                    print(i, j)
+                    let w = size.width*(0.025 + (CGFloat(j) * 0.19) + 0.095)
+                    let h = size.height*(0.185 + (CGFloat(i) * 0.16) + 0.08)
+                    self.addObstacleAtPoint(CGPoint(x: w, y: h))
+                }
+            }
+        }
+    }
+    
+    func resetField(){
+        self.children.filter({ $0.name == "obstacle" }).forEach({
+            $0.removeFromParent()
+        })
+        penguin.removeFromParent()
+        addPenguin()
+        self.generatePlayingField()
+
+    }
+    
+    // Close game if player hits an obstacle with 0 lives
     func onHitObstacle(){
         // Return to main screen
-        lives += -1
+        if lives == 0{
+            if self.gameController != nil  {
+                self.gameController?.endGame()
+            }
+        }else{
+            lives += -1
+        }
+    }
+    
+    func onReachGoal(){
+        self.score += 1
+        self.resetField()
     }
     
     // MARK: =====Delegate Functions=====
@@ -194,7 +234,7 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         if contact.bodyA.node?.name == "obstacle" || contact.bodyB.node?.name == "obstacle" {
             onHitObstacle()
         }else if contact.bodyA.node?.name == "hotChocolate" || contact.bodyB.node?.name == "hotChocolate" {
-            self.score += 1
+            onReachGoal()
         }
     }
     
