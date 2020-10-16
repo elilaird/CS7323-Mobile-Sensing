@@ -18,7 +18,6 @@ class Arena:SKScene, SKPhysicsContactDelegate {
     
     var gameController: arenaDelegateProtocol? = nil
 
-    //@IBOutlet weak var scoreLabel: UILabel!
     
     // MARK: Raw Motion Functions
     let motion = CMMotionManager()
@@ -36,7 +35,7 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    // MARK: View Hierarchy Functions
+    // MARK: Main Sprites
     let penguin = SKSpriteNode(imageNamed: "penguin")
     let hotChocolate = SKSpriteNode(imageNamed: "hot_chocolate")
     let scoreLabel = SKLabelNode(fontNamed: "Verdana-Bold")
@@ -59,9 +58,15 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    // Set up arena for the first time
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         backgroundColor = SKColor.white
+        
+        // Swipe to exit game
+        let swipe : UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
+        swipe.direction = .right
+        self.view?.addGestureRecognizer(swipe)
         
         // start motion for gravity
         self.startMotionUpdates()
@@ -75,7 +80,7 @@ class Arena:SKScene, SKPhysicsContactDelegate {
 
     }
     
-    // MARK: Create Sprites Functions
+    // MARK: Generate Sprites
     func addScore(){
         
         scoreLabel.text = "Score: 0"
@@ -177,19 +182,17 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         }
     }
     
-//
-    
+    // Randomly generate playing field based on rough grid
+    // Add more obstacles as score increases
     func generatePlayingField(){
         // Set up obstacles
         var playingField = Array(repeating: Array(repeating: false, count: 5), count: 4)
         for i in Range(0...min(self.score,3)){
             playingField[i][Int.random(in: Range(0...4))] = true
         }
-        print(playingField)
         for (i, row) in playingField.enumerated(){
             for (j, col) in row.enumerated(){
                 if col == true {
-                    print(i, j)
                     let w = size.width*(0.025 + (CGFloat(j) * 0.19) + 0.095)
                     let h = size.height*(0.185 + (CGFloat(i) * 0.16) + 0.08)
                     self.addObstacleAtPoint(CGPoint(x: w, y: h))
@@ -198,6 +201,7 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    // Reset field and penguin position
     func resetField(){
         self.children.filter({ $0.name == "obstacle" }).forEach({
             $0.removeFromParent()
@@ -208,7 +212,7 @@ class Arena:SKScene, SKPhysicsContactDelegate {
 
     }
     
-    // Close game if player hits an obstacle with 0 lives
+    // Close game if player hits an obstacle with 0 lives, other wise lose life and reset penguin
     func onHitObstacle(){
         // Return to main screen
         if lives == 0{
@@ -217,17 +221,15 @@ class Arena:SKScene, SKPhysicsContactDelegate {
             }
         }else{
             lives += -1
+            penguin.removeFromParent()
+            addPenguin()
         }
     }
     
+    // Reset game and increment score
     func onReachGoal(){
         self.score += 1
         self.resetField()
-    }
-    
-    // MARK: =====Delegate Functions=====
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //self.addPenguin()
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -238,13 +240,11 @@ class Arena:SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    // MARK: Utility Functions (thanks ray wenderlich!)
-    func random() -> CGFloat {
-        return CGFloat(Float(arc4random()) / Float(Int.max))
+    @objc func swipedRight(sender: UISwipeGestureRecognizer){
+        self.gameController?.endGame()
     }
     
-    func random(min: CGFloat, max: CGFloat) -> CGFloat {
-        return random() * (max - min) + min
-    }
+    
+    
 }
 

@@ -30,10 +30,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hW-mU-VNg">
-                                <rect key="frame" x="147.5" y="744" width="119" height="30"/>
-                                <state key="normal" title="Save the Penguin"/>
+                                <rect key="frame" x="85" y="744" width="244" height="30"/>
+                                <state key="normal" title="Penguin's Hot Chocolate Adventure"/>
                                 <connections>
-                                    <segue destination="UuA-LU-dTT" kind="presentation" modalPresentationStyle="fullScreen" id="1KN-do-Kj6"/>
+                                    <segue destination="UuA-LU-dTT" kind="presentation" identifier="game" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="1KN-do-Kj6"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Steps:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfk-UX-DGV">
