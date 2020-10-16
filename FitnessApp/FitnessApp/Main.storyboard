@@ -48,7 +48,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5000" minValue="500" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="5yN-TH-Z9N">
+                            <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5000" minValue="1" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="5yN-TH-Z9N">
                                 <rect key="frame" x="108" y="7" width="198" height="31"/>
                                 <connections>
                                     <action selector="setGoal:" destination="BYZ-38-t0r" eventType="valueChanged" id="WDD-ze-Sl1"/>
@@ -98,7 +98,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTp-mi-XwP">
-                                <rect key="frame" x="202" y="482" width="10.5" height="21"/>
+                                <rect key="frame" x="202" y="482.5" width="10.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
