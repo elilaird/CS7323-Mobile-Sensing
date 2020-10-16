@@ -195,5 +195,13 @@ class ViewController: UIViewController {
     func setYesterdaySteps(from yesterday:Date, to today:Date){
         self.pedometer.queryPedometerData(from: yesterday, to: today, withHandler: handleYesterdayPedometer)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "game"{
+            let gameView = segue.destination as? GameViewController
+            gameView?.numLives = Int(self.totalSteps/500)
+            
+        }
+    }
 }
 
