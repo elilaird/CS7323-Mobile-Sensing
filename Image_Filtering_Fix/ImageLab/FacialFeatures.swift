@@ -60,6 +60,7 @@ class FacialFeatures: UIViewController   {
         smilingLabel.layer.zPosition = 1
     }
     
+    
     //MARK: Setup filtering
     func setupFilters(){
         eyeFilters = []
