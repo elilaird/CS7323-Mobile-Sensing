@@ -11,7 +11,10 @@ import AVFoundation
 class FacialFeatures: UIViewController   {
 
     //MARK: Class Properties
-    var filters : [CIFilter]! = nil
+    @IBOutlet weak var smilingLabel: UILabel!
+    var eyeFilters : [CIFilter]! = nil
+    var mouthFilters : [CIFilter]! = nil
+    let bridge = OpenCVBridge()
     lazy var videoManager:VideoAnalgesic! = {
         let tmpManager = VideoAnalgesic(mainView: self.view)
         tmpManager.setCameraPosition(position: .back)
@@ -36,6 +39,11 @@ class FacialFeatures: UIViewController   {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.bridge.smilingText(true)
+        
+//        self.view.bringSubviewToFront(smilingLabel);
+        smilingLabel.layer.zPosition = 1;
+        
         self.view.backgroundColor = nil
         self.setupFilters()
         
@@ -47,35 +55,61 @@ class FacialFeatures: UIViewController   {
     
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.view.bringSubviewToFront(smilingLabel);
+        smilingLabel.layer.zPosition = 1
+    }
+    
     //MARK: Setup filtering
     func setupFilters(){
-        filters = []
+        eyeFilters = []
+        mouthFilters = []
         
-        let filterPinch = CIFilter(name:"CIBumpDistortion")!
-        filterPinch.setValue(-0.5, forKey: "inputScale")
+        var filterPinch = CIFilter(name:"CIBumpDistortion")!
+        filterPinch.setValue(-1, forKey: "inputScale")
         filterPinch.setValue(75, forKey: "inputRadius")
-        filters.append(filterPinch)
+        mouthFilters.append(filterPinch)
+        
+        
+        filterPinch = CIFilter(name:"CITwirlDistortion")!
+        filterPinch.setValue(20, forKey: "inputRadius")
+        filterPinch.setValue(20, forKey: "inputAngle")
+        eyeFilters.append(filterPinch)
         
     }
     
+    
     //MARK: Apply filters and apply feature detectors
-    func applyFiltersToFaces(inputImage:CIImage,features:[CIFaceFeature])->CIImage{
+    func applyFiltersToFaces(inputImage:CIImage, facialFeatures:[(String, CGPoint)])->CIImage{
         var retImage = inputImage
-        var filterCenter = CGPoint()
         
-        for f in features {
-            //set where to apply filter
-            filterCenter.x = f.bounds.midX
-            filterCenter.y = f.bounds.midY
+        for (featureType, filterCenter) in facialFeatures {
             
             //do for each filter (assumes all filters have property, "inputCenter")
-            for filt in filters{
-                filt.setValue(retImage, forKey: kCIInputImageKey)
-                filt.setValue(CIVector(cgPoint: filterCenter), forKey: "inputCenter")
-                // could also manipulate the radius of the filter based on face size!
-                retImage = filt.outputImage!
+            if featureType == "eye"{
+                for filt in eyeFilters{
+                    filt.setValue(retImage, forKey: kCIInputImageKey)
+                    filt.setValue(CIVector(cgPoint: filterCenter), forKey: "inputCenter")
+                    // could also manipulate the radius of the filter based on face size!
+                    retImage = filt.outputImage!
+                }
             }
+            if featureType == "mouth"{
+                for filt in mouthFilters{
+                    filt.setValue(retImage, forKey: kCIInputImageKey)
+                    filt.setValue(CIVector(cgPoint: filterCenter), forKey: "inputCenter")
+                    // could also manipulate the radius of the filter based on face size!
+                    retImage = filt.outputImage!
+                }
+            }
+    
         }
+        self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
+        self.bridge.smilingText(true)
+        self.bridge.processFinger()
+//        let rect = CGRect(origin: point, size: image.size)
+//        "Smiling".draw(in: rect, withAttributes: textFontAttributes)
+//        smilingLabel.layer.zPosition = 1;
         return retImage
     }
     
@@ -87,16 +121,40 @@ class FacialFeatures: UIViewController   {
         
     }
     
+    func getFacialFeatures(faces:[CIFaceFeature])-> [(String, CGPoint)] {
+        
+        var facialFeatures:[(featureType: String, location: CGPoint)] = []
+        
+        // for each face
+        for f in faces{
+            // get the left eye, right eye, and mouth
+            if f.hasLeftEyePosition{
+                facialFeatures.append((featureType: "eye", location: f.leftEyePosition))
+            }
+            if f.hasRightEyePosition{
+                facialFeatures.append((featureType: "eye", location: f.rightEyePosition))
+            }
+            if f.hasMouthPosition{
+                facialFeatures.append((featureType: "mouth", location: f.mouthPosition))
+            }
+        }
+        return facialFeatures
+        
+    }
+    
     //MARK: Process image output
     func processImage(inputImage:CIImage) -> CIImage{
         
         // detect faces
         let faces = getFaces(img: inputImage)
         
+        // get facial features
+        let facialFeatures = getFacialFeatures(faces: faces)
+        
         // if no faces, just return original image
         if faces.count == 0 { return inputImage }
         
         //otherwise apply the filters to the faces
-        return applyFiltersToFaces(inputImage: inputImage, features: faces)
+        return applyFiltersToFaces(inputImage: inputImage, facialFeatures: facialFeatures)
     }
 }
