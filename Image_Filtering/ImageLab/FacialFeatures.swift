@@ -11,8 +11,10 @@ import AVFoundation
 class FacialFeatures: UIViewController   {
 
     //MARK: Class Properties
+    @IBOutlet weak var smilingLabel: UILabel!
     var eyeFilters : [CIFilter]! = nil
     var mouthFilters : [CIFilter]! = nil
+    let bridge = OpenCVBridge()
     lazy var videoManager:VideoAnalgesic! = {
         let tmpManager = VideoAnalgesic(mainView: self.view)
         tmpManager.setCameraPosition(position: .back)
@@ -37,6 +39,11 @@ class FacialFeatures: UIViewController   {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.bridge.smilingText(true)
+        
+//        self.view.bringSubviewToFront(smilingLabel);
+        smilingLabel.layer.zPosition = 1;
+        
         self.view.backgroundColor = nil
         self.setupFilters()
         
@@ -46,6 +53,11 @@ class FacialFeatures: UIViewController   {
             videoManager.start()
         }
     
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.view.bringSubviewToFront(smilingLabel);
+        smilingLabel.layer.zPosition = 1
     }
     
     //MARK: Setup filtering
@@ -92,6 +104,12 @@ class FacialFeatures: UIViewController   {
             }
     
         }
+        self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
+        self.bridge.smilingText(true)
+        self.bridge.processFinger()
+//        let rect = CGRect(origin: point, size: image.size)
+//        "Smiling".draw(in: rect, withAttributes: textFontAttributes)
+//        smilingLabel.layer.zPosition = 1;
         return retImage
     }
     

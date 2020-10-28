@@ -70,6 +70,17 @@ using namespace cv;
     return false;
 }
 
+-(void) smilingText:(bool)isSmiling{
+    
+    cv::Mat frame_gray,image_copy;
+    
+    if (isSmiling){
+        cv::putText(_image, "Smiling", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 50, Scalar::all(255), 1, 2);
+    }else{
+        cv::putText(_image, "Not smiling", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 3, Scalar::all(255), 1, 2);
+    }
+}
+
 #pragma mark Define Custom Functions Here
 /*-(void)processImage{
     

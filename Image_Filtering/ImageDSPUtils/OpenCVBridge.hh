@@ -30,6 +30,7 @@
 // call this to perfrom processing (user controlled for better transparency)
 //-(void)processImage;
 -(bool)processFinger;
+-(void) smilingText:(bool)isSmiling;
 
 // for the video manager transformations
 -(void)setTransforms:(CGAffineTransform)trans;
