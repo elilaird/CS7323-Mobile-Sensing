@@ -61,6 +61,10 @@ class ViewController: UIViewController   {
     
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.videoManager = nil
+    }
+    
     //MARK: Process image output
     func processFromCamera(inputImage:CIImage) -> CIImage{
         
