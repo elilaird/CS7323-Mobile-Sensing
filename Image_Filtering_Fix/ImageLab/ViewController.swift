@@ -36,6 +36,7 @@ class ViewController: UIViewController   {
         
         self.videoManager = VideoAnalgesic(mainView: self.view)
         self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
+        self.videoManager.setFPS(desiredFrameRate: 30.0)
         
         self.fingerBuffer = Array.init(repeating: false, count: 36)
         
@@ -68,12 +69,6 @@ class ViewController: UIViewController   {
     //MARK: Process image output
     func processFromCamera(inputImage:CIImage) -> CIImage{
         
-        // detect faces
-        //let f = getFaces(img: inputImage)
-        
-        // if no faces, just return original image
-        //if f.count == 0 { return inputImage }
-        
         var retImage = inputImage
         
         // use this code if you are using OpenCV and want to overwrite the displayed image via OpenCv
@@ -81,9 +76,9 @@ class ViewController: UIViewController   {
         self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
         //self.bridge.processImage()
         self.finger = self.bridge.processFinger()
-        self.fingerBuffer[self.frameCtr] = self.finger
-        self.frameCtr += 1
+
         
+        /*
         if(frameCtr == 36){
             frameCtr = 0
         }
@@ -97,7 +92,7 @@ class ViewController: UIViewController   {
         }else if(currentState && !enoughFingers){
             _ = self.videoManager.toggleFlash()
             self.currentState = false
-        }
+        }*/
     
         
         retImage = self.bridge.getImage()
@@ -118,37 +113,6 @@ class ViewController: UIViewController   {
         filters.append(filterPinch)
         
     }
-    
-    //MARK: Apply filters and apply feature detectors
-    func applyFiltersToFaces(inputImage:CIImage,features:[CIFaceFeature])->CIImage{
-        var retImage = inputImage
-        var filterCenter = CGPoint()
-        
-        for f in features {
-            //set where to apply filter
-            filterCenter.x = f.bounds.midX
-            filterCenter.y = f.bounds.midY
-            
-            //do for each filter (assumes all filters have property, "inputCenter")
-            for filt in filters{
-                filt.setValue(retImage, forKey: kCIInputImageKey)
-                filt.setValue(CIVector(cgPoint: filterCenter), forKey: "inputCenter")
-                // could also manipualte the radius of the filter based on face size!
-                retImage = filt.outputImage!
-            }
-        }
-        return retImage
-    }
-    
-    func getFaces(img:CIImage) -> [CIFaceFeature]{
-        // this ungodly mess makes sure the image is the correct orientation
-        let optsFace = [CIDetectorImageOrientation:self.videoManager.ciOrientation]
-        // get Face Features
-        return self.detector.features(in: img, options: optsFace) as! [CIFaceFeature]
-        
-    }
-    
-    
     
     //MARK: Convenience Methods for UI Flash and Camera Toggle
     @IBAction func flash(sender: AnyObject) {
