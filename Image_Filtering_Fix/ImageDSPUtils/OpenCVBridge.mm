@@ -7,6 +7,7 @@
 //
 
 #import "OpenCVBridge.hh"
+#import "FFTHelper.h"
 
 
 using namespace cv;
@@ -18,8 +19,7 @@ using namespace cv;
 @property (nonatomic) CGAffineTransform transform;
 @property (nonatomic) CGAffineTransform inverseTransform;
 @property (atomic) cv::CascadeClassifier classifier;
-
-@property (nonatomic) NSMutableArray* redBuffer;
+@property (atomic) FFTHelper* fftHelper;
 
 @property (nonatomic) int bufferSize;
 
@@ -54,11 +54,14 @@ using namespace cv;
     sprintf(text,"Avg. B: %.0f, G: %.0f, R: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2]);
     cv::putText(_image, text, cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
     //cv::putText(_image, "Finger Present", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
-    NSLog(@"%@", self.redBuffer);
+    //NSLog(@"%@", self.redBuffer);
     
     
-    
-    return true;
+    if(self.redBuffer.count == self.bufferSize){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 -(void) smilingText:(bool)isSmiling{
@@ -314,7 +317,8 @@ using namespace cv;
 -(instancetype)init{
     self = [super init];
     self.bufferSize = 400;
-    self.redBuffer = [[NSMutableArray alloc] init]; 
+    self.redBuffer = [[NSMutableArray alloc] init];
+    self.fftHelper = [[FFTHelper alloc] initWithFFTSize:self.bufferSize]; 
     
     if(self != nil){
         self.transform = CGAffineTransformMakeRotation(M_PI_2);

@@ -25,7 +25,12 @@ class ViewController: UIViewController   {
     var frameCtr: Int = 0
     
     //MARK: Outlets in view
-    @IBOutlet weak var flashSlider: UISlider!
+    
+    
+    
+    lazy var graph:MetalGraph? = {
+        return MetalGraph(mainView: self.view)
+    }()
     
     //MARK: ViewController Hierarchy
     override func viewDidLoad() {
@@ -33,6 +38,10 @@ class ViewController: UIViewController   {
         
         self.view.backgroundColor = nil
         self.setupFilters()
+        
+        graph?.addGraph(withName: "fft",
+                        shouldNormalize: true,
+                        numPointsInGraph: 200)
         
         self.videoManager = VideoAnalgesic(mainView: self.view)
         self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
@@ -75,8 +84,11 @@ class ViewController: UIViewController   {
         // this is a BLOCKING CALL
         self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
         //self.bridge.processImage()
-        self.finger = self.bridge.processFinger()
-
+        let fullBuffer = self.bridge.processFinger()
+        if(fullBuffer){
+            self.updateGraph()
+        }
+        //self.videoManager.toggleFlash()
         
         /*
         if(frameCtr == 36){
@@ -113,36 +125,20 @@ class ViewController: UIViewController   {
         filters.append(filterPinch)
         
     }
-    
-    //MARK: Convenience Methods for UI Flash and Camera Toggle
-    @IBAction func flash(sender: AnyObject) {
-        if(!self.finger){
-            if(self.videoManager.toggleFlash()){
-                self.flashSlider.value = 1.0
-            }
-            else{
-                self.flashSlider.value = 0.0
-            }
-            
-        }
+    @IBAction func flashToggle(_ sender: UIButton) {
+        self.videoManager.toggleFlash()
     }
     
-    
-    @IBAction func switchCamera(sender: AnyObject) {
-        if (!self.finger){
-            self.videoManager.toggleCameraPosition()
-        }
-    }
-    
-    @IBAction func setFlashLevel(sender: UISlider) {
-        // Examples for usign the flash
-        if(sender.value>0.0){
-            // max value is 1.0
-            self.videoManager.turnOnFlashwithLevel(sender.value)
-        }
-        else if(sender.value==0.0){
-            self.videoManager.turnOffFlash()
-        }
+    @objc
+    func updateGraph(){
+        
+        let zoomedData = Array(self.bridge.redBuffer as! [Float])[199...399].map({$0 - 100})
+        
+        self.graph?.updateGraph(
+            data: zoomedData,
+            forKey: "fft"
+        )
+        
     }
 
    

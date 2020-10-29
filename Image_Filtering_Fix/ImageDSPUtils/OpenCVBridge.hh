@@ -15,6 +15,7 @@
 @interface OpenCVBridge : NSObject
 
 @property (nonatomic) NSInteger processType;
+@property (nonatomic) NSMutableArray* redBuffer;
 
 // set the image for processing later
 -(void) setImage:(CIImage*)ciFrameImage
