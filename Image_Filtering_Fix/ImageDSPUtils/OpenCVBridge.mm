@@ -61,6 +61,7 @@ using namespace cv;
             _buffer_ctr++;
 
         }
+        
         cv::putText(_image, "Finger Present", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
         return true;
 
@@ -70,14 +71,14 @@ using namespace cv;
     return false;
 }
 
--(void) smilingText:(bool)isSmiling{
+-(void) smilingText:(bool)isSmiling withXLocation:(int)xLocation withYLocation:(int)yLocation{
     
     cv::Mat frame_gray,image_copy;
     
     if (isSmiling){
-        cv::putText(_image, "Smiling", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 50, Scalar::all(255), 1, 2);
+        cv::putText(_image, "Smiling", cv::Point(xLocation, yLocation), FONT_HERSHEY_PLAIN, .75, Scalar::all(255), 1, 2);
     }else{
-        cv::putText(_image, "Not smiling", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 3, Scalar::all(255), 1, 2);
+        cv::putText(_image, "Not smiling", cv::Point(xLocation, yLocation), FONT_HERSHEY_PLAIN, .75, Scalar::all(255), 1, 2);
     }
 }
 

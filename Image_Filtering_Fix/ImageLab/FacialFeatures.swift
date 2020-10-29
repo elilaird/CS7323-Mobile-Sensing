@@ -11,9 +11,10 @@ import AVFoundation
 class FacialFeatures: UIViewController   {
 
     //MARK: Class Properties
-    @IBOutlet weak var smilingLabel: UILabel!
     var eyeFilters : [CIFilter]! = nil
     var mouthFilters : [CIFilter]! = nil
+    var height: CGFloat = 0
+    var width: CGFloat = 0
     let bridge = OpenCVBridge()
     lazy var videoManager:VideoAnalgesic! = {
         let tmpManager = VideoAnalgesic(mainView: self.view)
@@ -25,7 +26,7 @@ class FacialFeatures: UIViewController   {
         // create dictionary for face detection
         // HINT: you need to manipulate these properties for better face detection efficiency
         let optsDetector = [CIDetectorAccuracy:CIDetectorAccuracyHigh,
-                            CIDetectorTracking:true] as [String : Any]
+                            CIDetectorTracking:true, CIDetectorSmile:true] as [String : Any]
         
         // setup a face detector in swift
         let detector = CIDetector(ofType: CIDetectorTypeFace,
@@ -39,27 +40,22 @@ class FacialFeatures: UIViewController   {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.bridge.smilingText(true)
-        
-//        self.view.bringSubviewToFront(smilingLabel);
-        smilingLabel.layer.zPosition = 1;
+        height = self.view.frame.height
+        width = self.view.frame.width
         
         self.view.backgroundColor = nil
         self.setupFilters()
         
+        self.bridge.setTransforms(self.videoManager.transform)
         self.videoManager.setProcessingBlock(newProcessBlock: self.processImage)
         
         if !videoManager.isRunning{
             videoManager.start()
         }
+        
+        self.bridge.processType = 1
     
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.view.bringSubviewToFront(smilingLabel);
-        smilingLabel.layer.zPosition = 1
-    }
-    
     
     //MARK: Setup filtering
     func setupFilters(){
@@ -83,6 +79,8 @@ class FacialFeatures: UIViewController   {
     //MARK: Apply filters and apply feature detectors
     func applyFiltersToFaces(inputImage:CIImage, facialFeatures:[(String, CGPoint)])->CIImage{
         var retImage = inputImage
+        let scaleHeight = retImage.extent.height/self.height
+        let scaleWidth = retImage.extent.width/self.width
         
         for (featureType, filterCenter) in facialFeatures {
             
@@ -95,22 +93,30 @@ class FacialFeatures: UIViewController   {
                     retImage = filt.outputImage!
                 }
             }
-            if featureType == "mouth"{
+            if featureType == "mouth_smile" || featureType == "mouth_no_smile"{
                 for filt in mouthFilters{
                     filt.setValue(retImage, forKey: kCIInputImageKey)
                     filt.setValue(CIVector(cgPoint: filterCenter), forKey: "inputCenter")
                     // could also manipulate the radius of the filter based on face size!
                     retImage = filt.outputImage!
+
+                    self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
+                    
+                    let xLocation = Int(filterCenter.y * scaleHeight)
+                    let yLocation = Int(filterCenter.x * scaleWidth)
+                    
+                    if featureType == "mouth_smile"{
+                        self.bridge.smilingText(true, withXLocation: Int32(xLocation), withYLocation: Int32(yLocation))
+                    }else{
+                        self.bridge.smilingText(false, withXLocation: Int32(xLocation), withYLocation: Int32(yLocation))
+                    }
+                    retImage = self.bridge.getImage()
                 }
             }
+            
     
         }
-        self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
-        self.bridge.smilingText(true)
-        self.bridge.processFinger()
-//        let rect = CGRect(origin: point, size: image.size)
-//        "Smiling".draw(in: rect, withAttributes: textFontAttributes)
-//        smilingLabel.layer.zPosition = 1;
+
         return retImage
     }
     
@@ -136,7 +142,11 @@ class FacialFeatures: UIViewController   {
                 facialFeatures.append((featureType: "eye", location: f.rightEyePosition))
             }
             if f.hasMouthPosition{
-                facialFeatures.append((featureType: "mouth", location: f.mouthPosition))
+                if f.hasSmile{
+                    facialFeatures.append((featureType: "mouth_smile", location: f.mouthPosition))
+                }else{
+                    facialFeatures.append((featureType: "mouth_no_smile", location: f.mouthPosition))
+                }
             }
         }
         return facialFeatures
@@ -157,5 +167,6 @@ class FacialFeatures: UIViewController   {
         
         //otherwise apply the filters to the faces
         return applyFiltersToFaces(inputImage: inputImage, facialFeatures: facialFeatures)
+
     }
 }
