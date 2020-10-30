@@ -20,9 +20,11 @@ class ViewController: UIViewController   {
     let bridge = OpenCVBridge()
     
     var finger: Bool = false
+    var pulseGraph:[Float] = []
     var currentState: Bool = false
     var fingerBuffer: [Bool]! = nil
     var frameCtr: Int = 0
+    var bufferSize = 100
     
     //MARK: Outlets in view
     
@@ -30,6 +32,10 @@ class ViewController: UIViewController   {
     
     lazy var graph:MetalGraph? = {
         return MetalGraph(mainView: self.view)
+    }()
+    
+    private lazy var fftHelper:FFTHelper? = {
+        return FFTHelper.init(fftSize: Int32(self.bufferSize))
     }()
     
     //MARK: ViewController Hierarchy
@@ -41,11 +47,13 @@ class ViewController: UIViewController   {
         
         graph?.addGraph(withName: "fft",
                         shouldNormalize: true,
-                        numPointsInGraph: 200)
+                        numPointsInGraph: 100)
+        
+        pulseGraph = Array.init(repeating: 0.0, count: self.bufferSize)
         
         self.videoManager = VideoAnalgesic(mainView: self.view)
         self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
-        self.videoManager.setFPS(desiredFrameRate: 30.0)
+        self.videoManager.setFPS(desiredFrameRate: 60.0)
         
         self.fingerBuffer = Array.init(repeating: false, count: 36)
         
@@ -84,34 +92,13 @@ class ViewController: UIViewController   {
         // this is a BLOCKING CALL
         self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
         //self.bridge.processImage()
-        let fullBuffer = self.bridge.processFinger()
-        if(fullBuffer){
-            self.updateGraph()
+        let beat = self.bridge.processFinger()
+        if(beat != -1){
+            print(beat)
         }
-        //self.videoManager.toggleFlash()
-        
-        /*
-        if(frameCtr == 36){
-            frameCtr = 0
-        }
-        var enoughFingers = false
-        if(fingerBuffer.filter{$0}.count >= 1){
-            enoughFingers = true
-        }
-        if (enoughFingers && !currentState){
-            _ = self.videoManager.toggleFlash()
-            self.currentState = true
-        }else if(currentState && !enoughFingers){
-            _ = self.videoManager.toggleFlash()
-            self.currentState = false
-        }*/
     
         
         retImage = self.bridge.getImage()
-        
-        //HINT: you can also send in the bounds of the face to ONLY process the face in OpenCV
-        // or any bounds to only process a certain bounding region in OpenCV
-        
         return retImage
     }
     
@@ -126,13 +113,13 @@ class ViewController: UIViewController   {
         
     }
     @IBAction func flashToggle(_ sender: UIButton) {
-        self.videoManager.toggleFlash()
+        _ = self.videoManager.toggleFlash()
     }
     
     @objc
     func updateGraph(){
         
-        let zoomedData = Array(self.bridge.redBuffer as! [Float])[199...399].map({$0 - 100})
+        let zoomedData = Array(self.bridge.redBuffer as! [Float]).map({$0 - 350})
         
         self.graph?.updateGraph(
             data: zoomedData,

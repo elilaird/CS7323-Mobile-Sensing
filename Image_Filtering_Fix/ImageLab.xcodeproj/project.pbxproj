@@ -40,8 +40,8 @@
 		B6EF2FD51F7A1BE500C33387 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ImageDSPUtils/opencv2.framework; sourceTree = SOURCE_ROOT; };
 		B6EF2FD81F7A1CE100C33387 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		E837BAC2253673D20001CA0C /* ForThought.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ForThought.rtf; sourceTree = "<group>"; };
-		E8384A8D254B53D500E7B8C7 /* FFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFTHelper.h; path = ../../FFT_Audio/AudioDSPUtils/FFTHelper.h; sourceTree = "<group>"; };
-		E8384A8E254B53D500E7B8C7 /* FFTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFTHelper.m; path = ../../FFT_Audio/AudioDSPUtils/FFTHelper.m; sourceTree = "<group>"; };
+		E8384A8D254B53D500E7B8C7 /* FFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTHelper.h; sourceTree = "<group>"; };
+		E8384A8E254B53D500E7B8C7 /* FFTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFTHelper.m; sourceTree = "<group>"; };
 		E8384A91254B561500E7B8C7 /* MetalGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalGraph.swift; path = ../../FFT_Audio/AudioLabSwift/MetalGraph.swift; sourceTree = "<group>"; };
 		E8384A94254B58AB00E7B8C7 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = Shaders.metal; path = ../FFT_Audio/Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,8 +101,8 @@
 				B6EF2FD51F7A1BE500C33387 /* opencv2.framework */,
 				B6E657981D95AA4500E75C60 /* VideoAnalgesic.swift */,
 				B67B72B91D996ADE008EDDE1 /* OpenCVBridge.hh */,
-				E8384A8D254B53D500E7B8C7 /* FFTHelper.h */,
 				E8384A8E254B53D500E7B8C7 /* FFTHelper.m */,
+				E8384A8D254B53D500E7B8C7 /* FFTHelper.h */,
 				B67B72BA1D996ADE008EDDE1 /* OpenCVBridge.mm */,
 				B67B72B81D996ADC008EDDE1 /* ImageLab-Bridging-Header.h */,
 			);

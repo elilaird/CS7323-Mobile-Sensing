@@ -7,7 +7,6 @@
 //
 
 #import "OpenCVBridge.hh"
-#import "FFTHelper.h"
 
 
 using namespace cv;
@@ -19,10 +18,9 @@ using namespace cv;
 @property (nonatomic) CGAffineTransform transform;
 @property (nonatomic) CGAffineTransform inverseTransform;
 @property (atomic) cv::CascadeClassifier classifier;
-@property (atomic) FFTHelper* fftHelper;
 
 @property (nonatomic) int bufferSize;
-
+@property (nonatomic) int bufferCtr;
 //NSMutableArray *forecastDays = [[NSMutableArray alloc] init];
 
 @end
@@ -35,20 +33,20 @@ using namespace cv;
 // alternatively you can subclass this class and override the process image function
 // however, this can cause some unexpected behavior
 
--(bool)processFinger{
+-(int)processFinger{
     
     cv::Mat frame_gray,image_copy;
     char text[50];
     Scalar avgPixelIntensity;
+    bool isFull = false;
     
     cvtColor(_image, image_copy, CV_RGBA2BGR); // get rid of alpha for processing
     avgPixelIntensity = cv::mean( image_copy );
     int redVal = avgPixelIntensity.val[2];
     if(self.redBuffer.count == self.bufferSize){
-        [self.redBuffer removeObjectAtIndex:0];
-        [self.redBuffer addObject:@(redVal)];
+        isFull = true;
     }else{
-        [self.redBuffer addObject:@(redVal)];
+        [self.redBuffer addObject:[NSNumber numberWithInteger:redVal]];
     }
     
     sprintf(text,"Avg. B: %.0f, G: %.0f, R: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2]);
@@ -56,12 +54,27 @@ using namespace cv;
     //cv::putText(_image, "Finger Present", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
     //NSLog(@"%@", self.redBuffer);
     
-    
-    if(self.redBuffer.count == self.bufferSize){
-        return true;
-    }else{
-        return false;
+    if(isFull){
+        int max = -999;
+        int min = 999;
+        for(int i=0; i<self.bufferSize; i++){
+            long v = [[self.redBuffer objectAtIndex:i] integerValue];
+            if(v < min){
+                min = v;
+            }
+            if(v > max){
+                max = v;
+            }
+        }
+        [self.redBuffer removeAllObjects];
+        if((max - min) >= 6){
+            cv::putText(_image, "Beat", cv::Point(100, 200), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
+            return 1;
+        }else{
+            return 0;
+        }
     }
+    return -1;
 }
 
 -(void) smilingText:(bool)isSmiling{
@@ -316,9 +329,9 @@ using namespace cv;
 
 -(instancetype)init{
     self = [super init];
-    self.bufferSize = 400;
-    self.redBuffer = [[NSMutableArray alloc] init];
-    self.fftHelper = [[FFTHelper alloc] initWithFFTSize:self.bufferSize]; 
+    self.bufferSize = 15;
+    self.bufferCtr = 0;
+    self.redBuffer = [[NSMutableArray alloc] init]; 
     
     if(self != nil){
         self.transform = CGAffineTransformMakeRotation(M_PI_2);
