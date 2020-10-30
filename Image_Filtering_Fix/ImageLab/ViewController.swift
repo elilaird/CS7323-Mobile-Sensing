@@ -27,6 +27,13 @@ class ViewController: UIViewController   {
     var greenFFT:[Float] = []
     var blueFFT:[Float] = []
     
+    var redColorBuffer: [Float] = []
+    let redColorBufferSize = 256
+    var blueColorBuffer: [Float] = []
+    let blueColorBufferSize = 256
+    var bpmBuffer: [Float] = []
+    let bpmBufferSize = 10
+    
     var finger: Bool = false
     var pulseGraph:[Float] = []
     var currentState: Bool = false
@@ -53,15 +60,15 @@ class ViewController: UIViewController   {
         self.view.backgroundColor = nil
         self.setupFilters()
         
-        redFFT = Array.init(repeating: 0.0, count: bufferSize/2)
+        redFFT = Array.init(repeating: 0.0, count: 128)
         //fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         //fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         
         graph?.addGraph(withName: "fft",
                         shouldNormalize: true,
-                        numPointsInGraph: 50)
+                        numPointsInGraph: self.redColorBufferSize)
         
-        pulseGraph = Array.init(repeating: 0.0, count: self.bufferSize)
+        pulseGraph = Array.init(repeating: 0.0, count: self.redColorBufferSize)
         
         self.videoManager = VideoAnalgesic(mainView: self.view)
         self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
@@ -103,32 +110,94 @@ class ViewController: UIViewController   {
         // use this code if you are using OpenCV and want to overwrite the displayed image via OpenCv
         // this is a BLOCKING CALL
         self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
-        //self.bridge.processImage()
-        let frameColors = self.bridge.processFinger()
-        if(redBuffer.count >= bufferSize){
-            //Insert and shift
-            redBuffer.removeFirst(1)
-            greenBuffer.removeFirst(1)
-            blueBuffer.removeFirst(1)
-            redBuffer.append(Float((frameColors?[0])!))
-            greenBuffer.append(Float((frameColors?[1])!))
-            blueBuffer.append(Float((frameColors?[2])!))
+
+        let avgFromImage = self.bridge.processFinger()
+        
+        // Add the new average to our buffer
+        self.redColorBuffer.append(Float(avgFromImage![0]))
+        self.blueColorBuffer.append(Float(avgFromImage![2]))
+        
+        
+        // If the buffer is full
+        if self.redColorBuffer.count == self.redColorBufferSize{
+            var beats = 0
+            let windowSize = 11
+            for i in 0..<(redColorBufferSize-windowSize) {
+                let tempArr = self.redColorBuffer[i...(i+windowSize)]
+                var max:Float = 0
+                var indexOfMax: UInt = 0
+                vDSP_maxvi(Array(tempArr), vDSP_Stride(1), &max, &indexOfMax, vDSP_Length(tempArr.count))
+                
+                if indexOfMax == 5{
+                    beats += 1
+                }
+            }
+            /*
+            // Get the average color
+            let rAvg = self.redColorBuffer.reduce(0, {$0 + $1})/Float(self.redColorBuffer.count)
+            let bAvg = self.blueColorBuffer.reduce(0, {$0 + $1})/Float(self.blueColorBuffer.count)
+
+            // Initialize counters
+            var rinARowBelowAvg = 0
+            var rtotalsInARow = 0
+            var binARowBelowAvg = 0
+            var btotalsInARow = 0
+            for red in self.redColorBuffer{
+                if red < rAvg{
+                    // Add to the count of numbers below average in a row
+                    rinARowBelowAvg = rinARowBelowAvg + 1
+                }else{
+                    // Make sure we didn't just get a random sample that was below the average
+                    if rinARowBelowAvg > 10{
+                        // Add as a beat
+                        rtotalsInARow = rtotalsInARow + 1
+                    }else{
+                    }
+                    // Reset counter
+                    rinARowBelowAvg = 0
+                }
+            }
+            for blue in self.blueColorBuffer{
+                if blue < bAvg{
+                    // Add to the count of numbers below average in a row
+                    binARowBelowAvg = binARowBelowAvg + 1
+                }else{
+                    // Make sure we didn't just get a random sample that was below the average
+                    if binARowBelowAvg > 7{
+                        // Add as a beat
+                        btotalsInARow = btotalsInARow + 1
+                    }
+                    // Reset counter
+                    binARowBelowAvg = 0
+                }
+            }
+            */
+            let secondsInBuffer = Float(self.redColorBufferSize)/60.0
+            //let beatsInBuffer = (rtotalsInARow + btotalsInARow)/3
+            // BPS to BPM
+            let newBPM = (Float(beats)/secondsInBuffer)*60.0
+            //let rBPM = (Float(rtotalsInARow)/secondsInBuffer)*60.0
+            //let bBPM = (Float(btotalsInARow)/secondsInBuffer)*60.0
             
-        }else{
-            //Insert until buffers are full
-            redBuffer.append(Float((frameColors?[0])!))
-            greenBuffer.append(Float((frameColors?[1])!))
-            blueBuffer.append(Float((frameColors?[2])!))
-        }
-        
-        if(redBuffer.count == bufferSize){
-            fftHelper!.performForwardFFT(withData: &redBuffer,
-                                         andCopydBMagnitudeToBuffer: &redFFT)
-            print(redFFT)
+            if(newBPM > 40 && newBPM < 250){
+                bpmBuffer.append(newBPM/2)
+                if(bpmBuffer.count > bpmBufferSize){
+                    bpmBuffer.removeFirst(1)
+                }
+            }
+            
+            let totalBpm = (bpmBuffer.reduce(0, +))/Float(bpmBuffer.count)
+            
+            print("******************\n")
+            //print(rBPM, bBPM)
+            print("new bpm: \(totalBpm)")
+            print("******************\n")
+            
+            // Deque oldest reading to make room for a new one
+            self.redColorBuffer = Array(self.redColorBuffer[1...])
             self.updateGraph()
+            
         }
-        
-        //self.updateGraph()
         
         retImage = self.bridge.getImage()
         return retImage
@@ -154,7 +223,7 @@ class ViewController: UIViewController   {
         
         //let zoomedData = Array(self.bridge.redBuffer as! [Float]).map({$0 - 350})
         self.graph?.updateGraph(
-            data: self.redFFT.map({$0 - 100}),
+            data: self.redColorBuffer.map({$0 - 300}),
             forKey: "fft"
         )
         
