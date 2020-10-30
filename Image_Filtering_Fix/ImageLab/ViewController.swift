@@ -25,9 +25,8 @@ class ViewController: UIViewController   {
     var fingerBuffer: [Bool]! = nil
     var frameCtr: Int = 0
     var bufferSize = 100
-    
-    //MARK: Outlets in view
-    
+    var redColorBuffer: [Float] = []
+    let redColorBufferSize = 256
     
     
     lazy var graph:MetalGraph? = {
@@ -43,7 +42,7 @@ class ViewController: UIViewController   {
         super.viewDidLoad()
         
         self.view.backgroundColor = nil
-        self.setupFilters()
+//        self.setupFilters()
         
         graph?.addGraph(withName: "fft",
                         shouldNormalize: true,
@@ -91,27 +90,53 @@ class ViewController: UIViewController   {
         // use this code if you are using OpenCV and want to overwrite the displayed image via OpenCv
         // this is a BLOCKING CALL
         self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
-        //self.bridge.processImage()
-        let beat = self.bridge.processFinger()
-        if(beat != -1){
-            print(beat)
+
+        let avgRedFromImage = self.bridge.processFinger()
+        
+        // Add the new average to our buffer
+        self.redColorBuffer.append(Float(avgRedFromImage))
+        
+        // If the buffer is full
+        if self.redColorBuffer.count == self.redColorBufferSize{
+
+            // Get the average color
+            let avg = self.redColorBuffer.reduce(0, {$0 + $1})/Float(self.redColorBuffer.count)
+
+            // Initialize counters
+            var inARowBelowAvg = 0
+            var totalsInARow = 0
+            for red in self.redColorBuffer{
+                if red < avg{
+                    // Add to the count of numbers below average in a row
+                    inARowBelowAvg = inARowBelowAvg + 1
+                }else{
+                    // Make sure we didn't just get a random sample that was below the average
+                    if inARowBelowAvg > 4{
+                        // Add as a beat
+                        totalsInARow = totalsInARow + 1
+                    }
+                    // Reset counter
+                    inARowBelowAvg = 0
+                }
+            }
+            let secondsInBuffer = Float(self.redColorBufferSize)/60.0
+            let beatsInBuffer = totalsInARow
+            // BPS to BPM
+            let newBPM = (Float(beatsInBuffer)/secondsInBuffer)*60.0
+            
+            print("******************\n")
+            print("new bpm: \(newBPM)")
+            print("******************\n")
+            
+            // Deque oldest reading to make room for a new one
+            self.redColorBuffer = Array(self.redColorBuffer[1...])
+            
         }
-    
         
         retImage = self.bridge.getImage()
         return retImage
     }
     
-    //MARK: Setup filtering
-    func setupFilters(){
-        filters = []
-        
-        let filterPinch = CIFilter(name:"CIBumpDistortion")!
-        filterPinch.setValue(-0.5, forKey: "inputScale")
-        filterPinch.setValue(75, forKey: "inputRadius")
-        filters.append(filterPinch)
-        
-    }
     @IBAction func flashToggle(_ sender: UIButton) {
         _ = self.videoManager.toggleFlash()
     }

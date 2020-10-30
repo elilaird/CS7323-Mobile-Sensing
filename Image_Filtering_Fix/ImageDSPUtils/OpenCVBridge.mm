@@ -51,30 +51,8 @@ using namespace cv;
     
     sprintf(text,"Avg. B: %.0f, G: %.0f, R: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2]);
     cv::putText(_image, text, cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
-    //cv::putText(_image, "Finger Present", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
-    //NSLog(@"%@", self.redBuffer);
-    
-    if(isFull){
-        int max = -999;
-        int min = 999;
-        for(int i=0; i<self.bufferSize; i++){
-            long v = [[self.redBuffer objectAtIndex:i] integerValue];
-            if(v < min){
-                min = v;
-            }
-            if(v > max){
-                max = v;
-            }
-        }
-        [self.redBuffer removeAllObjects];
-        if((max - min) >= 6){
-            cv::putText(_image, "Beat", cv::Point(100, 200), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
-            return 1;
-        }else{
-            return 0;
-        }
-    }
-    return -1;
+
+    return avgPixelIntensity.val[2];
 }
 
 -(void) smilingText:(bool)isSmiling{
