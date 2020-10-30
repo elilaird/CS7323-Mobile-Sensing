@@ -72,7 +72,7 @@ class ViewController: UIViewController   {
         
         self.videoManager = VideoAnalgesic(mainView: self.view)
         self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
-        self.videoManager.setFPS(desiredFrameRate: 60.0)
+        self.videoManager.setFPS(desiredFrameRate: 24.0)
         
         self.fingerBuffer = Array.init(repeating: false, count: 36)
         
@@ -122,15 +122,21 @@ class ViewController: UIViewController   {
         if self.redColorBuffer.count == self.redColorBufferSize{
             var beats = 0
             let windowSize = 11
-            for i in 0..<(redColorBufferSize-windowSize) {
+            var i = 0
+            var lastPeak = 0
+            while(i<(redColorBufferSize-windowSize)) {
                 let tempArr = self.redColorBuffer[i...(i+windowSize)]
                 var max:Float = 0
                 var indexOfMax: UInt = 0
                 vDSP_maxvi(Array(tempArr), vDSP_Stride(1), &max, &indexOfMax, vDSP_Length(tempArr.count))
                 
                 if indexOfMax == 5{
-                    beats += 1
+                    if ((i+5) - lastPeak) > 5{
+                        beats += 1
+                        lastPeak = i+5
+                    }
                 }
+                i+=1
             }
             /*
             // Get the average color
@@ -172,7 +178,7 @@ class ViewController: UIViewController   {
                 }
             }
             */
-            let secondsInBuffer = Float(self.redColorBufferSize)/60.0
+            let secondsInBuffer = Float(self.redColorBufferSize)/24.0
             //let beatsInBuffer = (rtotalsInARow + btotalsInARow)/3
             // BPS to BPM
             let newBPM = (Float(beats)/secondsInBuffer)*60.0
@@ -180,7 +186,7 @@ class ViewController: UIViewController   {
             //let bBPM = (Float(btotalsInARow)/secondsInBuffer)*60.0
             
             if(newBPM > 40 && newBPM < 250){
-                bpmBuffer.append(newBPM/2)
+                bpmBuffer.append(newBPM)
                 if(bpmBuffer.count > bpmBufferSize){
                     bpmBuffer.removeFirst(1)
                 }
@@ -189,7 +195,6 @@ class ViewController: UIViewController   {
             let totalBpm = (bpmBuffer.reduce(0, +))/Float(bpmBuffer.count)
             
             print("******************\n")
-            //print(rBPM, bBPM)
             print("new bpm: \(totalBpm)")
             print("******************\n")
             
