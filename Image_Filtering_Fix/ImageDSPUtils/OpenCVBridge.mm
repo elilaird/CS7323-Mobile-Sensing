@@ -19,12 +19,8 @@ using namespace cv;
 @property (nonatomic) CGAffineTransform inverseTransform;
 @property (atomic) cv::CascadeClassifier classifier;
 
-@property (nonatomic) NSMutableArray* r_arr;
-@property (nonatomic) NSMutableArray* g_arr;
-@property (nonatomic) NSMutableArray* b_arr;
-
-@property (nonatomic) int buffer_ctr;
-
+@property (nonatomic) int bufferSize;
+@property (nonatomic) int bufferCtr;
 //NSMutableArray *forecastDays = [[NSMutableArray alloc] init];
 
 @end
@@ -37,38 +33,52 @@ using namespace cv;
 // alternatively you can subclass this class and override the process image function
 // however, this can cause some unexpected behavior
 
--(bool)processFinger{
-    
+-(int*)processFinger{
+    static int colorVals[3];
     cv::Mat frame_gray,image_copy;
     char text[50];
     Scalar avgPixelIntensity;
     
     cvtColor(_image, image_copy, CV_RGBA2BGR); // get rid of alpha for processing
     avgPixelIntensity = cv::mean( image_copy );
-    int r = avgPixelIntensity.val[2];
-    int g = avgPixelIntensity.val[1];
-    int b = avgPixelIntensity.val[0];
-    
-
+    colorVals[0] = avgPixelIntensity.val[2];
+    colorVals[1] = avgPixelIntensity.val[1];
+    colorVals[2] = avgPixelIntensity.val[0];
     sprintf(text,"Avg. B: %.0f, G: %.0f, R: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2]);
-    cv::putText(_image, text, cv::Point(0, 10), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
+    cv::putText(_image, text, cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
+    return colorVals;
     
-    if(((r > 200) && (b < 35)) || ((r < 115) && (b < 15))){
-        if(_buffer_ctr < 100){
-            self.r_arr[_buffer_ctr] = @(r);
-            self.g_arr[_buffer_ctr] = @(g);
-            self.b_arr[_buffer_ctr] = @(b);
-            _buffer_ctr++;
-
-        }
-        
-        cv::putText(_image, "Finger Present", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
-        return true;
-
+    /*
+    if(self.redBuffer.count == self.bufferSize){
+        isFull = true;
     }else{
-        _buffer_ctr = 0;
+        [self.redBuffer addObject:[NSNumber numberWithInteger:redVal]];
     }
-    return false;
+    
+    sprintf(text,"Avg. B: %.0f, G: %.0f, R: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2]);
+    cv::putText(_image, text, cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
+    //cv::putText(_image, "Finger Present", cv::Point(10, 100), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
+    //NSLog(@"%@", self.redBuffer);
+    
+    if(isFull){
+        int max = -999;
+        int min = 999;
+        for(int i=0; i<self.bufferSize; i++){
+            long v = [[self.redBuffer objectAtIndex:i] integerValue];
+            if(v < min){
+                min = v;
+            }
+            if(v > max){
+                max = v;
+            }
+        }
+        [self.redBuffer removeAllObjects];
+        if((max - min) >= 6){
+            cv::putText(_image, "Beat", cv::Point(100, 200), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
+            return 1;
+        }
+    }
+    return 0;*/
 }
 
 -(void) smilingText:(bool)isSmiling withXLocation:(int)xLocation withYLocation:(int)yLocation{
@@ -97,8 +107,9 @@ using namespace cv;
 
 -(instancetype)init{
     self = [super init];
-    
-    self.buffer_ctr = 0; 
+    self.bufferSize = 15;
+    self.bufferCtr = 0;
+    //self.redBuffer = [[NSMutableArray alloc] init]; 
     
     if(self != nil){
         self.transform = CGAffineTransformMakeRotation(M_PI_2);
@@ -251,32 +262,5 @@ using namespace cv;
     
     return retImage;
 }
-
--(NSMutableArray*)r_arr{
-    _r_arr = [NSMutableArray array];
-    for (int i = 0; i < 100; i++){
-        [_r_arr addObject:@(0)];
-    }
-    return _r_arr;
-}
-
--(NSMutableArray*)g_arr{
-    _g_arr = [NSMutableArray array];
-    for (int i = 0; i < 100; i++){
-        [_g_arr addObject:@(0)];
-    }
-    return _g_arr;
-}
-
--(NSMutableArray*)b_arr{
-    _b_arr = [NSMutableArray array];
-    for (int i = 0; i < 100; i++){
-        [_b_arr addObject:@(0)];
-    }
-    return _b_arr;
-}
-
-
-
 
 @end

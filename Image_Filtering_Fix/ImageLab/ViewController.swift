@@ -19,13 +19,32 @@ class ViewController: UIViewController   {
     let pinchFilterIndex = 2
     let bridge = OpenCVBridge()
     
+    var redBuffer:[Float] = []
+    var greenBuffer:[Float] = []
+    var blueBuffer:[Float] = []
+    
+    var redFFT:[Float] = []
+    var greenFFT:[Float] = []
+    var blueFFT:[Float] = []
+    
     var finger: Bool = false
+    var pulseGraph:[Float] = []
     var currentState: Bool = false
     var fingerBuffer: [Bool]! = nil
     var frameCtr: Int = 0
+    var bufferSize = 100
     
     //MARK: Outlets in view
-    @IBOutlet weak var flashSlider: UISlider!
+    
+    
+    
+    lazy var graph:MetalGraph? = {
+        return MetalGraph(mainView: self.view)
+    }()
+    
+    private lazy var fftHelper:FFTHelper? = {
+        return FFTHelper.init(fftSize: Int32(self.bufferSize))
+    }()
     
     //MARK: ViewController Hierarchy
     override func viewDidLoad() {
@@ -34,8 +53,19 @@ class ViewController: UIViewController   {
         self.view.backgroundColor = nil
         self.setupFilters()
         
+        redFFT = Array.init(repeating: 0.0, count: bufferSize/2)
+        //fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        //fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        
+        graph?.addGraph(withName: "fft",
+                        shouldNormalize: true,
+                        numPointsInGraph: 50)
+        
+        pulseGraph = Array.init(repeating: 0.0, count: self.bufferSize)
+        
         self.videoManager = VideoAnalgesic(mainView: self.view)
         self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
+        self.videoManager.setFPS(desiredFrameRate: 60.0)
         
         self.fingerBuffer = Array.init(repeating: false, count: 36)
         
@@ -68,43 +98,39 @@ class ViewController: UIViewController   {
     //MARK: Process image output
     func processFromCamera(inputImage:CIImage) -> CIImage{
         
-        // detect faces
-        //let f = getFaces(img: inputImage)
-        
-        // if no faces, just return original image
-        //if f.count == 0 { return inputImage }
-        
         var retImage = inputImage
         
         // use this code if you are using OpenCV and want to overwrite the displayed image via OpenCv
         // this is a BLOCKING CALL
         self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
         //self.bridge.processImage()
-        self.finger = self.bridge.processFinger()
-        self.fingerBuffer[self.frameCtr] = self.finger
-        self.frameCtr += 1
+        let frameColors = self.bridge.processFinger()
+        if(redBuffer.count >= bufferSize){
+            //Insert and shift
+            redBuffer.removeFirst(1)
+            greenBuffer.removeFirst(1)
+            blueBuffer.removeFirst(1)
+            redBuffer.append(Float((frameColors?[0])!))
+            greenBuffer.append(Float((frameColors?[1])!))
+            blueBuffer.append(Float((frameColors?[2])!))
+            
+        }else{
+            //Insert until buffers are full
+            redBuffer.append(Float((frameColors?[0])!))
+            greenBuffer.append(Float((frameColors?[1])!))
+            blueBuffer.append(Float((frameColors?[2])!))
+        }
         
-        if(frameCtr == 36){
-            frameCtr = 0
+        if(redBuffer.count == bufferSize){
+            fftHelper!.performForwardFFT(withData: &redBuffer,
+                                         andCopydBMagnitudeToBuffer: &redFFT)
+            print(redFFT)
+            self.updateGraph()
         }
-        var enoughFingers = false
-        if(fingerBuffer.filter{$0}.count >= 1){
-            enoughFingers = true
-        }
-        if (enoughFingers && !currentState){
-            _ = self.videoManager.toggleFlash()
-            self.currentState = true
-        }else if(currentState && !enoughFingers){
-            _ = self.videoManager.toggleFlash()
-            self.currentState = false
-        }
-    
+        
+        //self.updateGraph()
         
         retImage = self.bridge.getImage()
-        
-        //HINT: you can also send in the bounds of the face to ONLY process the face in OpenCV
-        // or any bounds to only process a certain bounding region in OpenCV
-        
         return retImage
     }
     
@@ -118,69 +144,20 @@ class ViewController: UIViewController   {
         filters.append(filterPinch)
         
     }
-    
-    //MARK: Apply filters and apply feature detectors
-    func applyFiltersToFaces(inputImage:CIImage,features:[CIFaceFeature])->CIImage{
-        var retImage = inputImage
-        var filterCenter = CGPoint()
-        
-        for f in features {
-            //set where to apply filter
-            filterCenter.x = f.bounds.midX
-            filterCenter.y = f.bounds.midY
-            
-            //do for each filter (assumes all filters have property, "inputCenter")
-            for filt in filters{
-                filt.setValue(retImage, forKey: kCIInputImageKey)
-                filt.setValue(CIVector(cgPoint: filterCenter), forKey: "inputCenter")
-                // could also manipualte the radius of the filter based on face size!
-                retImage = filt.outputImage!
-            }
-        }
-        return retImage
+    @IBAction func toggleFlash(_ sender: UIButton) {
+        self.videoManager.toggleFlash()
     }
     
-    func getFaces(img:CIImage) -> [CIFaceFeature]{
-        // this ungodly mess makes sure the image is the correct orientation
-        let optsFace = [CIDetectorImageOrientation:self.videoManager.ciOrientation]
-        // get Face Features
-        return self.detector.features(in: img, options: optsFace) as! [CIFaceFeature]
+    
+    @objc
+    func updateGraph(){
+        
+        //let zoomedData = Array(self.bridge.redBuffer as! [Float]).map({$0 - 350})
+        self.graph?.updateGraph(
+            data: self.redFFT.map({$0 - 100}),
+            forKey: "fft"
+        )
         
     }
-    
-    
-    
-    //MARK: Convenience Methods for UI Flash and Camera Toggle
-    @IBAction func flash(sender: AnyObject) {
-        if(!self.finger){
-            if(self.videoManager.toggleFlash()){
-                self.flashSlider.value = 1.0
-            }
-            else{
-                self.flashSlider.value = 0.0
-            }
-            
-        }
-    }
-    
-    
-    @IBAction func switchCamera(sender: AnyObject) {
-        if (!self.finger){
-            self.videoManager.toggleCameraPosition()
-        }
-    }
-    
-    @IBAction func setFlashLevel(sender: UISlider) {
-        // Examples for usign the flash
-        if(sender.value>0.0){
-            // max value is 1.0
-            self.videoManager.turnOnFlashwithLevel(sender.value)
-        }
-        else if(sender.value==0.0){
-            self.videoManager.turnOffFlash()
-        }
-    }
-
-   
 }
 
