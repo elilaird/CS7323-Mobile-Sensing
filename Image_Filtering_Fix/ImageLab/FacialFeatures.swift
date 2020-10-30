@@ -39,6 +39,7 @@ class FacialFeatures: UIViewController   {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Get height and width
         height = self.view.frame.height
         width = self.view.frame.width
         
@@ -78,6 +79,8 @@ class FacialFeatures: UIViewController   {
     //MARK: Apply filters and apply feature detectors
     func applyFiltersToFaces(inputImage:CIImage, facialFeatures:[(String, CGPoint)])->CIImage{
         var retImage = inputImage
+        
+        // Scaling for display
         let scaleHeight = retImage.extent.height/self.height
         let scaleWidth = retImage.extent.width/self.width
         
@@ -99,11 +102,14 @@ class FacialFeatures: UIViewController   {
                     // could also manipulate the radius of the filter based on face size!
                     retImage = filt.outputImage!
 
+                    // Set the image for opencv
                     self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
                     
+                    // Scale x,y location so it is easier to display smiling/not smiling
                     let xLocation = Int(filterCenter.y * scaleHeight)
                     let yLocation = Int(filterCenter.x * scaleWidth)
                     
+                    // Print something different if smiling or not smiling
                     if featureType == "mouth_smile"{
                         self.bridge.smilingText(true, withXLocation: Int32(xLocation), withYLocation: Int32(yLocation))
                     }else{
@@ -121,6 +127,7 @@ class FacialFeatures: UIViewController   {
     
     func getFaces(img:CIImage) -> [CIFaceFeature]{
         // this ungodly mess makes sure the image is the correct orientation
+        // check for smiles too
         let optsFace = [CIDetectorImageOrientation:self.videoManager.ciOrientation, CIDetectorSmile:true] as [String : Any]
         // get Face Features
         return self.detector.features(in: img, options: optsFace) as! [CIFaceFeature]
@@ -141,6 +148,7 @@ class FacialFeatures: UIViewController   {
                 facialFeatures.append((featureType: "eye", location: f.rightEyePosition))
             }
             if f.hasMouthPosition{
+                // check for smile
                 if f.hasSmile{
                     facialFeatures.append((featureType: "mouth_smile", location: f.mouthPosition))
                 }else{
