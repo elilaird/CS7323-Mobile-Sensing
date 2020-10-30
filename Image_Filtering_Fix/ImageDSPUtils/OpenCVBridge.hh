@@ -31,6 +31,7 @@
 // call this to perfrom processing (user controlled for better transparency)
 //-(void)processImage;
 -(int*)processFinger;
+-(bool)isFinger;
 -(void) smilingText:(bool)isSmiling withXLocation:(int)xLocation withYLocation:(int)yLocation;
 
 
