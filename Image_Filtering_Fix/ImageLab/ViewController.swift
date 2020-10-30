@@ -19,13 +19,27 @@ class ViewController: UIViewController   {
     let pinchFilterIndex = 2
     let bridge = OpenCVBridge()
     
-    var finger: Bool = false
-    var currentState: Bool = false
-    var fingerBuffer: [Bool]! = nil
-    var frameCtr: Int = 0
+    var reading = false
+    var flashOn = false
+    
+    var redColorBuffer: [Float] = []
+    let redColorBufferSize = 256
+    var bpmBuffer: [Float] = []
+    let bpmBufferSize = 10
     
     //MARK: Outlets in view
-    @IBOutlet weak var flashSlider: UISlider!
+    
+    @IBOutlet weak var BPMLabel: UILabel!
+    @IBOutlet weak var beginMeasurementButton: UIButton!
+    
+    
+    lazy var graph:MetalGraph? = {
+        return MetalGraph(mainView: self.view)
+    }()
+    
+    private lazy var fftHelper:FFTHelper? = {
+        return FFTHelper.init(fftSize: Int32(self.redColorBufferSize))
+    }()
     
     //MARK: ViewController Hierarchy
     override func viewDidLoad() {
@@ -34,10 +48,18 @@ class ViewController: UIViewController   {
         self.view.backgroundColor = nil
         self.setupFilters()
         
+        redColorBuffer = Array.init(repeating: 0.0, count: self.redColorBufferSize-1)
+        //fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        //fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        
+        graph?.addGraph(withName: "fft",
+                        shouldNormalize: true,
+                        numPointsInGraph: self.redColorBufferSize)
+        
+        
         self.videoManager = VideoAnalgesic(mainView: self.view)
         self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
-        
-        self.fingerBuffer = Array.init(repeating: false, count: 36)
+        self.videoManager.setFPS(desiredFrameRate: 24.0)
         
         // create dictionary for face detection
         // HINT: you need to manipulate these proerties for better face detection efficiency
@@ -57,8 +79,15 @@ class ViewController: UIViewController   {
             videoManager.start()
         }
         
+        self.beginMeasurementButton.layer.cornerRadius = 10
+        self.beginMeasurementButton.clipsToBounds = true
+        
         self.bridge.processType = 1
-    
+        DispatchQueue.main.async {
+            self.BPMLabel.text = ("Place Finger over Camera")
+            self.beginMeasurementButton.isEnabled = false
+            self.beginMeasurementButton.backgroundColor = UIColor.red
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,43 +97,96 @@ class ViewController: UIViewController   {
     //MARK: Process image output
     func processFromCamera(inputImage:CIImage) -> CIImage{
         
-        // detect faces
-        //let f = getFaces(img: inputImage)
-        
-        // if no faces, just return original image
-        //if f.count == 0 { return inputImage }
+        if !flashOn{
+            _ = self.videoManager.toggleFlash()
+            flashOn = true
+        }
         
         var retImage = inputImage
         
-        // use this code if you are using OpenCV and want to overwrite the displayed image via OpenCv
-        // this is a BLOCKING CALL
         self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
-        //self.bridge.processImage()
-        self.finger = self.bridge.processFinger()
-        self.fingerBuffer[self.frameCtr] = self.finger
-        self.frameCtr += 1
+        let finger = self.bridge.isFinger()
         
-        if(frameCtr == 36){
-            frameCtr = 0
+        // Activate Start Button if finger is present
+        if !reading{
+            if finger{
+                DispatchQueue.main.async {
+                    self.beginMeasurementButton.isEnabled = true
+                    self.beginMeasurementButton.backgroundColor = UIColor.green
+                }
+            }else{
+                DispatchQueue.main.async {
+                    self.beginMeasurementButton.isEnabled = false
+                    self.beginMeasurementButton.backgroundColor = UIColor.red
+                }
+            }
         }
-        var enoughFingers = false
-        if(fingerBuffer.filter{$0}.count >= 1){
-            enoughFingers = true
+
+        if reading {
+            
+            // Add the new average to our buffer
+            let avgFromImage = self.bridge.processFinger()
+            self.redColorBuffer.append(Float(avgFromImage![0]))
+            
+            // If the buffer is full
+            if self.redColorBuffer.count == self.redColorBufferSize{
+                var beats = 0
+                let windowSize = 13
+                var i = 0
+                // Pad buffer for window
+                let tempRedBuffer = Array.init(repeating: 0.0, count: Int(windowSize/2)) + self.redColorBuffer + Array.init(repeating: 0.0, count: Int(windowSize/2))
+                
+                // Sliding window to find peaks
+                while(i<(redColorBufferSize)) {
+                    //print(i)
+                    let tempArr = tempRedBuffer[i...(i+windowSize-1)]
+                    var max:Float = 0
+                    var indexOfMax: UInt = 0
+                    vDSP_maxvi(Array(tempArr), vDSP_Stride(1), &max, &indexOfMax, vDSP_Length(tempArr.count))
+                    
+                    if indexOfMax == 6{
+                        beats += 1
+                    }
+                    i+=1
+                }
+                
+                // Calculate BPM
+                let secondsInBuffer = Float(self.redColorBufferSize)/24
+                let newBPM = (Float(beats)/secondsInBuffer)*60.0
+                
+                // Append BPM to buffer
+                if(newBPM > 40 && newBPM < 250){
+                    bpmBuffer.append(newBPM)
+                    if(bpmBuffer.count > bpmBufferSize){
+                        bpmBuffer.removeFirst(1)
+                    }
+                }
+                
+                // Take average of last few bpm estimates
+                var totalBpm = (bpmBuffer.reduce(0, +))/Float(bpmBuffer.count)
+                if totalBpm.isNaN || totalBpm.isInfinite{
+                    totalBpm = 0
+                    DispatchQueue.main.async {
+                        self.BPMLabel.text = ("Reading ...")
+                    }
+                }else if !finger{
+                    DispatchQueue.main.async {
+                        self.BPMLabel.text = ("Finger Removed")
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.BPMLabel.text = ("\(Int(totalBpm)) BPM")
+                    }
+                }
+                
+                // Deque oldest reading to make room for a new one
+                self.redColorBuffer = Array(self.redColorBuffer[1...])
+                self.updateGraph()
+                
+            }
         }
-        if (enoughFingers && !currentState){
-            _ = self.videoManager.toggleFlash()
-            self.currentState = true
-        }else if(currentState && !enoughFingers){
-            _ = self.videoManager.toggleFlash()
-            self.currentState = false
-        }
-    
         
         retImage = self.bridge.getImage()
-        
-        //HINT: you can also send in the bounds of the face to ONLY process the face in OpenCV
-        // or any bounds to only process a certain bounding region in OpenCV
-        
         return retImage
     }
     
@@ -118,69 +200,20 @@ class ViewController: UIViewController   {
         filters.append(filterPinch)
         
     }
-    
-    //MARK: Apply filters and apply feature detectors
-    func applyFiltersToFaces(inputImage:CIImage,features:[CIFaceFeature])->CIImage{
-        var retImage = inputImage
-        var filterCenter = CGPoint()
-        
-        for f in features {
-            //set where to apply filter
-            filterCenter.x = f.bounds.midX
-            filterCenter.y = f.bounds.midY
-            
-            //do for each filter (assumes all filters have property, "inputCenter")
-            for filt in filters{
-                filt.setValue(retImage, forKey: kCIInputImageKey)
-                filt.setValue(CIVector(cgPoint: filterCenter), forKey: "inputCenter")
-                // could also manipualte the radius of the filter based on face size!
-                retImage = filt.outputImage!
-            }
-        }
-        return retImage
+    @IBAction func toggleFlash(_ sender: UIButton) {
+        self.reading = true
+        self.beginMeasurementButton.setTitle("Reading Heart Rate", for: .normal)
+        self.beginMeasurementButton.isEnabled = false
     }
     
-    func getFaces(img:CIImage) -> [CIFaceFeature]{
-        // this ungodly mess makes sure the image is the correct orientation
-        let optsFace = [CIDetectorImageOrientation:self.videoManager.ciOrientation]
-        // get Face Features
-        return self.detector.features(in: img, options: optsFace) as! [CIFaceFeature]
+    
+    @objc
+    func updateGraph(){
+        self.graph?.updateGraph(
+            data: self.redColorBuffer.map({$0 - 300}),
+            forKey: "fft"
+        )
         
     }
-    
-    
-    
-    //MARK: Convenience Methods for UI Flash and Camera Toggle
-    @IBAction func flash(sender: AnyObject) {
-        if(!self.finger){
-            if(self.videoManager.toggleFlash()){
-                self.flashSlider.value = 1.0
-            }
-            else{
-                self.flashSlider.value = 0.0
-            }
-            
-        }
-    }
-    
-    
-    @IBAction func switchCamera(sender: AnyObject) {
-        if (!self.finger){
-            self.videoManager.toggleCameraPosition()
-        }
-    }
-    
-    @IBAction func setFlashLevel(sender: UISlider) {
-        // Examples for usign the flash
-        if(sender.value>0.0){
-            // max value is 1.0
-            self.videoManager.turnOnFlashwithLevel(sender.value)
-        }
-        else if(sender.value==0.0){
-            self.videoManager.turnOffFlash()
-        }
-    }
-
-   
 }
 

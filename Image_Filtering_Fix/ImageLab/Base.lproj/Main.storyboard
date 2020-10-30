@@ -20,47 +20,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="AZh-I9-zyC">
-                                <rect key="frame" x="18" y="846" width="378" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wc-g8-D0j">
+                                <rect key="frame" x="100" y="499" width="215" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Begin Heart Rate Measurement">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="setFlashLevelWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="4tD-gm-tcg"/>
-                                </connections>
-                            </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HqB-mz-Xht">
-                                <rect key="frame" x="290" y="808" width="104" height="30"/>
-                                <state key="normal" title="Toggle Camera"/>
-                                <connections>
-                                    <action selector="switchCameraWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AOo-SP-iLW"/>
+                                    <action selector="toggleFlash:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nac-Ur-r2s"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsl-XI-9ND">
-                                <rect key="frame" x="20" y="808" width="87" height="30"/>
-                                <state key="normal" title="Toggle Flash"/>
-                                <connections>
-                                    <action selector="flashWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yey-GQ-OR0"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pb8-Zm-3ap">
+                                <rect key="frame" x="61" y="339" width="292" height="113"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="AZh-I9-zyC" secondAttribute="bottom" constant="20" symbolic="YES" id="60r-75-K1I"/>
-                            <constraint firstItem="fsl-XI-9ND" firstAttribute="leading" secondItem="AZh-I9-zyC" secondAttribute="leading" id="8Qr-hq-s8c"/>
-                            <constraint firstItem="fsl-XI-9ND" firstAttribute="baseline" secondItem="HqB-mz-Xht" secondAttribute="baseline" id="9LW-dS-HXP"/>
-                            <constraint firstItem="AZh-I9-zyC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JNk-l6-pcn"/>
-                            <constraint firstItem="HqB-mz-Xht" firstAttribute="trailing" secondItem="AZh-I9-zyC" secondAttribute="trailing" id="NMX-0P-Ett"/>
-                            <constraint firstItem="AZh-I9-zyC" firstAttribute="top" secondItem="HqB-mz-Xht" secondAttribute="bottom" constant="8" symbolic="YES" id="csO-hb-YdJ"/>
-                            <constraint firstItem="AZh-I9-zyC" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="eNH-ox-Zlt"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6xy-BO-3xe"/>
                     <connections>
-                        <outlet property="flashSlider" destination="AZh-I9-zyC" id="cd6-Eh-9cl"/>
+                        <outlet property="BPMLabel" destination="pb8-Zm-3ap" id="q27-tu-UZU"/>
+                        <outlet property="beginMeasurementButton" destination="4wc-g8-D0j" id="oyW-NQ-3AB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-691" y="-238"/>
+            <point key="canvasLocation" x="-691.304347826087" y="-238.39285714285714"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="hEt-DB-xMN">

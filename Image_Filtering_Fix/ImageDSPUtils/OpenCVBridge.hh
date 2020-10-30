@@ -15,6 +15,7 @@
 @interface OpenCVBridge : NSObject
 
 @property (nonatomic) NSInteger processType;
+//@property (nonatomic) int* redBuffer;
 
 // set the image for processing later
 -(void) setImage:(CIImage*)ciFrameImage
@@ -29,8 +30,10 @@
 
 // call this to perfrom processing (user controlled for better transparency)
 //-(void)processImage;
--(bool)processFinger;
+-(int*)processFinger;
+-(bool)isFinger;
 -(void) smilingText:(bool)isSmiling withXLocation:(int)xLocation withYLocation:(int)yLocation;
+
 
 // for the video manager transformations
 -(void)setTransforms:(CGAffineTransform)trans;
