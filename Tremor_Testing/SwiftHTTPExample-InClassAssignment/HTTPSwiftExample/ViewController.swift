@@ -53,6 +53,7 @@ class ViewController: UIViewController, URLSessionDelegate {
 
     @IBOutlet weak var dsidLabel: UILabel!
 
+    @IBOutlet weak var modelSelecter: UISegmentedControl!
     @IBOutlet weak var largeMotionMagnitude: UIProgressView!
     @IBOutlet weak var handImageView: UIImageView!
     @IBOutlet weak var defaultHandImageView: UIImageView!
@@ -114,6 +115,21 @@ class ViewController: UIViewController, URLSessionDelegate {
         }
     }
     
+    @IBAction func changeModel(_ sender: Any) {
+        let selectedModel = self.modelSelecter.titleForSegment(at: self.modelSelecter.selectedSegmentIndex)!
+        
+        switch selectedModel {
+        case "Random Forest":
+            self.model_type = "random_forest"
+        case "SVM":
+            self.model_type = "svm"
+        case "KNN":
+            self.model_type = "knn"
+        default:
+            self.model_type = "random_forest"
+        }
+        
+    }
     @IBAction func magnitudeChanged(_ sender: UISlider) {
         self.magValue = Double(sender.value)
     }
