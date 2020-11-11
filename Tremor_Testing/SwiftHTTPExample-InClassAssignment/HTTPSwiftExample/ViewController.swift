@@ -15,7 +15,7 @@
 //    ifconfig |grep inet   
 // to see what your public facing IP address is, the ip address can be used here
 //let SERVER_URL = "http://erics-macbook-pro.local:8000" // change this for your server name!!!
-let SERVER_URL = "http://35.239.233.247:8000/" // change this for your server name!!!
+let SERVER_URL = "http://35.239.233.247:8000" // change this for your server name!!!
 
 import UIKit
 import CoreMotion
@@ -35,6 +35,7 @@ class ViewController: UIViewController, URLSessionDelegate {
             delegate: self,
             delegateQueue:self.operationQueue)
     }()
+    @IBOutlet weak var updateModelButton: UIButton!
     
     let operationQueue = OperationQueue()
     let motionOperationQueue = OperationQueue()
@@ -49,6 +50,7 @@ class ViewController: UIViewController, URLSessionDelegate {
     
     var isWaitingForMotionData = false
     
+
     @IBOutlet weak var dsidLabel: UILabel!
 
     @IBOutlet weak var largeMotionMagnitude: UIProgressView!
@@ -98,6 +100,16 @@ class ViewController: UIViewController, URLSessionDelegate {
                 // update label when set
                 self.dsidLabel.layer.add(self.animation, forKey: nil)
                 self.dsidLabel.text = "Current DSID: \(self.dsid)"
+            }
+        }
+    }
+    
+    var model_type:String = "random_forest"  {
+        didSet{
+            DispatchQueue.main.async{
+                // update label when set
+//                self.dsidLabel.layer.add(self.animation, forKey: nil)
+//                self.dsidLabel.text = "Current DSID: \(self.dsid)"
             }
         }
     }
@@ -268,7 +280,7 @@ class ViewController: UIViewController, URLSessionDelegate {
                                        "label":"\(label)",
                                        "dsid":self.dsid]
         
-        
+        print(jsonUpload)
         let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
         
         request.httpMethod = "POST"
@@ -301,7 +313,7 @@ class ViewController: UIViewController, URLSessionDelegate {
         var request = URLRequest(url: postUrl!)
         
         // data to send in body of post request (send arguments as json)
-        let jsonUpload:NSDictionary = ["feature":array, "dsid":self.dsid]
+        let jsonUpload:NSDictionary = ["feature":array, "dsid":self.dsid, "model_type":self.model_type]
         
         
         let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
@@ -359,7 +371,7 @@ class ViewController: UIViewController, URLSessionDelegate {
         
         // create a GET request for server to update the ML model with current data
         let baseURL = "\(SERVER_URL)/UpdateModel"
-        let query = "?dsid=\(self.dsid)"
+        let query = "?dsid=\(self.dsid)&model_type=\(self.model_type)"
         
         let getUrl = URL(string: baseURL+query)
         let request: URLRequest = URLRequest(url: getUrl!)
