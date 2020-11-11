@@ -17,6 +17,7 @@ from tornado.web import HTTPError
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options
+import tornado.wsgi
 
 # custom imports
 from basehandler import BaseHandler
@@ -52,6 +53,7 @@ class Application(tornado.web.Application):
             self.client  = MongoClient(serverSelectionTimeoutMS=50) # local host, default port
             print(self.client.server_info()) # force pymongo to look for possible running servers, error if none running
             # if we get here, at least one instance of pymongo is running
+            print("Found mongo")
             self.db = self.client.turidatabase # database with labeledinstances, models
             
         except ServerSelectionTimeoutError as inst:
@@ -61,7 +63,7 @@ class Application(tornado.web.Application):
             print('   something like $./mongod --dbpath "/data/db"')
             #raise inst
         
-        self.clf = [] # the classifier model (in-class assignment, you might need to change this line!)
+        self.clf = {} # the classifier model (in-class assignment, you might need to change this line!)
         # but depending on your implementation, you may not need to change it  ¯\_(ツ)_/¯
 
         settings = {'debug':True}
@@ -76,8 +78,8 @@ def main():
     '''
     tornado.options.parse_command_line()
     http_server = HTTPServer(Application(), xheaders=True)
-    http_server.listen(options.port)
+    http_server.listen(options.port, address="0.0.0.0")
     IOLoop.instance().start()
 
 if __name__ == "__main__":
-    main()
+    application=tornado.wsgi.WSGIAdapter(main())
