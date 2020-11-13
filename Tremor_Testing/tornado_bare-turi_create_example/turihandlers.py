@@ -105,7 +105,7 @@ class UpdateModelForDatasetId(BaseHandler):
 
 class PredictOneFromDatasetId(BaseHandler):
 
-    def _create_model(self, dsid, model_type):
+    def _create_model(self, dsid, model_type, data):
         #create new model
         if model_type == "random_forest":
             model = tc.random_forest_classifier.create(data,target='target',verbose=0)
@@ -127,7 +127,7 @@ class PredictOneFromDatasetId(BaseHandler):
         model_type = data['model_type']
 
         if dsid not in self.clf:
-            model = self._create_model(dsid, model_type)
+            model = self._create_model(dsid, model_type, data)
 
             yhat = model.predict(data)
             self.clf[dsid][model_type] = model
@@ -135,7 +135,7 @@ class PredictOneFromDatasetId(BaseHandler):
             model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
 
         if model_type not in self.clf[dsid]:
-            model = self._create_model(dsid, model_type)
+            model = self._create_model(dsid, model_type, data)
             yhat = model.predict(data)
             self.clf[dsid][model_type] = model
             # save model for use later, if desired
@@ -147,7 +147,7 @@ class PredictOneFromDatasetId(BaseHandler):
 
             except Exception as e:
                 print(f'Error loading model {dsid}:{model_type} from file..\nCreating new instance...')
-                model = self._create_model(dsid, model_type)
+                model = self._create_model(dsid, model_type, data)
                 yhat = model.predict(data)
                 self.clf[dsid][model_type] = model
                 # save model for use later, if desired
