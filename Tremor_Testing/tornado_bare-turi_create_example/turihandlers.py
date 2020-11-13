@@ -60,6 +60,7 @@ class UpdateModelForDatasetId(BaseHandler):
         '''Train a new model (or update) for given dataset ID
         '''
         dsid = self.get_int_arg("dsid",default=0)
+        model_type = self.get_str_arg("model_type",default="random_forest")
 
         data = self.get_features_and_labels_as_SFrame(dsid)
 
@@ -67,14 +68,22 @@ class UpdateModelForDatasetId(BaseHandler):
         acc = -1
         best_model = 'unknown'
         if len(data)>0:
-            
-            model = tc.classifier.create(data,target='target',verbose=0)# training
+
+            if model_type == "random_forest":
+                model = tc.random_forest_classifier.create(data,target='target',verbose=0)
+            elif model_type == 'knn':
+                model = tc.nearest_neighbor_classifier.create(data,target='target',distance='auto',verbose=0)
+            elif model_type == 'svm':
+                model = tc.svm_classifier.create(data,target='target',verbose=0)
+            else:
+                model = tc.classifier.create(data,target='target',verbose=0)
+
             yhat = model.predict(data)
-            self.clf[dsid] = model
+            self.clf[dsid] = {model_type:model}
             acc = sum(yhat==data['target'])/float(len(data))
             # save model for use later, if desired
-            model.save('../models/turi_model_dsid%d'%(dsid))
-            
+            model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
+
 
         # send back the resubstitution accuracy
         # if training takes a while, we are blocking tornado!! No!!
@@ -84,7 +93,7 @@ class UpdateModelForDatasetId(BaseHandler):
         # create feature vectors from database
         features=[]
         labels=[]
-        for a in self.db.labeledinstances.find({"dsid":dsid}): 
+        for a in self.db.labeledinstances.find({"dsid":dsid}):
             features.append([float(val) for val in a['feature']])
             labels.append(a['label'])
 
@@ -98,18 +107,36 @@ class PredictOneFromDatasetId(BaseHandler):
     def post(self):
         '''Predict the class of a sent feature vector
         '''
-        data = json.loads(self.request.body.decode("utf-8"))    
+        data = json.loads(self.request.body.decode("utf-8"))
         fvals = self.get_features_as_SFrame(data['feature'])
         dsid  = data['dsid']
+        model_type = data['model_type']
 
         # load the model from the database (using pickle)
         # we are blocking tornado!! no!!
         if(dsid not in self.clf):
             print('Loading Model From file')
-            self.clf[dsid] = tc.load_model('../models/turi_model_dsid%d'%(dsid))
-  
+            try:
+                self.clf[dsid][model_type] = tc.load_model('../models/turi_model_dsid%d_%s'%(dsid, model_type))
+            except:
 
-        predLabel = self.clf[dsid].predict(fvals);
+                #if no model exists, create new model
+                if model_type == "random_forest":
+                    model = tc.random_forest_classifier.create(data,target='target',verbose=0)
+                elif model_type == 'knn':
+                    model = tc.nearest_neighbor_classifier.create(data,target='target',distance='auto',verbose=0)
+                elif model_type == 'svm':
+                    model = tc.svm_classifier.create(data,target='target',verbose=0)
+                else:
+                    model = tc.classifier.create(data,target='target',verbose=0)
+
+                yhat = model.predict(data)
+                self.clf[dsid][model_type] = model
+                # save model for use later, if desired
+                model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
+
+
+        predLabel = self.clf[dsid][model_type].predict(fvals);
         self.write_json({"prediction":str(predLabel)})
 
     def get_features_as_SFrame(self, vals):

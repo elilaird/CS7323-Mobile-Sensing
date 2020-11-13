@@ -76,6 +76,7 @@ class BaseHandler(tornado.web.RequestHandler):
     def clf(self, value):
         self.application.clf = value
 
+
     def get_int_arg(self, value, default=[], strip=True):
         '''Convenience method for grabbing integer arguments
            from HTTP headers. Will raise an HTTP error if
@@ -83,10 +84,22 @@ class BaseHandler(tornado.web.RequestHandler):
         '''
         try:
             arg = self.get_argument(value, default, strip)
-            return default if arg == default else int(arg) 
+            return default if arg == default else int(arg)
         except ValueError:
             e = "%s could not be read as an integer" % value
             raise HTTPJSONError(1, e)
+
+    def get_str_arg(self, value, default=[], strip=True):
+        '''Convenience method for grabbing string arguments
+            from HTTP headers. Will raise an HTTP error if
+            argument is missing or is not a str
+        '''
+        try:
+            arg = self.get_argument(value, default, strip)
+            return default if arg == default else str(arg)
+        except ValueError:
+            e = "%s could not be read as a str" % value
+            raise HTTPJSONError(1,e)
 
     def get_long_arg(self, value, default=[], strip=True):
         '''Convenience method for grabbing long integer arguments
@@ -113,12 +126,9 @@ class BaseHandler(tornado.web.RequestHandler):
             raise HTTPJSONError(1, e)
 
     def write_json(self, value={}):
-        '''Completes header and writes JSONified 
+        '''Completes header and writes JSONified
            HTTP back to client
         '''
         self.set_header("Content-Type", "application/json")
         tmp = json_str(value);
         self.write(tmp)
-
-
-
