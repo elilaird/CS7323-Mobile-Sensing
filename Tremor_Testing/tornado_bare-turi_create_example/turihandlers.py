@@ -69,25 +69,30 @@ class UpdateModelForDatasetId(BaseHandler):
         best_model = 'unknown'
         if len(data)>0:
 
-            if model_type == "random_forest":
-                model = tc.random_forest_classifier.create(data,target='target',verbose=0)
-            elif model_type == 'knn':
-                model = tc.nearest_neighbor_classifier.create(data,target='target',distance='auto',verbose=0)
-            elif model_type == 'svm':
-                model = tc.svm_classifier.create(data,target='target',verbose=0)
-            else:
-                model = tc.classifier.create(data,target='target',verbose=0)
+            #create models for comparison
+            rf_model = tc.random_forest_classifier.create(data,target='target',verbose=0)
+            knn_model = tc.nearest_neighbor_classifier.create(data,target='target',distance='auto',verbose=0)
+            svm_model = tc.svm_classifier.create(data,target='target',verbose=0)
 
-            yhat = model.predict(data)
+            #predict on each model
+            rf_yhat = rf_model.predict(data)
+            knn_yhat = knn_model.predict(data)
+            svm_yhat = svm_model.predict(data)
+
+            #set specified model
             self.clf[dsid] = {model_type:model}
-            acc = sum(yhat==data['target'])/float(len(data))
+
+            #calc accuracy for each model for comparison
+            rf_acc = sum(rf_yhat==data['target'])/float(len(data))
+            knn_acc = sum(knn_yhat==data['target'])/float(len(data))
+            svm_acc = sum(svm_yhat==data['target'])/float(len(data))
+
             # save model for use later, if desired
             model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
 
 
-        # send back the resubstitution accuracy
-        # if training takes a while, we are blocking tornado!! No!!
-        self.write_json({"resubAccuracy":acc})
+        # send back the resubstitution accuracy for each model
+        self.write_json({"rf_accuracy":rf_acc, "knn_accuracy":knn_acc, "svm_accuracy":svm_acc})
 
     def get_features_and_labels_as_SFrame(self, dsid):
         # create feature vectors from database
