@@ -126,7 +126,7 @@ class PredictOneFromDatasetId(BaseHandler):
         dsid  = data['dsid']
         model_type = data['model_type']
 
-        data = self.get_features_as_SFrame(fvals)
+        data = self.get_features_and_labels_as_SFrame(dsid)
 
         if dsid not in self.clf:
             model = self._create_model(dsid, model_type, data)
@@ -166,6 +166,20 @@ class PredictOneFromDatasetId(BaseHandler):
         tmp = np.array(tmp)
         tmp = tmp.reshape((1,-1))
         data = {'sequence':tmp}
+
+        # send back the SFrame of the data
+        return tc.SFrame(data=data)
+
+    def get_features_and_labels_as_SFrame(self, dsid):
+        # create feature vectors from database
+        features=[]
+        labels=[]
+        for a in self.db.labeledinstances.find({"dsid":dsid}):
+            features.append([float(val) for val in a['feature']])
+            labels.append(a['label'])
+
+        # convert to dictionary for tc
+        data = {'target':labels, 'sequence':np.array(features)}
 
         # send back the SFrame of the data
         return tc.SFrame(data=data)
