@@ -104,6 +104,20 @@ class UpdateModelForDatasetId(BaseHandler):
         return tc.SFrame(data=data)
 
 class PredictOneFromDatasetId(BaseHandler):
+
+    def _create_model(self, dsid, model_type, data):
+        #create new model
+        if model_type == "random_forest":
+            model = tc.random_forest_classifier.create(data,target='target',verbose=0)
+        elif model_type == 'knn':
+            model = tc.nearest_neighbor_classifier.create(data,target='target',distance='auto',verbose=0)
+        elif model_type == 'svm':
+            model = tc.svm_classifier.create(data,target='target',verbose=0)
+        else:
+            model = tc.classifier.create(data,target='target',verbose=0)
+
+        return model
+
     def post(self):
         '''Predict the class of a sent feature vector
         '''
@@ -112,29 +126,34 @@ class PredictOneFromDatasetId(BaseHandler):
         dsid  = data['dsid']
         model_type = data['model_type']
 
-        # load the model from the database (using pickle)
-        # we are blocking tornado!! no!!
-        if(dsid not in self.clf):
-            print('Loading Model From file')
+        data = self.get_features_and_labels_as_SFrame(dsid)
+
+        if dsid not in self.clf:
+            model = self._create_model(dsid, model_type, data)
+
+            yhat = model.predict(data)
+            self.clf[dsid] = {model_type:model}
+            # save model for use later, if desired
+            model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
+
+        if model_type not in self.clf[dsid]:
+            model = self._create_model(dsid, model_type, data)
+            yhat = model.predict(data)
+            self.clf[dsid][model_type] = model
+            # save model for use later, if desired
+            model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
+
+        elif model_type in self.clf[dsid]:
             try:
-                self.clf[dsid][model_type] = tc.load_model('../models/turi_model_dsid%d_%s'%(dsid, model_type))
-            except:
+                model = tc.load_model('../models/turi_model_dsid%d_%s'%(dsid, model_type))
 
-                #if no model exists, create new model
-                if model_type == "random_forest":
-                    model = tc.random_forest_classifier.create(data,target='target',verbose=0)
-                elif model_type == 'knn':
-                    model = tc.nearest_neighbor_classifier.create(data,target='target',distance='auto',verbose=0)
-                elif model_type == 'svm':
-                    model = tc.svm_classifier.create(data,target='target',verbose=0)
-                else:
-                    model = tc.classifier.create(data,target='target',verbose=0)
-
+            except Exception as e:
+                print(f'Error loading model {dsid}:{model_type} from file..\nCreating new instance...')
+                model = self._create_model(dsid, model_type, data)
                 yhat = model.predict(data)
                 self.clf[dsid][model_type] = model
                 # save model for use later, if desired
                 model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
-
 
         predLabel = self.clf[dsid][model_type].predict(fvals);
         self.write_json({"prediction":str(predLabel)})
@@ -147,6 +166,20 @@ class PredictOneFromDatasetId(BaseHandler):
         tmp = np.array(tmp)
         tmp = tmp.reshape((1,-1))
         data = {'sequence':tmp}
+
+        # send back the SFrame of the data
+        return tc.SFrame(data=data)
+
+    def get_features_and_labels_as_SFrame(self, dsid):
+        # create feature vectors from database
+        features=[]
+        labels=[]
+        for a in self.db.labeledinstances.find({"dsid":dsid}):
+            features.append([float(val) for val in a['feature']])
+            labels.append(a['label'])
+
+        # convert to dictionary for tc
+        data = {'target':labels, 'sequence':np.array(features)}
 
         # send back the SFrame of the data
         return tc.SFrame(data=data)
