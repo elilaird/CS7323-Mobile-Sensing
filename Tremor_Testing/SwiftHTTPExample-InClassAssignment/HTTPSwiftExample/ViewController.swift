@@ -155,15 +155,14 @@ class ViewController: UIViewController, URLSessionDelegate {
                 self.largeMotionMagnitude.progress = Float(mag)/0.2
             }
             
-            if mag > self.magValue {
-                // buffer up a bit more data and then notify of occurrence
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
-                    self.calibrationOperationQueue.addOperation {
-                        // something large enough happened to warrant
-                        self.largeMotionEventOccurred()
-                    }
-                })
-            }
+            // buffer up a bit more data and then notify of occurrence
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
+                self.calibrationOperationQueue.addOperation {
+                    // something large enough happened to warrant
+                    self.largeMotionEventOccurred()
+                }
+            })
+
         }
     }
     
@@ -202,17 +201,17 @@ class ViewController: UIViewController, URLSessionDelegate {
         case .notCalibrating:
             //start with table
             self.calibrationStage = .table
-            setDelayedWaitingToTrue(1.0)
+            setDelayedWaitingToTrue(2.0)
             break
         case .table:
             //go to hand
             self.calibrationStage = .hand
-            setDelayedWaitingToTrue(1.0)
+            setDelayedWaitingToTrue(2.0)
             break
         case .hand:
             //end calibration
             self.calibrationStage = .notCalibrating
-            setDelayedWaitingToTrue(1.0)
+            setDelayedWaitingToTrue(2.0)
             break
         }
     }
