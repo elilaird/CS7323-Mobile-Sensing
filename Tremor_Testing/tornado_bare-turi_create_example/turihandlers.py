@@ -132,7 +132,7 @@ class PredictOneFromDatasetId(BaseHandler):
             model = self._create_model(dsid, model_type, data)
 
             yhat = model.predict(data)
-            self.clf[dsid][model_type] = model
+            self.clf[dsid] = {model_type:model}
             # save model for use later, if desired
             model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
 
