@@ -126,6 +126,8 @@ class PredictOneFromDatasetId(BaseHandler):
         dsid  = data['dsid']
         model_type = data['model_type']
 
+        data = self.get_features_and_labels_as_SFrame(dsid)
+
         if dsid not in self.clf:
             model = self._create_model(dsid, model_type, data)
 
