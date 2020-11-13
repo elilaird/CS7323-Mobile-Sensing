@@ -59,6 +59,10 @@ class ViewController: UIViewController, URLSessionDelegate {
     @IBOutlet weak var defaultHandImageView: UIImageView!
     @IBOutlet weak var tableImageView: UIImageView!
     
+    @IBOutlet weak var predictingLabel: UILabel!
+    @IBOutlet weak var layDownTableLabel: UILabel!
+    @IBOutlet weak var holdPhoneLabel: UILabel!
+    
     // MARK: Class Properties with Observers
     enum CalibrationStage {
         case notCalibrating
@@ -72,23 +76,24 @@ class ViewController: UIViewController, URLSessionDelegate {
             case .table:
                 self.isCalibrating = true
                 DispatchQueue.main.async{
-                    self.setAsCalibrating(self.tableImageView)
-                    self.setAsNormal(self.handImageView)
+                    self.setAsCalibrating(self.tableImageView, label: self.layDownTableLabel)
+                    self.setAsNormal(self.handImageView, label: self.holdPhoneLabel)
                 }
                 break
             case .hand:
                 self.isCalibrating = true
                 DispatchQueue.main.async{
-                    self.setAsNormal(self.tableImageView)
-                    self.setAsCalibrating(self.handImageView)
+                    self.setAsNormal(self.tableImageView, label: self.layDownTableLabel)
+                    self.setAsCalibrating(self.handImageView, label: self.holdPhoneLabel)
                 }
                 break
             case .notCalibrating:
                 self.isCalibrating = false
                 DispatchQueue.main.async{
-                    self.setAsNormal(self.tableImageView)
-                    self.setAsNormal(self.handImageView)
+                    self.setAsNormal(self.tableImageView, label: self.layDownTableLabel)
+                    self.setAsNormal(self.handImageView, label: self.holdPhoneLabel)
                     self.defaultHandImageView.isHidden = false
+                    self.predictingLabel.isHidden = false
                 }
                 break
             }
@@ -222,13 +227,17 @@ class ViewController: UIViewController, URLSessionDelegate {
         })
     }
     
-    func setAsCalibrating(_ image: UIImageView){
+    func setAsCalibrating(_ image: UIImageView, label: UILabel){
         self.defaultHandImageView.isHidden = true
         image.isHidden = false
+        label.isHidden = false
     }
     
-    func setAsNormal(_ image: UIImageView){
+    func setAsNormal(_ image: UIImageView, label: UILabel?){
         image.isHidden = true
+        if label != nil{
+            label!.isHidden = true
+        }
     }
     
     // MARK: View Controller Life Cycle
@@ -348,9 +357,10 @@ class ViewController: UIViewController, URLSessionDelegate {
                         else{ // no error we are aware of
                             let jsonDictionary = self.convertDataToDictionary(with: data)
                             
-                            let labelResponse = jsonDictionary["prediction"]!
-                            print(labelResponse)
-                            self.displayLabelResponse(labelResponse as! String)
+                            if let labelResponse = jsonDictionary["prediction"]{
+                                print(labelResponse)
+                                self.displayLabelResponse(labelResponse as! String)
+                            }
 
                         }
                                                                     
@@ -375,9 +385,9 @@ class ViewController: UIViewController, URLSessionDelegate {
     
     func blinkLabel(_ image:UIImageView){
         DispatchQueue.main.async {
-            self.setAsCalibrating(image)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                self.setAsNormal(image)
+            self.setAsCalibrating(image, label: self.predictingLabel)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                self.setAsNormal(image, label: nil)
             })
         }
         
