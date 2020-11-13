@@ -129,6 +129,7 @@ class ViewController: UIViewController, URLSessionDelegate {
             self.model_type = "random_forest"
         }
         
+        //self.makeModel(<#AnyObject#>)
     }
     @IBAction func magnitudeChanged(_ sender: UISlider) {
         self.magValue = Double(sender.value)

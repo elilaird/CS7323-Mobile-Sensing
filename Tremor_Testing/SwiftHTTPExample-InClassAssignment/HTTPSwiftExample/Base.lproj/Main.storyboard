@@ -73,7 +73,7 @@
                                     <action selector="makeModel:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="M5H-Z6-DGN"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a5o-Do-Aon">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a5o-Do-Aon">
                                 <rect key="frame" x="17" y="109" width="338" height="32"/>
                                 <segments>
                                     <segment title="Random Forest"/>
@@ -105,6 +105,7 @@
                             <constraint firstAttribute="trailing" secondItem="pc1-rZ-j6y" secondAttribute="trailing" constant="9" id="aVl-TG-Xag"/>
                             <constraint firstItem="hat-ey-qs0" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="bJX-l9-OHK"/>
                             <constraint firstItem="hUu-DN-Kwe" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="bNO-4O-ATp"/>
+                            <constraint firstItem="a5o-Do-Aon" firstAttribute="top" secondItem="hnx-72-uCy" secondAttribute="bottom" constant="8" symbolic="YES" id="beL-vD-F9w"/>
                             <constraint firstItem="Q83-th-e1u" firstAttribute="top" secondItem="pc1-rZ-j6y" secondAttribute="bottom" constant="107" id="bnz-fr-CNk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NhQ-l3-lIm" secondAttribute="trailing" constant="32" id="db9-8V-DpO"/>
                             <constraint firstItem="o8Y-zC-VI1" firstAttribute="top" secondItem="hUu-DN-Kwe" secondAttribute="bottom" constant="94" id="eLZ-zx-tMx"/>
