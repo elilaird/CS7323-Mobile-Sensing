@@ -135,7 +135,7 @@ class PredictOneFromDatasetId(BaseHandler):
                     # save model for use later, if desired
                     model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
 
-            except Exception e:
+            except Exception as e:
                 print(f'Failed to create model {dsid}:{model_type} with error: {e}')
 
 
