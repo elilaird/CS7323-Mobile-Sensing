@@ -141,7 +141,7 @@ class PredictOneFromDatasetId(BaseHandler):
             # save model for use later, if desired
             model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
 
-        else if model_type in self.clf[dsid]:
+        elif model_type in self.clf[dsid]:
             try:
                 model = tc.load_model('../models/turi_model_dsid%d_%s'%(dsid, model_type))
 
