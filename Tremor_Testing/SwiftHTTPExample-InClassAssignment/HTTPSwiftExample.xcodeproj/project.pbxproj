@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051C0CC6255F80CC0027DFF7 /* random_forest_coreml.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 051C0CC5255F80CC0027DFF7 /* random_forest_coreml.mlmodel */; };
 		B67483DB1ACA2D6800A9970E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67483DA1ACA2D6800A9970E /* AppDelegate.swift */; };
 		B67483DD1ACA2D6800A9970E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67483DC1ACA2D6800A9970E /* ViewController.swift */; };
 		B67483E01ACA2D6800A9970E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B67483DE1ACA2D6800A9970E /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		051C0CC5255F80CC0027DFF7 /* random_forest_coreml.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = random_forest_coreml.mlmodel; sourceTree = "<group>"; };
 		B67483D51ACA2D6800A9970E /* HTTPSwiftExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HTTPSwiftExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67483D91ACA2D6800A9970E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B67483DA1ACA2D6800A9970E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		B67483D71ACA2D6800A9970E /* HTTPSwiftExample */ = {
 			isa = PBXGroup;
 			children = (
+				051C0CC5255F80CC0027DFF7 /* random_forest_coreml.mlmodel */,
 				B67483DA1ACA2D6800A9970E /* AppDelegate.swift */,
 				B67483DC1ACA2D6800A9970E /* ViewController.swift */,
 				B694B0191FA377E4009A4277 /* RingBuffer.swift */,
@@ -148,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				051C0CC6255F80CC0027DFF7 /* random_forest_coreml.mlmodel in Sources */,
 				B67483DD1ACA2D6800A9970E /* ViewController.swift in Sources */,
 				B67483DB1ACA2D6800A9970E /* AppDelegate.swift in Sources */,
 				B694B01A1FA377E4009A4277 /* RingBuffer.swift in Sources */,

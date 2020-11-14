@@ -47,6 +47,9 @@ class ViewController: UIViewController, URLSessionDelegate {
     
     var magValue = 0.1
     var isCalibrating = false
+    var isReady = false
+    
+    lazy var loadedRFModel: random_forest_coreml = random_forest_coreml()
     
     var isWaitingForMotionData = false
     
@@ -62,6 +65,16 @@ class ViewController: UIViewController, URLSessionDelegate {
     @IBOutlet weak var predictingLabel: UILabel!
     @IBOutlet weak var layDownTableLabel: UILabel!
     @IBOutlet weak var holdPhoneLabel: UILabel!
+    @IBOutlet weak var rfAccLabel: UILabel!
+    @IBOutlet weak var svmAccLabel: UILabel!
+    @IBOutlet weak var logAccLabel: UILabel!
+    @IBOutlet weak var loadedAccLabel: UILabel!
+    
+    var buttonIsReady = false
+    
+    @IBAction func isReadyButtonClicked(_ sender: Any) {
+        self.buttonIsReady = true
+    }
     
     // MARK: Class Properties with Observers
     enum CalibrationStage {
@@ -76,6 +89,7 @@ class ViewController: UIViewController, URLSessionDelegate {
             case .table:
                 self.isCalibrating = true
                 DispatchQueue.main.async{
+                    self.predictingLabel.isHidden = true
                     self.setAsCalibrating(self.tableImageView, label: self.layDownTableLabel)
                     self.setAsNormal(self.handImageView, label: self.holdPhoneLabel)
                 }
@@ -83,6 +97,7 @@ class ViewController: UIViewController, URLSessionDelegate {
             case .hand:
                 self.isCalibrating = true
                 DispatchQueue.main.async{
+                    self.predictingLabel.isHidden = true
                     self.setAsNormal(self.tableImageView, label: self.layDownTableLabel)
                     self.setAsCalibrating(self.handImageView, label: self.holdPhoneLabel)
                 }
@@ -124,20 +139,19 @@ class ViewController: UIViewController, URLSessionDelegate {
         let selectedModel = self.modelSelecter.titleForSegment(at: self.modelSelecter.selectedSegmentIndex)!
         
         switch selectedModel {
-        case "Random Forest":
+        case "RF":
             self.model_type = "random_forest"
         case "SVM":
             self.model_type = "svm"
-        case "KNN":
-            self.model_type = "knn"
+        case "Log":
+            self.model_type = "log"
+        case "Loaded":
+            self.model_type = "loaded"
         default:
             self.model_type = "random_forest"
         }
         
         //self.makeModel(<#AnyObject#>)
-    }
-    @IBAction func magnitudeChanged(_ sender: UISlider) {
-        self.magValue = Double(sender.value)
     }
     
     // MARK: Core Motion Updates
@@ -160,13 +174,16 @@ class ViewController: UIViewController, URLSessionDelegate {
                 self.largeMotionMagnitude.progress = Float(mag)/0.2
             }
             
-            // buffer up a bit more data and then notify of occurrence
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
-                self.calibrationOperationQueue.addOperation {
-                    // something large enough happened to warrant
-                    self.largeMotionEventOccurred()
-                }
-            })
+            if self.buttonIsReady{
+                // buffer up a bit more data and then notify of occurrence
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
+                    self.buttonIsReady = false
+                    self.calibrationOperationQueue.addOperation {
+                        // something large enough happened to warrant
+                        self.largeMotionEventOccurred()
+                    }
+                })
+            }
 
         }
     }
@@ -206,17 +223,17 @@ class ViewController: UIViewController, URLSessionDelegate {
         case .notCalibrating:
             //start with table
             self.calibrationStage = .table
-            setDelayedWaitingToTrue(2.0)
+            setDelayedWaitingToTrue(3.0)
             break
         case .table:
             //go to hand
             self.calibrationStage = .hand
-            setDelayedWaitingToTrue(2.0)
+            setDelayedWaitingToTrue(3.0)
             break
         case .hand:
             //end calibration
             self.calibrationStage = .notCalibrating
-            setDelayedWaitingToTrue(2.0)
+            setDelayedWaitingToTrue(1.0)
             break
         }
     }
@@ -331,42 +348,55 @@ class ViewController: UIViewController, URLSessionDelegate {
     }
     
     func getPrediction(_ array:[Double]){
-        let baseURL = "\(SERVER_URL)/PredictOne"
-        let postUrl = URL(string: "\(baseURL)")
         
-        // create a custom HTTP POST request
-        var request = URLRequest(url: postUrl!)
-        
-        // data to send in body of post request (send arguments as json)
-        let jsonUpload:NSDictionary = ["feature":array, "dsid":self.dsid, "model_type":self.model_type]
-        
-        
-        let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
-        
-        request.httpMethod = "POST"
-        request.httpBody = requestBody
-        
-        let postTask : URLSessionDataTask = self.session.dataTask(with: request,
-                                                                  completionHandler:{
-                        (data, response, error) in
-                        if(error != nil){
-                            if let res = response{
-                                print("Response:\n",res)
+        if self.model_type != "loaded"{
+            let baseURL = "\(SERVER_URL)/PredictOne"
+            let postUrl = URL(string: "\(baseURL)")
+            
+            // create a custom HTTP POST request
+            var request = URLRequest(url: postUrl!)
+            
+            // data to send in body of post request (send arguments as json)
+            let jsonUpload:NSDictionary = ["feature":array, "dsid":self.dsid, "model_type":self.model_type]
+            
+            
+            let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
+            
+            request.httpMethod = "POST"
+            request.httpBody = requestBody
+            
+            let postTask : URLSessionDataTask = self.session.dataTask(with: request,
+                                                                      completionHandler:{
+                            (data, response, error) in
+                            if(error != nil){
+                                if let res = response{
+                                    print("Response:\n",res)
+                                }
                             }
-                        }
-                        else{ // no error we are aware of
-                            let jsonDictionary = self.convertDataToDictionary(with: data)
-                            
-                            if let labelResponse = jsonDictionary["prediction"]{
-                                print(labelResponse)
-                                self.displayLabelResponse(labelResponse as! String)
-                            }
+                            else{ // no error we are aware of
+                                let jsonDictionary = self.convertDataToDictionary(with: data)
+                                
+                                if let labelResponse = jsonDictionary["prediction"]{
+                                    print(labelResponse)
+                                    self.displayLabelResponse(labelResponse as! String)
+                                }
 
-                        }
-                                                                    
-        })
+                            }
+                                                                        
+            })
+            
+            postTask.resume() // start the task
+        }
+//        }else{
+//            let jsonUpload:NSDictionary = ["feature":array]
+////            let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
+////            print(requestBody)
+////            print(\(requestBody["feature"]))
+////            guard let loadedPrediction = try? loadedRFModel.prediction(input: jsonUpload) else {
+////                fatalError("Loaded model issue")
+//            }
+//        }
         
-        postTask.resume() // start the task
     }
     
     func displayLabelResponse(_ response:String){
@@ -386,7 +416,7 @@ class ViewController: UIViewController, URLSessionDelegate {
     func blinkLabel(_ image:UIImageView){
         DispatchQueue.main.async {
             self.setAsCalibrating(image, label: self.predictingLabel)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
                 self.setAsNormal(image, label: nil)
             })
         }
@@ -414,6 +444,31 @@ class ViewController: UIViewController, URLSessionDelegate {
                     
                     if let resubAcc = jsonDictionary["resubAccuracy"]{
                         print("Resubstitution Accuracy is", resubAcc)
+                    }
+                    
+                    // update acc labels
+                    if let rfAcc = (jsonDictionary["rf_accuracy"] as? NSNumber)?.floatValue {
+                        print("Rf acc: \(rfAcc)")
+                        let acc = Int(rfAcc * Float(100))
+                        DispatchQueue.main.async{
+                            self.rfAccLabel.text = "\(acc)%"
+                        }
+                    }
+                    if let svmAcc = (jsonDictionary["svm_accuracy"] as? NSNumber)?.floatValue {
+                        print("svm acc: \(svmAcc)")
+                        let acc = Int(svmAcc * Float(100))
+                        DispatchQueue.main.async{
+                            self.svmAccLabel.text = "\(acc)%"
+                        }
+                    
+                    }
+                    if let logAcc = (jsonDictionary["log_accuracy"] as? NSNumber)?.floatValue{
+                        print("log acc: \(logAcc)")
+                        let acc = Int(logAcc * Float(100))
+                        DispatchQueue.main.async{
+                            self.logAccLabel.text = "\(acc)%"
+                        }
+                        
                     }
                 }
                                                                     
