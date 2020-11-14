@@ -63,7 +63,7 @@ class UpdateModelForDatasetId(BaseHandler):
         model_type = self.get_str_arg("model_type",default="random_forest")
 
         data = self.get_features_and_labels_as_SFrame(dsid)
-
+        print(data)
         # fit the model to the data
         acc = -1
         best_model = 'unknown'
@@ -71,13 +71,22 @@ class UpdateModelForDatasetId(BaseHandler):
 
             #create models for comparison
             rf_model = tc.random_forest_classifier.create(data,target='target',verbose=0)
-            knn_model = tc.nearest_neighbor_classifier.create(data,target='target',distance='auto',verbose=0)
+            knn_model = tc.nearest_neighbor_classifier.create(data,target='target',distance='euclidean',verbose=0)
             svm_model = tc.svm_classifier.create(data,target='target',verbose=0)
 
             #predict on each model
             rf_yhat = rf_model.predict(data)
             knn_yhat = knn_model.predict(data)
             svm_yhat = svm_model.predict(data)
+            
+            if model_type == 'random_forest':
+                model = rf_model
+            elif model_type == 'knn':
+                model = knn_model
+            elif model_type == 'svm':
+                model = svm_model
+            else:
+                model = rf_model
 
             #set specified model
             self.clf[dsid] = {model_type:model}
