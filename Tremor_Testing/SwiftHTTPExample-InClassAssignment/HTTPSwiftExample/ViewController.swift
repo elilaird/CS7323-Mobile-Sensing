@@ -19,6 +19,8 @@ let SERVER_URL = "http://35.239.233.247:8000" // change this for your server nam
 
 import UIKit
 import CoreMotion
+import CoreML
+import Vision
 
 class ViewController: UIViewController, URLSessionDelegate {
     
@@ -49,7 +51,17 @@ class ViewController: UIViewController, URLSessionDelegate {
     var isCalibrating = false
     var isReady = false
     
-    lazy var loadedRFModel: random_forest_coreml = random_forest_coreml()
+//    lazy var loadedRFModel: random_forest_coreml = random_forest_coreml()
+//    let model = try VNCoreMLModel(for: random_forest_coreml().model)
+    lazy var model:random_forest_coreml = {
+            do{
+                let config = MLModelConfiguration()
+                return try random_forest_coreml(configuration: config)
+            }catch{
+                print(error)
+                fatalError("Could not load Resnet50")
+            }
+        }()
     
     var isWaitingForMotionData = false
     
@@ -352,19 +364,19 @@ class ViewController: UIViewController, URLSessionDelegate {
         if self.model_type != "loaded"{
             let baseURL = "\(SERVER_URL)/PredictOne"
             let postUrl = URL(string: "\(baseURL)")
-            
+
             // create a custom HTTP POST request
             var request = URLRequest(url: postUrl!)
-            
+
             // data to send in body of post request (send arguments as json)
             let jsonUpload:NSDictionary = ["feature":array, "dsid":self.dsid, "model_type":self.model_type]
-            
-            
+
+
             let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
-            
+
             request.httpMethod = "POST"
             request.httpBody = requestBody
-            
+
             let postTask : URLSessionDataTask = self.session.dataTask(with: request,
                                                                       completionHandler:{
                             (data, response, error) in
@@ -375,26 +387,49 @@ class ViewController: UIViewController, URLSessionDelegate {
                             }
                             else{ // no error we are aware of
                                 let jsonDictionary = self.convertDataToDictionary(with: data)
-                                
+
                                 if let labelResponse = jsonDictionary["prediction"]{
                                     print(labelResponse)
                                     self.displayLabelResponse(labelResponse as! String)
                                 }
 
                             }
-                                                                        
+
             })
             
             postTask.resume() // start the task
+        }else{
+            do{
+                let pred = try self.model.prediction(input: random_forest_coremlInput(sequence: MLMultiArray(array))).target
+                print("pred: \(pred)")
+                self.displayLabelResponse(pred)
+            }catch {
+                print(error)
+              }
+            
+            
         }
-//        }else{
-//            let jsonUpload:NSDictionary = ["feature":array]
-////            let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
-////            print(requestBody)
-////            print(\(requestBody["feature"]))
-////            guard let loadedPrediction = try? loadedRFModel.prediction(input: jsonUpload) else {
-////                fatalError("Loaded model issue")
-//            }
+        
+    }
+    
+    //interpret results from vision query
+    func resultsMethod(request: VNRequest, error: Error?) {
+        guard let results = request.results as? [VNClassificationObservation]
+            else {
+                fatalError("Could not cast request as classification object")
+        }
+        
+        // Add in results display...
+        print("---------------")
+        for result in results {
+            if(result.confidence > 0.05){
+                print(result.identifier,result.confidence)
+            }
+        }
+        
+//        DispatchQueue.main.async{
+//            self.classifierLabel.text = "This might be a \(results[0].identifier) \n conf:\(results[0].confidence)"
+//
 //        }
         
     }
