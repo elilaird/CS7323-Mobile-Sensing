@@ -137,15 +137,7 @@ class ViewController: UIViewController, URLSessionDelegate {
         }
     }
     
-    var model_type:String = "random_forest"  {
-        didSet{
-            DispatchQueue.main.async{
-                // update label when set
-//                self.dsidLabel.layer.add(self.animation, forKey: nil)
-//                self.dsidLabel.text = "Current DSID: \(self.dsid)"
-            }
-        }
-    }
+    var model_type:String = "random_forest"
     
     @IBAction func changeModel(_ sender: Any) {
         let selectedModel = self.modelSelecter.titleForSegment(at: self.modelSelecter.selectedSegmentIndex)!
@@ -162,8 +154,6 @@ class ViewController: UIViewController, URLSessionDelegate {
         default:
             self.model_type = "random_forest"
         }
-        
-        //self.makeModel(<#AnyObject#>)
     }
     
     // MARK: Core Motion Updates
@@ -400,8 +390,8 @@ class ViewController: UIViewController, URLSessionDelegate {
             postTask.resume() // start the task
         }else{
             do{
-                let pred = try self.model.prediction(input: random_forest_coremlInput(sequence: MLMultiArray(array))).target
-                print("pred: \(pred)")
+                var pred = try self.model.prediction(input: random_forest_coremlInput(sequence: MLMultiArray(array))).target
+                pred = "['\(pred)']"
                 self.displayLabelResponse(pred)
             }catch {
                 print(error)
@@ -426,11 +416,6 @@ class ViewController: UIViewController, URLSessionDelegate {
                 print(result.identifier,result.confidence)
             }
         }
-        
-//        DispatchQueue.main.async{
-//            self.classifierLabel.text = "This might be a \(results[0].identifier) \n conf:\(results[0].confidence)"
-//
-//        }
         
     }
     
