@@ -63,7 +63,7 @@ class UpdateModelForDatasetId(BaseHandler):
         model_type = self.get_str_arg("model_type",default="random_forest")
 
         data = self.get_features_and_labels_as_SFrame(dsid)
-        print(data)
+        
         # fit the model to the data
         acc = -1
         best_model = 'unknown'
@@ -98,7 +98,7 @@ class UpdateModelForDatasetId(BaseHandler):
 
             # save model for use later, if desired
             model.save('../models/turi_model_dsid%d_%s'%(dsid, model_type))
-
+            model.export_coreml('../models/%s_coreml.mlmodel'%(model_type))
 
         # send back the resubstitution accuracy for each model
         self.write_json({"rf_accuracy":rf_acc, "log_accuracy":log_acc, "svm_accuracy":svm_acc})
