@@ -71,18 +71,18 @@ class UpdateModelForDatasetId(BaseHandler):
 
             #create models for comparison
             rf_model = tc.random_forest_classifier.create(data,target='target',verbose=0)
-            knn_model = tc.nearest_neighbor_classifier.create(data,target='target',distance='euclidean',verbose=0)
+            log_model = tc.logistic_classifier.create(data,target='target',verbose=0)
             svm_model = tc.svm_classifier.create(data,target='target',verbose=0)
 
             #predict on each model
             rf_yhat = rf_model.predict(data)
-            knn_yhat = knn_model.predict(data)
+            log_yhat = log_model.predict(data)
             svm_yhat = svm_model.predict(data)
-            
+
             if model_type == 'random_forest':
                 model = rf_model
-            elif model_type == 'knn':
-                model = knn_model
+            elif model_type == 'log':
+                model = log_model
             elif model_type == 'svm':
                 model = svm_model
             else:
@@ -93,7 +93,7 @@ class UpdateModelForDatasetId(BaseHandler):
 
             #calc accuracy for each model for comparison
             rf_acc = sum(rf_yhat==data['target'])/float(len(data))
-            knn_acc = sum(knn_yhat==data['target'])/float(len(data))
+            log_acc = sum(log_yhat==data['target'])/float(len(data))
             svm_acc = sum(svm_yhat==data['target'])/float(len(data))
 
             # save model for use later, if desired
@@ -101,7 +101,7 @@ class UpdateModelForDatasetId(BaseHandler):
 
 
         # send back the resubstitution accuracy for each model
-        self.write_json({"rf_accuracy":rf_acc, "knn_accuracy":knn_acc, "svm_accuracy":svm_acc})
+        self.write_json({"rf_accuracy":rf_acc, "log_accuracy":log_acc, "svm_accuracy":svm_acc})
 
     def get_features_and_labels_as_SFrame(self, dsid):
         # create feature vectors from database
@@ -123,8 +123,8 @@ class PredictOneFromDatasetId(BaseHandler):
         #create new model
         if model_type == "random_forest":
             model = tc.random_forest_classifier.create(data,target='target',verbose=0)
-        elif model_type == 'knn':
-            model = tc.nearest_neighbor_classifier.create(data,target='target',distance='auto',verbose=0)
+        elif model_type == 'log':
+            model = tc.logistic_classifier.create(data,target='target',verbose=0)
         elif model_type == 'svm':
             model = tc.svm_classifier.create(data,target='target',verbose=0)
         else:
