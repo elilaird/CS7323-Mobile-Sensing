@@ -17,6 +17,7 @@
 		051013902578781100DC83E6 /* common_senseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0510138F2578781100DC83E6 /* common_senseTests.swift */; };
 		0510139B2578781100DC83E6 /* common_senseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0510139A2578781100DC83E6 /* common_senseUITests.swift */; };
 		052C2B30257D898500B00F17 /* ColorDistinctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */; };
+		05EA54F7257EE69C00C6E442 /* ColorOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EA54F6257EE69C00C6E442 /* ColorOps.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		0510139A2578781100DC83E6 /* common_senseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = common_senseUITests.swift; sourceTree = "<group>"; };
 		0510139C2578781100DC83E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDistinctionTest.swift; sourceTree = "<group>"; };
+		05EA54F6257EE69C00C6E442 /* ColorOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOps.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				051013792578781000DC83E6 /* ViewController.swift */,
 				0510137B2578781000DC83E6 /* Main.storyboard */,
 				052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */,
+				05EA54F6257EE69C00C6E442 /* ColorOps.swift */,
 				051013812578781100DC83E6 /* Assets.xcassets */,
 				051013832578781100DC83E6 /* LaunchScreen.storyboard */,
 				051013862578781100DC83E6 /* Info.plist */,
@@ -268,6 +271,7 @@
 				051013762578781000DC83E6 /* AppDelegate.swift in Sources */,
 				052C2B30257D898500B00F17 /* ColorDistinctionTest.swift in Sources */,
 				051013782578781000DC83E6 /* SceneDelegate.swift in Sources */,
+				05EA54F7257EE69C00C6E442 /* ColorOps.swift in Sources */,
 				051013802578781000DC83E6 /* common_sense.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

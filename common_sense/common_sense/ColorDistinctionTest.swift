@@ -12,58 +12,66 @@ class ColorDistinction: UIViewController {
 
     @IBOutlet weak var leftColorView: UIView!
     @IBOutlet weak var rightColorView: UIView!
-    @IBAction func yesClick(_ sender: Any) {
-        // Call adjustColorUI with yes answered
-        
-    }
-    @IBAction func noClick(_ sender: Any) {
-        // Call adjustColorUI with no answered
-    }
+
     
-    // List of answers with delta e value
-    var answers:[(correct: Bool, deltaE: Float)] = []
-    var correctAnswersDeltaE:[Float] = []
-    let numToGetCorrect = 10
-    var currentDeltaE: Float? = nil
-    var currentThreeColorPairs: [(Int, Int, Int)] = []
-    var pairAffirmativeCount: Int = 0
+    // New cleaner variables
+    var affirmativeAnswersDeltaE:[Float] = []
+    let numAffirmativeRequired = 10
+    var currentDeltaE: Float = 1.0 // Start with the same value in the adjustor
+    var currentColorPair = ColorPair(leftColor: Color(r: 0, g: 0, b: 0), rightColor: Color(r: 0, g: 0, b: 0), deltaE: 0.0)
+    var colorPairsAtDeltaE: [ColorPair] = []
+    var currentDeltaEAffirmativeCount: Int = 0
+    
+    let deAdjustor = DeltaEAdjustor()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        leftColorView.layer.backgroundColor = UIColor(red: 0/255, green: 255/255, blue: 0/255, alpha: 1.0).cgColor
-        rightColorView.layer.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor
+        // Setup the first comparison
+        colorPairsAtDeltaE = dummyGetColorsWithDeltaE()
+        currentColorPair = colorPairsAtDeltaE.removeFirst()
         
     }
     
-    func adjustColorUI(answeredAffirmative: Bool){
-        if answeredAffirmative{
-            correctAnswersDeltaE.append(currentDeltaE!)
-            // Check if we are done on this testing screen
-            if correctAnswersDeltaE.count == numToGetCorrect{
-                // Print out the perceptibility score
-                print(calcPercepScore())
-                
-                // Return to main screen
-                segueBackToMain()
-            }
-        }
+    
+    @IBAction func yesClick(_ sender: Any) {
+        // Add to affirmative answers
+        affirmativeAnswersDeltaE.append(currentColorPair.deltaE)
+        currentDeltaEAffirmativeCount += 1
+
+        // Setup the next comparison
+        setupNextComparison()
         
-        // Update UI if negative or positive and did not return to main screen
-        updateUI()
     }
     
-    func updateUI(){
+    @IBAction func noClick(_ sender: Any) {
+        // Still testing
         
-        // Gone through the 3 colors or have already answered 2 correctly
-        if currentThreeColorPairs.count == 0 || pairAffirmativeCount == 2{
-            // Adjust deltaE based on affirmative answers
-            currentDeltaE = adjustDeltaE()
-            
-            // Get 3 new colors
-            currentThreeColorPairs = getColorsWithDeltaE()
+        // Setup the next comparison
+        setupNextComparison()
+
+    }
+    
+    func setupNextComparison(){
+        // Get the next color pair
+        getNextPair()
+        
+        // Update the UI
+        displayComparison()
+    }
+    
+    func isLastComparison() -> Bool{
+        return deAdjustor.dummyShouldAdjustDeltaE()
+    }
+    
+    func displayComparison(){
+        let leftColor = currentColorPair.leftColor
+        let rightColor = currentColorPair.rightColor
+        
+        DispatchQueue.main.async {
+            self.leftColorView.layer.backgroundColor = UIColor(red: leftColor.r/255, green: leftColor.g/255, blue: leftColor.b/255, alpha: 1.0).cgColor
+            self.rightColorView.layer.backgroundColor = UIColor(red: rightColor.r/255, green: rightColor.g/255, blue: rightColor.b/255, alpha: 1.0).cgColor
         }
     }
     
@@ -75,120 +83,81 @@ class ColorDistinction: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // Dummy function, should be replaced with an API call to our server later
-    func getColorsWithDeltaE() -> [(Int, Int, Int)]{
+    func getNextPair(){
+
+        // If no more comparisons at the current deltaE, get new colors -- TOD0: make work with deltaE ajdust algo
+        // If went through all 3 pairs or (2/3 have already been answered yes/no) -- best 2/3
+        if colorPairsAtDeltaE.count == 0 || (currentDeltaEAffirmativeCount == 0 && colorPairsAtDeltaE.count == 1) || currentDeltaEAffirmativeCount == 2{
+            // Use algo to get new deltaE
+            if currentDeltaEAffirmativeCount == 2{
+                deAdjustor.updateCouldDistinguish(couldDistinguishCurrentDeltaE: true)
+            }else{
+                deAdjustor.updateCouldDistinguish(couldDistinguishCurrentDeltaE: false)
+            }
+            
+            // Check if we have enough affirmative answers
+            if isLastComparison(){
+                // Segue back to main screen
+                segueBackToMain()  // Deallocate these variables or is this done automatically?? -- TODO
+            }
+            
+            
+            // Request pairs from server with deltaE values
+            
+            // DUMMY DATA: just making it run right now
+            colorPairsAtDeltaE = dummyGetColorsWithDeltaE()
+            
+            // Reset variables
+            currentDeltaEAffirmativeCount = 0
+        }
         
-        var colors: [(Int, Int, Int)]! = nil
+        // Set the current pair
+        currentColorPair = colorPairsAtDeltaE.removeFirst()
+    }
+    
+    
+    // DUMMY FUNCTIONS FOR RIGHT NOW
+    func dummyGetColorsWithDeltaE() -> [ColorPair]{
+
+        var colors: [ColorPair] = []
         
         for _ in 1...3{
-            let r = Int.random(in: 0..<256)
-            let g = Int.random(in: 0..<256)
-            let b = Int.random(in: 0..<256)
-            colors!.append((r, g, b))
+            var rr = Int.random(in: 0..<256)
+            var rg = Int.random(in: 0..<256)
+            var rb = Int.random(in: 0..<256)
+            
+            var (cr, cg, cb) = dummyMakeCGFloatColor(color: (rr, rg, rb))
+            let color = Color(r: cr, g: cg, b: cb)
+            
+            rr = Int.random(in: 0..<256)
+            rg = Int.random(in: 0..<256)
+            rb = Int.random(in: 0..<256)
+            
+            (cr, cg, cb) = dummyMakeCGFloatColor(color: (rr, rg, rb))
+            let color2 = Color(r: cr, g: cg, b: cb)
+            
+            let deltaE = Float.random(in: 0.0..<20.0)
+            colors.append(ColorPair(leftColor: color, rightColor: color2, deltaE: deltaE))
         }
         
         return colors
     }
     
-    func getNewColorCombo(){
-        
+    func dummyMakeCGFloatColor(color: (Int, Int, Int)) -> (CGFloat, CGFloat, CGFloat){
+        let (r, g, b) = color
+        let newR = CGFloat(r)
+        let newG = CGFloat(g)
+        let newB = CGFloat(b)
+        return (newR, newG, newB)
     }
     
-    // Adjusts the deltaE value for the next test (increase or decrease the deltaE)
-    func adjustDeltaE() -> Float{
-        /*
-         Note: based on our current perceptibility score, we want to really avoid having
-         to decrease the deltaE because we are averaging their correct answers and don't
-         want that to impact the result.
-         */
-        let numberOfCorrectlyAnswered = answered.filter{$0}.count
-        
-//        if numberOfCorrectlyAnswered
-        return 0.0
-    }
-    
-//    func adjustColorUI(answeredAffirmative: Bool){
-//        if answeredAffirmative{
-//            correctAnswersDeltaE.append()
-//        }
-//    }
-    
-    func controller(){
-        // Run until we have 10 valid answers
-        while correctAnswersDeltaE.count < 10{
-            
-            
-            // Get 3 pairs of colors to test with approximately the same deltaE
-            let threeColors = getColorsWithDeltaE(deltaE: 5.0)
-            
-            // For each of the colors (2 if first two answered correctly, 3 if tiebreaker needed)
-            for colorPair in threeColors{
-                // Adjust the UI
-                
-            }
-            
-        }
-    }
-    
-    // Calculates the perceptibility score based on the user's answers for this specific test
-    func calcPercepScore() -> Double{
-        /*
-         For now, I am making this a very simple function.  Basically, I am only going to
-         look at the deltaE values that were answered correctly and take the average of them
-         to produce what the person's delta e score is.  Then I will use that in my basic
-         formula to convert that to the perceptibility score.  Maybe this could work and I just
-         make the user keep answering questions until they get 10 answers correct?  That could
-         be a good UI element too (like a cool progressbar or something?).  Going with this as
-         the assumption right now so I should just be able to take the average of the deltaE values
-         in the answered correctly array.  It is important that instead of narrowing in on what the
-         user's deltaE is, that we instead start with a small deltaE and work our way up so that
-         there aren't large outliers in the deltaE correctly answered array.
-         */
-//        var answeredCorrectly = 0
-//        var addedDeltaE =
-//        for elem in answers{
-//
-//            // Check if the answer was correct
-//            if elem.correct == true {
-//
-//            } else{
-//
-//            }
-        
-        let sum = correctAnswersDeltaE.reduce(0, +)
-        let avgDeltaE = Double(sum)/Double(numToGetCorrect)
-        let maxDeltaE = (139032).squareRoot()
-        
-        // Using the basic perceptibility score formula of:
-        /*
-         Max deltaE = 372.86995051894434 (sqrt(139032))
-            will have to be adjusted based on the penalizing factor
-         K = penalizing factor so that deltaE of .001 apears much better than .1
-         
-         Max score will depend on Max DeltaE and K so that no one has a negative score
-            (a blind person would be expected to get a 0)
-         */
-        
-        let penalizingFactor = 2.3
-        let maxPerceptibilityScore = maxDeltaE*penalizingFactor
-        
-        return maxPerceptibilityScore - (avgDeltaE*penalizingFactor)
-    }
+}
 
-
+extension Collection where Iterator.Element == Int {
+    var convertToDouble: [Double] {
+        return compactMap{ Double($0) }
+    }
+    var convertToFloat: [Float] {
+        return compactMap{ Float($0) }
+    }
 }

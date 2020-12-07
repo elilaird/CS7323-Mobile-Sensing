@@ -117,16 +117,6 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nan-AB-d7K">
-                                <rect key="frame" x="20" y="658" width="374" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Yes">
-                                    <color key="titleColor" systemColor="separatorColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="yesClick:" destination="CtE-OU-IMG" eventType="touchUpInside" id="6ZP-Y8-pbT"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Can you tell the difference in the colors?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2S-3Y-Djl">
                                 <rect key="frame" x="32" y="139" width="350" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -134,15 +124,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyt-gJ-iqK">
-                                <rect key="frame" x="20" y="744" width="374" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c34-mF-dUt">
+                                <rect key="frame" x="32" y="650" width="350" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="No">
-                                    <color key="titleColor" systemColor="separatorColor"/>
-                                    <color key="titleShadowColor" systemColor="linkColor"/>
-                                </state>
+                                <state key="normal" title="Yes"/>
                                 <connections>
-                                    <action selector="noClick:" destination="CtE-OU-IMG" eventType="touchUpInside" id="mlJ-7o-60h"/>
+                                    <action selector="yesClick:" destination="CtE-OU-IMG" eventType="touchUpInside" id="cd0-zT-GVG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7H-XQ-Yon">
+                                <rect key="frame" x="32" y="733" width="350" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="No"/>
+                                <connections>
+                                    <action selector="noClick:" destination="CtE-OU-IMG" eventType="touchUpInside" id="Yhl-Ms-Xap"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -150,24 +145,23 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0uu-Gy-kD5" firstAttribute="leading" secondItem="gHL-8Y-dFb" secondAttribute="leadingMargin" id="29e-6n-yZT"/>
-                            <constraint firstItem="mzA-AW-T6k" firstAttribute="bottom" secondItem="lyt-gJ-iqK" secondAttribute="bottom" constant="70" id="36A-Bv-QM3"/>
+                            <constraint firstItem="r7H-XQ-Yon" firstAttribute="leading" secondItem="mzA-AW-T6k" secondAttribute="leading" constant="32" id="2pt-6v-d6U"/>
                             <constraint firstItem="0uu-Gy-kD5" firstAttribute="centerY" secondItem="gHL-8Y-dFb" secondAttribute="centerY" id="6ae-LU-k9s"/>
-                            <constraint firstItem="lyt-gJ-iqK" firstAttribute="leading" secondItem="mzA-AW-T6k" secondAttribute="leading" constant="20" id="9IK-eP-nAN"/>
-                            <constraint firstItem="mzA-AW-T6k" firstAttribute="trailing" secondItem="Nan-AB-d7K" secondAttribute="trailing" constant="20" id="I7t-CY-Mgn"/>
-                            <constraint firstItem="lyt-gJ-iqK" firstAttribute="top" secondItem="Nan-AB-d7K" secondAttribute="bottom" constant="38" id="ILy-Y5-CmO"/>
-                            <constraint firstItem="lyt-gJ-iqK" firstAttribute="top" secondItem="Nan-AB-d7K" secondAttribute="bottom" constant="38" id="Qq6-Hr-br9"/>
-                            <constraint firstItem="mzA-AW-T6k" firstAttribute="trailing" secondItem="lyt-gJ-iqK" secondAttribute="trailing" constant="20" id="brG-a0-zCC"/>
+                            <constraint firstItem="r7H-XQ-Yon" firstAttribute="top" secondItem="c34-mF-dUt" secondAttribute="bottom" constant="35" id="CnJ-8X-7LI"/>
+                            <constraint firstItem="mzA-AW-T6k" firstAttribute="trailing" secondItem="r7H-XQ-Yon" secondAttribute="trailing" constant="32" id="MNj-Nv-3sN"/>
+                            <constraint firstItem="mzA-AW-T6k" firstAttribute="bottom" secondItem="r7H-XQ-Yon" secondAttribute="bottom" constant="81" id="PrS-Ab-z1p"/>
+                            <constraint firstItem="r7H-XQ-Yon" firstAttribute="top" secondItem="c34-mF-dUt" secondAttribute="bottom" constant="35" id="QUR-tt-Lo4"/>
+                            <constraint firstItem="c34-mF-dUt" firstAttribute="top" secondItem="0uu-Gy-kD5" secondAttribute="bottom" constant="121" id="VIC-Qu-HAm"/>
+                            <constraint firstItem="c34-mF-dUt" firstAttribute="leading" secondItem="mzA-AW-T6k" secondAttribute="leading" constant="32" id="cv2-uN-QMN"/>
                             <constraint firstItem="0uu-Gy-kD5" firstAttribute="centerX" secondItem="gHL-8Y-dFb" secondAttribute="centerX" id="fGu-uf-it6"/>
-                            <constraint firstItem="Nan-AB-d7K" firstAttribute="leading" secondItem="mzA-AW-T6k" secondAttribute="leading" constant="20" id="jFE-mr-quv"/>
                             <constraint firstItem="0uu-Gy-kD5" firstAttribute="top" secondItem="mzA-AW-T6k" secondAttribute="top" constant="279" id="n9E-Yh-VkZ"/>
-                            <constraint firstItem="Nan-AB-d7K" firstAttribute="top" secondItem="0uu-Gy-kD5" secondAttribute="bottom" constant="129" id="qmh-LZ-mYe"/>
+                            <constraint firstItem="mzA-AW-T6k" firstAttribute="trailing" secondItem="c34-mF-dUt" secondAttribute="trailing" constant="32" id="nh1-4T-kng"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fAs-jg-5Ak"/>
                     <connections>
                         <outlet property="leftColorView" destination="xgH-zX-xyI" id="Zbh-0s-rnW"/>
                         <outlet property="rightColorView" destination="gaN-1w-MFH" id="jMD-ar-pxS"/>
-                        <outlet property="yesButton" destination="Nan-AB-d7K" id="fQT-zE-Fgq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYR-0c-kfA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -194,12 +188,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="separatorColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
