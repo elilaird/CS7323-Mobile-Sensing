@@ -29,6 +29,8 @@ define("port", default=8000, help="run on the given port", type=int)
 
 # Utility to be used when creating the Tornado server
 # Contains the handlers and the database connection
+
+
 class Application(tornado.web.Application):
     def __init__(self):
         '''Store necessary handlers,
@@ -37,40 +39,45 @@ class Application(tornado.web.Application):
 
         handlers = [(r"/[/]?", BaseHandler),
                     (r"/Handlers[/]?",        th.PrintHandlers),
-                    (r"/AddDataPoint[/]?",    th.UploadLabeledDatapointHandler),
+                    (r"/AddDataPoint[/]?",
+                     th.UploadLabeledDatapointHandler),
                     (r"/GetNewDatasetId[/]?", th.RequestNewDatasetId),
-                    (r"/UpdateModel[/]?",     th.UpdateModelForDatasetId),     
-                    (r"/PredictOne[/]?",      th.PredictOneFromDatasetId),  
+                    (r"/UpdateModel[/]?",     th.UpdateModelForDatasetId),
+                    (r"/PredictOne[/]?",      th.PredictOneFromDatasetId),
                     (r"/GetExample[/]?",      eh.TestHandler),
                     (r"/DoPost[/]?",          eh.PostHandlerAsGetArguments),
                     (r"/PostWithJson[/]?",    eh.JSONPostHandler),
-                    (r"/MSLC[/]?",            eh.MSLC),             
+                    (r"/MSLC[/]?",            eh.MSLC),
+                    (r"/GetColorDeltaE[/]?",  th.GetColorDeltaE),
                     ]
 
         self.handlers_string = str(handlers)
 
         try:
-            self.client  = MongoClient(serverSelectionTimeoutMS=50) # local host, default port
-            print(self.client.server_info()) # force pymongo to look for possible running servers, error if none running
+            # local host, default port
+            self.client = MongoClient(serverSelectionTimeoutMS=50)
+            # force pymongo to look for possible running servers, error if none running
+            print(self.client.server_info())
             # if we get here, at least one instance of pymongo is running
             print("Found mongo")
-            self.db = self.client.turidatabase # database with labeledinstances, models
-            
+            self.db = self.client.turidatabase  # database with labeledinstances, models
+
         except ServerSelectionTimeoutError as inst:
             print('Could not initialize database connection, stopping execution')
             print('Are you running a valid local-hosted instance of mongodb?')
             print('   Navigate to where mongo db is installed and run')
             print('   something like $./mongod --dbpath "/data/db"')
             #raise inst
-        
-        self.clf = {} # the classifier model (in-class assignment, you might need to change this line!)
+
+        # the classifier model (in-class assignment, you might need to change this line!)
+        self.clf = {}
         # but depending on your implementation, you may not need to change it  ¯\_(ツ)_/¯
 
-        settings = {'debug':True}
+        settings = {'debug': True}
         tornado.web.Application.__init__(self, handlers, **settings)
 
     def __exit__(self):
-        self.client.close() # just in case
+        self.client.close()  # just in case
 
 
 def main():
@@ -81,5 +88,6 @@ def main():
     http_server.listen(options.port, address="0.0.0.0")
     IOLoop.instance().start()
 
+
 if __name__ == "__main__":
-    application=tornado.wsgi.WSGIAdapter(main())
+    application = tornado.wsgi.WSGIAdapter(main())
