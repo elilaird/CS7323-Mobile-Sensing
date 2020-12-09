@@ -11,6 +11,8 @@
     perceptibility score for the user.
  */
 
+let SERVER_URL = "http://35.239.233.247:8000"
+
 import Foundation
 import UIKit
 
@@ -60,6 +62,7 @@ class DeltaEAdjustor: NSObject {
     
     var lowestDeltaESeen:Float = 1000.0 // init to high value to avoid issues
     var lowestDeltaENotSeen:Float = 1.0
+    let maxDeltaE:Float = 40
     
     // Step 1 after color comparison
     func updateCouldDistinguish(couldDistinguishCurrentDeltaE: Bool){
@@ -97,11 +100,16 @@ class DeltaEAdjustor: NSObject {
     }
 }
 
-//func calculatePerceptibilityScore(deltaE: Float){
-//    let maxDeltaE = (139032).squareRoot()
-//
-//
-//}
+func exp(power: Double) -> Double{
+    return pow(M_E, power)
+}
+
+func calculatePerceptibilityScore(deltaE: Float) -> Float{
+    
+    let scaled_sigmoid = 450*(1/(1 + exp(-1*Double(deltaE)/10)))
+    
+    return Float(450 - scaled_sigmoid)
+}
 
 struct Color {
     let r: CGFloat
@@ -112,6 +120,5 @@ struct Color {
 struct ColorPair {
     let leftColor: Color
     let rightColor: Color
-    let deltaE: Float
 }
 
