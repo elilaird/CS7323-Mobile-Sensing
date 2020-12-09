@@ -11,6 +11,8 @@
     perceptibility score for the user.
  */
 
+let SERVER_URL = "http://35.239.233.247:8000"
+
 import Foundation
 import UIKit
 
@@ -19,17 +21,7 @@ class DeltaEAdjustor: NSObject {
     /*
      Idea here is that the view controller will get a deltaE value from this adjustor and then request 3 pairs
      of colors from the server with each pair being approximately the deltaE apart.  The user will then:
-        
-        1. Answer if they can tell the difference between the first pair
-        2. Answer if they can tell the difference between the second pair
-        3. (conditional) Answer if they can tell the difference between the third pair
-            a. If they answer yes/no to the first 2, then no need for the 3rd one (assume they can tell/not tell the difference)
-            b. If they split between yes/no on the first 2, use the 3rd as the tiebreaker
-     
-     
-     couldDistinguishCurrentDeltaE is the best of 3 from the answers above.  The UI will ask to adjust the
-     deltaE based on this criteria.
-     
+    
      If they could distinguish with the current deltaE, we need to make the next deltaE harder to see.
      If they could not distinguish, we need to increase the deltaE (easier to see)
      
@@ -52,11 +44,10 @@ class DeltaEAdjustor: NSObject {
      */
     
     // This should be initialized with something from disk or server (in case the user has used the app before)
-    var userAvgDeltaE = 0.0
     var currentDeltaE:Float = 1.0
     var couldDistinguishDeltaEValues:[Float] = []
     var couldNotDistinguishDeltaEValues:[Float] = []
-    let stoppingCriteria:Float = 0.01
+    let stoppingCriteria:Float = 0.1
     
     var lowestDeltaESeen:Float = 1000.0 // init to high value to avoid issues
     var lowestDeltaENotSeen:Float = 1.0
@@ -75,7 +66,8 @@ class DeltaEAdjustor: NSObject {
     
     // Step 2 after color comparison
     func shouldAdjustDeltaE()->Bool{
-        if (lowestDeltaESeen - lowestDeltaENotSeen) <= stoppingCriteria{
+        // Make sure we want to continue
+        if (lowestDeltaESeen - lowestDeltaENotSeen) <= stoppingCriteria {
             return true
         }
         return false
@@ -83,25 +75,36 @@ class DeltaEAdjustor: NSObject {
     
     // Optional: Step 3 after color comparison
     func adjustDeltaE() -> Float{
+        // If calling the first time, return the intialized value of 1.0
+        if couldDistinguishDeltaEValues.count == 0 && couldNotDistinguishDeltaEValues.count == 0{
+            return currentDeltaE
+        }
+        
+        // If the user hasn't seen any of the distinctions yet, just increase by 10%
+        if couldDistinguishDeltaEValues.count == 0 {
+            currentDeltaE *= 1.1
+            return currentDeltaE
+        }
+        
+        // User has seen differences and we want to zero in on their ability
         let distIncrement:Float = (lowestDeltaESeen-lowestDeltaENotSeen)*0.1
         currentDeltaE = lowestDeltaENotSeen + distIncrement
         return currentDeltaE
     }
     
-    // Dummy, delete later
-    func dummyShouldAdjustDeltaE() -> Bool{
-        if couldDistinguishDeltaEValues.count == 3{
-            return true
-        }
-        return false
+    func exp(power: Double) -> Double{
+        return pow(M_E, power)
     }
-}
 
-//func calculatePerceptibilityScore(deltaE: Float){
-//    let maxDeltaE = (139032).squareRoot()
-//
-//
-//}
+    func calculatePerceptibilityScore() -> Float{
+        let deltaE = couldDistinguishDeltaEValues.min()
+        print("Best deltaE: \(String(describing: deltaE))")
+        let scaled_sigmoid = 450*(1/(1 + exp(power: -1*Double(deltaE!)/10)))
+        
+        return Float(450 - scaled_sigmoid)
+    }
+
+}
 
 struct Color {
     let r: CGFloat
@@ -112,6 +115,5 @@ struct Color {
 struct ColorPair {
     let leftColor: Color
     let rightColor: Color
-    let deltaE: Float
 }
 
