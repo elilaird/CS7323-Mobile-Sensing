@@ -28,12 +28,11 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     
     // New cleaner variables
     let operationQueue = OperationQueue()
-    var affirmativeAnswersDeltaE:[Float] = []
-    let numAffirmativeRequired = 10
-    var currentDeltaE: Float = 30 // Start with the same value in the adjustor
+    var currentDeltaE: Float = 1.0 // Start with the same value in the adjustor
     var currentColorPair = ColorPair(leftColor: Color(r: 0, g: 0, b: 0), rightColor: Color(r: 0, g: 0, b: 0))
     var colorPairsAtDeltaE: [ColorPair] = []
     var currentDeltaEAffirmativeCount: Int = 0
+    var perceptibilityScore: Float = 0
     
     let deAdjustor = DeltaEAdjustor()
     
@@ -41,31 +40,20 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup the first comparison
-//        colorPairsAtDeltaE = dummyGetColorsWithDeltaE()
-//        serverGetColors(deltaE: currentDeltaE)
-//
-//        // Since async call, this can cause an issue.
-//        currentColorPair = colorPairsAtDeltaE.removeFirst()
-//        displayComparison()
+        // Get the delta E value that we want to investigate from the DeltaEAdjustor (starts at 1)
+        currentDeltaE = deAdjustor.adjustDeltaE()
         
         // Might be good for loading in the future: https://www.raywenderlich.com/35-alamofire-tutorial-getting-started
         serverGetColorsSetup(deltaE: currentDeltaE)
-        
-        print(calculatePerceptibilityScore(deltaE: 0))
-        print(calculatePerceptibilityScore(deltaE: 7))
-        
     }
     
     
     @IBAction func yesClick(_ sender: Any) {
         // Add to affirmative answers
-        affirmativeAnswersDeltaE.append(currentDeltaE)
         currentDeltaEAffirmativeCount += 1
 
         // Setup the next comparison
         setupNextComparison()
-        
     }
     
     @IBAction func noClick(_ sender: Any) {
@@ -85,7 +73,7 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     }
     
     func isLastComparison() -> Bool{
-        return deAdjustor.dummyShouldAdjustDeltaE()
+        return deAdjustor.shouldAdjustDeltaE()
     }
     
     func displayComparison(){
@@ -120,51 +108,38 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
             
             // Check if we have enough affirmative answers
             if isLastComparison(){
+                // Calculate the perceptibility score
+                perceptibilityScore = deAdjustor.calculatePerceptibilityScore()
+                print("Perceptibility score: \(perceptibilityScore)")
                 // Segue back to main screen
-                segueBackToMain()  // Deallocate these variables or is this done automatically?? -- TODO
+                segueBackToMain()
             }
             
-            
             // Request pairs from server with deltaE values
+            currentDeltaE = deAdjustor.adjustDeltaE()
             
-            // DUMMY DATA: just making it run right now
-//            colorPairsAtDeltaE = dummyGetColorsWithDeltaE()
-            serverGetColors(deltaE: 5.0)
+            // If we got a new delta E of greater than 40, done
+            if currentDeltaE > 40{
+                perceptibilityScore = 0.0
+                print("Perceptibility score: \(perceptibilityScore)")
+                
+                // Segue back to main screen
+                segueBackToMain()
+            }
+            
+            // Get new pairs
+            serverGetColorsSetup(deltaE: currentDeltaE)
             
             // Reset variables
             currentDeltaEAffirmativeCount = 0
+        }else{
+            // Set the current pair
+            currentColorPair = colorPairsAtDeltaE.removeFirst()
         }
-        
-        // Set the current pair
-        currentColorPair = colorPairsAtDeltaE.removeFirst()
     }
     
-    func serverGetColors(deltaE: Float) {
-        // create a GET request for new color pairs
-        let baseURL = "\(SERVER_URL)/GetColorDeltaE?delta=" + String(deltaE)
-        
-        let getUrl = URL(string: baseURL)
-        let request: URLRequest = URLRequest(url: getUrl!)
-        let dataTask : URLSessionDataTask = self.session.dataTask(with: request,
-            completionHandler:{(data, response, error) in
-                if(error != nil){
-                    print("Response:\n%@",response!) // **** Should show that we had an issue connecting to the server and return to the main screen
-                }
-                else{
-                    let jsonDictionary = self.convertDataToDictionary(with: data)
-                    
-//                    // This better be an integer
-//                    if let dsid = jsonDictionary["dsid"]{
-//                        self.dsid = dsid as! Int
-//                    }
-                    self.convertDictToColorPairs(with: jsonDictionary)
-                }
-                
-        })
-        
-        dataTask.resume() // start the task
-    }
     
+    // MARK: Server Utilities
     func serverGetColorsSetup(deltaE: Float) {
         // create a GET request for new color pairs
         let baseURL = "\(SERVER_URL)/GetColorDeltaE?delta=" + String(deltaE)
@@ -179,13 +154,13 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
                 else{
                     let jsonDictionary = self.convertDataToDictionary(with: data)
                     
-//                    // This better be an integer
-//                    if let dsid = jsonDictionary["dsid"]{
-//                        self.dsid = dsid as! Int
-//                    }
-                    self.convertDictToColorPairs(with: jsonDictionary)
-                    self.currentColorPair = self.colorPairsAtDeltaE.removeFirst()
-                    self.displayComparison()
+                    // Set the list of colorPairsAtDeltaE
+                    if jsonDictionary["PairA"] != nil{
+                        self.convertDictToColorPairs(with: jsonDictionary)
+                        self.currentColorPair = self.colorPairsAtDeltaE.removeFirst()
+                        self.displayComparison()
+                    }
+                
                 }
                 
         })
@@ -199,7 +174,6 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
         let pairB = dict["PairB"]
         let pairC = dict["PairC"]
         var newPairs: [ColorPair] = []
-        print(dict)
         
         for pair in [pairA, pairB, pairC]{
             newPairs.append(getPair(pairDict: pair as! NSDictionary))
@@ -250,41 +224,6 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
             }
             return NSDictionary() // just return empty
         }
-    }
-    
-    
-    // DUMMY FUNCTIONS FOR RIGHT NOW
-    func dummyGetColorsWithDeltaE() -> [ColorPair]{
-
-        var colors: [ColorPair] = []
-        
-        for _ in 1...3{
-            var rr = Int.random(in: 0..<256)
-            var rg = Int.random(in: 0..<256)
-            var rb = Int.random(in: 0..<256)
-            
-            var (cr, cg, cb) = dummyMakeCGFloatColor(color: (rr, rg, rb))
-            let color = Color(r: cr, g: cg, b: cb)
-            
-            rr = Int.random(in: 0..<256)
-            rg = Int.random(in: 0..<256)
-            rb = Int.random(in: 0..<256)
-            
-            (cr, cg, cb) = dummyMakeCGFloatColor(color: (rr, rg, rb))
-            let color2 = Color(r: cr, g: cg, b: cb)
-            
-            colors.append(ColorPair(leftColor: color, rightColor: color2))
-        }
-        
-        return colors
-    }
-    
-    func dummyMakeCGFloatColor(color: (Int, Int, Int)) -> (CGFloat, CGFloat, CGFloat){
-        let (r, g, b) = color
-        let newR = CGFloat(r)
-        let newG = CGFloat(g)
-        let newB = CGFloat(b)
-        return (newR, newG, newB)
     }
     
 }
