@@ -13,9 +13,9 @@ let CALIBRATION_FREQUENCY:Float = 1000.0
 let MAX_TEST_FREQUENCY:Float = 10000.0
 let MIN_TEST_FREQUENCY:Float = 100.0
 
-class DataPipeLine {var dbMax:Float = 0.0; var dbHalf:Float = 0.0; init(m:Float=0, h:Float=0){dbMax=m; dbHalf=h}}
 
-class AudioViewController: UIViewController {
+class AudioViewController: UIViewController, DataDelegate{
+    
 
     @IBOutlet weak var yesButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
@@ -30,24 +30,6 @@ class AudioViewController: UIViewController {
     
     var canHear:Bool = false
     var buttonPressed:Bool = false
-    var pipe = DataPipeLine()  {
-        
-        didSet {
-            DispatchQueue.main.async{
-                print("here")
-                
-                if(self.pipe.dbMax != 0.0){
-                    self.dbMax = self.pipe.dbMax
-                    self.dbHalf = self.pipe.dbHalf
-                    
-                    
-                    self.audio.pause()
-                    print("Finished Calibrating...")
-                    self.waitLabel.isHidden = true
-                }
-            }
-        }
-    }
     
     
     var dbMax:Float = 0.0
@@ -63,7 +45,9 @@ class AudioViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE, datapipe: &self.pipe)
+        self.audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
+        
+        self.audio.delegate = self
 
         //hide buttons initially
         self.toggleHidden(withValue: true)
@@ -109,6 +93,7 @@ class AudioViewController: UIViewController {
         self.waitLabel.isHidden = !toggle
     
     }
+    
     
     //Audio Functions
 

@@ -10,6 +10,10 @@ import Foundation
 import Accelerate
 import MediaPlayer
 
+protocol DataDelegate: AudioViewController {
+    func foundDbValues(withMax max:Float, andHalf half:Float)
+}
+
 class AudioModel {
     
     // MARK: Properties
@@ -17,6 +21,8 @@ class AudioModel {
     private var phase:Float = 0.0
     private var phaseIncrement:Float = 0.0
     private var sineWaveRepeatMax:Float = Float(2*Double.pi)
+    
+    weak var delegate:DataDelegate?
  
     var dbMax:Float = 0.0
     var dbHalf:Float = 0.0
@@ -30,8 +36,6 @@ class AudioModel {
     var fftData:[Float]
     var fftDecibels:[Float]
     var dataEqualizer:[Float]
-
-    var pipeline:UnsafeMutablePointer<DataPipeLine>!
     
     var sineFrequency:Float = 0.0 {
         didSet{
@@ -41,14 +45,13 @@ class AudioModel {
     
     
     // MARK: Public Methods
-    init(buffer_size:Int, datapipe: UnsafeMutablePointer<DataPipeLine>) {
+    init(buffer_size:Int) {
         BUFFER_SIZE = buffer_size
         // anything not lazily instantiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         fftDecibels = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         dataEqualizer = Array.init(repeating: 0.0, count: 20)
-        pipeline = datapipe
     }
     
     // public function for starting processing of microphone data
@@ -98,8 +101,6 @@ class AudioModel {
         
         print("Calibrating...")
         
-        //self.pipeline = &pipe
-        
         //set volume to max
         MPVolumeView.setVolume(1.0)
 
@@ -108,28 +109,16 @@ class AudioModel {
         
         
         let index:Int = (Int(freq) * BUFFER_SIZE) / 44100
+
         
-//        do {
-//            sleep(5)
-//        }
-        
-       DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Change `2.0` to the desired number of seconds.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Change `2.0` to the desired number of seconds.
 
             self.dbMax = self.fftData[index] + self.DB_ERROR
             self.dbHalf = self.dbMax - self.DB_HALF_OFFSET
             print("Db Max: \(self.dbMax) ")
-        
-        self.pipeline.pointee = DataPipeLine(m:self.dbMax, h:self.dbHalf)
+            self.delegate?.foundDbValues(withMax: self.dbMax, andHalf: self.dbHalf)
     
-       }
-        
-        //while(self.WAIT){}
-        
-        //self.pause()
-        
-        //print("Finished Calibrating...")
-        
-        
+        }
         
     }
     
