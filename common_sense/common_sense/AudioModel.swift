@@ -8,6 +8,7 @@
 
 import Foundation
 import Accelerate
+import MediaPlayer
 
 class AudioModel {
     
@@ -16,7 +17,12 @@ class AudioModel {
     private var phase:Float = 0.0
     private var phaseIncrement:Float = 0.0
     private var sineWaveRepeatMax:Float = Float(2*Double.pi)
-    //private var peakFinder:PeakFinder
+ 
+    var dbMax:Float = 0.0
+    var dbHalf:Float = 0.0
+    
+    let DB_ERROR:Float = 13.0
+    let DB_HALF_OFFSET:Float = 10.0
     
     // thse properties are for interfaceing with the API
     // the user can access these arrays at any time and plot them if they like
@@ -25,6 +31,7 @@ class AudioModel {
     var fftDecibels:[Float]
     var dataEqualizer:[Float]
 
+    var pipeline:UnsafeMutablePointer<DataPipeLine>!
     
     var sineFrequency:Float = 0.0 {
         didSet{
@@ -34,14 +41,14 @@ class AudioModel {
     
     
     // MARK: Public Methods
-    init(buffer_size:Int) {
+    init(buffer_size:Int, datapipe: UnsafeMutablePointer<DataPipeLine>) {
         BUFFER_SIZE = buffer_size
-        // anything not lazily instatntiated should be allocated here
+        // anything not lazily instantiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         fftDecibels = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         dataEqualizer = Array.init(repeating: 0.0, count: 20)
-   
+        pipeline = datapipe
     }
     
     // public function for starting processing of microphone data
@@ -55,6 +62,7 @@ class AudioModel {
                             selector: #selector(self.runEveryInterval),
                             userInfo: nil,
                             repeats: true)
+
     }
     
     
@@ -76,6 +84,52 @@ class AudioModel {
     }
     
     func pureToneTest(){
+        
+        print("Starting Tone Tests...")
+        
+        MPVolumeView.setVolume(0.5)
+        
+        
+        
+    }
+    
+    
+    func calibrate(withFreq freq:Float=1000){
+        
+        print("Calibrating...")
+        
+        //self.pipeline = &pipe
+        
+        //set volume to max
+        MPVolumeView.setVolume(1.0)
+
+        self.play()
+        
+        
+        
+        let index:Int = (Int(freq) * BUFFER_SIZE) / 44100
+        
+//        do {
+//            sleep(5)
+//        }
+        
+       DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Change `2.0` to the desired number of seconds.
+
+            self.dbMax = self.fftData[index] + self.DB_ERROR
+            self.dbHalf = self.dbMax - self.DB_HALF_OFFSET
+            print("Db Max: \(self.dbMax) ")
+        
+        self.pipeline.pointee = DataPipeLine(m:self.dbMax, h:self.dbHalf)
+    
+       }
+        
+        //while(self.WAIT){}
+        
+        //self.pause()
+        
+        //print("Finished Calibrating...")
+        
+        
         
     }
     
@@ -99,22 +153,8 @@ class AudioModel {
     
     //==========================================
 //    // MARK: Private Methods
-//    private lazy var fileReader:AudioFileReader? = {
-//        if let url = Bundle.main.url (forResource: "satisfaction", withExtension: "mp3"){
-//            var tmpFileReader:AudioFileReader? = AudioFileReader.init(audioFileURL: url, samplingRate: Float(audioManager!.samplingRate), numChannels: audioManager!.numOutputChannels)
-//
-//            tmpFileReader!.currentTime = 0.0
-//            print("Audio file success loaded \(url)")
-//            return tmpFileReader
-//        }else{
-//            print("Error loading file")
-//            return nil
-//        }
-//    }()
-//
-    
-    // NONE for this model
-    
+
+
     //==========================================
     // MARK: Model Callback Methods
     @objc
@@ -127,40 +167,13 @@ class AudioModel {
             // now take FFT
             fftHelper!.performForwardFFT(withData: &timeData,
                                          andCopydBMagnitudeToBuffer: &fftData)
-
             
-//            peakFinder.setFFTData(fftArray: fftData)
-//
-//            var peaks:[PeakFinder.Peak]? = nil
-//
-//            // Set peaks based on module, tighter peak window for doppler
-//            if dopplerView{
-//                peaks = peakFinder.getPeaks(withFl: Float(self.dopplerFreq-150), withFh: Float(self.dopplerFreq+150), expectedHzApart: 15)
-//            }else{
-//                peaks = peakFinder.getPeaks(withFl: nil, withFh: nil, expectedHzApart: 50)
-//            }
-//
-//
-//
-//            if peaks!.count > 1 {
-//                let sortedPeaks = peakFinder.sortPeaksDescendingMagnitude(peaks: peaks!, topK: nil)
-//                self.loudestFreq[0] = sortedPeaks[0].f2!
-//                self.loudestFreq[1] = sortedPeaks[1].f2!
-//
-//                //print("Loudest Freq: \(loudestFreq[0]), Second Loudest Freq: \(loudestFreq[1])")
-//
-//                // Determine motion of hand based on magnitude and frequency
-//                if(sortedPeaks[1].m2! > Float(-38)){
-//                    if(loudestFreq[1] > self.dopplerFreq){
-//                        self.dopplerStatus = "Moving Toward"
-//                    }else{
-//                        self.dopplerStatus = "Moving Away"
-//                    }
-//                }else{
-//                    self.dopplerStatus = "No Motion"
-//                }
-//
-//            }
+
+            let index:Int = (Int(1000.0) * BUFFER_SIZE) / 44100
+            //let interp = (fftData[index-1] - fftData[index+1]) / (fftData[index+1] - 2*fftData[index] + fftData[index-1])
+            
+            //print(fftData[index])
+            //print(self.fftData[Int(index)-2...Int(index)+2])
             
         }
     }
@@ -176,11 +189,6 @@ class AudioModel {
         self.inputBuffer?.addNewFloatData(data, withNumSamples: Int64(numFrames))
     }
     
-//    private func handleSpeakerQueryWithAudioFile(data:Optional<UnsafeMutablePointer<Float>>, numFrames:UInt32, numChannels:UInt32){
-//        if let file = self.fileReader{
-//            file.retrieveFreshAudio(data, numFrames: numFrames, numChannels: numChannels)
-//            self.inputBuffer?.addNewFloatData(data, withNumSamples: Int64(numFrames))
-//        }
-//    }
+
     
 }
