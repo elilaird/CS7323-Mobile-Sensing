@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		051013902578781100DC83E6 /* common_senseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0510138F2578781100DC83E6 /* common_senseTests.swift */; };
 		0510139B2578781100DC83E6 /* common_senseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0510139A2578781100DC83E6 /* common_senseUITests.swift */; };
 		052C2B30257D898500B00F17 /* ColorDistinctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */; };
+		05CFD3382581A0DC00760E22 /* SigmaSwiftStatistics in Frameworks */ = {isa = PBXBuildFile; productRef = 05CFD3372581A0DC00760E22 /* SigmaSwiftStatistics */; };
+		05CFD33D2581A18400760E22 /* StatOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD33C2581A18400760E22 /* StatOps.swift */; };
 		05EA54F7257EE69C00C6E442 /* ColorOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EA54F6257EE69C00C6E442 /* ColorOps.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,7 @@
 		0510139A2578781100DC83E6 /* common_senseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = common_senseUITests.swift; sourceTree = "<group>"; };
 		0510139C2578781100DC83E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDistinctionTest.swift; sourceTree = "<group>"; };
+		05CFD33C2581A18400760E22 /* StatOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatOps.swift; sourceTree = "<group>"; };
 		05EA54F6257EE69C00C6E442 /* ColorOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOps.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05CFD3382581A0DC00760E22 /* SigmaSwiftStatistics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +112,7 @@
 				051013752578781000DC83E6 /* AppDelegate.swift */,
 				051013772578781000DC83E6 /* SceneDelegate.swift */,
 				051013792578781000DC83E6 /* ViewController.swift */,
+				05CFD33C2581A18400760E22 /* StatOps.swift */,
 				0510137B2578781000DC83E6 /* Main.storyboard */,
 				052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */,
 				05EA54F6257EE69C00C6E442 /* ColorOps.swift */,
@@ -153,6 +158,9 @@
 			dependencies = (
 			);
 			name = common_sense;
+			packageProductDependencies = (
+				05CFD3372581A0DC00760E22 /* SigmaSwiftStatistics */,
+			);
 			productName = common_sense;
 			productReference = 051013722578781000DC83E6 /* common_sense.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +232,9 @@
 				Base,
 			);
 			mainGroup = 051013692578781000DC83E6;
+			packageReferences = (
+				05CFD3362581A0DC00760E22 /* XCRemoteSwiftPackageReference "SigmaSwiftStatistics" */,
+			);
 			productRefGroup = 051013732578781000DC83E6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -271,6 +282,7 @@
 				051013762578781000DC83E6 /* AppDelegate.swift in Sources */,
 				052C2B30257D898500B00F17 /* ColorDistinctionTest.swift in Sources */,
 				051013782578781000DC83E6 /* SceneDelegate.swift in Sources */,
+				05CFD33D2581A18400760E22 /* StatOps.swift in Sources */,
 				05EA54F7257EE69C00C6E442 /* ColorOps.swift in Sources */,
 				051013802578781000DC83E6 /* common_sense.xcdatamodeld in Sources */,
 			);
@@ -607,6 +619,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		05CFD3362581A0DC00760E22 /* XCRemoteSwiftPackageReference "SigmaSwiftStatistics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/SigmaSwiftStatistics.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		05CFD3372581A0DC00760E22 /* SigmaSwiftStatistics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 05CFD3362581A0DC00760E22 /* XCRemoteSwiftPackageReference "SigmaSwiftStatistics" */;
+			productName = SigmaSwiftStatistics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0510137E2578781000DC83E6 /* common_sense.xcdatamodeld */ = {
