@@ -16,9 +16,10 @@
 		051013852578781100DC83E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 051013832578781100DC83E6 /* LaunchScreen.storyboard */; };
 		051013902578781100DC83E6 /* common_senseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0510138F2578781100DC83E6 /* common_senseTests.swift */; };
 		0510139B2578781100DC83E6 /* common_senseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0510139A2578781100DC83E6 /* common_senseUITests.swift */; };
-		E87BA664257EEFCA00B1281B /* FoldingCell in Frameworks */ = {isa = PBXBuildFile; productRef = E87BA663257EEFCA00B1281B /* FoldingCell */; };
+		E87BA664257EEFCA00B1281B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E87BA663257EEFCA00B1281B /* SwiftPackageProductDependency */; };
 		E87BA669257EF92300B1281B /* FoldingCellsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */; };
 		E87BA684258007FB00B1281B /* SensePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87BA683258007FB00B1281B /* SensePreviewCell.swift */; };
+		F628A4F6ED0F3DAEBCFB4A1A /* Pods_common_sense.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56F71A755BD7722AD9FE77FE /* Pods_common_sense.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E8B99E562583FC5900FB07C6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		051013722578781000DC83E6 /* common_sense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = common_sense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		051013752578781000DC83E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +68,9 @@
 		051013962578781100DC83E6 /* common_senseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = common_senseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0510139A2578781100DC83E6 /* common_senseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = common_senseUITests.swift; sourceTree = "<group>"; };
 		0510139C2578781100DC83E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F01F0282B71C87B56724EFC /* Pods-common_sense.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_sense.release.xcconfig"; path = "Target Support Files/Pods-common_sense/Pods-common_sense.release.xcconfig"; sourceTree = "<group>"; };
+		56F71A755BD7722AD9FE77FE /* Pods_common_sense.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_common_sense.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A99C9643A6DE0508F764D478 /* Pods-common_sense.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_sense.debug.xcconfig"; path = "Target Support Files/Pods-common_sense/Pods-common_sense.debug.xcconfig"; sourceTree = "<group>"; };
 		E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingCellsViewController.swift; sourceTree = "<group>"; };
 		E87BA683258007FB00B1281B /* SensePreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensePreviewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E87BA664257EEFCA00B1281B /* FoldingCell in Frameworks */,
+				E87BA664257EEFCA00B1281B /* BuildFile in Frameworks */,
+				F628A4F6ED0F3DAEBCFB4A1A /* Pods_common_sense.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +109,8 @@
 				0510138E2578781100DC83E6 /* common_senseTests */,
 				051013992578781100DC83E6 /* common_senseUITests */,
 				051013732578781000DC83E6 /* Products */,
+				E8B99E532583FC5900FB07C6 /* Frameworks */,
+				A32A6B3C0DF1508D2CE72B71 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +159,23 @@
 			path = common_senseUITests;
 			sourceTree = "<group>";
 		};
+		A32A6B3C0DF1508D2CE72B71 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A99C9643A6DE0508F764D478 /* Pods-common_sense.debug.xcconfig */,
+				2F01F0282B71C87B56724EFC /* Pods-common_sense.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E8B99E532583FC5900FB07C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				56F71A755BD7722AD9FE77FE /* Pods_common_sense.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,9 +183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0510139F2578781100DC83E6 /* Build configuration list for PBXNativeTarget "common_sense" */;
 			buildPhases = (
+				A69BF60E5AA8D9ECD3B1A041 /* [CP] Check Pods Manifest.lock */,
 				0510136E2578781000DC83E6 /* Sources */,
 				0510136F2578781000DC83E6 /* Frameworks */,
 				051013702578781000DC83E6 /* Resources */,
+				E8B99E562583FC5900FB07C6 /* Embed Frameworks */,
+				FE8A62C0E7568187A79D4AAA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -156,7 +196,7 @@
 			);
 			name = common_sense;
 			packageProductDependencies = (
-				E87BA663257EEFCA00B1281B /* FoldingCell */,
+				E87BA663257EEFCA00B1281B /* SwiftPackageProductDependency */,
 			);
 			productName = common_sense;
 			productReference = 051013722578781000DC83E6 /* common_sense.app */;
@@ -230,7 +270,7 @@
 			);
 			mainGroup = 051013692578781000DC83E6;
 			packageReferences = (
-				E87BA662257EEFCA00B1281B /* XCRemoteSwiftPackageReference "folding-cell" */,
+				E87BA662257EEFCA00B1281B /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 051013732578781000DC83E6 /* Products */;
 			projectDirPath = "";
@@ -269,6 +309,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A69BF60E5AA8D9ECD3B1A041 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-common_sense-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE8A62C0E7568187A79D4AAA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-common_sense/Pods-common_sense-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-common_sense/Pods-common_sense-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-common_sense/Pods-common_sense-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0510136E2578781000DC83E6 /* Sources */ = {
@@ -453,6 +535,7 @@
 		};
 		051013A02578781100DC83E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A99C9643A6DE0508F764D478 /* Pods-common_sense.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -473,6 +556,7 @@
 		};
 		051013A12578781100DC83E6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F01F0282B71C87B56724EFC /* Pods-common_sense.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -617,7 +701,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E87BA662257EEFCA00B1281B /* XCRemoteSwiftPackageReference "folding-cell" */ = {
+		E87BA662257EEFCA00B1281B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Ramotion/folding-cell.git";
 			requirement = {
@@ -628,9 +712,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E87BA663257EEFCA00B1281B /* FoldingCell */ = {
+		E87BA663257EEFCA00B1281B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E87BA662257EEFCA00B1281B /* XCRemoteSwiftPackageReference "folding-cell" */;
+			package = E87BA662257EEFCA00B1281B /* RemoteSwiftPackageReference */;
 			productName = FoldingCell;
 		};
 /* End XCSwiftPackageProductDependency section */

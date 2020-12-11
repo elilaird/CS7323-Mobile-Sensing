@@ -17,6 +17,8 @@ class FoldingCellsViewController: UITableViewController {
     }
     
     var cellHeights: [CGFloat] = []
+    
+    var cells: [String] = ["Hearing", "Vision", "Tremors"]
 
     // MARK: Life Cycle
     override func viewDidLoad() {
@@ -53,7 +55,7 @@ class FoldingCellsViewController: UITableViewController {
 extension FoldingCellsViewController {
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return 10
+        return 3
     }
 
     override func tableView(_: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -73,10 +75,11 @@ extension FoldingCellsViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! SensePreviewCell
         let durations: [TimeInterval] = [0.26, 0.2, 0.2]
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations
+        cell.lastCheckupLabel.text = cells[indexPath.row]
         return cell
     }
 

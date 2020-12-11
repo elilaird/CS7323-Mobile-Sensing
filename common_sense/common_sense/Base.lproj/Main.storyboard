@@ -216,10 +216,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Sample_Graph" translatesAutoresizingMaskIntoConstraints="NO" id="1VN-qi-wAS">
-                                                    <rect key="frame" x="18" y="150" width="338" height="191"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="95" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHF-3v-Xmr">
                                                     <rect key="frame" x="132" y="59" width="111" height="63"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -252,6 +248,11 @@
                                                     <color key="textColor" systemColor="systemRedColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cn1-ss-fMk" customClass="LineChartView" customModule="Charts">
+                                                    <rect key="frame" x="43" y="150" width="288" height="179"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.88606159399155859" alpha="0.84705882352941175" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -280,8 +281,12 @@
                                     <outlet property="AlertIcon" destination="a8z-0S-ovw" id="YyO-Ke-3lZ"/>
                                     <outlet property="containerView" destination="wrU-IB-eYa" id="C5W-rV-XO2"/>
                                     <outlet property="containerViewTop" destination="Kae-ct-fCi" id="tLn-rb-9j4"/>
+                                    <outlet property="expandedHeader" destination="ref-Ve-30W" id="zXI-HV-MW2"/>
                                     <outlet property="foregroundView" destination="6UO-CJ-jyA" id="e4h-aY-NYh"/>
                                     <outlet property="foregroundViewTop" destination="HzU-2X-yPE" id="xzk-As-WGn"/>
+                                    <outlet property="lastCheckupLabel" destination="Nld-XS-NVz" id="YEy-Jn-j1V"/>
+                                    <outlet property="lineChart" destination="cn1-ss-fMk" id="Kij-aO-k5q"/>
+                                    <outlet property="senseIcon" destination="Vdh-Ud-IUK" id="i3Z-Dp-I90"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -302,7 +307,6 @@
         <segue reference="vKv-Fi-6f5"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Sample_Graph" width="1380" height="918"/>
         <image name="ear" width="50" height="50"/>
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
