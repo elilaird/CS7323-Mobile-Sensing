@@ -19,6 +19,7 @@
 		052C2B30257D898500B00F17 /* ColorDistinctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */; };
 		05CFD3382581A0DC00760E22 /* SigmaSwiftStatistics in Frameworks */ = {isa = PBXBuildFile; productRef = 05CFD3372581A0DC00760E22 /* SigmaSwiftStatistics */; };
 		05CFD33D2581A18400760E22 /* StatOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD33C2581A18400760E22 /* StatOps.swift */; };
+		05CFD3572583BF3900760E22 /* UserDataOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD3562583BF3900760E22 /* UserDataOps.swift */; };
 		05EA54F7257EE69C00C6E442 /* ColorOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EA54F6257EE69C00C6E442 /* ColorOps.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		0510139C2578781100DC83E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDistinctionTest.swift; sourceTree = "<group>"; };
 		05CFD33C2581A18400760E22 /* StatOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatOps.swift; sourceTree = "<group>"; };
+		05CFD3562583BF3900760E22 /* UserDataOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataOps.swift; sourceTree = "<group>"; };
 		05EA54F6257EE69C00C6E442 /* ColorOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOps.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				051013752578781000DC83E6 /* AppDelegate.swift */,
 				051013772578781000DC83E6 /* SceneDelegate.swift */,
 				051013792578781000DC83E6 /* ViewController.swift */,
+				05CFD3562583BF3900760E22 /* UserDataOps.swift */,
 				05CFD33C2581A18400760E22 /* StatOps.swift */,
 				0510137B2578781000DC83E6 /* Main.storyboard */,
 				052C2B2F257D898500B00F17 /* ColorDistinctionTest.swift */,
@@ -285,6 +288,7 @@
 				05CFD33D2581A18400760E22 /* StatOps.swift in Sources */,
 				05EA54F7257EE69C00C6E442 /* ColorOps.swift in Sources */,
 				051013802578781000DC83E6 /* common_sense.xcdatamodeld in Sources */,
+				05CFD3572583BF3900760E22 /* UserDataOps.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
