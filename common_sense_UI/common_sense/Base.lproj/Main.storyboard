@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZZK-vn-KgM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
@@ -8,6 +8,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="WZ5-84-tFy">
+            <objects>
+                <navigationController id="ZZK-vn-KgM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FRL-YW-Lqa">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="U1f-wN-8sc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jP1-Tr-21U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-732" y="70"/>
+        </scene>
         <!--Landing Page Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -17,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CnV-ze-eB4">
-                                <rect key="frame" x="0.0" y="44" width="414" height="166.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="166.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Matthew" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZF-Xw-fN1">
                                         <rect key="frame" x="117" y="50" width="180" height="50"/>
@@ -29,7 +45,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Good afternoon," textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNA-S0-byH">
-                                        <rect key="frame" x="136" y="8" width="143" height="26"/>
+                                        <rect key="frame" x="135.5" y="8" width="143" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="41n-MF-EWk"/>
                                         </constraints>
@@ -59,7 +75,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ClW-hw-TQj">
-                                <rect key="frame" x="0.0" y="212" width="414" height="684"/>
+                                <rect key="frame" x="0.0" y="256" width="414" height="640"/>
                                 <connections>
                                     <segue destination="UdZ-wb-Cca" kind="embed" identifier="tableViewEmbedding" id="l55-KD-Yp2"/>
                                 </connections>
@@ -80,9 +96,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="N52-wE-zn8"/>
                     <connections>
-                        <segue destination="QUq-nc-a4A" kind="presentation" identifier="vision" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="c5u-g5-cS9"/>
-                        <segue destination="qTk-hk-h9G" kind="presentation" identifier="hearing" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="xge-T8-qSW"/>
-                        <segue destination="92Z-In-LNJ" kind="presentation" identifier="tremors" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="mYs-8C-Liy"/>
+                        <segue destination="QUq-nc-a4A" kind="show" identifier="vision" id="c5u-g5-cS9"/>
+                        <segue destination="qTk-hk-h9G" kind="show" identifier="hearing" id="xge-T8-qSW"/>
+                        <segue destination="92Z-In-LNJ" kind="show" identifier="tremors" id="mYs-8C-Liy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -241,7 +257,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mle-M1-E8x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1030" y="938"/>
+            <point key="canvasLocation" x="-180" y="1031"/>
         </scene>
         <!--Temp Sense View Controller-->
         <scene sceneID="9zV-UA-xPK">
