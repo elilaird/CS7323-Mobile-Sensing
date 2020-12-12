@@ -1,21 +1,22 @@
 //
-//  TempSenseViewController.swift
+//  TempResultViewController.swift
 //  common_sense
 //
-//  Created by Matthew Lee on 12/11/20.
+//  Created by Matthew Lee on 12/12/20.
 //
 
 import UIKit
 
-class TempSenseViewController: UIViewController {
+class TempResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
     @IBAction func returnToLanding(_ sender: Any) {
-        _ = navigationController?.popViewController(animated: true)
+        _ = navigationController?.popToRootViewController(animated: true)
     }
 
     /*

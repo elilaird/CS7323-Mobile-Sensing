@@ -8,6 +8,15 @@
 import UIKit
 
 class LandingPageController: UIViewController {
+    
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var greetingText: UILabel!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        userName.text = "Matthew"
+        greetingText.text = "Welcome"
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
