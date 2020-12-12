@@ -14,6 +14,9 @@ class DataInterface {
     let tremorDataKey = "tremorData"
     let perceptibilityKey = "perceptibilityData"
     let audioKey = "audioData"
+
+    let userNameKey = "userName"
+
     
     func getTremorData() -> [TremorDataElement]{
         let decoded = userDefaults.data(forKey: tremorDataKey) ?? nil
@@ -43,6 +46,10 @@ class DataInterface {
         }
         
         return savedAudioData
+    }
+
+    func getUserName() -> String?{
+        return userDefaults.string(forKey: userNameKey)
     }
     
     func saveTremorData(tremorMagnitude: Float){
@@ -132,6 +139,11 @@ class DataInterface {
         userDefaults.synchronize()
     }
     
+    func saveUserName(userName: String){
+        userDefaults.set(userName, forKey: userNameKey)
+    }
+    
+
     func removeAllTremorData(){
         // Delete the currently saved data
         if userDefaults.bool(forKey: tremorDataKey){
@@ -150,6 +162,13 @@ class DataInterface {
         // Delete the currently saved data
         if userDefaults.bool(forKey: audioKey){
             userDefaults.removeObject(forKey: audioKey)
+        }
+    }
+
+    
+    func removeUserName(){
+        if userDefaults.bool(forKey: userNameKey){
+            userDefaults.removeObject(forKey: userNameKey)
         }
     }
 }

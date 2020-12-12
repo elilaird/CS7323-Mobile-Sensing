@@ -29,7 +29,6 @@ class AudioViewController: UIViewController, DataDelegate{
     @IBOutlet weak var resultsLabel: UILabel!
     @IBOutlet weak var resultsMaxLabel: UILabel!
     @IBOutlet weak var resultsMinLabel: UILabel!
-    @IBOutlet weak var viewResultsButton: UIButton!
     
     weak var delegate: AudioModel!
     
@@ -116,9 +115,14 @@ class AudioViewController: UIViewController, DataDelegate{
         }
         self.audio.calibrate(withFreq: CALIBRATION_FREQUENCY)
     }
+
     
-    @IBAction func viewResults(_ sender: Any) {
-        self.performSegue(withIdentifier: "audioResults", sender: nil)
+    func segueToResults(){
+        DispatchQueue.main.async {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "AudioResults")
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
     }
     
     
@@ -182,7 +186,7 @@ class AudioViewController: UIViewController, DataDelegate{
                 self.waitLabel.isHidden = true
                 self.resultsMaxLabel.text = "Max Frequency: " + self.getFormattedFrequency(with: maxVolumeUpperBound)
                 self.resultsMinLabel.text = "Min Frequency: " + self.getFormattedFrequency(with: maxVolumeLowerBound)
-                self.viewResultsButton.isHidden = false
+            
                 self.resultsMaxLabel.textAlignment = NSTextAlignment.right
                 self.resultsMinLabel.textAlignment = NSTextAlignment.right
                 self.resultsMaxLabel.isHidden = false
@@ -191,6 +195,7 @@ class AudioViewController: UIViewController, DataDelegate{
             
             self.dataInterface.saveAudioData(lowFrequencyAtdB: lowerBound, highFrequencyAtdB: upperBound, dB: self.dbHalf, lowFrequencyAtMaxdB: maxVolumeLowerBound, highFrequencyAtMaxdB: maxVolumeUpperBound, maxdB: self.dbMax)
 
+            self.segueToResults()
         }
     }
    
