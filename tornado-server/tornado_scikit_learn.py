@@ -3,7 +3,7 @@
 
 # For this to run properly, MongoDB must be running
 #    Navigate to where mongo db is installed and run
-#    something like $./mongod --dbpath "/data/db"
+#    something like $./mongod --dbpath "../data/db"
 #    might need to use sudo (yikes!)
 
 # database imports
@@ -17,20 +17,16 @@ from tornado.web import HTTPError
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options
-import tornado.wsgi
 
 # custom imports
 from basehandler import BaseHandler
-import turihandlers as th
-import examplehandlers as eh
+import sklearnhandlers as skh
 
 # Setup information for tornado class
 define("port", default=8000, help="run on the given port", type=int)
 
 # Utility to be used when creating the Tornado server
 # Contains the handlers and the database connection
-
-
 class Application(tornado.web.Application):
     def __init__(self):
         '''Store necessary handlers,
@@ -38,46 +34,34 @@ class Application(tornado.web.Application):
         '''
 
         handlers = [(r"/[/]?", BaseHandler),
-                    (r"/Handlers[/]?",        th.PrintHandlers),
-                    (r"/AddDataPoint[/]?",
-                     th.UploadLabeledDatapointHandler),
-                    (r"/GetNewDatasetId[/]?", th.RequestNewDatasetId),
-                    (r"/UpdateModel[/]?",     th.UpdateModelForDatasetId),
-                    (r"/PredictOne[/]?",      th.PredictOneFromDatasetId),
-                    (r"/GetExample[/]?",      eh.TestHandler),
-                    (r"/DoPost[/]?",          eh.PostHandlerAsGetArguments),
-                    (r"/PostWithJson[/]?",    eh.JSONPostHandler),
-                    (r"/MSLC[/]?",            eh.MSLC),
-                    (r"/GetColorDeltaE[/]?",  th.GetColorDeltaE),
+                    (r"/Handlers[/]?",        skh.PrintHandlers),
+                    (r"/AddDataPoint[/]?",    skh.UploadLabeledDatapointHandler),
+                    (r"/GetNewDatasetId[/]?", skh.RequestNewDatasetId),
+                    (r"/UpdateModel[/]?",     skh.UpdateModelForDatasetId),     
+                    (r"/PredictOne[/]?",      skh.PredictOneFromDatasetId),               
                     ]
 
         self.handlers_string = str(handlers)
 
         try:
-            # local host, default port
-            self.client = MongoClient(serverSelectionTimeoutMS=50)
-            # force pymongo to look for possible running servers, error if none running
-            print(self.client.server_info())
+            self.client  = MongoClient(serverSelectionTimeoutMS=50) # local host, default port
+            print(self.client.server_info()) # force pymongo to look for possible running servers, error if none running
             # if we get here, at least one instance of pymongo is running
-            print("Found mongo")
-            self.db = self.client.turidatabase  # database with labeledinstances, models
-
+            self.db = self.client.sklearndatabase # database with labeledinstances, models
+            
         except ServerSelectionTimeoutError as inst:
             print('Could not initialize database connection, stopping execution')
             print('Are you running a valid local-hosted instance of mongodb?')
-            print('   Navigate to where mongo db is installed and run')
-            print('   something like $./mongod --dbpath "/data/db"')
             #raise inst
-
-        # the classifier model (in-class assignment, you might need to change this line!)
-        self.clf = {}
+        
+        self.clf = [] # the classifier model (in-class assignment, you might need to change this line!)
         # but depending on your implementation, you may not need to change it  ¯\_(ツ)_/¯
 
-        settings = {'debug': True}
+        settings = {'debug':True}
         tornado.web.Application.__init__(self, handlers, **settings)
 
     def __exit__(self):
-        self.client.close()  # just in case
+        self.client.close() # just in case
 
 
 def main():
@@ -85,9 +69,8 @@ def main():
     '''
     tornado.options.parse_command_line()
     http_server = HTTPServer(Application(), xheaders=True)
-    http_server.listen(options.port, address="0.0.0.0")
+    http_server.listen(options.port)
     IOLoop.instance().start()
 
-
 if __name__ == "__main__":
-    application = tornado.wsgi.WSGIAdapter(main())
+    main()
