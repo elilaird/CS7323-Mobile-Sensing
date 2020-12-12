@@ -26,6 +26,9 @@ class AudioViewController: UIViewController, DataDelegate{
     @IBOutlet weak var testCompleteLabel: UILabel!
     @IBOutlet weak var beginCalibrationButton: UIButton!
     @IBOutlet weak var toneTestButton: UIButton!
+    @IBOutlet weak var resultsLabel: UILabel!
+    @IBOutlet weak var resultsMaxLabel: UILabel!
+    @IBOutlet weak var resultsMinLabel: UILabel!
     
     weak var delegate: AudioModel!
     
@@ -80,7 +83,8 @@ class AudioViewController: UIViewController, DataDelegate{
         audio.pause()
     }
     
-    //Button Actions
+    //MARK: Button Interactions
+
     @IBAction func yesPressed(_ sender: Any) {
         print("yes pressed")
         self.canHear = true
@@ -108,6 +112,10 @@ class AudioViewController: UIViewController, DataDelegate{
         self.audio.calibrate(withFreq: CALIBRATION_FREQUENCY)
     }
     
+    
+    
+    //MARK: Utility Functions
+    
     func toggleHidden(withValue toggle:Bool){
         DispatchQueue.main.async {
             self.queryLabel.isHidden = toggle
@@ -118,6 +126,11 @@ class AudioViewController: UIViewController, DataDelegate{
         }
     }
     
+    func getFormattedFrequency(with freq:Float) -> String{
+        let formatter = MeasurementFormatter()
+        let hertz = Measurement(value: Double(freq), unit: UnitFrequency.hertz)
+        return formatter.string(from: hertz)
+    }
     
     //MARK: Audio Functions
     
@@ -126,6 +139,8 @@ class AudioViewController: UIViewController, DataDelegate{
             
             DispatchQueue.main.async {
                 self.testCompleteLabel.isHidden = true
+                self.resultsMaxLabel.isHidden = true
+                self.resultsMinLabel.isHidden = true
             }
             
             var upperBound:Float
@@ -157,6 +172,12 @@ class AudioViewController: UIViewController, DataDelegate{
             DispatchQueue.main.async {
                 self.testCompleteLabel.isHidden = false
                 self.waitLabel.isHidden = true
+                self.resultsMaxLabel.text = "Max Frequency: " + self.getFormattedFrequency(with: maxVolumeUpperBound)
+                self.resultsMinLabel.text = "Min Frequency: " + self.getFormattedFrequency(with: maxVolumeLowerBound)
+                self.resultsMaxLabel.textAlignment = NSTextAlignment.right
+                self.resultsMinLabel.textAlignment = NSTextAlignment.right
+                self.resultsMaxLabel.isHidden = false
+                self.resultsMinLabel.isHidden = false
             }
 
         }
@@ -166,6 +187,7 @@ class AudioViewController: UIViewController, DataDelegate{
 
     var testResults:[(frequency: Float, heard: Bool)] = []
     
+    //MARK: Find upper bound
     func findUpperBound(withStarting frequency:Float, andStep increment:Float) -> (Float) {
         var TESTING_HIGH = true
         var TESTING_FREQUENCY:Float = frequency
@@ -180,15 +202,12 @@ class AudioViewController: UIViewController, DataDelegate{
             
             self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
             
-            //MARK: Find upper bound
             while(TESTING_HIGH && (TESTING_FREQUENCY <= MAX_TEST_FREQUENCY)){
 
                 //show "Can you hear the sound?", "Yes/No" buttons, and testing frequency
                 DispatchQueue.main.async {
                     self.toggleHidden(withValue: false)
-                    let formatter = MeasurementFormatter()
-                    let hertz = Measurement(value: Double(TESTING_FREQUENCY), unit: UnitFrequency.hertz)
-                    self.testingFreqLabel.text = "Frequency: \(formatter.string(from: hertz))"
+                    self.testingFreqLabel.text = "Frequency: " + self.getFormattedFrequency(with: TESTING_FREQUENCY)
                 }
 
                 print("Testing: \(TESTING_FREQUENCY) Hz")
@@ -254,15 +273,12 @@ class AudioViewController: UIViewController, DataDelegate{
             
             self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
             
-            //MARK: Find upper bound
             while(TESTING_LOW && (TESTING_FREQUENCY >= MIN_TEST_FREQUENCY)){
 
                 //show "Can you hear the sound?", "Yes/No" buttons, and testing frequency
                 DispatchQueue.main.async {
                     self.toggleHidden(withValue: false)
-                    let formatter = MeasurementFormatter()
-                    let hertz = Measurement(value: Double(TESTING_FREQUENCY), unit: UnitFrequency.hertz)
-                    self.testingFreqLabel.text = "Frequency: \(formatter.string(from: hertz))"
+                    self.testingFreqLabel.text = "Frequency: " + self.getFormattedFrequency(with: TESTING_FREQUENCY)
                 }
 
                 print("Frequency: \(TESTING_FREQUENCY) Hz")
