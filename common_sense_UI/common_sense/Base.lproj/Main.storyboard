@@ -482,10 +482,10 @@ hold it parallel to the floor in your hand.</string>
             </objects>
             <point key="canvasLocation" x="2457" y="940"/>
         </scene>
-        <!--Temp Result View Controller-->
+        <!--visionResult-->
         <scene sceneID="PZl-Aq-5Dd">
             <objects>
-                <viewController id="ZJX-KE-gjf" customClass="TempResultViewController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="visionResult" storyboardIdentifier="visionResult" title="visionResult" id="ZJX-KE-gjf" customClass="TempResultViewController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PHS-dX-BO7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

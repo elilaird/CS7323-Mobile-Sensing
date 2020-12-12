@@ -35,6 +35,7 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     var perceptibilityScore: Float = 0
     
     let deAdjustor = DeltaEAdjustor()
+    let dataInterface = DataInterface()
     
     
     override func viewDidLoad() {
@@ -86,12 +87,10 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
         }
     }
     
-    func segueBackToMain(){
-        
-        // Return to main screen
-        if let mainView = self.navigationController?.viewControllers.first{
-            self.navigationController?.popToViewController(mainView, animated: true)
-        }
+    func segueToResults(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "visionResult")
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     func getNextPair(){
@@ -111,8 +110,11 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
                 // Calculate the perceptibility score
                 perceptibilityScore = deAdjustor.calculatePerceptibilityScore()
                 print("Perceptibility score: \(perceptibilityScore)")
+                
+                dataInterface.savePerceptibilityData(perceptibilityScore: perceptibilityScore)
+                
                 // Segue back to main screen
-                segueBackToMain()
+                segueToResults()
             }
             
             // Request pairs from server with deltaE values
@@ -123,8 +125,10 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
                 perceptibilityScore = 0.0
                 print("Perceptibility score: \(perceptibilityScore)")
                 
+                dataInterface.savePerceptibilityData(perceptibilityScore: perceptibilityScore)
+                
                 // Segue back to main screen
-                segueBackToMain()
+                segueToResults()
             }
             
             // Get new pairs
