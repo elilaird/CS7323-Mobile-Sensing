@@ -9,8 +9,8 @@ import UIKit
 import MediaPlayer
 
 let AUDIO_BUFFER_SIZE = 131072
-let CALIBRATION_FREQUENCY:Float = 1000.0
-let MAX_TEST_FREQUENCY:Float = 10000.0
+let CALIBRATION_FREQUENCY:Float = 3000.0
+let MAX_TEST_FREQUENCY:Float = 18000.0
 let MIN_TEST_FREQUENCY:Float = 100.0
 
 
@@ -25,18 +25,36 @@ class AudioViewController: UIViewController, DataDelegate{
     @IBOutlet weak var waitLabel: UILabel!
     @IBOutlet weak var testCompleteLabel: UILabel!
     @IBOutlet weak var beginTestsButton: UIButton!
+    @IBOutlet weak var toneTestButton: UIButton!
     
     weak var delegate: AudioModel!
     
     var canHear:Bool = false
     var buttonPressed:Bool = false
+    var calibrating:Bool = true {
+        didSet {
+            let group = DispatchGroup()
+            group.enter()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                self.toneTestButton.isHidden = false
+                self.waitLabel.isHidden = true
+                MPVolumeView.setVolume(0.5)
+                group.leave()
+            }
+            
+            group.notify(queue: .main){
+                print("done calibrating")
+            }
+            
+        }
+    }
     
     
     var dbMax:Float = 0.0
     var dbHalf:Float = 0.0
     
     enum StartingValues:Float {
-        case High = 18000.0, Low = 100.0
+        case High = 15000.0, Low = 1000.0
     }
     
     // setup audio model
@@ -49,18 +67,9 @@ class AudioViewController: UIViewController, DataDelegate{
         
         self.audio.delegate = self
 
-        //hide buttons initially
-        self.toggleHidden(withValue: true)
-        self.testCompleteLabel.isHidden = true
-        self.beginTestsButton.isHidden = false
-        
         self.audio.startSinewaveProcessing(withFreq: CALIBRATION_FREQUENCY)
         self.audio.startMicrophoneProcessing(withFps: 60.0)
         
-   
-        //self.calibrateMicrophone()
-        
-        //self.toneTesting()
     }
     
     override func viewWillDisappear(_: Bool) {
@@ -71,128 +80,211 @@ class AudioViewController: UIViewController, DataDelegate{
     
     //Button Actions
     @IBAction func yesPressed(_ sender: Any) {
+        print("yes pressed")
         self.canHear = true
+        self.buttonPressed = true
     }
+    
     @IBAction func noPressed(_ sender: Any) {
+        print("no pressed")
         self.canHear = false
+        self.buttonPressed = true
+    }
+    @IBAction func startTests(_ sender: Any) {
+       
+        DispatchQueue.main.async {
+            self.toneTestButton.isHidden = true
+            self.toggleHidden(withValue: false)
+        }
+        self.toneTesting()
     }
     
     @IBAction func beginTests(_ sender: Any) {
-        self.beginTestsButton.isHidden = true
-        self.waitLabel.isHidden = false
-        self.audio.calibrate(withFreq: CALIBRATION_FREQUENCY)
+        DispatchQueue.main.async {
+            self.beginTestsButton.isHidden = true
+            self.waitLabel.isHidden = false
+        }
         
+        self.audio.calibrate(withFreq: CALIBRATION_FREQUENCY)
     }
     
     func toggleHidden(withValue toggle:Bool){
-        
-        self.queryLabel.isHidden = toggle
-        self.yesButton.isHidden = toggle
-        self.noButton.isHidden = toggle
-        self.testingFreqLabel.isHidden = toggle
-        self.waitLabel.isHidden = !toggle
-    
+        DispatchQueue.main.async {
+            self.queryLabel.isHidden = toggle
+            self.yesButton.isHidden = toggle
+            self.noButton.isHidden = toggle
+            self.testingFreqLabel.isHidden = toggle
+            self.waitLabel.isHidden = !toggle
+        }
     }
     
     
-    //Audio Functions
+    //MARK: Audio Functions
 
+
+    var testResults = [Float]()
     
-    var testResults:[(frequency: Float, heard: Bool)] = []
-    
-    func toneTesting(){
-        
+    func findUpperBound(withStarting frequency:Float, andStep increment:Float) -> (Float) {
         var TESTING_HIGH = true
-        var TESTING_LOW = true
-        var TESTING_FREQUENCY:Float = StartingValues.High.rawValue
-        let TEST_INCREMENT:Float = 100.0
+        var TESTING_FREQUENCY:Float = frequency
+        let TEST_INCREMENT:Float = increment
         
         self.buttonPressed = false
         
-        MPVolumeView.setVolume(0.5)
-        self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
-        
-        //test high frequency tones
-        while(TESTING_HIGH && (TESTING_FREQUENCY < MAX_TEST_FREQUENCY)){
+        let outerGroup = DispatchGroup()
+        outerGroup.enter()
+        DispatchQueue.global(qos: .userInteractive).async {
             
-            //show "Can you hear the sound?", "Yes/No" buttons, and testing frequency
-            self.toggleHidden(withValue: false)
-            self.testingFreqLabel.text = "Testing: \(TESTING_FREQUENCY) Hz"
             
-            self.audio.play()
+            self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
             
-            //wait for user to press yes/no button
-            while(!self.buttonPressed){/*WAIT FOR USER*/}
+            //MARK: Find upper bound
+            while(TESTING_HIGH && (TESTING_FREQUENCY <= MAX_TEST_FREQUENCY)){
+
+                //show "Can you hear the sound?", "Yes/No" buttons, and testing frequency
+                DispatchQueue.main.async {
+                    self.toggleHidden(withValue: false)
+                    self.testingFreqLabel.text = "Testing: \(TESTING_FREQUENCY) Hz"
+                }
+
+                print("Testing: \(TESTING_FREQUENCY) Hz")
+    
+                self.audio.play()
+
+                var group = DispatchGroup()
+                group.enter()
+                DispatchQueue.global(qos: .background).async {
+                    //wait for user to press yes/no button
+                    while(!self.buttonPressed){/*WAIT FOR USER*/}
+                    group.leave()
+                }
+                group.wait()
+
+
+                self.buttonPressed = false
+    
+                //check if user could hear frequency, if so increment
+                if(self.canHear){
+                    self.audio.pause()
+                    self.testResults.append(TESTING_FREQUENCY)
+                    TESTING_FREQUENCY += TEST_INCREMENT
+                    self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
+                } else{
+                    self.audio.pause()
+                    TESTING_HIGH = false
+                }
+    
+                DispatchQueue.main.async {
+                    self.toggleHidden(withValue: true)
+                }
+                
+                //allow noise to dissipate
+                group = DispatchGroup()
+                group.enter()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0){
+                    //wait for 3 seconds
+                    group.leave()
+                }
+                group.wait()
             
-            self.buttonPressed = false
-            
-            //check if user could hear frequency, if so increment
-            if(self.canHear){
-                self.audio.pause()
-                TESTING_FREQUENCY += TEST_INCREMENT
-                self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
             }
-            else{
-                self.audio.pause()
-                TESTING_HIGH = false
-            }
-            
-            self.testResults.append((frequency: TESTING_FREQUENCY, heard: self.canHear))
-            
-            self.toggleHidden(withValue: true)
-            
-            //allow noise to dissipate
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0){
-                //wait for 5 seconds
-            }
-            
+            outerGroup.leave()
         }
-        
-        TESTING_FREQUENCY = StartingValues.Low.rawValue
-        
-        //test low frequency tones
-        while(TESTING_LOW && (TESTING_FREQUENCY > MIN_TEST_FREQUENCY)){
-            
-            //show "Can you hear the sound?", "Yes/No" buttons, and testing frequency
-            self.toggleHidden(withValue: false)
-            self.testingFreqLabel.text = "Testing: \(TESTING_FREQUENCY) Hz"
-            
-            self.audio.play()
-            
-            //wait for user to press yes/no button
-            while(!self.buttonPressed){/*WAIT FOR USER*/}
-            
-            self.buttonPressed = false
-            
-            //check if user could hear frequency, if so increment
-            if(self.canHear){
-                self.audio.pause()
-                TESTING_FREQUENCY -= TEST_INCREMENT
-                self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
-            }
-            else{
-                self.audio.pause()
-                TESTING_LOW = false
-            }
-            
-            self.testResults.append((frequency: TESTING_FREQUENCY, heard: self.canHear))
-            
-            self.toggleHidden(withValue: true)
-            
-            //allow noise to dissipate
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0){
-                //wait for 5 seconds
-            }
-        }
-        
-        self.toggleHidden(withValue: true)
-        self.waitLabel.isHidden = true
-        self.testCompleteLabel.isHidden = true
-        
-        print(self.testResults)
-        
+        outerGroup.wait()
+        return testResults.last!
     }
     
+    //MARK: Find lower bound
+    func findLowerBound(withStarting frequency:Float, andStep increment:Float) -> (Float) {
+        var TESTING_LOW = true
+        var TESTING_FREQUENCY:Float = frequency
+        let TEST_INCREMENT:Float = increment
+        
+        self.buttonPressed = false
+        
+        let outerGroup = DispatchGroup()
+        outerGroup.enter()
+        DispatchQueue.global(qos: .userInteractive).async {
+            
+            
+            self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
+            
+            //MARK: Find upper bound
+            while(TESTING_LOW && (TESTING_FREQUENCY >= MIN_TEST_FREQUENCY)){
+
+                //show "Can you hear the sound?", "Yes/No" buttons, and testing frequency
+                DispatchQueue.main.async {
+                    self.toggleHidden(withValue: false)
+                    self.testingFreqLabel.text = "Testing: \(TESTING_FREQUENCY) Hz"
+                }
+
+                print("Testing: \(TESTING_FREQUENCY) Hz")
+    
+                self.audio.play()
+
+                var group = DispatchGroup()
+                group.enter()
+                DispatchQueue.global(qos: .background).async {
+                    //wait for user to press yes/no button
+                    while(!self.buttonPressed){/*WAIT FOR USER*/}
+                    group.leave()
+                }
+                group.wait()
+
+
+                self.buttonPressed = false
+    
+                //check if user could hear frequency, if so increment
+                if(self.canHear){
+                    self.audio.pause()
+                    self.testResults.append(TESTING_FREQUENCY)
+                    TESTING_FREQUENCY -= TEST_INCREMENT
+                    self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
+                } else{
+                    self.audio.pause()
+                    TESTING_LOW = false
+                }
+
+                DispatchQueue.main.async {
+                    self.toggleHidden(withValue: true)
+                }
+                
+                //allow noise to dissipate
+                group = DispatchGroup()
+                group.enter()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0){
+                    //wait for 3 seconds
+                    group.leave()
+                }
+                group.wait()
+            
+            }
+            outerGroup.leave()
+        }
+        outerGroup.wait()
+        return testResults.last!
+    }
+    
+    func toneTesting(){
+        DispatchQueue.global(qos: .userInteractive).async {
+            
+            var upperBound:Float
+            var lowerBound:Float
+            
+            upperBound = self.findUpperBound(withStarting: StartingValues.High.rawValue, andStep: 500.0)
+            print("Found upper bound of \(upperBound)")
+            upperBound = self.findUpperBound(withStarting: upperBound, andStep: 50.0)
+            print("Found upper bound of \(upperBound)")
+
+            lowerBound = self.findLowerBound(withStarting: StartingValues.Low.rawValue, andStep: 200.0)
+            print("Found lower bound of \(lowerBound)")
+            lowerBound = self.findLowerBound(withStarting: lowerBound, andStep: 50.0)
+            print("Found lower bound of \(lowerBound)")
+
+        }
+            
+    }
+
     
     
 }

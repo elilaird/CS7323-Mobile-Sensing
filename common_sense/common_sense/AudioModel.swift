@@ -102,24 +102,21 @@ class AudioModel {
         print("Calibrating...")
         
         //set volume to max
-        MPVolumeView.setVolume(1.0)
+        DispatchQueue.main.async {
+            MPVolumeView.setVolume(1.0)
+        }
+        
 
         self.play()
         
-        
-        
         let index:Int = (Int(freq) * BUFFER_SIZE) / 44100
 
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Change `2.0` to the desired number of seconds.
-
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.dbMax = self.fftData[index] + self.DB_ERROR
             self.dbHalf = self.dbMax - self.DB_HALF_OFFSET
             print("Db Max: \(self.dbMax) ")
             self.delegate?.foundDbValues(withMax: self.dbMax, andHalf: self.dbHalf)
-    
         }
-        
     }
     
     

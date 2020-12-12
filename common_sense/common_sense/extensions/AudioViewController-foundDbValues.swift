@@ -9,10 +9,12 @@ import Foundation
 
 extension AudioViewController {
     func foundDbValues(withMax max: Float, andHalf half: Float) {
-        self.dbMax = max
-        self.dbHalf = half
-        self.audio.pause()
-        self.waitLabel.isHidden = true
-        print("Finished Calibrating...")
+        DispatchQueue.main.async {
+            self.dbMax = max
+            self.dbHalf = half
+            self.audio.pause()
+            print("Finished Calibrating...")
+            self.calibrating = false
+        }
     }
 }
