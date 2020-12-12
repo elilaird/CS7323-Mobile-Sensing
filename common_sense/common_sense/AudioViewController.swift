@@ -64,10 +64,11 @@ class AudioViewController: UIViewController, DataDelegate{
     var audio:AudioModel!
     
     // setup data interface
-    var dataInterface:DataInterface!
+    var dataInterface:DataInterface = DataInterface()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
         
@@ -183,7 +184,7 @@ class AudioViewController: UIViewController, DataDelegate{
                 self.resultsMinLabel.isHidden = false
             }
             
-//            self.dataInterface.saveAudioData(lowFrequencyAtdB: lowerBound, highFrequencyAtdB: upperBound, dB: self.dbHalf, lowFrequencyAtMaxdB: maxVolumeLowerBound, highFrequencyAtMaxdB: maxVolumeUpperBound, maxdB: self.dbMax)
+            self.dataInterface.saveAudioData(lowFrequencyAtdB: lowerBound, highFrequencyAtdB: upperBound, dB: self.dbHalf, lowFrequencyAtMaxdB: maxVolumeLowerBound, highFrequencyAtMaxdB: maxVolumeUpperBound, maxdB: self.dbMax)
 
         }
     }
