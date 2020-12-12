@@ -124,7 +124,7 @@ class AudioViewController: UIViewController, DataDelegate{
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
     }
-    
+     
     
     //MARK: Utility Functions
     
@@ -184,13 +184,13 @@ class AudioViewController: UIViewController, DataDelegate{
             DispatchQueue.main.async {
                 self.testCompleteLabel.isHidden = false
                 self.waitLabel.isHidden = true
-                self.resultsMaxLabel.text = "Max Frequency: " + self.getFormattedFrequency(with: maxVolumeUpperBound)
-                self.resultsMinLabel.text = "Min Frequency: " + self.getFormattedFrequency(with: maxVolumeLowerBound)
+//                self.resultsMaxLabel.text = "Max Frequency: " + self.getFormattedFrequency(with: maxVolumeUpperBound)
+//                self.resultsMinLabel.text = "Min Frequency: " + self.getFormattedFrequency(with: maxVolumeLowerBound)
             
-                self.resultsMaxLabel.textAlignment = NSTextAlignment.right
-                self.resultsMinLabel.textAlignment = NSTextAlignment.right
-                self.resultsMaxLabel.isHidden = false
-                self.resultsMinLabel.isHidden = false
+//                self.resultsMaxLabel.textAlignment = NSTextAlignment.right
+//                self.resultsMinLabel.textAlignment = NSTextAlignment.right
+//                self.resultsMaxLabel.isHidden = false
+//                self.resultsMinLabel.isHidden = false
             }
             
             self.dataInterface.saveAudioData(lowFrequencyAtdB: lowerBound, highFrequencyAtdB: upperBound, dB: self.dbHalf, lowFrequencyAtMaxdB: maxVolumeLowerBound, highFrequencyAtMaxdB: maxVolumeUpperBound, maxdB: self.dbMax)
