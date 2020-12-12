@@ -28,6 +28,7 @@ class LandingPageController: UIViewController {
         self.performSegue(withIdentifier: viewName, sender: nil)
     }
 
+  
     /*
     // MARK: - Navigation
 
