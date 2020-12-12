@@ -446,9 +446,12 @@
                         <viewLayoutGuide key="safeArea" id="THo-mG-9ET"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="GJ2-BY-buG" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="157" id="0MR-Qf-gSg"/>
+                            <constraint firstItem="YzR-TG-o4z" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="131" id="1Dn-SG-qrY"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="1fW-OG-L7o"/>
-                            <constraint firstItem="YzR-TG-o4z" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="131" id="4DA-6V-MyW"/>
+                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="1wU-vU-Nef" secondAttribute="trailing" constant="176" id="3Q3-KC-p10"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="dj7-QI-fZm" secondAttribute="trailing" constant="108" id="5HF-PT-0IF"/>
+                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="GLi-Kv-H2l" secondAttribute="trailing" constant="111" id="5vv-om-f7e"/>
                             <constraint firstItem="GT6-Tf-4lC" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="6SA-xa-19f"/>
                             <constraint firstItem="SXk-bP-Uaf" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="50" id="92n-Os-clS"/>
                             <constraint firstItem="SXk-bP-Uaf" firstAttribute="top" secondItem="ICl-mc-ShS" secondAttribute="bottom" constant="16" id="ASH-66-Yc6"/>
@@ -456,6 +459,7 @@
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="GT6-Tf-4lC" secondAttribute="trailing" constant="179" id="Bme-lx-JfT"/>
                             <constraint firstItem="dj7-QI-fZm" firstAttribute="top" secondItem="WR5-E8-ocy" secondAttribute="bottom" constant="42" id="Dah-80-DZN"/>
                             <constraint firstItem="GT6-Tf-4lC" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="179" id="HGP-wP-fhM"/>
+                            <constraint firstItem="GLi-Kv-H2l" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="111" id="HWK-yk-gA0"/>
                             <constraint firstItem="YzR-TG-o4z" firstAttribute="top" secondItem="GJ2-BY-buG" secondAttribute="bottom" constant="20" id="Jw4-5w-iLS"/>
                             <constraint firstItem="WR5-E8-ocy" firstAttribute="top" secondItem="YzR-TG-o4z" secondAttribute="bottom" constant="22" id="Kny-k2-9G9"/>
                             <constraint firstItem="GJ2-BY-buG" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="Kzr-SP-uRO"/>
@@ -466,9 +470,14 @@
                             <constraint firstItem="WR5-E8-ocy" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="THe-Bb-mUR"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="amD-f3-WfN" secondAttribute="bottom" constant="322" id="YIN-lu-tKD"/>
                             <constraint firstItem="ICl-mc-ShS" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="50" id="YjN-Ee-AEH"/>
+                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="YzR-TG-o4z" secondAttribute="trailing" constant="131" id="ZgU-56-Ri5"/>
                             <constraint firstItem="amD-f3-WfN" firstAttribute="top" secondItem="WR5-E8-ocy" secondAttribute="bottom" constant="41" id="a4a-Dd-kCU"/>
                             <constraint firstItem="GJ2-BY-buG" firstAttribute="top" secondItem="GLi-Kv-H2l" secondAttribute="bottom" constant="67" id="dK7-Po-cIk"/>
+                            <constraint firstItem="Rjl-dX-azG" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="173.5" id="gqO-b8-wVD"/>
+                            <constraint firstItem="1wU-vU-Nef" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="176" id="nuA-uL-fsg"/>
+                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="GJ2-BY-buG" secondAttribute="trailing" constant="157" id="og1-8N-ymc"/>
                             <constraint firstItem="amD-f3-WfN" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="108" id="p7N-BA-WSY"/>
+                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="Rjl-dX-azG" secondAttribute="trailing" constant="173.5" id="qMP-GT-rcM"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="top" secondItem="THo-mG-9ET" secondAttribute="top" constant="135" id="rOf-Ya-kJg"/>
                             <constraint firstItem="GLi-Kv-H2l" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="way-aU-lo8"/>
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="top" secondItem="THo-mG-9ET" secondAttribute="top" constant="89" id="wc3-Dm-8B4"/>
