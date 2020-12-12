@@ -86,16 +86,6 @@ class AudioModel {
         self.audioManager?.pause()
     }
     
-    func pureToneTest(){
-        
-        print("Starting Tone Tests...")
-        
-        MPVolumeView.setVolume(0.5)
-        
-        
-        
-    }
-    
     
     func calibrate(withFreq freq:Float=1000){
         
@@ -105,7 +95,6 @@ class AudioModel {
         DispatchQueue.main.async {
             MPVolumeView.setVolume(1.0)
         }
-        
 
         self.play()
         
@@ -137,9 +126,6 @@ class AudioModel {
     }()
     
     
-    //==========================================
-//    // MARK: Private Methods
-
 
     //==========================================
     // MARK: Model Callback Methods
@@ -154,12 +140,6 @@ class AudioModel {
             fftHelper!.performForwardFFT(withData: &timeData,
                                          andCopydBMagnitudeToBuffer: &fftData)
             
-
-            let index:Int = (Int(1000.0) * BUFFER_SIZE) / 44100
-            //let interp = (fftData[index-1] - fftData[index+1]) / (fftData[index+1] - 2*fftData[index] + fftData[index-1])
-            
-            //print(fftData[index])
-            //print(self.fftData[Int(index)-2...Int(index)+2])
             
         }
     }

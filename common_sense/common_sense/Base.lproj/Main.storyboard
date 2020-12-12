@@ -64,7 +64,7 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="93.75"/>
         </scene>
-        <!--Audio View Controller-->
+        <!--Hearing Test-->
         <scene sceneID="bFp-UR-Pcq">
             <objects>
                 <viewController id="u6f-8w-eyG" customClass="AudioViewController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,77 +72,98 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQn-Gh-JV0">
-                                <rect key="frame" x="254" y="483" width="30" height="30"/>
-                                <state key="normal" title="No"/>
-                                <connections>
-                                    <action selector="noPressed:" destination="u6f-8w-eyG" eventType="touchUpInside" id="Ewn-vf-tPD"/>
-                                </connections>
-                            </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Can you hear the sound?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rua-4M-MfY">
-                                <rect key="frame" x="112.5" y="259" width="189" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Testing: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2p-hF-OdX">
-                                <rect key="frame" x="146" y="388" width="146" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please wait..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8h-nJ-VQb">
-                                <rect key="frame" x="157" y="340" width="100" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tests Complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dv-H0-bCe">
-                                <rect key="frame" x="148" y="298" width="119" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4w4-G2-SUn">
-                                <rect key="frame" x="176" y="172" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Calibrate"/>
-                                <connections>
-                                    <action selector="beginTests:" destination="u6f-8w-eyG" eventType="touchUpInside" id="dWG-GI-lmM"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJ0-w4-ad4">
-                                <rect key="frame" x="171" y="427" width="72" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Begin Test"/>
-                                <connections>
-                                    <action selector="startTests:" destination="u6f-8w-eyG" eventType="touchUpInside" id="ML8-qh-1cm"/>
-                                </connections>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3V-pX-4lj">
-                                <rect key="frame" x="112" y="483" width="30" height="30"/>
+                                <rect key="frame" x="126" y="483" width="30" height="30"/>
                                 <state key="normal" title="Yes"/>
                                 <connections>
                                     <action selector="yesPressed:" destination="u6f-8w-eyG" eventType="touchUpInside" id="yof-dz-Mku"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQn-Gh-JV0">
+                                <rect key="frame" x="275" y="483" width="30" height="30"/>
+                                <state key="normal" title="No"/>
+                                <connections>
+                                    <action selector="noPressed:" destination="u6f-8w-eyG" eventType="touchUpInside" id="Ewn-vf-tPD"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can you hear this sound?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rua-4M-MfY">
+                                <rect key="frame" x="111" y="261" width="192" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="1LH-I8-fTL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8h-nJ-VQb">
+                                <rect key="frame" x="157" y="339" width="100" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="mTo-z9-bTI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tests Complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dv-H0-bCe">
+                                <rect key="frame" x="148" y="437.5" width="129" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4w4-G2-SUn">
+                                <rect key="frame" x="176" y="145" width="62" height="30"/>
+                                <state key="normal" title="Calibrate"/>
+                                <connections>
+                                    <action selector="beginCalibration:" destination="u6f-8w-eyG" eventType="touchUpInside" id="hws-w1-S4V"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJ0-w4-ad4">
+                                <rect key="frame" x="173.5" y="183" width="67" height="29"/>
+                                <state key="normal" title="Start Test"/>
+                                <connections>
+                                    <action selector="startTests:" destination="u6f-8w-eyG" eventType="touchUpInside" id="ML8-qh-1cm"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Testing: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2p-hF-OdX">
+                                <rect key="frame" x="134" y="389.5" width="146" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="W0Z-bU-545"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9KE-oa-xQH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="9KE-oa-xQH" firstAttribute="trailing" secondItem="WQn-Gh-JV0" secondAttribute="trailing" constant="130" id="5MP-F7-BBe"/>
+                            <constraint firstItem="9KE-oa-xQH" firstAttribute="trailing" secondItem="WQn-Gh-JV0" secondAttribute="trailing" constant="109" id="5MP-F7-BBe"/>
+                            <constraint firstItem="r8h-nJ-VQb" firstAttribute="top" secondItem="Rua-4M-MfY" secondAttribute="bottom" constant="57" id="7b7-l5-Vt9"/>
+                            <constraint firstItem="4w4-G2-SUn" firstAttribute="top" secondItem="9KE-oa-xQH" secondAttribute="top" constant="57" id="7y5-Ba-68c"/>
                             <constraint firstItem="9KE-oa-xQH" firstAttribute="bottom" secondItem="WQn-Gh-JV0" secondAttribute="bottom" constant="349" id="82y-1c-wSo"/>
-                            <constraint firstItem="O3V-pX-4lj" firstAttribute="leading" secondItem="9KE-oa-xQH" secondAttribute="leading" constant="112" id="OJN-NO-vKr"/>
+                            <constraint firstItem="0dv-H0-bCe" firstAttribute="top" secondItem="n2p-hF-OdX" secondAttribute="bottom" constant="27" id="9vc-7L-Kma"/>
+                            <constraint firstItem="CJ0-w4-ad4" firstAttribute="centerX" secondItem="9KE-oa-xQH" secondAttribute="centerX" id="D3Z-pa-kqf"/>
+                            <constraint firstItem="9KE-oa-xQH" firstAttribute="trailing" secondItem="CJ0-w4-ad4" secondAttribute="trailing" constant="173.5" id="GuK-Yt-76z"/>
+                            <constraint firstItem="9KE-oa-xQH" firstAttribute="trailing" secondItem="n2p-hF-OdX" secondAttribute="trailing" constant="134" id="HZs-g2-XVB"/>
+                            <constraint firstItem="n2p-hF-OdX" firstAttribute="leading" secondItem="9KE-oa-xQH" secondAttribute="leading" constant="134" id="JBh-tx-bQP"/>
+                            <constraint firstItem="Rua-4M-MfY" firstAttribute="top" secondItem="CJ0-w4-ad4" secondAttribute="bottom" constant="49" id="JGt-Ma-dUF"/>
+                            <constraint firstItem="CJ0-w4-ad4" firstAttribute="leading" secondItem="9KE-oa-xQH" secondAttribute="leading" constant="173.5" id="KPa-uC-6XA"/>
+                            <constraint firstItem="0dv-H0-bCe" firstAttribute="leading" secondItem="9KE-oa-xQH" secondAttribute="leading" constant="148" id="NXe-fS-kO9"/>
+                            <constraint firstItem="O3V-pX-4lj" firstAttribute="leading" secondItem="9KE-oa-xQH" secondAttribute="leading" constant="126" id="OJN-NO-vKr"/>
+                            <constraint firstItem="4w4-G2-SUn" firstAttribute="centerX" secondItem="9KE-oa-xQH" secondAttribute="centerX" id="Ot2-Sv-6mF"/>
+                            <constraint firstItem="0dv-H0-bCe" firstAttribute="centerY" secondItem="r00-ZH-kxQ" secondAttribute="centerY" id="ROK-Xa-Zaj"/>
                             <constraint firstItem="Rua-4M-MfY" firstAttribute="centerX" secondItem="9KE-oa-xQH" secondAttribute="centerX" id="VDa-ee-rdW"/>
+                            <constraint firstItem="O3V-pX-4lj" firstAttribute="top" secondItem="0dv-H0-bCe" secondAttribute="bottom" constant="24" id="VW6-5w-3Jy"/>
+                            <constraint firstItem="n2p-hF-OdX" firstAttribute="top" secondItem="r8h-nJ-VQb" secondAttribute="bottom" constant="29.5" id="Vfv-kx-qD3"/>
+                            <constraint firstItem="CJ0-w4-ad4" firstAttribute="top" secondItem="9KE-oa-xQH" secondAttribute="top" constant="95" id="dEY-c8-WDb"/>
+                            <constraint firstItem="0dv-H0-bCe" firstAttribute="centerX" secondItem="9KE-oa-xQH" secondAttribute="centerX" constant="5.5" id="fEt-ez-C9k"/>
+                            <constraint firstItem="Rua-4M-MfY" firstAttribute="centerX" secondItem="r8h-nJ-VQb" secondAttribute="centerX" id="fIc-SQ-Uyk"/>
                             <constraint firstItem="9KE-oa-xQH" firstAttribute="bottom" secondItem="O3V-pX-4lj" secondAttribute="bottom" constant="349" id="wch-TL-5r7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Jkz-gH-pg1"/>
+                    <navigationItem key="navigationItem" title="Hearing Test" id="Jkz-gH-pg1"/>
                     <connections>
-                        <outlet property="beginTestsButton" destination="4w4-G2-SUn" id="3Dn-un-czY"/>
+                        <outlet property="beginCalibrationButton" destination="4w4-G2-SUn" id="xe3-rS-9WL"/>
                         <outlet property="noButton" destination="WQn-Gh-JV0" id="aHa-be-w9x"/>
                         <outlet property="queryLabel" destination="Rua-4M-MfY" id="Wcf-Xu-DaC"/>
                         <outlet property="testCompleteLabel" destination="0dv-H0-bCe" id="8dt-n0-K2E"/>
