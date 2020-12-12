@@ -16,6 +16,9 @@ class SensePreviewCell: FoldingCell {
     @IBOutlet weak var expandedHeader: UILabel!
     @IBOutlet weak var lineChart: LineChartView!
     
+    var takeTestAction: ((SensePreviewCell) -> Void)?
+    var imageName: String = ""
+    
 
     
     
@@ -26,9 +29,6 @@ class SensePreviewCell: FoldingCell {
         
         containerView.layer.cornerRadius = 10
         containerView.layer.masksToBounds = true
-        
-        AlertIcon.image!.withRenderingMode(.alwaysTemplate)
-        AlertIcon.tintColor = .red
         
         var lineChartEntry = [ChartDataEntry]()
         for i in stride(from: 0, to: 50, by: 5){
@@ -47,10 +47,16 @@ class SensePreviewCell: FoldingCell {
         // Initialization code
     }
     
+    @IBAction func takeTest(_ sender: Any) {
+        takeTestAction?(self)
+    }
     
+    func configure(imageName: String, name: String){
+        self.senseIcon?.image = UIImage(named: imageName)
+        self.expandedHeader.text = name
+    }
     
 
-    @IBOutlet weak var AlertIcon: UIImageView!
     
     override func animationDuration(_ itemIndex: NSInteger, type _: FoldingCell.AnimationType) -> TimeInterval {
         let durations = [0.26, 0.2, 0.2]

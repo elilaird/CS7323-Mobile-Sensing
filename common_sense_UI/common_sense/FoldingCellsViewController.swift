@@ -11,19 +11,21 @@ import FoldingCell
 class FoldingCellsViewController: UITableViewController {
 
     enum Const {
-        static let closeCellHeight: CGFloat = 179
-        static let openCellHeight: CGFloat = 495
+        static let closeCellHeight: CGFloat = 200
+        static let openCellHeight: CGFloat = 514
         static let rowsCount = 10
     }
     
     var cellHeights: [CGFloat] = []
     
     var cells: [String] = ["Hearing", "Vision", "Tremors"]
+    var cellIcons: [String] = ["ear", "eye", "hand"]
 
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        
     }
 
     // MARK: Helpers
@@ -79,7 +81,12 @@ extension FoldingCellsViewController {
         let durations: [TimeInterval] = [0.26, 0.2, 0.2]
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations
-        cell.lastCheckupLabel.text = cells[indexPath.row]
+        cell.configure(imageName: cellIcons[indexPath.row], name: cells[indexPath.row])
+        cell.takeTestAction = {(cell) in
+            if let parent = self.parent as? LandingPageController {
+                parent.toView(viewName: self.cells[indexPath.row].lowercased())
+            }
+        }
         return cell
     }
 

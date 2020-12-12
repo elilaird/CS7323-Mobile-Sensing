@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "SigmaSwiftStatistics",
-        "repositoryURL": "https://github.com/evgenyneu/SigmaSwiftStatistics.git",
+        "package": "FoldingCell",
+        "repositoryURL": "https://github.com/Ramotion/folding-cell.git",
         "state": {
           "branch": null,
-          "revision": "d36db09f97a1739edc8c63897220c7ecbb5de684",
-          "version": "9.0.2"
+          "revision": "5cf01ed2b48eac4385a599e9f40f438655bf4147",
+          "version": "5.0.2"
         }
       }
     ]

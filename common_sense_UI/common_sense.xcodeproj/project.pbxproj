@@ -9,16 +9,17 @@
 /* Begin PBXBuildFile section */
 		051013762578781000DC83E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051013752578781000DC83E6 /* AppDelegate.swift */; };
 		051013782578781000DC83E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051013772578781000DC83E6 /* SceneDelegate.swift */; };
-		0510137A2578781000DC83E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051013792578781000DC83E6 /* ViewController.swift */; };
 		0510137D2578781000DC83E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0510137B2578781000DC83E6 /* Main.storyboard */; };
 		051013802578781000DC83E6 /* common_sense.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0510137E2578781000DC83E6 /* common_sense.xcdatamodeld */; };
 		051013822578781100DC83E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051013812578781100DC83E6 /* Assets.xcassets */; };
 		051013852578781100DC83E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 051013832578781100DC83E6 /* LaunchScreen.storyboard */; };
 		051013902578781100DC83E6 /* common_senseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0510138F2578781100DC83E6 /* common_senseTests.swift */; };
 		0510139B2578781100DC83E6 /* common_senseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0510139A2578781100DC83E6 /* common_senseUITests.swift */; };
-		E87BA664257EEFCA00B1281B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E87BA663257EEFCA00B1281B /* SwiftPackageProductDependency */; };
+		E87BA664257EEFCA00B1281B /* FoldingCell in Frameworks */ = {isa = PBXBuildFile; productRef = E87BA663257EEFCA00B1281B /* FoldingCell */; };
 		E87BA669257EF92300B1281B /* FoldingCellsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */; };
 		E87BA684258007FB00B1281B /* SensePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87BA683258007FB00B1281B /* SensePreviewCell.swift */; };
+		E8BE660F258459FD008C1F2B /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE660E258459FD008C1F2B /* LandingPageController.swift */; };
+		E8BE6629258462C9008C1F2B /* TempSenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE6628258462C9008C1F2B /* TempSenseViewController.swift */; };
 		F628A4F6ED0F3DAEBCFB4A1A /* Pods_common_sense.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56F71A755BD7722AD9FE77FE /* Pods_common_sense.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +57,6 @@
 		051013722578781000DC83E6 /* common_sense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = common_sense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		051013752578781000DC83E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		051013772578781000DC83E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		051013792578781000DC83E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0510137C2578781000DC83E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0510137F2578781000DC83E6 /* common_sense.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = common_sense.xcdatamodel; sourceTree = "<group>"; };
 		051013812578781100DC83E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,6 +73,8 @@
 		A99C9643A6DE0508F764D478 /* Pods-common_sense.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_sense.debug.xcconfig"; path = "Target Support Files/Pods-common_sense/Pods-common_sense.debug.xcconfig"; sourceTree = "<group>"; };
 		E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingCellsViewController.swift; sourceTree = "<group>"; };
 		E87BA683258007FB00B1281B /* SensePreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensePreviewCell.swift; sourceTree = "<group>"; };
+		E8BE660E258459FD008C1F2B /* LandingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageController.swift; sourceTree = "<group>"; };
+		E8BE6628258462C9008C1F2B /* TempSenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSenseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E87BA664257EEFCA00B1281B /* BuildFile in Frameworks */,
+				E87BA664257EEFCA00B1281B /* FoldingCell in Frameworks */,
 				F628A4F6ED0F3DAEBCFB4A1A /* Pods_common_sense.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,12 +131,13 @@
 			children = (
 				051013752578781000DC83E6 /* AppDelegate.swift */,
 				051013772578781000DC83E6 /* SceneDelegate.swift */,
-				051013792578781000DC83E6 /* ViewController.swift */,
 				0510137B2578781000DC83E6 /* Main.storyboard */,
 				051013812578781100DC83E6 /* Assets.xcassets */,
 				051013832578781100DC83E6 /* LaunchScreen.storyboard */,
 				E87BA683258007FB00B1281B /* SensePreviewCell.swift */,
+				E8BE6628258462C9008C1F2B /* TempSenseViewController.swift */,
 				E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */,
+				E8BE660E258459FD008C1F2B /* LandingPageController.swift */,
 				051013862578781100DC83E6 /* Info.plist */,
 				0510137E2578781000DC83E6 /* common_sense.xcdatamodeld */,
 			);
@@ -196,7 +199,7 @@
 			);
 			name = common_sense;
 			packageProductDependencies = (
-				E87BA663257EEFCA00B1281B /* SwiftPackageProductDependency */,
+				E87BA663257EEFCA00B1281B /* FoldingCell */,
 			);
 			productName = common_sense;
 			productReference = 051013722578781000DC83E6 /* common_sense.app */;
@@ -270,7 +273,7 @@
 			);
 			mainGroup = 051013692578781000DC83E6;
 			packageReferences = (
-				E87BA662257EEFCA00B1281B /* RemoteSwiftPackageReference */,
+				E87BA662257EEFCA00B1281B /* XCRemoteSwiftPackageReference "folding-cell" */,
 			);
 			productRefGroup = 051013732578781000DC83E6 /* Products */;
 			projectDirPath = "";
@@ -357,7 +360,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0510137A2578781000DC83E6 /* ViewController.swift in Sources */,
+				E8BE660F258459FD008C1F2B /* LandingPageController.swift in Sources */,
+				E8BE6629258462C9008C1F2B /* TempSenseViewController.swift in Sources */,
 				E87BA684258007FB00B1281B /* SensePreviewCell.swift in Sources */,
 				E87BA669257EF92300B1281B /* FoldingCellsViewController.swift in Sources */,
 				051013762578781000DC83E6 /* AppDelegate.swift in Sources */,
@@ -701,7 +705,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E87BA662257EEFCA00B1281B /* RemoteSwiftPackageReference */ = {
+		E87BA662257EEFCA00B1281B /* XCRemoteSwiftPackageReference "folding-cell" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Ramotion/folding-cell.git";
 			requirement = {
@@ -712,9 +716,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E87BA663257EEFCA00B1281B /* SwiftPackageProductDependency */ = {
+		E87BA663257EEFCA00B1281B /* FoldingCell */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E87BA662257EEFCA00B1281B /* RemoteSwiftPackageReference */;
+			package = E87BA662257EEFCA00B1281B /* XCRemoteSwiftPackageReference "folding-cell" */;
 			productName = FoldingCell;
 		};
 /* End XCSwiftPackageProductDependency section */
