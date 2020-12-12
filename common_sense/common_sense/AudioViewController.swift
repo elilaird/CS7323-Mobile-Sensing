@@ -148,12 +148,12 @@ class AudioViewController: UIViewController, DataDelegate{
             
             upperBound = self.findUpperBound(withStarting: StartingValues.High.rawValue, andStep: 500.0)
             print("Found upper bound of \(upperBound)")
-            upperBound = self.findUpperBound(withStarting: upperBound, andStep: 50.0)
+            upperBound = self.findUpperBound(withStarting: upperBound - 500, andStep: 100.0)
             print("Found upper bound of \(upperBound)")
 
             lowerBound = self.findLowerBound(withStarting: StartingValues.Low.rawValue, andStep: 200.0)
             print("Found lower bound of \(lowerBound)")
-            lowerBound = self.findLowerBound(withStarting: lowerBound, andStep: 50.0)
+            lowerBound = self.findLowerBound(withStarting: lowerBound + 200, andStep: 100.0)
             print("Found lower bound of \(lowerBound)")
             
             //find the bounds with max volume
@@ -164,9 +164,9 @@ class AudioViewController: UIViewController, DataDelegate{
                 MPVolumeView.setVolume(1.0)
             }
             
-            maxVolumeUpperBound = self.findUpperBound(withStarting: upperBound, andStep: 10.0)
+            maxVolumeUpperBound = self.findUpperBound(withStarting: upperBound - 100, andStep: 50.0)
             print("Max volume upper bound of \(maxVolumeUpperBound)")
-            maxVolumeLowerBound = self.findLowerBound(withStarting: lowerBound, andStep: 10.0)
+            maxVolumeLowerBound = self.findLowerBound(withStarting: lowerBound + 100, andStep: 50.0)
             print("Max volume lower bound of \(maxVolumeLowerBound)")
             
             DispatchQueue.main.async {

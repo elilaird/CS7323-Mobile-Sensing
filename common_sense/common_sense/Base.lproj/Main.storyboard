@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MainView-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
@@ -116,7 +116,7 @@
                                 <rect key="frame" x="176" y="145" width="62" height="30"/>
                                 <state key="normal" title="Calibrate"/>
                                 <connections>
-                                    <action selector="beginCalibration:" destination="u6f-8w-eyG" eventType="touchUpInside" id="hws-w1-S4V"/>
+                                    <action selector="beginCalibration:" destination="u6f-8w-eyG" eventType="touchUpInside" id="cqa-gc-DA2"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJ0-w4-ad4">
