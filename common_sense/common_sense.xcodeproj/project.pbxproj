@@ -22,6 +22,10 @@
 		05CFD3572583BF3900760E22 /* UserDataOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD3562583BF3900760E22 /* UserDataOps.swift */; };
 		05CFD3622585458A00760E22 /* TremorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD3612585458A00760E22 /* TremorTest.swift */; };
 		05CFD367258545BE00760E22 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD366258545BE00760E22 /* RingBuffer.swift */; };
+		05CFD3762585670B00760E22 /* AudioDSPUtils in Resources */ = {isa = PBXBuildFile; fileRef = 05CFD3712585670B00760E22 /* AudioDSPUtils */; };
+		05CFD3772585670B00760E22 /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD3722585670B00760E22 /* AudioViewController.swift */; };
+		05CFD3782585670B00760E22 /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD3732585670B00760E22 /* AudioModel.swift */; };
+		05CFD3792585670B00760E22 /* extensions in Resources */ = {isa = PBXBuildFile; fileRef = 05CFD3752585670B00760E22 /* extensions */; };
 		05EA54F7257EE69C00C6E442 /* ColorOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EA54F6257EE69C00C6E442 /* ColorOps.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +67,11 @@
 		05CFD3562583BF3900760E22 /* UserDataOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataOps.swift; sourceTree = "<group>"; };
 		05CFD3612585458A00760E22 /* TremorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TremorTest.swift; sourceTree = "<group>"; };
 		05CFD366258545BE00760E22 /* RingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
+		05CFD3712585670B00760E22 /* AudioDSPUtils */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AudioDSPUtils; sourceTree = "<group>"; };
+		05CFD3722585670B00760E22 /* AudioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
+		05CFD3732585670B00760E22 /* AudioModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
+		05CFD3742585670B00760E22 /* common_sense-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "common_sense-Bridging-Header.h"; sourceTree = "<group>"; };
+		05CFD3752585670B00760E22 /* extensions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = extensions; sourceTree = "<group>"; };
 		05EA54F6257EE69C00C6E442 /* ColorOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOps.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +124,11 @@
 		051013742578781000DC83E6 /* common_sense */ = {
 			isa = PBXGroup;
 			children = (
+				05CFD3712585670B00760E22 /* AudioDSPUtils */,
+				05CFD3732585670B00760E22 /* AudioModel.swift */,
+				05CFD3722585670B00760E22 /* AudioViewController.swift */,
+				05CFD3742585670B00760E22 /* common_sense-Bridging-Header.h */,
+				05CFD3752585670B00760E22 /* extensions */,
 				051013752578781000DC83E6 /* AppDelegate.swift */,
 				051013772578781000DC83E6 /* SceneDelegate.swift */,
 				051013792578781000DC83E6 /* ViewController.swift */,
@@ -261,8 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				051013852578781100DC83E6 /* LaunchScreen.storyboard in Resources */,
+				05CFD3792585670B00760E22 /* extensions in Resources */,
 				051013822578781100DC83E6 /* Assets.xcassets in Resources */,
 				0510137D2578781000DC83E6 /* Main.storyboard in Resources */,
+				05CFD3762585670B00760E22 /* AudioDSPUtils in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,12 +305,14 @@
 			files = (
 				05CFD3622585458A00760E22 /* TremorTest.swift in Sources */,
 				05CFD367258545BE00760E22 /* RingBuffer.swift in Sources */,
+				05CFD3782585670B00760E22 /* AudioModel.swift in Sources */,
 				0510137A2578781000DC83E6 /* ViewController.swift in Sources */,
 				051013762578781000DC83E6 /* AppDelegate.swift in Sources */,
 				052C2B30257D898500B00F17 /* ColorDistinctionTest.swift in Sources */,
 				051013782578781000DC83E6 /* SceneDelegate.swift in Sources */,
 				05CFD33D2581A18400760E22 /* StatOps.swift in Sources */,
 				05EA54F7257EE69C00C6E442 /* ColorOps.swift in Sources */,
+				05CFD3772585670B00760E22 /* AudioViewController.swift in Sources */,
 				051013802578781000DC83E6 /* common_sense.xcdatamodeld in Sources */,
 				05CFD3572583BF3900760E22 /* UserDataOps.swift in Sources */,
 			);
