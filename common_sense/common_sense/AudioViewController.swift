@@ -10,7 +10,7 @@ import MediaPlayer
 
 let AUDIO_BUFFER_SIZE = 131072
 let CALIBRATION_FREQUENCY:Float = 3000.0
-let MAX_TEST_FREQUENCY:Float = 18000.0
+let MAX_TEST_FREQUENCY:Float = 20000.0
 let MIN_TEST_FREQUENCY:Float = 50.0
 
 
@@ -57,11 +57,14 @@ class AudioViewController: UIViewController, DataDelegate{
     var dbHalf:Float = 0.0
     
     enum StartingValues:Float {
-        case High = 15000.0, Low = 1000.0
+        case High = 15000.0, Low = 600.0
     }
     
     // setup audio model
     var audio:AudioModel!
+    
+    // setup data interface
+    var dataInterface:DataInterface!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,7 +156,7 @@ class AudioViewController: UIViewController, DataDelegate{
 
             lowerBound = self.findLowerBound(withStarting: StartingValues.Low.rawValue, andStep: 200.0)
             print("Found lower bound of \(lowerBound)")
-            lowerBound = self.findLowerBound(withStarting: lowerBound + 200, andStep: 100.0)
+            lowerBound = self.findLowerBound(withStarting: lowerBound + 100, andStep: 100.0)
             print("Found lower bound of \(lowerBound)")
             
             //find the bounds with max volume
@@ -164,7 +167,7 @@ class AudioViewController: UIViewController, DataDelegate{
                 MPVolumeView.setVolume(1.0)
             }
             
-            maxVolumeUpperBound = self.findUpperBound(withStarting: upperBound - 100, andStep: 50.0)
+            maxVolumeUpperBound = self.findUpperBound(withStarting: upperBound - 100, andStep: 100.0)
             print("Max volume upper bound of \(maxVolumeUpperBound)")
             maxVolumeLowerBound = self.findLowerBound(withStarting: lowerBound + 100, andStep: 50.0)
             print("Max volume lower bound of \(maxVolumeLowerBound)")
@@ -179,6 +182,8 @@ class AudioViewController: UIViewController, DataDelegate{
                 self.resultsMaxLabel.isHidden = false
                 self.resultsMinLabel.isHidden = false
             }
+            
+//            self.dataInterface.saveAudioData(lowFrequencyAtdB: lowerBound, highFrequencyAtdB: upperBound, dB: self.dbHalf, lowFrequencyAtMaxdB: maxVolumeLowerBound, highFrequencyAtMaxdB: maxVolumeUpperBound, maxdB: self.dbMax)
 
         }
     }
