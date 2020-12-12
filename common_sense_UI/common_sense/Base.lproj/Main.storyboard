@@ -421,10 +421,10 @@
             </objects>
             <point key="canvasLocation" x="3756.521739130435" y="-689.0625"/>
         </scene>
-        <!--Temp Sense View Controller-->
+        <!--Tremortest-->
         <scene sceneID="fi8-ut-zx7">
             <objects>
-                <viewController id="92Z-In-LNJ" customClass="TempSenseViewController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="92Z-In-LNJ" customClass="Tremortest" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IN5-NW-KWQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -450,6 +450,9 @@ hold it parallel to the floor in your hand.</string>
                                 <rect key="frame" x="132" y="750" width="150" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="41"/>
                                 <state key="normal" title="Run Test"/>
+                                <connections>
+                                    <action selector="runTestButton:" destination="92Z-In-LNJ" eventType="touchUpInside" id="kd7-Pi-oTu"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fdu-Ty-sJI"/>

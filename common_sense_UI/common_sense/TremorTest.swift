@@ -19,10 +19,6 @@ class Tremortest: UIViewController, URLSessionDelegate {
     var ringBuffer = RingBuffer()
     let animation = CATransition()
     let motion = CMMotionManager()
-
-    
-    @IBOutlet weak var handImageView: UIImageView!
-    @IBOutlet weak var holdPhoneLabel: UILabel!
     
     
     
