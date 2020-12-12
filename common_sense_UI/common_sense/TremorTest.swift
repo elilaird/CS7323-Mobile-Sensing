@@ -19,6 +19,7 @@ class Tremortest: UIViewController, URLSessionDelegate {
     var ringBuffer = RingBuffer()
     let animation = CATransition()
     let motion = CMMotionManager()
+    let dataInterface = DataInterface()
     
     
     
@@ -71,18 +72,17 @@ class Tremortest: UIViewController, URLSessionDelegate {
             print("Average magnitude: \(avgMag)")
             
             // Save the average magnitude
+            self.dataInterface.saveTremorData(tremorMagnitude: avgMag)
             
             // Segue back to main
-            self.segueBackToMain()
+            self.segueToResults()
         }
     }
     
-    func segueBackToMain(){
-        
-        // Return to main screen
-        if let mainView = self.navigationController?.viewControllers.first{
-            self.navigationController?.popToViewController(mainView, animated: true)
-        }
+    func segueToResults(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "tremorResult")
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 
 }
