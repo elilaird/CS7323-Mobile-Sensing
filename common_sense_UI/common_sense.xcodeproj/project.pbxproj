@@ -28,6 +28,7 @@
 		453DE17C258582CA0089DA7B /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = 453DE178258582C90089DA7B /* Novocaine.m */; };
 		453DE17D258582CA0089DA7B /* FFTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 453DE179258582C90089DA7B /* FFTHelper.m */; };
 		453DE17E258582CA0089DA7B /* CircularBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 453DE17A258582C90089DA7B /* CircularBuffer.m */; };
+		459942182585A9E7000061E0 /* UIColor-hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459942172585A9E7000061E0 /* UIColor-hexColor.swift */; };
 		E84E830D258529D8003ECF24 /* TempResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84E830C258529D8003ECF24 /* TempResultViewController.swift */; };
 		E84E831125853FA8003ECF24 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84E831025853FA8003ECF24 /* HeaderView.swift */; };
 		E87BA664257EEFCA00B1281B /* FoldingCell in Frameworks */ = {isa = PBXBuildFile; productRef = E87BA663257EEFCA00B1281B /* FoldingCell */; };
@@ -102,6 +103,7 @@
 		453DE179258582C90089DA7B /* FFTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFTHelper.m; path = AudioDSPUtils/FFTHelper.m; sourceTree = "<group>"; };
 		453DE17A258582C90089DA7B /* CircularBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircularBuffer.m; path = AudioDSPUtils/CircularBuffer.m; sourceTree = "<group>"; };
 		453DE17B258582C90089DA7B /* CircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircularBuffer.h; path = AudioDSPUtils/CircularBuffer.h; sourceTree = "<group>"; };
+		459942172585A9E7000061E0 /* UIColor-hexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-hexColor.swift"; sourceTree = "<group>"; };
 		56F71A755BD7722AD9FE77FE /* Pods_common_sense.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_common_sense.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A99C9643A6DE0508F764D478 /* Pods-common_sense.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_sense.debug.xcconfig"; path = "Target Support Files/Pods-common_sense/Pods-common_sense.debug.xcconfig"; sourceTree = "<group>"; };
 		E84E830C258529D8003ECF24 /* TempResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempResultViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				051013862578781100DC83E6 /* Info.plist */,
 				0510137E2578781000DC83E6 /* common_sense.xcdatamodeld */,
 				453DE175258582C90089DA7B /* common_sense-Bridging-Header.h */,
+				459942172585A9E7000061E0 /* UIColor-hexColor.swift */,
 			);
 			path = common_sense;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				E84E830D258529D8003ECF24 /* TempResultViewController.swift in Sources */,
 				051013782578781000DC83E6 /* SceneDelegate.swift in Sources */,
 				453DE172258582B50089DA7B /* AudioViewController.swift in Sources */,
+				459942182585A9E7000061E0 /* UIColor-hexColor.swift in Sources */,
 				05CFD395258571C500760E22 /* TremorTest.swift in Sources */,
 				05CFD391258571A100760E22 /* ColorOps.swift in Sources */,
 				051013802578781000DC83E6 /* common_sense.xcdatamodeld in Sources */,

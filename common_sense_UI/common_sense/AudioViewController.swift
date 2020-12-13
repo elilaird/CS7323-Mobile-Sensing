@@ -56,6 +56,9 @@ class AudioViewController: UIViewController, DataDelegate{
         case High = 15000.0, Low = 600.0
     }
     
+    let darkBlue = UIColor(hex: "#0076b4bd")
+    let pastelRed = UIColor(red: 255/255, green: 105/255, blue: 97/255, alpha: 1.0)
+    let pastelGreen = UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1.0)
     // setup audio model
     var audio:AudioModel!
     
@@ -64,6 +67,23 @@ class AudioViewController: UIViewController, DataDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DispatchQueue.main.async {
+            self.beginCalibrationButton.layer.cornerRadius = 9
+            self.toneTestButton.layer.cornerRadius = 9
+            self.yesButton.layer.cornerRadius = 9
+            self.noButton.layer.cornerRadius = 9
+            
+            self.beginCalibrationButton.backgroundColor = self.darkBlue
+            self.toneTestButton.backgroundColor = self.darkBlue
+            self.yesButton.backgroundColor = self.pastelGreen
+            self.noButton.backgroundColor = self.pastelRed
+            
+            self.beginCalibrationButton.setTitleColor(.white, for: .normal)
+            self.toneTestButton.setTitleColor(.white, for: .normal)
+            self.yesButton.setTitleColor(.white, for: .normal)
+            self.noButton.setTitleColor(.white, for: .normal)
+        }
         
         
         self.audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
