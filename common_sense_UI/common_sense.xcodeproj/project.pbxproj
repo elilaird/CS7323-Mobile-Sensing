@@ -36,6 +36,7 @@
 		E87BA664257EEFCA00B1281B /* FoldingCell in Frameworks */ = {isa = PBXBuildFile; productRef = E87BA663257EEFCA00B1281B /* FoldingCell */; };
 		E87BA669257EF92300B1281B /* FoldingCellsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */; };
 		E87BA684258007FB00B1281B /* SensePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87BA683258007FB00B1281B /* SensePreviewCell.swift */; };
+		E87FED812586B8C900E9D418 /* AccountCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FED802586B8C900E9D418 /* AccountCreationViewController.swift */; };
 		E8BE660F258459FD008C1F2B /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE660E258459FD008C1F2B /* LandingPageController.swift */; };
 		E8BE6629258462C9008C1F2B /* TempSenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE6628258462C9008C1F2B /* TempSenseViewController.swift */; };
 		F628A4F6ED0F3DAEBCFB4A1A /* Pods_common_sense.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56F71A755BD7722AD9FE77FE /* Pods_common_sense.framework */; };
@@ -110,11 +111,11 @@
 		459942172585A9E7000061E0 /* UIColor-hexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-hexColor.swift"; sourceTree = "<group>"; };
 		56F71A755BD7722AD9FE77FE /* Pods_common_sense.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_common_sense.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A99C9643A6DE0508F764D478 /* Pods-common_sense.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_sense.debug.xcconfig"; path = "Target Support Files/Pods-common_sense/Pods-common_sense.debug.xcconfig"; sourceTree = "<group>"; };
-		E82802D7258587FC001F0139 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		E84E830C258529D8003ECF24 /* TempResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempResultViewController.swift; sourceTree = "<group>"; };
 		E84E831025853FA8003ECF24 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingCellsViewController.swift; sourceTree = "<group>"; };
 		E87BA683258007FB00B1281B /* SensePreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensePreviewCell.swift; sourceTree = "<group>"; };
+		E87FED802586B8C900E9D418 /* AccountCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewController.swift; sourceTree = "<group>"; };
 		E8BE660E258459FD008C1F2B /* LandingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageController.swift; sourceTree = "<group>"; };
 		E8BE6628258462C9008C1F2B /* TempSenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSenseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,8 +195,8 @@
 				051013812578781100DC83E6 /* Assets.xcassets */,
 				051013832578781100DC83E6 /* LaunchScreen.storyboard */,
 				E87BA683258007FB00B1281B /* SensePreviewCell.swift */,
+				E87FED802586B8C900E9D418 /* AccountCreationViewController.swift */,
 				E84E830C258529D8003ECF24 /* TempResultViewController.swift */,
-				E82802D7258587FC001F0139 /* CreateAccountViewController.swift */,
 				E84E831025853FA8003ECF24 /* HeaderView.swift */,
 				E8BE6628258462C9008C1F2B /* TempSenseViewController.swift */,
 				05CFD3D92585A0C900760E22 /* VisionResultController.swift */,
@@ -432,6 +433,7 @@
 				453DE17D258582CA0089DA7B /* FFTHelper.m in Sources */,
 				05CFD38D2585717800760E22 /* ColorDistinctionTest.swift in Sources */,
 				E84E831125853FA8003ECF24 /* HeaderView.swift in Sources */,
+				E87FED812586B8C900E9D418 /* AccountCreationViewController.swift in Sources */,
 				453DE17C258582CA0089DA7B /* Novocaine.m in Sources */,
 				E8BE6629258462C9008C1F2B /* TempSenseViewController.swift in Sources */,
 				05CFD399258571DA00760E22 /* RingBuffer.swift in Sources */,
@@ -443,7 +445,6 @@
 				E87BA669257EF92300B1281B /* FoldingCellsViewController.swift in Sources */,
 				05CFD3DA2585A0C900760E22 /* VisionResultController.swift in Sources */,
 				453DE16F258582B50089DA7B /* MPVolumeView-setVolume.swift in Sources */,
-				E82802D8258587FC001F0139 /* CreateAccountViewController.swift in Sources */,
 				051013762578781000DC83E6 /* AppDelegate.swift in Sources */,
 				E84E830D258529D8003ECF24 /* TempResultViewController.swift in Sources */,
 				051013782578781000DC83E6 /* SceneDelegate.swift in Sources */,

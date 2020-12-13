@@ -1,29 +1,29 @@
 //
-//  CreateAccountViewController.swift
+//  AccountCreationViewController.swift
 //  common_sense
 //
-//  Created by Matthew Lee on 12/12/20.
+//  Created by Matthew Lee on 12/13/20.
 //
 
 import UIKit
 
-class CreateAccountViewController: UIViewController {
+class AccountCreationViewController: UIViewController {
 
     let defaults = UserDefaults.standard
-    @IBOutlet weak var appDescription: UILabel!
+    @IBOutlet weak var appDesc: UILabel!
     @IBOutlet weak var firstName: UITextField!
-    @IBOutlet weak var lastName: UITextField!
-    @IBOutlet weak var getStartedButton: UIButton!
+    @IBOutlet weak var lastN: UITextField!
+    @IBOutlet weak var getStarted: UIButton!
     
     var descriptionPart1: String = "Common Sense is about keeping in touch with your senses over time."
     var descriptionPart2: String = "Routine checkups let you see how your senses are changing and help you see when something is changing unexpectedly."
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.appDescription.alpha = 0
-        self.appDescription.text = descriptionPart1
-        self.getStartedButton.alpha = 0
-        self.getStartedButton.isEnabled = false
+        self.appDesc.alpha = 0
+        self.appDesc.text = descriptionPart1
+        self.getStarted.alpha = 0
+        self.getStarted.isEnabled = false
         
         // Do any additional setup after loading the view.
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -46,28 +46,28 @@ class CreateAccountViewController: UIViewController {
         dismissKeyboard()
         defaults.setValue(firstName.text, forKey: "userName")
         UILabel.animate(withDuration: 1){
-            self.appDescription.alpha = 1
+            self.appDesc.alpha = 1
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { // Change `2.0` to the desired number of seconds.
             UILabel.animate(withDuration: 1){
-                self.appDescription.alpha = 0
+                self.appDesc.alpha = 0
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Change `2.0` to the desired number of seconds.
-            self.appDescription.text = self.descriptionPart2
+            self.appDesc.text = self.descriptionPart2
             UILabel.animate(withDuration: 1){
-                self.appDescription.alpha = 1
+                self.appDesc.alpha = 1
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 12.0) { // Change `2.0` to the desired number of seconds.
             UILabel.animate(withDuration: 1){
-                self.appDescription.alpha = 0
+                self.appDesc.alpha = 0
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 13.0) { // Change `2.0` to the desired number of seconds.
-            self.getStartedButton.isEnabled = true
+            self.getStarted.isEnabled = true
             UIButton.animate(withDuration: 1){
-                self.getStartedButton.alpha = 1
+                self.getStarted.alpha = 1
             }
         }
     
