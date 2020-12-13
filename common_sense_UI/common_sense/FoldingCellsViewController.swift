@@ -221,6 +221,14 @@ extension FoldingCellsViewController {
                 if latestResult > 0 {
                     unit.adjustsFontSizeToFitWidth = true
                     unit.text = "Perceptibility"
+                    let firstTime = visionResults.first?.timeRecorded ?? Date()
+                    let mostRecentTime = visionResults.last?.timeRecorded ?? Date()
+                    
+                    let sinceFirstTime = firstTime.timeAgoDisplay()
+                    let sinceMostRecentTime = mostRecentTime.timeAgoDisplay()
+                    
+                    cell.graphRangeLabel.text = "From " + sinceFirstTime + " to " + sinceMostRecentTime
+                    cell.graphRangeLabel.adjustsFontSizeToFitWidth = true
                 }
                 else{
                     unit.text = self.emptyUnits
@@ -271,6 +279,15 @@ extension FoldingCellsViewController {
                 if latestResult > 0.0 {
                     unit.adjustsFontSizeToFitWidth = true
                     unit.text = "Tremor"
+                    
+                    let firstTime = tremorResults.first?.timeRecorded ?? Date()
+                    let mostRecentTime = tremorResults.last?.timeRecorded ?? Date()
+                    
+                    let sinceFirstTime = firstTime.timeAgoDisplay()
+                    let sinceMostRecentTime = mostRecentTime.timeAgoDisplay()
+                    
+                    cell.graphRangeLabel.text = "From " + sinceFirstTime + " to " + sinceMostRecentTime
+                    cell.graphRangeLabel.adjustsFontSizeToFitWidth = true
                 }
                 else{
                     unit.text = self.emptyUnits
