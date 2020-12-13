@@ -27,6 +27,7 @@ class AudioViewController: UIViewController, DataDelegate{
     @IBOutlet weak var toneTestButton: UIButton!
     @IBOutlet weak var testSummary: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var earImage: UIImageView!
     
     weak var delegate: AudioModel!
     
@@ -95,6 +96,10 @@ class AudioViewController: UIViewController, DataDelegate{
             self.yesButton.setTitleColor(.white, for: .normal)
             self.noButton.setTitleColor(.white, for: .normal)
             self.cancelButton.setTitleColor(.white, for: .normal)
+            
+            if let image = UIImage(named:"ear"){
+                self.earImage.image = image
+            }
         }
         
         
@@ -141,6 +146,7 @@ class AudioViewController: UIViewController, DataDelegate{
             self.beginCalibrationButton.isHidden = true
             self.waitLabel.isHidden = false
             self.testSummary.isHidden = true
+            self.earImage.isHidden = true
         }
         self.audio.calibrate(withFreq: CALIBRATION_FREQUENCY)
     }
@@ -189,7 +195,7 @@ class AudioViewController: UIViewController, DataDelegate{
             
             upperBound = self.findUpperBound(withStarting: StartingValues.High.rawValue, andStep: 500.0)
             print("Found upper bound of \(upperBound)")
-            upperBound = self.findUpperBound(withStarting: upperBound - 500, andStep: 100.0)
+            upperBound = self.findUpperBound(withStarting: upperBound - 500, andStep: 250.0)
             print("Found upper bound of \(upperBound)")
 
             lowerBound = self.findLowerBound(withStarting: StartingValues.Low.rawValue, andStep: 200.0)
@@ -205,9 +211,9 @@ class AudioViewController: UIViewController, DataDelegate{
                 MPVolumeView.setVolume(1.0)
             }
             
-            maxVolumeUpperBound = self.findUpperBound(withStarting: upperBound - 100, andStep: 100.0)
+            maxVolumeUpperBound = self.findUpperBound(withStarting: upperBound, andStep: 100.0)
             print("Max volume upper bound of \(maxVolumeUpperBound)")
-            maxVolumeLowerBound = self.findLowerBound(withStarting: lowerBound + 100, andStep: 50.0)
+            maxVolumeLowerBound = self.findLowerBound(withStarting: lowerBound, andStep: 50.0)
             print("Max volume lower bound of \(maxVolumeLowerBound)")
             
             DispatchQueue.main.async {

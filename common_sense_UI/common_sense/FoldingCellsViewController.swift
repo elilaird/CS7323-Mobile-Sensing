@@ -30,6 +30,13 @@ class FoldingCellsViewController: UITableViewController {
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //uncomment to reset user data
+        //UserDefaults.standard.reset()
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
+        
         setup()
         self.view.backgroundColor = UIColor(named: "red")
         
@@ -118,6 +125,7 @@ extension FoldingCellsViewController {
         if indexPath.row == 0 { // Call special 2 line graph for hearing
 
             let dataInterface:DataInterface = DataInterface()
+            
             
             let audioResults = dataInterface.getAudioData()
             var yHigh:[Double] = []

@@ -600,13 +600,19 @@
                                     <action selector="cancel:" destination="qTk-hk-h9G" eventType="touchUpInside" id="sef-XZ-URO"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQB-oU-0LV">
+                                <rect key="frame" x="87" y="507" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="THo-mG-9ET"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="amD-f3-WfN" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="2q0-Ic-Nic"/>
+                            <constraint firstItem="aoc-o6-a2t" firstAttribute="top" secondItem="nQB-oU-0LV" secondAttribute="bottom" constant="158" id="5XE-iO-F46"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="top" secondItem="1wU-vU-Nef" secondAttribute="bottom" constant="14" id="7Ua-sY-ARQ"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="Aps-mL-EgA"/>
+                            <constraint firstItem="nQB-oU-0LV" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="FwQ-bX-eXp"/>
+                            <constraint firstItem="nQB-oU-0LV" firstAttribute="top" secondItem="Q0B-RQ-0YC" secondAttribute="bottom" constant="52" id="Jk4-Gg-FZD"/>
                             <constraint firstItem="amD-f3-WfN" firstAttribute="top" secondItem="Q0B-RQ-0YC" secondAttribute="bottom" constant="60" id="K70-VT-lJm"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="Q0B-RQ-0YC" secondAttribute="trailing" constant="83" id="UdH-uf-p69"/>
                             <constraint firstItem="Q0B-RQ-0YC" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="84" id="WF1-2c-JpV"/>
@@ -624,6 +630,7 @@
                     <connections>
                         <outlet property="beginCalibrationButton" destination="1wU-vU-Nef" id="DCe-at-eQY"/>
                         <outlet property="cancelButton" destination="aoc-o6-a2t" id="Z7R-RO-yko"/>
+                        <outlet property="earImage" destination="nQB-oU-0LV" id="mGD-8I-kF5"/>
                         <outlet property="noButton" destination="dj7-QI-fZm" id="zfl-zs-k4q"/>
                         <outlet property="queryLabel" destination="GLi-Kv-H2l" id="tRt-Uz-ImD"/>
                         <outlet property="testSummary" destination="Q0B-RQ-0YC" id="aDr-2E-Vae"/>
