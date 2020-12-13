@@ -507,9 +507,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Can you hear this sound?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLi-Kv-H2l">
-                                <rect key="frame" x="111" y="276" width="192" height="21"/>
+                                <rect key="frame" x="97" y="276" width="221" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -552,16 +552,16 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please wait..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ2-BY-buG">
-                                <rect key="frame" x="157" y="364" width="100" height="21"/>
+                                <rect key="frame" x="157" y="364" width="114" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Testing: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="YzR-TG-o4z">
                                 <rect key="frame" x="131" y="405" width="152" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -584,13 +584,6 @@
                                     <action selector="yesPressed:" destination="qTk-hk-h9G" eventType="touchUpInside" id="OzX-iK-GjG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0B-RQ-0YC">
-                                <rect key="frame" x="84" y="284" width="247" height="171"/>
-                                <string key="text">Welcome to the hearing test. This procedure will test your ability to hear high and low frequencies at different volume levels. Please navigate to a quiet environment and press calibrate.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoc-o6-a2t">
                                 <rect key="frame" x="20" y="793" width="374" height="48"/>
                                 <constraints>
@@ -605,6 +598,13 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQB-oU-0LV">
                                 <rect key="frame" x="87" y="507" width="240" height="128"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0B-RQ-0YC">
+                                <rect key="frame" x="84" y="277" width="247" height="199"/>
+                                <string key="text">Welcome to the hearing test. This procedure will test your ability to hear high and low frequencies at different volume levels. Please navigate to a quiet environment and press calibrate.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="THo-mG-9ET"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -614,15 +614,15 @@
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="top" secondItem="1wU-vU-Nef" secondAttribute="bottom" constant="14" id="7Ua-sY-ARQ"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="Aps-mL-EgA"/>
                             <constraint firstItem="nQB-oU-0LV" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="FwQ-bX-eXp"/>
-                            <constraint firstItem="nQB-oU-0LV" firstAttribute="top" secondItem="Q0B-RQ-0YC" secondAttribute="bottom" constant="52" id="Jk4-Gg-FZD"/>
-                            <constraint firstItem="amD-f3-WfN" firstAttribute="top" secondItem="Q0B-RQ-0YC" secondAttribute="bottom" constant="60" id="K70-VT-lJm"/>
+                            <constraint firstItem="nQB-oU-0LV" firstAttribute="top" secondItem="Q0B-RQ-0YC" secondAttribute="bottom" constant="31" id="Jk4-Gg-FZD"/>
+                            <constraint firstItem="amD-f3-WfN" firstAttribute="top" secondItem="Q0B-RQ-0YC" secondAttribute="bottom" constant="39" id="K70-VT-lJm"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="Q0B-RQ-0YC" secondAttribute="trailing" constant="83" id="UdH-uf-p69"/>
                             <constraint firstItem="Q0B-RQ-0YC" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="84" id="WF1-2c-JpV"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="dj7-QI-fZm" secondAttribute="bottom" constant="227" id="dn4-U7-n0k"/>
                             <constraint firstItem="dj7-QI-fZm" firstAttribute="top" secondItem="amD-f3-WfN" secondAttribute="bottom" constant="24" id="eFp-GT-E62"/>
                             <constraint firstItem="aoc-o6-a2t" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="h0a-3n-bsD"/>
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="top" secondItem="THo-mG-9ET" secondAttribute="top" constant="90" id="hDP-le-oDj"/>
-                            <constraint firstItem="Q0B-RQ-0YC" firstAttribute="top" secondItem="Rjl-dX-azG" secondAttribute="bottom" constant="52" id="neo-Ry-jph"/>
+                            <constraint firstItem="Q0B-RQ-0YC" firstAttribute="top" secondItem="Rjl-dX-azG" secondAttribute="bottom" constant="45" id="neo-Ry-jph"/>
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="ogI-wp-crI"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="aoc-o6-a2t" secondAttribute="bottom" constant="21" id="pzv-Yh-ABo"/>
                             <constraint firstItem="dj7-QI-fZm" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="wSj-xw-eWR"/>
