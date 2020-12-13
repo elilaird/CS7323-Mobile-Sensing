@@ -33,12 +33,6 @@ class AudioResultViewController: UIViewController {
         self.hearingRange.text = String(format: "%@ - %@", low, high)
         
         // CHART
-        // - Sample Data
-//        let a = [1,2,3,4,5]
-//        let b = [6,7,8,9,10]
-//        let c = [1,2,3,4,5]
-//        let d = [6,7,8,9,10]
-//        let e = 5
     
         var yHigh:[Double] = []
         var yLow:[Double] = []
@@ -50,13 +44,6 @@ class AudioResultViewController: UIViewController {
         }
         
         generateChart(xValsLow: x, yValsLow: yLow, xValsHigh: x, yValsHigh: yHigh, length: x.count)
-        
-        // - Function Call, both arrays have to be doubles so you may have to map them
-//        generateChart(xValsLow: a.map{Double($0)}, //lower bound x values array
-//                      yValsLow: b.map{Double($0)}, //lower bound y values array
-//                      xValsHigh: c.map{Double($0)}, //upper bound x values array
-//                      yValsHigh: d.map{Double($0)}, //upper bound y values array
-//                      length: e) //number of data points
 
     }
     

@@ -295,7 +295,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKT-JP-ccu">
-                                <rect key="frame" x="32" y="623" width="350" height="48"/>
+                                <rect key="frame" x="20" y="623" width="374" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Yes"/>
                                 <connections>
@@ -303,7 +303,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOY-4d-3GE">
-                                <rect key="frame" x="32" y="706" width="350" height="48"/>
+                                <rect key="frame" x="20" y="706" width="374" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="No"/>
                                 <connections>
@@ -346,7 +346,7 @@
                         <viewLayoutGuide key="safeArea" id="vQM-0x-XvX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="BKT-JP-ccu" secondAttribute="trailing" constant="32" id="2VE-Ni-sJ4"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="BKT-JP-ccu" secondAttribute="trailing" constant="20" id="2VE-Ni-sJ4"/>
                             <constraint firstItem="BKT-JP-ccu" firstAttribute="top" secondItem="UvC-U5-EKL" secondAttribute="bottom" constant="88" id="2ZF-JP-2uc"/>
                             <constraint firstItem="KOY-4d-3GE" firstAttribute="top" secondItem="BKT-JP-ccu" secondAttribute="bottom" constant="35" id="3r7-6J-R4P"/>
                             <constraint firstItem="q11-SE-OwD" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="9W8-V5-qGV"/>
@@ -362,9 +362,9 @@
                             <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="UvC-U5-EKL" secondAttribute="trailing" constant="20" id="apv-sW-aA4"/>
                             <constraint firstItem="UvC-U5-EKL" firstAttribute="top" secondItem="q11-SE-OwD" secondAttribute="bottom" constant="72" id="ekn-1f-9Mg"/>
                             <constraint firstItem="BKT-JP-ccu" firstAttribute="top" secondItem="UvC-U5-EKL" secondAttribute="bottom" constant="88" id="gMw-eU-mNt"/>
-                            <constraint firstItem="KOY-4d-3GE" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="hBX-fL-26S"/>
-                            <constraint firstItem="BKT-JP-ccu" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="hgI-FQ-L5l"/>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="KOY-4d-3GE" secondAttribute="trailing" constant="32" id="k93-uR-Wem"/>
+                            <constraint firstItem="KOY-4d-3GE" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="hBX-fL-26S"/>
+                            <constraint firstItem="BKT-JP-ccu" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="hgI-FQ-L5l"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="KOY-4d-3GE" secondAttribute="trailing" constant="20" id="k93-uR-Wem"/>
                             <constraint firstItem="UvC-U5-EKL" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="kq7-Rl-me4"/>
                             <constraint firstItem="Yac-Sy-Kct" firstAttribute="top" secondItem="vQM-0x-XvX" secondAttribute="top" id="u2w-3x-eCt"/>
                             <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="Yac-Sy-Kct" secondAttribute="trailing" constant="161" id="vLD-mV-ZcI"/>
@@ -538,11 +538,12 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dj7-QI-fZm">
-                                <rect key="frame" x="20" y="592" width="374" height="43"/>
+                                <rect key="frame" x="20" y="587" width="374" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="735-LN-Rz5"/>
+                                    <constraint firstAttribute="height" constant="48" id="LUj-LO-8hP"/>
                                     <constraint firstAttribute="width" constant="374" id="Zou-F1-tGg"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="No"/>
                                 <connections>
                                     <action selector="noPressed:" destination="qTk-hk-h9G" eventType="touchUpInside" id="DQb-pk-an2"/>
@@ -570,28 +571,29 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amD-f3-WfN">
-                                <rect key="frame" x="20" y="525" width="374" height="43"/>
+                                <rect key="frame" x="20" y="515" width="374" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="EKk-xk-e7l"/>
+                                    <constraint firstAttribute="height" constant="48" id="CKW-Dt-V9s"/>
                                     <constraint firstAttribute="width" constant="374" id="IB3-sT-7gz"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Yes"/>
                                 <connections>
                                     <action selector="yesPressed:" destination="qTk-hk-h9G" eventType="touchUpInside" id="OzX-iK-GjG"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0B-RQ-0YC">
-                                <rect key="frame" x="84" y="284" width="247" height="181"/>
+                                <rect key="frame" x="84" y="284" width="247" height="171"/>
                                 <string key="text">Welcome to the hearing test. This procedure will test your ability to hear high and low frequencies at different volume levels. Please navigate to a quiet environment and press calibrate.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoc-o6-a2t">
-                                <rect key="frame" x="20" y="799" width="374" height="42"/>
+                                <rect key="frame" x="20" y="793" width="374" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="374" id="1k4-aT-2Kb"/>
-                                    <constraint firstAttribute="height" constant="42" id="s5b-H5-x9t"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="lrf-dM-278"/>
                                 </constraints>
                                 <state key="normal" title="Cancel Test"/>
                                 <connections>
@@ -655,19 +657,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5s-fR-zfO">
-                                <rect key="frame" x="20" y="691" width="374" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="374" id="bwM-Pg-y2h"/>
-                                    <constraint firstAttribute="width" constant="374" id="hSN-8b-TJW"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="jrP-B6-rc1"/>
-                                    <constraint firstAttribute="height" constant="42" id="m2m-vg-6Hp"/>
-                                </constraints>
-                                <state key="normal" title="Return Home"/>
-                                <connections>
-                                    <action selector="returnToLanding:" destination="7Wv-S4-MRx" eventType="touchUpInside" id="jEX-Wy-XMk"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jI-X8-Df7" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="20" y="314" width="374" height="276"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -676,6 +665,18 @@
                                     <constraint firstAttribute="height" constant="276" id="Hqo-GA-Gsu"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5s-fR-zfO">
+                                <rect key="frame" x="20" y="814" width="374" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="8cX-iF-CIM"/>
+                                    <constraint firstAttribute="width" constant="374" id="hSN-8b-TJW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="returnToLanding:" destination="7Wv-S4-MRx" eventType="touchUpInside" id="jEX-Wy-XMk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eOo-4x-7cd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -684,7 +685,7 @@
                             <constraint firstItem="eOo-4x-7cd" firstAttribute="trailing" secondItem="2jI-X8-Df7" secondAttribute="trailing" constant="20" id="7Gq-5E-X2S"/>
                             <constraint firstItem="2jI-X8-Df7" firstAttribute="top" secondItem="EKf-Le-lX9" secondAttribute="bottom" constant="128" id="9Bv-6Q-5E3"/>
                             <constraint firstItem="2jI-X8-Df7" firstAttribute="centerX" secondItem="eOo-4x-7cd" secondAttribute="centerX" id="CqK-d4-IPh"/>
-                            <constraint firstItem="eOo-4x-7cd" firstAttribute="bottom" secondItem="r5s-fR-zfO" secondAttribute="bottom" constant="129" id="D7e-42-ukA"/>
+                            <constraint firstItem="eOo-4x-7cd" firstAttribute="bottom" secondItem="r5s-fR-zfO" secondAttribute="bottom" id="D7e-42-ukA"/>
                             <constraint firstItem="2jI-X8-Df7" firstAttribute="leading" secondItem="eOo-4x-7cd" secondAttribute="leading" constant="20" id="NVY-Gs-0ts"/>
                             <constraint firstItem="EKf-Le-lX9" firstAttribute="top" secondItem="4Wv-Jp-xTw" secondAttribute="bottom" constant="33" id="RPn-10-tJZ"/>
                             <constraint firstItem="4Wv-Jp-xTw" firstAttribute="centerX" secondItem="eOo-4x-7cd" secondAttribute="centerX" id="SKa-Ns-9Xh"/>

@@ -25,7 +25,7 @@ class FoldingCellsViewController: UITableViewController {
                                  UIColor(red: 0.46, green: 0.71, blue: 0.74, alpha: 1.00),
                                  UIColor(red: 0.74, green: 0.92, blue: 0.93, alpha: 1.00)]
     
-    var dataInterface:DataInterface = DataInterface()
+    
 
     // MARK: Life Cycle
     override func viewDidLoad() {
@@ -33,6 +33,12 @@ class FoldingCellsViewController: UITableViewController {
         setup()
         self.view.backgroundColor = UIColor(named: "red")
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
     }
 
     // MARK: Helpers
@@ -110,11 +116,9 @@ extension FoldingCellsViewController {
                        )
         
         if indexPath.row == 0 { // Call special 2 line graph for hearing
-            //loadDoubleLineDataChart(xValsLow: [Double], // lower bound x vals
-            //                        yValsLow: [Double], // lower bound y vals
-            //                        xValsHigh: [Double], // upper bound x vals
-            //                        yValsHigh: [Double], // upper bound y vals
-            //                        length: Int) // number of data points
+
+            let dataInterface:DataInterface = DataInterface()
+            
             let audioResults = dataInterface.getAudioData()
             var yHigh:[Double] = []
             var yLow:[Double] = []
@@ -152,6 +156,9 @@ extension FoldingCellsViewController {
         }
         
         if indexPath.row == 1{
+            
+            let dataInterface:DataInterface = DataInterface()
+            
             let visionResults = dataInterface.getPerceptibilityData()
             var percepScores:[Double] = []
             let x = Array(stride(from: 0, to: visionResults.count, by:1)).map {Double($0)}
@@ -188,6 +195,9 @@ extension FoldingCellsViewController {
         }
         
         if indexPath.row == 2{
+            
+            let dataInterface:DataInterface = DataInterface()
+            
             let tremorResults = dataInterface.getTremorData()
             var tremorMags:[Double] = []
             let x = Array(stride(from: 0, to: tremorResults.count, by:1)).map {Double($0)}
