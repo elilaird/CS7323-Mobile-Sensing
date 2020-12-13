@@ -123,7 +123,7 @@
                                                         <constraint firstAttribute="height" constant="128" id="xUb-kY-8RT"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Ffd-cP-2KG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ffd-cP-2KG">
                                                     <rect key="frame" x="166" y="28" width="200" height="99"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="72"/>
                                                     <nil key="textColor"/>
@@ -162,7 +162,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="80" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHF-3v-Xmr">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="80" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="MHF-3v-Xmr">
                                                     <rect key="frame" x="159" y="59" width="56" height="68.5"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="50"/>
                                                     <nil key="textColor"/>
@@ -248,12 +248,14 @@
                                     <outlet property="foregroundView" destination="6UO-CJ-jyA" id="e4h-aY-NYh"/>
                                     <outlet property="foregroundViewTop" destination="HzU-2X-yPE" id="xzk-As-WGn"/>
                                     <outlet property="lastCheckupLabel" destination="TJe-uH-0BU" id="afe-49-PKq"/>
+                                    <outlet property="latestScoreCaption" destination="Dhg-Uf-wb4" id="kGb-sV-fxt"/>
                                     <outlet property="lineChart" destination="cn1-ss-fMk" id="Kij-aO-k5q"/>
                                     <outlet property="senseIcon" destination="Vdh-Ud-IUK" id="i3Z-Dp-I90"/>
                                     <outlet property="testButton" destination="bQW-l2-gK8" id="yS3-IW-Ip1"/>
                                     <outletCollection property="scoreUnitsLabels" destination="nbE-h6-DBy" collectionClass="NSMutableArray" id="Zpf-AO-7eN"/>
                                     <outletCollection property="latestScoreLabels" destination="MHF-3v-Xmr" collectionClass="NSMutableArray" id="JzK-mS-nh7"/>
                                     <outletCollection property="latestScoreLabels" destination="Ffd-cP-2KG" collectionClass="NSMutableArray" id="sAA-yn-iZd"/>
+                                    <outletCollection property="latestScoreCaption" destination="Dhg-Uf-wb4" collectionClass="NSMutableArray" id="ytZ-sJ-37y"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
