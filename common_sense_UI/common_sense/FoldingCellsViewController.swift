@@ -24,6 +24,8 @@ class FoldingCellsViewController: UITableViewController {
     var cellColors: [UIColor] = [UIColor(red: 0.35, green: 0.40, blue: 0.55, alpha: 1.00),
                                  UIColor(red: 0.46, green: 0.71, blue: 0.74, alpha: 1.00),
                                  UIColor(red: 0.74, green: 0.92, blue: 0.93, alpha: 1.00)]
+    
+    var dataInterface:DataInterface = DataInterface()
 
     // MARK: Life Cycle
     override func viewDidLoad() {
@@ -45,6 +47,12 @@ class FoldingCellsViewController: UITableViewController {
         }
     }
     
+    func getFormattedFrequency(with freq:Float) -> String{
+        let formatter = MeasurementFormatter()
+        let hertz = Measurement(value: Double(freq), unit: UnitFrequency.hertz)
+        return formatter.string(from: hertz)
+    }
+    
     // MARK: Actions
     @objc func refreshHandler() {
         let deadlineTime = DispatchTime.now() + .seconds(1)
@@ -56,6 +64,7 @@ class FoldingCellsViewController: UITableViewController {
         })
     }
 }
+
 
 // MARK: - TableView
 
@@ -100,15 +109,38 @@ extension FoldingCellsViewController {
                        )
         
         if indexPath.row == 0 { // Call special 2 line graph for hearing
-            //loadSingleLineDataChart(xVals: , // x values array
-            //                        yVals: , // y values array
-            //                        length: ) // number of data points
-        }else{ // Call 1 line graph for others
             //loadDoubleLineDataChart(xValsLow: [Double], // lower bound x vals
             //                        yValsLow: [Double], // lower bound y vals
             //                        xValsHigh: [Double], // upper bound x vals
             //                        yValsHigh: [Double], // upper bound y vals
             //                        length: Int) // number of data points
+            let audioResults = dataInterface.getAudioData()
+            var yHigh:[Double] = []
+            var yLow:[Double] = []
+            let x = Array(stride(from: 0, to: audioResults.count, by:1)).map {Double($0)}
+
+            for audioE in audioResults {
+                yHigh.append(Double(audioE.highFrequencyAtMaxdB))
+                yLow.append(Double(audioE.lowFrequencyAtMaxdB))
+            }
+            
+            cell.loadDoubleLineDataChart(xValsLow: x, yValsLow: yLow, xValsHigh: x, yValsHigh: yHigh, length: x.count)
+            
+            for label in cell.latestScoreLabels {
+                cell.latestScoreLabels.first?.adjustsFontSizeToFitWidth = true
+                label.text = String(Int(audioResults.last!.lowFrequencyAtMaxdB))
+                //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
+            }
+            for unit in cell.scoreUnitsLabels {
+                unit.text = "Hz"
+            }
+            
+            
+        }else{ // Call 1 line graph for others
+            //loadSingleLineDataChart(xVals: , // x values array
+            //                        yVals: , // y values array
+            //                        length: ) // number of data points
+            
         }
         
         

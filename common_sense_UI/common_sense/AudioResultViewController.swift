@@ -28,18 +28,29 @@ class AudioResultViewController: UIViewController {
         
         // CHART
         // - Sample Data
-        let a = [1,2,3,4,5]
-        let b = [6,7,8,9,10]
-        let c = [1,2,3,4,5]
-        let d = [6,7,8,9,10]
-        let e = 5
+//        let a = [1,2,3,4,5]
+//        let b = [6,7,8,9,10]
+//        let c = [1,2,3,4,5]
+//        let d = [6,7,8,9,10]
+//        let e = 5
+    
+        var yHigh:[Double] = []
+        var yLow:[Double] = []
+        let x = Array(stride(from: 0, to: audioResults.count, by:1)).map {Double($0)}
+
+        for audioE in audioResults {
+            yHigh.append(Double(audioE.highFrequencyAtMaxdB))
+            yLow.append(Double(audioE.lowFrequencyAtMaxdB))
+        }
+        
+        generateChart(xValsLow: x, yValsLow: yLow, xValsHigh: x, yValsHigh: yHigh, length: x.count)
         
         // - Function Call, both arrays have to be doubles so you may have to map them
-        generateChart(xValsLow: a.map{Double($0)}, //lower bound x values array
-                      yValsLow: b.map{Double($0)}, //lower bound y values array
-                      xValsHigh: c.map{Double($0)}, //upper bound x values array
-                      yValsHigh: d.map{Double($0)}, //upper bound y values array
-                      length: e) //number of data points
+//        generateChart(xValsLow: a.map{Double($0)}, //lower bound x values array
+//                      yValsLow: b.map{Double($0)}, //lower bound y values array
+//                      xValsHigh: c.map{Double($0)}, //upper bound x values array
+//                      yValsHigh: d.map{Double($0)}, //upper bound y values array
+//                      length: e) //number of data points
 
     }
     
