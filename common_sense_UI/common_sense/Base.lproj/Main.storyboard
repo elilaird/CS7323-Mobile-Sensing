@@ -447,7 +447,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ2-BY-buG">
-                                <rect key="frame" x="20" y="348" width="358" height="24"/>
+                                <rect key="frame" x="150" y="348" width="114" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -530,16 +530,16 @@
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="top" secondItem="ABc-R0-Dqk" secondAttribute="bottom" constant="48" id="bPP-zu-VfZ"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="GLi-Kv-H2l" secondAttribute="trailing" constant="20" id="bUl-kC-Mua"/>
                             <constraint firstItem="YzR-TG-o4z" firstAttribute="top" secondItem="ABc-R0-Dqk" secondAttribute="bottom" constant="319" id="c1d-nz-gyX"/>
+                            <constraint firstItem="GJ2-BY-buG" firstAttribute="centerX" secondItem="JLy-78-PD4" secondAttribute="centerX" id="fBj-4a-qpI"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="aoc-o6-a2t" secondAttribute="bottom" constant="21" id="fWt-dE-vGn"/>
-                            <constraint firstItem="GJ2-BY-buG" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="20" id="hzT-Nu-9xS"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="20" id="iLq-2o-cac"/>
                             <constraint firstItem="ABc-R0-Dqk" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="20" id="lZz-5G-PN3"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="aoc-o6-a2t" secondAttribute="bottom" constant="21" id="p06-fQ-dhy"/>
+                            <constraint firstItem="ABc-R0-Dqk" firstAttribute="centerX" secondItem="JLy-78-PD4" secondAttribute="centerX" id="qk9-oM-lQe"/>
                             <constraint firstItem="aoc-o6-a2t" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="20" id="s5r-c8-Dqt"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="1wU-vU-Nef" secondAttribute="trailing" constant="20" id="sq4-wg-Qkh"/>
                             <constraint firstItem="dj7-QI-fZm" firstAttribute="top" secondItem="amD-f3-WfN" secondAttribute="bottom" constant="24" id="uX8-KC-oiu"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="dj7-QI-fZm" secondAttribute="trailing" constant="20" id="wXN-4a-4LC"/>
-                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="GJ2-BY-buG" secondAttribute="trailing" constant="36" id="zcq-QS-nAo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="10c-ci-nxB"/>
