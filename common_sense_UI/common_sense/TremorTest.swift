@@ -28,6 +28,7 @@ class Tremortest: UIViewController, URLSessionDelegate {
     @IBOutlet weak var runningTestLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var runTestButtonNew: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func cancelTestbuttonClick(_ sender: Any) {
         _ = navigationController?.popToRootViewController(animated: true)
@@ -81,6 +82,9 @@ class Tremortest: UIViewController, URLSessionDelegate {
         self.runTestButtonNew.setTitleColor(.white, for: .normal)
         
         runTestButtonNew.titleLabel?.adjustsFontSizeToFitWidth = true
+        titleLabel.adjustsFontSizeToFitWidth = true
+        directionsLabel.adjustsFontSizeToFitWidth = true
+        runningTestLabel.adjustsFontSizeToFitWidth = true
         
         // create reusable animation
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
