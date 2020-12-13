@@ -15,6 +15,8 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     @IBOutlet weak var yesButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var directionsLabel: UILabel!
     
     lazy var session: URLSession = {
         let sessionConfig = URLSessionConfiguration.ephemeral
@@ -66,6 +68,9 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
         self.yesButton.setTitleColor(.white, for: .normal)
         self.noButton.setTitleColor(.white, for: .normal)
         self.cancelButton.setTitleColor(.white, for: .normal)
+        
+        titleLabel.adjustsFontSizeToFitWidth = true
+        directionsLabel.adjustsFontSizeToFitWidth = true
         
         // Get the delta E value that we want to investigate from the DeltaEAdjustor (starts at 1)
         currentDeltaE = deAdjustor.adjustDeltaE()
