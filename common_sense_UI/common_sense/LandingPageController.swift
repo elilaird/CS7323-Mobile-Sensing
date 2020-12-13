@@ -12,6 +12,9 @@ class LandingPageController: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var greetingText: UILabel!
     
+    
+    let dataInterface:DataInterface = DataInterface()
+    
     let defaults = UserDefaults.standard
     
     override func viewWillAppear(_ animated: Bool) {
