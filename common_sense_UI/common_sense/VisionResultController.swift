@@ -26,10 +26,15 @@ class VisionResultController: UIViewController {
         self.visionScoreLabel.text = String(Int(self.currentScore))
         // Do any additional setup after loading the view.
         
-        //let a = [1,2,3,4,5]
-        //let b = [6,7,8,9,10]
-        //let c = 5
-        //generateChart(xVals: a.map{Double($0)}, yVals: b.map{Double($0)}, length: c)
+        
+        // CHART
+        // - Sample Data
+        let a = [1,2,3,4,5]
+        let b = [6,7,8,9,10]
+        let c = 5
+        
+        // - Function Call, both arrays have to be doubles so you may have to map them
+        generateChart(xVals: a.map{Double($0)}, yVals: b.map{Double($0)}, length: c)
     }
     
     func loadData() -> [Float]{
@@ -55,7 +60,9 @@ class VisionResultController: UIViewController {
         let data = LineChartData()
         data.addDataSet(line1)
         lineChart.data = data
-        lineChart.chartDescription?.text = "Description"
+        lineChart.legend.enabled = false
+        lineChart.xAxis.enabled = false
+        lineChart.chartDescription?.text = ""
     }
     
     @IBAction func returnToLanding(_ sender: Any) {

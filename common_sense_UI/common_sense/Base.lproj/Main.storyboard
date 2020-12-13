@@ -628,26 +628,39 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1,000 Hz - 20,000 Hz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="EKf-Le-lX9">
-                                <rect key="frame" x="8" y="132" width="399" height="162"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,000 Hz - 20,000 Hz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="EKf-Le-lX9">
+                                <rect key="frame" x="8" y="132" width="398" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7J-f2-8aA" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="20" y="314" width="374" height="267"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="374" id="PHf-Hn-IqA"/>
+                                    <constraint firstAttribute="height" constant="267" id="qLD-7J-vub"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eOo-4x-7cd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eOo-4x-7cd" firstAttribute="trailing" secondItem="EKf-Le-lX9" secondAttribute="trailing" constant="7" id="2r6-Rs-EyI"/>
+                            <constraint firstItem="J7J-f2-8aA" firstAttribute="leading" secondItem="eOo-4x-7cd" secondAttribute="leading" constant="20" id="0M1-Wh-zV6"/>
+                            <constraint firstItem="J7J-f2-8aA" firstAttribute="top" secondItem="EKf-Le-lX9" secondAttribute="bottom" constant="128" id="0YB-4b-QCc"/>
                             <constraint firstItem="4Wv-Jp-xTw" firstAttribute="centerX" secondItem="eOo-4x-7cd" secondAttribute="centerX" id="SKa-Ns-9Xh"/>
                             <constraint firstItem="4Wv-Jp-xTw" firstAttribute="top" secondItem="eOo-4x-7cd" secondAttribute="top" constant="13" id="XVT-VY-EeN"/>
+                            <constraint firstItem="J7J-f2-8aA" firstAttribute="centerX" secondItem="eOo-4x-7cd" secondAttribute="centerX" id="XVf-VK-tTp"/>
                             <constraint firstItem="EKf-Le-lX9" firstAttribute="centerX" secondItem="eOo-4x-7cd" secondAttribute="centerX" id="Xi5-qm-0D2"/>
                             <constraint firstItem="EKf-Le-lX9" firstAttribute="top" secondItem="4Wv-Jp-xTw" secondAttribute="bottom" constant="33" id="clC-8A-ras"/>
+                            <constraint firstItem="EKf-Le-lX9" firstAttribute="leading" secondItem="eOo-4x-7cd" secondAttribute="leading" constant="8" id="gj0-dm-moW"/>
+                            <constraint firstItem="eOo-4x-7cd" firstAttribute="trailing" secondItem="J7J-f2-8aA" secondAttribute="trailing" constant="20" id="luL-Gz-wGy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="e1r-5Q-5Nb"/>
                     <connections>
                         <outlet property="hearingRange" destination="EKf-Le-lX9" id="zOk-CB-7ZR"/>
+                        <outlet property="lineChart" destination="J7J-f2-8aA" id="2YX-po-MIe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqb-za-6vP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -794,23 +807,36 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lYE-ym-ufm" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="20" y="314" width="374" height="267"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="374" id="czT-t9-w4A"/>
+                                    <constraint firstAttribute="height" constant="267" id="s9m-dm-29b"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AhF-Js-vvN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="lYE-ym-ufm" firstAttribute="leading" secondItem="AhF-Js-vvN" secondAttribute="leading" constant="20" id="1HV-Yu-FOT"/>
                             <constraint firstItem="AhF-Js-vvN" firstAttribute="trailing" secondItem="Ou1-GB-Afg" secondAttribute="trailing" constant="113" id="2WV-yD-EZE"/>
                             <constraint firstItem="AhF-Js-vvN" firstAttribute="trailing" secondItem="FQ4-co-LnR" secondAttribute="trailing" constant="96" id="47R-dT-1QV"/>
                             <constraint firstItem="Ou1-GB-Afg" firstAttribute="top" secondItem="FQ4-co-LnR" secondAttribute="bottom" constant="34" id="4PG-W9-qKD"/>
                             <constraint firstItem="urD-Ui-euo" firstAttribute="leading" secondItem="AhF-Js-vvN" secondAttribute="leading" constant="20" id="FcF-Pp-q8J"/>
                             <constraint firstItem="urD-Ui-euo" firstAttribute="bottom" secondItem="AhF-Js-vvN" secondAttribute="bottom" id="Ib8-HD-4xt"/>
+                            <constraint firstItem="lYE-ym-ufm" firstAttribute="top" secondItem="Ou1-GB-Afg" secondAttribute="bottom" constant="64" id="Lu4-Oy-b9C"/>
                             <constraint firstItem="FQ4-co-LnR" firstAttribute="leading" secondItem="AhF-Js-vvN" secondAttribute="leading" constant="96" id="Nnr-nj-exH"/>
                             <constraint firstItem="AhF-Js-vvN" firstAttribute="trailing" secondItem="urD-Ui-euo" secondAttribute="trailing" constant="20" id="ONf-IZ-XIW"/>
+                            <constraint firstItem="lYE-ym-ufm" firstAttribute="centerX" secondItem="AhF-Js-vvN" secondAttribute="centerX" id="OmX-cd-irS"/>
                             <constraint firstItem="Ou1-GB-Afg" firstAttribute="leading" secondItem="AhF-Js-vvN" secondAttribute="leading" constant="113" id="Q8F-6j-qxq"/>
+                            <constraint firstItem="AhF-Js-vvN" firstAttribute="trailing" secondItem="lYE-ym-ufm" secondAttribute="trailing" constant="20" id="WL3-yW-l2W"/>
                             <constraint firstItem="FQ4-co-LnR" firstAttribute="top" secondItem="AhF-Js-vvN" secondAttribute="top" id="q4x-xV-bjm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3uf-e1-aiU"/>
                     <connections>
+                        <outlet property="lineChart" destination="lYE-ym-ufm" id="fWZ-3F-BE7"/>
                         <outlet property="tremorMagLabel" destination="Ou1-GB-Afg" id="8mq-Id-jL6"/>
                     </connections>
                 </viewController>

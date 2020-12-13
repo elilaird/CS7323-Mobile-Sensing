@@ -81,12 +81,37 @@ extension FoldingCellsViewController {
         //cell.number = indexPath.row
     }
 
+    
+    // ***** ADD LOGIC IN THIS FUNCTION FOR CELLS *****
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! SensePreviewCell
         let durations: [TimeInterval] = [0.26, 0.2, 0.2]
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations
-        cell.configure(imageName: cellIcons[indexPath.row], name: cells[indexPath.row], color: cellColors[indexPath.row])
+        
+        // Pass values into commented fields
+        cell.configure(imageName: cellIcons[indexPath.row], // Icon name
+                       name: cells[indexPath.row], // Name of sense
+                       color: cellColors[indexPath.row] // Cell Color
+                       //lastCheckup: Int,
+                       //scoreUnits: String,
+                       //latestScore: String
+                       )
+        
+        if indexPath.row == 0 { // Call special 2 line graph for hearing
+            //loadSingleLineDataChart(xVals: , // x values array
+            //                        yVals: , // y values array
+            //                        length: ) // number of data points
+        }else{ // Call 1 line graph for others
+            //loadDoubleLineDataChart(xValsLow: [Double], // lower bound x vals
+            //                        yValsLow: [Double], // lower bound y vals
+            //                        xValsHigh: [Double], // upper bound x vals
+            //                        yValsHigh: [Double], // upper bound y vals
+            //                        length: Int) // number of data points
+        }
+        
+        
         cell.takeTestAction = {(cell) in
             if let parent = self.parent as? LandingPageController {
                 parent.toView(viewName: self.cells[indexPath.row].lowercased())

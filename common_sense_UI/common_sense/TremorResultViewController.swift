@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Charts
 
 class TremorResultController: UIViewController {
 
@@ -14,6 +15,7 @@ class TremorResultController: UIViewController {
     var allTremorValues: [Float] = []
     var currentScore: Float = 0
     @IBOutlet weak var tremorMagLabel: UILabel!
+    @IBOutlet weak var lineChart: LineChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,15 @@ class TremorResultController: UIViewController {
         
         self.tremorMagLabel.text = String(format: "%.2f", self.currentScore)
         // Do any additional setup after loading the view.
+        
+        // CHART
+        // - Sample Data
+        let a = [1,2,3,4,5]
+        let b = [6,7,8,9,10]
+        let c = 5
+        
+        // - Function Call, both arrays have to be doubles so you may have to map them
+        generateChart(xVals: a.map{Double($0)}, yVals: b.map{Double($0)}, length: c)
     }
     
     func loadData() -> [Float]{
@@ -35,6 +46,22 @@ class TremorResultController: UIViewController {
         }
         
         return tremorMags
+    }
+    
+    func generateChart(xVals: [Double], yVals: [Double], length: Int){
+        var lineChartEntry = [ChartDataEntry]()
+        for i in 0..<length{
+            let value = ChartDataEntry(x: xVals[i], y: yVals[i])
+            lineChartEntry.append(value)
+        }
+        let line1 = LineChartDataSet(entries: lineChartEntry, label: "Number")
+        line1.colors = [NSUIColor.blue]
+        let data = LineChartData()
+        data.addDataSet(line1)
+        lineChart.data = data
+        lineChart.legend.enabled = false
+        lineChart.xAxis.enabled = false
+        lineChart.chartDescription?.text = ""
     }
     
     @IBAction func returnToLanding(_ sender: Any) {
