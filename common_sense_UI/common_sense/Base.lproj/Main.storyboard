@@ -564,6 +564,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoc-o6-a2t">
+                                <rect key="frame" x="20" y="799" width="374" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="374" id="1k4-aT-2Kb"/>
+                                    <constraint firstAttribute="height" constant="42" id="s5b-H5-x9t"/>
+                                </constraints>
+                                <state key="normal" title="Cancel Test"/>
+                                <connections>
+                                    <action selector="cancel:" destination="qTk-hk-h9G" eventType="touchUpInside" id="sef-XZ-URO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="THo-mG-9ET"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -576,15 +587,18 @@
                             <constraint firstItem="Q0B-RQ-0YC" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="84" id="WF1-2c-JpV"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="dj7-QI-fZm" secondAttribute="bottom" constant="227" id="dn4-U7-n0k"/>
                             <constraint firstItem="dj7-QI-fZm" firstAttribute="top" secondItem="amD-f3-WfN" secondAttribute="bottom" constant="24" id="eFp-GT-E62"/>
+                            <constraint firstItem="aoc-o6-a2t" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="h0a-3n-bsD"/>
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="top" secondItem="THo-mG-9ET" secondAttribute="top" constant="90" id="hDP-le-oDj"/>
                             <constraint firstItem="Q0B-RQ-0YC" firstAttribute="top" secondItem="Rjl-dX-azG" secondAttribute="bottom" constant="52" id="neo-Ry-jph"/>
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="ogI-wp-crI"/>
+                            <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="aoc-o6-a2t" secondAttribute="bottom" constant="21" id="pzv-Yh-ABo"/>
                             <constraint firstItem="dj7-QI-fZm" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="wSj-xw-eWR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="10c-ci-nxB"/>
                     <connections>
                         <outlet property="beginCalibrationButton" destination="1wU-vU-Nef" id="DCe-at-eQY"/>
+                        <outlet property="cancelButton" destination="aoc-o6-a2t" id="Z7R-RO-yko"/>
                         <outlet property="noButton" destination="dj7-QI-fZm" id="zfl-zs-k4q"/>
                         <outlet property="queryLabel" destination="GLi-Kv-H2l" id="tRt-Uz-ImD"/>
                         <outlet property="testSummary" destination="Q0B-RQ-0YC" id="aDr-2E-Vae"/>

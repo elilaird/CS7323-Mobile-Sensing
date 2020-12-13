@@ -26,6 +26,7 @@ class AudioViewController: UIViewController, DataDelegate{
     @IBOutlet weak var beginCalibrationButton: UIButton!
     @IBOutlet weak var toneTestButton: UIButton!
     @IBOutlet weak var testSummary: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     weak var delegate: AudioModel!
     
@@ -75,16 +76,19 @@ class AudioViewController: UIViewController, DataDelegate{
             self.toneTestButton.layer.cornerRadius = 9
             self.yesButton.layer.cornerRadius = 9
             self.noButton.layer.cornerRadius = 9
+            self.cancelButton.layer.cornerRadius = 9
             
             self.beginCalibrationButton.backgroundColor = self.darkBlue
             self.toneTestButton.backgroundColor = self.darkBlue
             self.yesButton.backgroundColor = self.pastelGreen
             self.noButton.backgroundColor = self.pastelRed
+            self.cancelButton.backgroundColor = self.darkBlue
             
             self.beginCalibrationButton.setTitleColor(.white, for: .normal)
             self.toneTestButton.setTitleColor(.white, for: .normal)
             self.yesButton.setTitleColor(.white, for: .normal)
             self.noButton.setTitleColor(.white, for: .normal)
+            self.cancelButton.setTitleColor(.white, for: .normal)
         }
         
         
@@ -134,7 +138,12 @@ class AudioViewController: UIViewController, DataDelegate{
         }
         self.audio.calibrate(withFreq: CALIBRATION_FREQUENCY)
     }
-
+    
+    @IBAction func cancel(_ sender: Any) {
+        self.audio.pause()
+        _ = navigationController?.popToRootViewController(animated: true)
+    }
+    
     
     func segueToResults(){
         DispatchQueue.main.async {
