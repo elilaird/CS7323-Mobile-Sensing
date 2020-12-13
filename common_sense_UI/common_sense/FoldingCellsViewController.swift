@@ -156,7 +156,6 @@ extension FoldingCellsViewController {
                     displayResult = self.emptyScore
                 }
                 label.text = displayResult
-                //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
             }
             for unit in cell.scoreUnitsLabels {
                 let latestResult = Int(audioResults.last?.highFrequencyAtMaxdB ?? -1)
@@ -209,7 +208,6 @@ extension FoldingCellsViewController {
                     displayResult = self.emptyScore
                 }
                 label.text = displayResult
-                //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
             }
             for unit in cell.scoreUnitsLabels {
                 let latestResult = Int(visionResults.last?.perceptibilityScore ?? -1)
@@ -260,11 +258,10 @@ extension FoldingCellsViewController {
                     displayResult = self.emptyScore
                 }
                 label.text = displayResult
-                //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
             }
             for unit in cell.scoreUnitsLabels {
-                let latestResult = Int(tremorResults.last?.tremorMagnitude ?? -1)
-                if latestResult > 0 {
+                let latestResult = tremorResults.last?.tremorMagnitude ?? -1
+                if latestResult > 0.0 {
                     unit.adjustsFontSizeToFitWidth = true
                     unit.text = "Tremor"
                 }
