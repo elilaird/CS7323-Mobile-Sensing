@@ -14,8 +14,11 @@ class AudioResultViewController: UIViewController {
     @IBOutlet weak var hearingRange: UILabel!
     @IBOutlet weak var lineChart: LineChartView!
     @IBOutlet weak var graphRangeLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
     
     var dataInterface: DataInterface = DataInterface()
+    
+    let pastelGreen = UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +28,9 @@ class AudioResultViewController: UIViewController {
         let startGrad = UIColor(red: 88/255, green: 102/255, blue: 139/255, alpha: 1.0).cgColor
         gradientLayer.colors = [startGrad, UIColor.white.cgColor]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.doneButton.layer.cornerRadius = 9
+        self.doneButton.backgroundColor = self.pastelGreen
         
         let audioResults = dataInterface.getAudioData()
         let high = getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB)
@@ -43,6 +49,13 @@ class AudioResultViewController: UIViewController {
             yHigh.append(Double(audioE.highFrequencyAtMaxdB))
             yLow.append(Double(audioE.lowFrequencyAtMaxdB))
         }
+        
+        let firstTime = audioResults.first?.timeRecorded ?? Date()
+        let mostRecentTime = audioResults.last?.timeRecorded ?? Date()
+        let sinceFirstTime = firstTime.timeAgoDisplay()
+        let sinceMostRecentTime = mostRecentTime.timeAgoDisplay()
+        self.graphRangeLabel.text = "From " + sinceFirstTime + " to " + sinceMostRecentTime
+        self.graphRangeLabel.adjustsFontSizeToFitWidth = true
         
         generateChart(xValsLow: x, yValsLow: yLow, xValsHigh: x, yValsHigh: yHigh, length: x.count)
 

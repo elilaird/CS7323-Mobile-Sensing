@@ -141,12 +141,19 @@ extension FoldingCellsViewController {
             
             if audioResults.count > 0{
                 cell.latestScoreCaption.isHidden = false
+                let firstTime = audioResults.first?.timeRecorded ?? Date()
+                let mostRecentTime = audioResults.last?.timeRecorded ?? Date()
+                let sinceFirstTime = firstTime.timeAgoDisplay()
+                let sinceMostRecentTime = mostRecentTime.timeAgoDisplay()
+                cell.graphRangeLabel.text = "From " + sinceFirstTime + " to " + sinceMostRecentTime
+                cell.graphRangeLabel.adjustsFontSizeToFitWidth = true
             }
             else{
                 cell.latestScoreCaption.isHidden = true
             }
             
             cell.loadDoubleLineDataChart(xValsLow: x, yValsLow: yLow, xValsHigh: x, yValsHigh: yHigh, length: x.count)
+            
             
             for label in cell.latestScoreLabels {
                 label.adjustsFontSizeToFitWidth = true
