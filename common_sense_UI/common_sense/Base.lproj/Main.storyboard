@@ -313,7 +313,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vision" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-Sy-Kct">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vision" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-Sy-Kct">
                                 <rect key="frame" x="161" y="44" width="92" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
@@ -348,7 +348,9 @@
                     <navigationItem key="navigationItem" id="60n-3f-CVb"/>
                     <connections>
                         <outlet property="leftColorView" destination="Jqg-OT-JRy" id="wG6-GA-sgD"/>
+                        <outlet property="noButton" destination="KOY-4d-3GE" id="nqC-O7-DbN"/>
                         <outlet property="rightColorView" destination="oEC-dG-wFA" id="sN8-bd-YSY"/>
+                        <outlet property="yesButton" destination="BKT-JP-ccu" id="sat-xo-u9G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keN-7a-sN1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -542,25 +544,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Onu-vn-Iob">
-                                <rect key="frame" x="95" y="211" width="224" height="61"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Onu-vn-Iob">
+                                <rect key="frame" x="95" y="211" width="224" height="82"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <string key="text">Please pick up the phone and
-hold it parallel to the floor in your hand.</string>
+hold it parallel to the floor in your hand.  Once you are ready click "Run Test."</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tremors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3c-yh-qjN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tremors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z3c-yh-qjN">
                                 <rect key="frame" x="126" y="44" width="163" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand_phone" translatesAutoresizingMaskIntoConstraints="NO" id="7sW-VD-tEl">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hand_phone" translatesAutoresizingMaskIntoConstraints="NO" id="7sW-VD-tEl">
                                 <rect key="frame" x="87" y="384" width="240" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbC-89-6WF">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbC-89-6WF">
                                 <rect key="frame" x="132" y="750" width="150" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="41"/>
                                 <state key="normal" title="Run Test"/>
                                 <connections>
@@ -570,24 +576,6 @@ hold it parallel to the floor in your hand.</string>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fdu-Ty-sJI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Onu-vn-Iob" secondAttribute="trailing" constant="95" id="AKE-kb-UYJ"/>
-                            <constraint firstItem="Onu-vn-Iob" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="95" id="I6F-uX-Vpt"/>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="bottom" secondItem="ZbC-89-6WF" secondAttribute="bottom" constant="51" id="O8R-aU-a1d"/>
-                            <constraint firstItem="Z3c-yh-qjN" firstAttribute="top" secondItem="fdu-Ty-sJI" secondAttribute="top" id="VIY-Xf-1s3"/>
-                            <constraint firstItem="ZbC-89-6WF" firstAttribute="top" secondItem="7sW-VD-tEl" secondAttribute="bottom" constant="166" id="YxP-ZW-Niw"/>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Z3c-yh-qjN" secondAttribute="trailing" constant="125" id="am1-Qn-194"/>
-                            <constraint firstItem="ZbC-89-6WF" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="132" id="dXo-Yg-opg"/>
-                            <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Onu-vn-Iob" secondAttribute="bottom" constant="112" id="eKU-8p-SW4"/>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="7sW-VD-tEl" secondAttribute="trailing" constant="87" id="eMR-z2-0Pf"/>
-                            <constraint firstItem="Onu-vn-Iob" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="125" id="hpW-RI-cPj"/>
-                            <constraint firstItem="7sW-VD-tEl" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="87" id="jsf-jE-cs2"/>
-                            <constraint firstItem="Onu-vn-Iob" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="125" id="mYT-kM-0a5"/>
-                            <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Onu-vn-Iob" secondAttribute="bottom" constant="112" id="nDr-Gf-RDF"/>
-                            <constraint firstItem="ZbC-89-6WF" firstAttribute="top" secondItem="7sW-VD-tEl" secondAttribute="bottom" constant="166" id="vSt-lS-S7a"/>
-                            <constraint firstItem="Z3c-yh-qjN" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="126" id="zJd-DN-Kbo"/>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="ZbC-89-6WF" secondAttribute="trailing" constant="132" id="zWD-kU-ftQ"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AlE-Uu-uJO"/>
                 </viewController>
@@ -598,68 +586,106 @@ hold it parallel to the floor in your hand.</string>
         <!--visionResult-->
         <scene sceneID="PZl-Aq-5Dd">
             <objects>
-                <viewController restorationIdentifier="visionResult" storyboardIdentifier="visionResult" title="visionResult" id="ZJX-KE-gjf" customClass="TempResultViewController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="visionResult" storyboardIdentifier="visionResult" title="visionResult" id="ZJX-KE-gjf" customClass="VisionResultController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PHS-dX-BO7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vision Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2d-0L-qHW">
-                                <rect key="frame" x="98" y="285" width="220" height="119"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vision Checkup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r2d-0L-qHW">
+                                <rect key="frame" x="90" y="33" width="235" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3GW-Hl-JV6">
-                                <rect key="frame" x="160" y="668" width="94" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Return Home"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3GW-Hl-JV6">
+                                <rect key="frame" x="20" y="814" width="374" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="returnToLanding:" destination="ZJX-KE-gjf" eventType="touchUpInside" id="seq-LC-06H"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XyM-Ji-pYP">
+                                <rect key="frame" x="113" y="117" width="188" height="130"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="95"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j7w-CL-Axc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="r2d-0L-qHW" firstAttribute="leading" secondItem="j7w-CL-Axc" secondAttribute="leading" constant="90" id="0CF-1E-TQo"/>
+                            <constraint firstItem="j7w-CL-Axc" firstAttribute="trailing" secondItem="3GW-Hl-JV6" secondAttribute="trailing" constant="20" id="4gI-Ee-4nw"/>
+                            <constraint firstItem="3GW-Hl-JV6" firstAttribute="leading" secondItem="j7w-CL-Axc" secondAttribute="leading" constant="20" id="7qE-eh-72H"/>
+                            <constraint firstItem="XyM-Ji-pYP" firstAttribute="top" secondItem="r2d-0L-qHW" secondAttribute="bottom" constant="42" id="8ry-q8-B8N"/>
+                            <constraint firstItem="r2d-0L-qHW" firstAttribute="top" secondItem="PHS-dX-BO7" secondAttribute="top" constant="33" id="Gbr-kV-V6l"/>
+                            <constraint firstItem="j7w-CL-Axc" firstAttribute="trailing" secondItem="r2d-0L-qHW" secondAttribute="trailing" constant="89" id="SxH-3X-bYf"/>
+                            <constraint firstItem="XyM-Ji-pYP" firstAttribute="leading" secondItem="j7w-CL-Axc" secondAttribute="leading" constant="113" id="kvd-9z-eU5"/>
+                            <constraint firstItem="3GW-Hl-JV6" firstAttribute="bottom" secondItem="j7w-CL-Axc" secondAttribute="bottom" id="nvg-QM-rKi"/>
+                            <constraint firstItem="j7w-CL-Axc" firstAttribute="trailing" secondItem="XyM-Ji-pYP" secondAttribute="trailing" constant="113" id="upO-9k-Qt7"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fBw-bo-9GG"/>
+                    <connections>
+                        <outlet property="visionScoreLabel" destination="XyM-Ji-pYP" id="ChX-5b-siw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLp-eS-yMV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3757" y="70"/>
+            <point key="canvasLocation" x="3756.521739130435" y="69.642857142857139"/>
         </scene>
-        <!--Temp Result View Controller-->
+        <!--Tremor Result Controller-->
         <scene sceneID="lyf-fR-dPO">
             <objects>
-                <viewController restorationIdentifier="tremorResult" storyboardIdentifier="tremorResult" id="crr-PN-Vcl" customClass="TempResultViewController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="tremorResult" storyboardIdentifier="tremorResult" id="crr-PN-Vcl" customClass="TremorResultController" customModule="common_sense" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MOj-0W-NOD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tremors Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQ4-co-LnR">
-                                <rect key="frame" x="97" y="285" width="222" height="119"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tremors Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQ4-co-LnR">
+                                <rect key="frame" x="96" y="44" width="222" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="urD-Ui-euo">
-                                <rect key="frame" x="160" y="668" width="94" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Return Home"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="urD-Ui-euo">
+                                <rect key="frame" x="20" y="814" width="374" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="returnToLanding:" destination="crr-PN-Vcl" eventType="touchUpInside" id="XQ9-QM-Knc"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ou1-GB-Afg">
+                                <rect key="frame" x="113" y="120" width="188" height="130"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="95"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AhF-Js-vvN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AhF-Js-vvN" firstAttribute="trailing" secondItem="Ou1-GB-Afg" secondAttribute="trailing" constant="113" id="2WV-yD-EZE"/>
+                            <constraint firstItem="AhF-Js-vvN" firstAttribute="trailing" secondItem="FQ4-co-LnR" secondAttribute="trailing" constant="96" id="47R-dT-1QV"/>
+                            <constraint firstItem="Ou1-GB-Afg" firstAttribute="top" secondItem="FQ4-co-LnR" secondAttribute="bottom" constant="34" id="4PG-W9-qKD"/>
+                            <constraint firstItem="urD-Ui-euo" firstAttribute="leading" secondItem="AhF-Js-vvN" secondAttribute="leading" constant="20" id="FcF-Pp-q8J"/>
+                            <constraint firstItem="urD-Ui-euo" firstAttribute="bottom" secondItem="AhF-Js-vvN" secondAttribute="bottom" id="Ib8-HD-4xt"/>
+                            <constraint firstItem="FQ4-co-LnR" firstAttribute="leading" secondItem="AhF-Js-vvN" secondAttribute="leading" constant="96" id="Nnr-nj-exH"/>
+                            <constraint firstItem="AhF-Js-vvN" firstAttribute="trailing" secondItem="urD-Ui-euo" secondAttribute="trailing" constant="20" id="ONf-IZ-XIW"/>
+                            <constraint firstItem="Ou1-GB-Afg" firstAttribute="leading" secondItem="AhF-Js-vvN" secondAttribute="leading" constant="113" id="Q8F-6j-qxq"/>
+                            <constraint firstItem="FQ4-co-LnR" firstAttribute="top" secondItem="AhF-Js-vvN" secondAttribute="top" id="q4x-xV-bjm"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3uf-e1-aiU"/>
+                    <connections>
+                        <outlet property="tremorMagLabel" destination="Ou1-GB-Afg" id="8mq-Id-jL6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uqt-uC-BMy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3757" y="940"/>
+            <point key="canvasLocation" x="3756.521739130435" y="939.50892857142856"/>
         </scene>
     </scenes>
     <resources>
