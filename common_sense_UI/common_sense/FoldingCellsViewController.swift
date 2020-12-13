@@ -25,6 +25,8 @@ class FoldingCellsViewController: UITableViewController {
                                  UIColor(red: 0.46, green: 0.71, blue: 0.74, alpha: 1.00),
                                  UIColor(red: 0.74, green: 0.92, blue: 0.93, alpha: 1.00)]
     
+    let emptyScore:String = "Get Started!"
+    let emptyUnits:String = ""
     
 
     // MARK: Life Cycle
@@ -137,28 +139,42 @@ extension FoldingCellsViewController {
                 yLow.append(Double(audioE.lowFrequencyAtMaxdB))
             }
             
+            if audioResults.count > 0{
+                cell.latestScoreCaption.isHidden = false
+            }
+            else{
+                cell.latestScoreCaption.isHidden = true
+            }
+            
             cell.loadDoubleLineDataChart(xValsLow: x, yValsLow: yLow, xValsHigh: x, yValsHigh: yHigh, length: x.count)
             
             for label in cell.latestScoreLabels {
-                cell.latestScoreLabels.first?.adjustsFontSizeToFitWidth = true
+                label.adjustsFontSizeToFitWidth = true
                 let latestResult = Int(audioResults.last?.highFrequencyAtMaxdB ?? -1)
                 var displayResult = String(latestResult)
                 if latestResult == -1{
-                    displayResult = "N/A"
+                    displayResult = self.emptyScore
                 }
                 label.text = displayResult
                 //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
             }
             for unit in cell.scoreUnitsLabels {
-                unit.adjustsFontSizeToFitWidth = true
-                unit.text = "Hz"
+                let latestResult = Int(audioResults.last?.highFrequencyAtMaxdB ?? -1)
+                if latestResult > 0 {
+                    unit.adjustsFontSizeToFitWidth = true
+                    unit.text = "Hz"
+                }
+                else{
+                    unit.text = self.emptyUnits
+                }
+                
             }
             
             if audioResults.count > 0 {
                 last = audioResults.last?.timeRecorded ?? Date()
                 cell.lastCheckupLabel.text = last.timeAgoDisplay()
             }else{
-                cell.lastCheckupLabel.text = "N/A"
+                cell.lastCheckupLabel.text = self.emptyUnits
             }
             
             
@@ -178,27 +194,39 @@ extension FoldingCellsViewController {
             
             cell.loadSingleLineDataChart(xVals: x, yVals: percepScores, length: x.count)
             
+            if visionResults.count > 0{
+                cell.latestScoreCaption.isHidden = false
+            }
+            else{
+                cell.latestScoreCaption.isHidden = true
+            }
             
             for label in cell.latestScoreLabels {
                 cell.latestScoreLabels.first?.adjustsFontSizeToFitWidth = true
                 let latestResult = Int(visionResults.last?.perceptibilityScore ?? -1)
                 var displayResult = String(latestResult)
                 if latestResult == -1{
-                    displayResult = "N/A"
+                    displayResult = self.emptyScore
                 }
                 label.text = displayResult
                 //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
             }
             for unit in cell.scoreUnitsLabels {
-                cell.scoreUnitsLabels.first?.adjustsFontSizeToFitWidth = true
-                unit.text = "Perceptibility"
+                let latestResult = Int(visionResults.last?.perceptibilityScore ?? -1)
+                if latestResult > 0 {
+                    unit.adjustsFontSizeToFitWidth = true
+                    unit.text = "Perceptibility"
+                }
+                else{
+                    unit.text = self.emptyUnits
+                }
             }
             
             if visionResults.count > 0 {
                 last = visionResults.last?.timeRecorded ?? Date()
                 cell.lastCheckupLabel.text = last.timeAgoDisplay()
             }else{
-                cell.lastCheckupLabel.text = "N/A"
+                cell.lastCheckupLabel.text = self.emptyUnits
             }
             
         }
@@ -217,25 +245,39 @@ extension FoldingCellsViewController {
             
             cell.loadSingleLineDataChart(xVals: x, yVals: tremorMags, length: x.count)
             
+            if tremorResults.count > 0{
+                cell.latestScoreCaption.isHidden = false
+            }
+            else{
+                cell.latestScoreCaption.isHidden = true
+            }
+            
             for label in cell.latestScoreLabels {
                 cell.latestScoreLabels.first?.adjustsFontSizeToFitWidth = true
                 let latestResult = tremorResults.last?.tremorMagnitude ?? -1
                 var displayResult = String(format: "%.2f", latestResult)
                 if latestResult == -1{
-                    displayResult = "N/A"
+                    displayResult = self.emptyScore
                 }
                 label.text = displayResult
                 //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
             }
             for unit in cell.scoreUnitsLabels {
-                unit.text = "Tremor"
+                let latestResult = Int(tremorResults.last?.tremorMagnitude ?? -1)
+                if latestResult > 0 {
+                    unit.adjustsFontSizeToFitWidth = true
+                    unit.text = "Tremor"
+                }
+                else{
+                    unit.text = self.emptyUnits
+                }
             }
             
             if tremorResults.count > 0 {
                 last = tremorResults.last?.timeRecorded ?? Date()
                 cell.lastCheckupLabel.text = last.timeAgoDisplay()
             }else{
-                cell.lastCheckupLabel.text = "N/A"
+                cell.lastCheckupLabel.text = self.emptyUnits
             }
             
         }

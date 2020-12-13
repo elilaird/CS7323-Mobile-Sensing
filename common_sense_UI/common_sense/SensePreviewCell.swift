@@ -18,6 +18,7 @@ class SensePreviewCell: FoldingCell {
     @IBOutlet var latestScoreLabels: [UILabel]!
     @IBOutlet var scoreUnitsLabels: [UILabel]!
     @IBOutlet weak var testButton: UIButton!
+    @IBOutlet weak var latestScoreCaption: UILabel!
     
     var takeTestAction: ((SensePreviewCell) -> Void)?
     var imageName: String = ""
