@@ -16,9 +16,24 @@ class TremorResultController: UIViewController {
     var currentScore: Float = 0
     @IBOutlet weak var tremorMagLabel: UILabel!
     @IBOutlet weak var lineChart: LineChartView!
+    @IBOutlet weak var doneButton: UIButton!
+    
+    let pastelRed = UIColor(red: 255/255, green: 105/255, blue: 97/255, alpha: 1.0)
+    let pastelGreen = UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add gradient background
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        let startGrad = UIColor(red: 189/255, green: 234/255, blue: 238/255, alpha: 1.0).cgColor
+        gradientLayer.colors = [startGrad, UIColor.white.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.doneButton.layer.cornerRadius = 9
+        self.doneButton.backgroundColor = self.pastelGreen
+        self.doneButton.setTitleColor(.white, for: .normal)
 
         self.allTremorValues = loadData()
         self.currentScore = self.allTremorValues.last ?? 0
@@ -26,14 +41,12 @@ class TremorResultController: UIViewController {
         self.tremorMagLabel.text = String(format: "%.2f", self.currentScore)
         // Do any additional setup after loading the view.
         
+        
         // CHART
-        // - Sample Data
-        let a = [1,2,3,4,5]
-        let b = [6,7,8,9,10]
-        let c = 5
+        let x = Array(stride(from: 0, to: allTremorValues.count, by:1)).map {Double($0)}
         
         // - Function Call, both arrays have to be doubles so you may have to map them
-        generateChart(xVals: a.map{Double($0)}, yVals: b.map{Double($0)}, length: c)
+        generateChart(xVals: x, yVals: allTremorValues.map{Double($0)}, length: x.count)
     }
     
     func loadData() -> [Float]{

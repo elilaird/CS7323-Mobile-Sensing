@@ -19,6 +19,12 @@ class AudioResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        let startGrad = UIColor(red: 88/255, green: 102/255, blue: 139/255, alpha: 1.0).cgColor
+        gradientLayer.colors = [startGrad, UIColor.white.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
         let audioResults = dataInterface.getAudioData()
         let high = getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB)
         let low = getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB)

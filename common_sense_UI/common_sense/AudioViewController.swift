@@ -71,6 +71,12 @@ class AudioViewController: UIViewController, DataDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        let startGrad = UIColor(red: 88/255, green: 102/255, blue: 139/255, alpha: 1.0).cgColor
+        gradientLayer.colors = [startGrad, UIColor.white.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
         DispatchQueue.main.async {
             self.beginCalibrationButton.layer.cornerRadius = 9
             self.toneTestButton.layer.cornerRadius = 9
