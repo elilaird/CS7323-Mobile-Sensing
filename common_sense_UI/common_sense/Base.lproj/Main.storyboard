@@ -310,10 +310,9 @@
                                     <action selector="noClick:" destination="QUq-nc-a4A" eventType="touchUpInside" id="e3w-4B-20a"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vision" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-Sy-Kct">
-                                <rect key="frame" x="161" y="44" width="92" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vision" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-Sy-Kct">
+                                <rect key="frame" x="20" y="44" width="374" height="51"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="92" id="EUA-ax-6ay"/>
                                     <constraint firstAttribute="height" constant="51" id="gjI-f4-rXw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
@@ -332,13 +331,13 @@
                                     <action selector="cancelButtonclick:" destination="QUq-nc-a4A" eventType="touchUpInside" id="R3C-7A-MmJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the vision test.  Here, we will test your ability to distinguish colors.  Can you tell the difference in the colors?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q11-SE-OwD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the vision test.   Here, we will test your ability to distinguish colors. Can you tell the difference in the colors?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q11-SE-OwD">
                                 <rect key="frame" x="32" y="144" width="350" height="132"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="132" id="UQ0-dj-4mL"/>
                                     <constraint firstAttribute="width" constant="350" id="vNE-VD-4Q0"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -350,7 +349,10 @@
                             <constraint firstItem="BKT-JP-ccu" firstAttribute="top" secondItem="UvC-U5-EKL" secondAttribute="bottom" constant="88" id="2ZF-JP-2uc"/>
                             <constraint firstItem="KOY-4d-3GE" firstAttribute="top" secondItem="BKT-JP-ccu" secondAttribute="bottom" constant="35" id="3r7-6J-R4P"/>
                             <constraint firstItem="q11-SE-OwD" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="9W8-V5-qGV"/>
+                            <constraint firstItem="Yac-Sy-Kct" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="AXR-px-66J"/>
                             <constraint firstItem="Q1j-x8-dI0" firstAttribute="top" secondItem="KOY-4d-3GE" secondAttribute="bottom" constant="45" id="BMm-gR-5Kh"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="Yac-Sy-Kct" secondAttribute="trailing" constant="20" id="DFQ-zk-ruf"/>
+                            <constraint firstItem="Yac-Sy-Kct" firstAttribute="top" secondItem="vQM-0x-XvX" secondAttribute="top" id="Hy6-PV-Nov"/>
                             <constraint firstItem="vQM-0x-XvX" firstAttribute="bottom" secondItem="Q1j-x8-dI0" secondAttribute="bottom" constant="21" id="M3P-9K-JPa"/>
                             <constraint firstItem="Q1j-x8-dI0" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="OLD-nP-sRZ"/>
                             <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="q11-SE-OwD" secondAttribute="trailing" constant="32" id="P1h-tw-UR5"/>
@@ -358,7 +360,6 @@
                             <constraint firstItem="q11-SE-OwD" firstAttribute="top" secondItem="Yac-Sy-Kct" secondAttribute="bottom" constant="49" id="Vza-Jk-GnR"/>
                             <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="Q1j-x8-dI0" secondAttribute="trailing" constant="20" id="Wjd-r8-qwJ"/>
                             <constraint firstItem="Q1j-x8-dI0" firstAttribute="top" secondItem="KOY-4d-3GE" secondAttribute="bottom" constant="45" id="Yo2-Mu-xOX"/>
-                            <constraint firstItem="Yac-Sy-Kct" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="161" id="ZHL-W6-9Py"/>
                             <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="UvC-U5-EKL" secondAttribute="trailing" constant="20" id="apv-sW-aA4"/>
                             <constraint firstItem="UvC-U5-EKL" firstAttribute="top" secondItem="q11-SE-OwD" secondAttribute="bottom" constant="72" id="ekn-1f-9Mg"/>
                             <constraint firstItem="BKT-JP-ccu" firstAttribute="top" secondItem="UvC-U5-EKL" secondAttribute="bottom" constant="88" id="gMw-eU-mNt"/>
@@ -367,15 +368,16 @@
                             <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="KOY-4d-3GE" secondAttribute="trailing" constant="20" id="k93-uR-Wem"/>
                             <constraint firstItem="UvC-U5-EKL" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="kq7-Rl-me4"/>
                             <constraint firstItem="Yac-Sy-Kct" firstAttribute="top" secondItem="vQM-0x-XvX" secondAttribute="top" id="u2w-3x-eCt"/>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="Yac-Sy-Kct" secondAttribute="trailing" constant="161" id="vLD-mV-ZcI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="60n-3f-CVb"/>
                     <connections>
                         <outlet property="cancelButton" destination="Q1j-x8-dI0" id="Pa2-y3-Bqr"/>
+                        <outlet property="directionsLabel" destination="q11-SE-OwD" id="ra1-bg-uja"/>
                         <outlet property="leftColorView" destination="Jqg-OT-JRy" id="wG6-GA-sgD"/>
                         <outlet property="noButton" destination="KOY-4d-3GE" id="nqC-O7-DbN"/>
                         <outlet property="rightColorView" destination="oEC-dG-wFA" id="sN8-bd-YSY"/>
+                        <outlet property="titleLabel" destination="Yac-Sy-Kct" id="JmQ-pM-GcR"/>
                         <outlet property="yesButton" destination="BKT-JP-ccu" id="sat-xo-u9G"/>
                     </connections>
                 </viewController>
@@ -719,26 +721,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Onu-vn-Iob">
-                                <rect key="frame" x="95" y="136" width="224" height="142.5"/>
-                                <string key="text">Welcome to the tremor test.  This procedure will estimate the tremor in your hand. Please pick up the phone and
-hold it parallel to the floor in your hand.  Once you are ready click "Run Test."</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tremors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z3c-yh-qjN">
-                                <rect key="frame" x="126" y="44" width="163" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tremors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3c-yh-qjN">
+                                <rect key="frame" x="20" y="44" width="374" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand_phone" translatesAutoresizingMaskIntoConstraints="NO" id="7sW-VD-tEl">
-                                <rect key="frame" x="87" y="384" width="240" height="200"/>
+                                <rect key="frame" x="87" y="390.5" width="240" height="200"/>
                             </imageView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running the test..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Kea-wd-dGv">
-                                <rect key="frame" x="138" y="197" width="139" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running the test..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kea-wd-dGv">
+                                <rect key="frame" x="118" y="232" width="178.5" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -754,37 +748,44 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04u-NJ-j0w">
-                                <rect key="frame" x="20" y="624" width="374" height="48"/>
+                                <rect key="frame" x="20" y="630.5" width="374" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Run Test"/>
                                 <connections>
                                     <action selector="testClick:" destination="92Z-In-LNJ" eventType="touchUpInside" id="7hy-MZ-9Li"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Onu-vn-Iob">
+                                <rect key="frame" x="20" y="163" width="374" height="143.5"/>
+                                <string key="text">Welcome to the tremor test.   This procedure will estimate the tremor in your hand.  Please pick up the phone and hold it parallel to the floor in your hand.   Once you are ready click "Run Test."</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fdu-Ty-sJI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Kea-wd-dGv" secondAttribute="bottom" constant="131" id="9HI-LK-Sxb"/>
                             <constraint firstItem="fL3-5n-eik" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="20" id="Ck0-2f-1SK"/>
-                            <constraint firstItem="Kea-wd-dGv" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="111" id="IS8-zl-p8f"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Onu-vn-Iob" secondAttribute="trailing" constant="20" id="Fmq-Fr-tbX"/>
+                            <constraint firstItem="Onu-vn-Iob" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="20" id="L1b-5Q-20D"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="7sW-VD-tEl" secondAttribute="trailing" constant="87" id="MNa-BT-7dm"/>
-                            <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Kea-wd-dGv" secondAttribute="bottom" constant="166" id="P75-ZW-QdZ"/>
-                            <constraint firstItem="Onu-vn-Iob" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="95" id="RGX-cs-H49"/>
+                            <constraint firstItem="Z3c-yh-qjN" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="20" id="Pw1-0g-AAk"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="fL3-5n-eik" secondAttribute="trailing" constant="20" id="U40-yq-I8f"/>
-                            <constraint firstItem="Kea-wd-dGv" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="138" id="YcR-By-sCp"/>
+                            <constraint firstItem="Onu-vn-Iob" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="77" id="Ubf-hg-ckG"/>
                             <constraint firstItem="04u-NJ-j0w" firstAttribute="top" secondItem="7sW-VD-tEl" secondAttribute="bottom" constant="40" id="YfX-OT-8IB"/>
                             <constraint firstItem="04u-NJ-j0w" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="20" id="aeZ-m0-23R"/>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Z3c-yh-qjN" secondAttribute="trailing" constant="125" id="bUg-8r-U9A"/>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Kea-wd-dGv" secondAttribute="trailing" constant="137" id="cOS-pU-lVS"/>
+                            <constraint firstItem="Kea-wd-dGv" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="118" id="ag3-hZ-2lv"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="bottom" secondItem="fL3-5n-eik" secondAttribute="bottom" constant="21" id="eFD-L7-kxV"/>
                             <constraint firstItem="7sW-VD-tEl" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="87" id="fpi-qh-4W6"/>
-                            <constraint firstItem="Onu-vn-Iob" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="50" id="i3L-G5-Ziz"/>
-                            <constraint firstItem="Onu-vn-Iob" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="50" id="lmH-9y-JM3"/>
-                            <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Onu-vn-Iob" secondAttribute="bottom" constant="105.5" id="nT8-Zy-e3E"/>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Onu-vn-Iob" secondAttribute="trailing" constant="95" id="nWv-N3-p1Z"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="04u-NJ-j0w" secondAttribute="trailing" constant="20" id="p1b-QW-CMR"/>
+                            <constraint firstItem="Z3c-yh-qjN" firstAttribute="top" secondItem="fdu-Ty-sJI" secondAttribute="top" id="ptu-wL-TpY"/>
                             <constraint firstItem="Z3c-yh-qjN" firstAttribute="top" secondItem="fdu-Ty-sJI" secondAttribute="top" id="r4G-Lh-WqH"/>
-                            <constraint firstItem="Z3c-yh-qjN" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="126" id="trT-j7-XwZ"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Kea-wd-dGv" secondAttribute="trailing" constant="117.5" id="rFK-9S-DcF"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Z3c-yh-qjN" secondAttribute="trailing" constant="20" id="rSb-vw-ILT"/>
+                            <constraint firstItem="Kea-wd-dGv" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="146" id="sFN-QY-DGv"/>
+                            <constraint firstItem="04u-NJ-j0w" firstAttribute="top" secondItem="Onu-vn-Iob" secondAttribute="bottom" constant="324" id="z3v-eP-DKU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AlE-Uu-uJO"/>
@@ -793,6 +794,7 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                         <outlet property="directionsLabel" destination="Onu-vn-Iob" id="dCN-QI-Kts"/>
                         <outlet property="runTestButtonNew" destination="04u-NJ-j0w" id="GeR-cV-5h6"/>
                         <outlet property="runningTestLabel" destination="Kea-wd-dGv" id="mKq-qT-P96"/>
+                        <outlet property="titleLabel" destination="Z3c-yh-qjN" id="egl-HP-8F6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gMs-KM-GIO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
