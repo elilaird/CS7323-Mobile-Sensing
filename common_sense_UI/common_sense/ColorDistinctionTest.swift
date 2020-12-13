@@ -12,7 +12,9 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
 
     @IBOutlet weak var leftColorView: UIView!
     @IBOutlet weak var rightColorView: UIView!
-
+    @IBOutlet weak var yesButton: UIButton!
+    @IBOutlet weak var noButton: UIButton!
+    
     lazy var session: URLSession = {
         let sessionConfig = URLSessionConfiguration.ephemeral
         
@@ -41,10 +43,21 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        yesButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        yesButton.layer.cornerRadius = 30
+        yesButton.layer.borderWidth = 5
+        yesButton.layer.borderColor = UIColor.green.cgColor
+//        yesButton.backgroundColor = .green
+        
+        noButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        noButton.layer.cornerRadius = 30
+        noButton.layer.borderWidth = 5
+        noButton.layer.borderColor = UIColor.red.cgColor
+        
         // Get the delta E value that we want to investigate from the DeltaEAdjustor (starts at 1)
         currentDeltaE = deAdjustor.adjustDeltaE()
         
-        // Might be good for loading in the future: https://www.raywenderlich.com/35-alamofire-tutorial-getting-started
+        // Get data
         serverGetColorsSetup(deltaE: currentDeltaE)
     }
     
