@@ -5,6 +5,7 @@
 //  Created by Matthew Lee on 12/7/20.
 //
 
+
 import UIKit
 import FoldingCell
 
@@ -20,11 +21,15 @@ class FoldingCellsViewController: UITableViewController {
     
     var cells: [String] = ["Hearing", "Vision", "Tremors"]
     var cellIcons: [String] = ["ear", "eye", "hand"]
+    var cellColors: [UIColor] = [UIColor(red: 0.35, green: 0.40, blue: 0.55, alpha: 1.00),
+                                 UIColor(red: 0.46, green: 0.71, blue: 0.74, alpha: 1.00),
+                                 UIColor(red: 0.74, green: 0.92, blue: 0.93, alpha: 1.00)]
 
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        self.view.backgroundColor = UIColor(named: "red")
         
     }
 
@@ -81,7 +86,7 @@ extension FoldingCellsViewController {
         let durations: [TimeInterval] = [0.26, 0.2, 0.2]
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations
-        cell.configure(imageName: cellIcons[indexPath.row], name: cells[indexPath.row])
+        cell.configure(imageName: cellIcons[indexPath.row], name: cells[indexPath.row], color: cellColors[indexPath.row])
         cell.takeTestAction = {(cell) in
             if let parent = self.parent as? LandingPageController {
                 parent.toView(viewName: self.cells[indexPath.row].lowercased())

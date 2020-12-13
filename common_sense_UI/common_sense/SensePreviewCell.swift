@@ -62,9 +62,15 @@ class SensePreviewCell: FoldingCell {
         takeTestAction?(self)
     }
     
-    func configure(imageName: String, name: String){
+    func configure(imageName: String, name: String, color: UIColor){
         self.senseIcon?.image = UIImage(named: imageName)
         self.expandedHeader.text = name
+        self.foregroundView.backgroundColor = color
+        self.backViewColor = color
+        self.expandedHeader.backgroundColor = color
+        self.testButton.backgroundColor = color
+        //self.contentView.backgroundColor
+        
     }
     
     func loadDataChart(xVals: [Double], yVals: [Double], length: Int){
