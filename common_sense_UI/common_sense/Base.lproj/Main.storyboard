@@ -387,6 +387,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wU-vU-Nef">
                                 <rect key="frame" x="176" y="133" width="62" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4bB-HX-fK8"/>
+                                </constraints>
                                 <state key="normal" title="Calibrate"/>
                                 <connections>
                                     <action selector="beginCalibration:" destination="qTk-hk-h9G" eventType="touchUpInside" id="btE-Q6-aaM"/>
@@ -394,6 +397,9 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjl-dX-azG">
                                 <rect key="frame" x="173.5" y="179" width="67" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="C25-X2-PrT"/>
+                                </constraints>
                                 <state key="normal" title="Start Test"/>
                                 <connections>
                                     <action selector="startTests:" destination="qTk-hk-h9G" eventType="touchUpInside" id="vMy-eq-cun"/>
