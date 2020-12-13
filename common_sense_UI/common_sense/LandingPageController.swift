@@ -12,15 +12,23 @@ class LandingPageController: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var greetingText: UILabel!
     
+    let defaults = UserDefaults.standard
+    
     override func viewWillAppear(_ animated: Bool) {
-        userName.text = "Matthew"
+        userName.text = defaults.string(forKey: "userName")
         greetingText.text = "Welcome"
         
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if defaults.bool(forKey: "firstLogin") == true{
+            defaults.setValue(true, forKey: "firstLogin")
+        }else{
+            print("first")
+            self.performSegue(withIdentifier: "createAccount", sender: nil)
+            defaults.setValue(true, forKey: "firstLogin")
+        }
         // Do any additional setup after loading the view.
     }
     
