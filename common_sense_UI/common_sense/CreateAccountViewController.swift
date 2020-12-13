@@ -20,6 +20,14 @@ class CreateAccountViewController: UIViewController {
         self.appDescription.alpha = 0
         
         // Do any additional setup after loading the view.
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     @IBAction func returnToLanding(_ sender: Any) {
@@ -33,6 +41,7 @@ class CreateAccountViewController: UIViewController {
         UILabel.animate(withDuration: 1){
             self.appDescription.alpha = 1
         }
+        dismissKeyboard()
     }
 
     /*
