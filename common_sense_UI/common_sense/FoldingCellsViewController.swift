@@ -141,7 +141,7 @@ extension FoldingCellsViewController {
             
             for label in cell.latestScoreLabels {
                 cell.latestScoreLabels.first?.adjustsFontSizeToFitWidth = true
-                let latestResult = Int(audioResults.last?.lowFrequencyAtMaxdB ?? -1)
+                let latestResult = Int(audioResults.last?.highFrequencyAtMaxdB ?? -1)
                 var displayResult = String(latestResult)
                 if latestResult == -1{
                     displayResult = "N/A"
