@@ -746,7 +746,7 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04u-NJ-j0w">
-                                <rect key="frame" x="152" y="624" width="111" height="48"/>
+                                <rect key="frame" x="20" y="624" width="374" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Run Test"/>
                                 <connections>
@@ -761,12 +761,11 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                             <constraint firstItem="Kea-wd-dGv" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="111" id="IS8-zl-p8f"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="7sW-VD-tEl" secondAttribute="trailing" constant="87" id="MNa-BT-7dm"/>
                             <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Kea-wd-dGv" secondAttribute="bottom" constant="166" id="P75-ZW-QdZ"/>
-                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="04u-NJ-j0w" secondAttribute="trailing" constant="151" id="Pa7-kn-laP"/>
                             <constraint firstItem="Onu-vn-Iob" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="95" id="RGX-cs-H49"/>
-                            <constraint firstItem="04u-NJ-j0w" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="152" id="RiM-Je-CRp"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="fL3-5n-eik" secondAttribute="trailing" constant="20" id="U40-yq-I8f"/>
                             <constraint firstItem="Kea-wd-dGv" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="138" id="YcR-By-sCp"/>
                             <constraint firstItem="04u-NJ-j0w" firstAttribute="top" secondItem="7sW-VD-tEl" secondAttribute="bottom" constant="40" id="YfX-OT-8IB"/>
+                            <constraint firstItem="04u-NJ-j0w" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="20" id="aeZ-m0-23R"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Z3c-yh-qjN" secondAttribute="trailing" constant="125" id="bUg-8r-U9A"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Kea-wd-dGv" secondAttribute="trailing" constant="137" id="cOS-pU-lVS"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="bottom" secondItem="fL3-5n-eik" secondAttribute="bottom" constant="21" id="eFD-L7-kxV"/>
@@ -775,6 +774,7 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                             <constraint firstItem="Onu-vn-Iob" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="50" id="lmH-9y-JM3"/>
                             <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Onu-vn-Iob" secondAttribute="bottom" constant="105.5" id="nT8-Zy-e3E"/>
                             <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Onu-vn-Iob" secondAttribute="trailing" constant="95" id="nWv-N3-p1Z"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="04u-NJ-j0w" secondAttribute="trailing" constant="20" id="p1b-QW-CMR"/>
                             <constraint firstItem="Z3c-yh-qjN" firstAttribute="top" secondItem="fdu-Ty-sJI" secondAttribute="top" id="r4G-Lh-WqH"/>
                             <constraint firstItem="Z3c-yh-qjN" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="126" id="trT-j7-XwZ"/>
                         </constraints>
@@ -848,6 +848,7 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                     </view>
                     <navigationItem key="navigationItem" id="fBw-bo-9GG"/>
                     <connections>
+                        <outlet property="doneButton" destination="3GW-Hl-JV6" id="hDA-yf-H4P"/>
                         <outlet property="lineChart" destination="ZGa-YG-akb" id="XQu-1m-KbF"/>
                         <outlet property="visionScoreLabel" destination="XyM-Ji-pYP" id="ChX-5b-siw"/>
                     </connections>
@@ -913,6 +914,7 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                     </view>
                     <navigationItem key="navigationItem" id="3uf-e1-aiU"/>
                     <connections>
+                        <outlet property="doneButton" destination="urD-Ui-euo" id="5Eq-O0-IX2"/>
                         <outlet property="lineChart" destination="YZS-Vw-9Zv" id="Uze-GP-WlU"/>
                         <outlet property="tremorMagLabel" destination="Ou1-GB-Afg" id="8mq-Id-jL6"/>
                     </connections>

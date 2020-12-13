@@ -76,6 +76,10 @@ class Tremortest: UIViewController, URLSessionDelegate {
         self.cancelButton.backgroundColor = self.darkBlue
         self.cancelButton.setTitleColor(.white, for: .normal)
         
+        self.runTestButtonNew.layer.cornerRadius = 9
+        self.runTestButtonNew.backgroundColor = self.darkBlue
+        self.runTestButtonNew.setTitleColor(.white, for: .normal)
+        
         runTestButtonNew.titleLabel?.adjustsFontSizeToFitWidth = true
         
         // create reusable animation

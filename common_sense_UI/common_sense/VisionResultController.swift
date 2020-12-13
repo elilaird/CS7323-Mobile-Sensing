@@ -16,6 +16,10 @@ class VisionResultController: UIViewController {
     var currentScore: Float = 0
     @IBOutlet weak var visionScoreLabel: UILabel!
     @IBOutlet weak var lineChart: LineChartView!
+    @IBOutlet weak var doneButton: UIButton!
+    
+    let pastelRed = UIColor(red: 255/255, green: 105/255, blue: 97/255, alpha: 1.0)
+    let pastelGreen = UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +29,11 @@ class VisionResultController: UIViewController {
         let startGrad = UIColor(red: 118/255, green: 180/255, blue: 189/255, alpha: 1.0).cgColor
         gradientLayer.colors = [startGrad, UIColor.white.cgColor]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.doneButton.layer.cornerRadius = 9
+        self.doneButton.backgroundColor = self.pastelGreen
+        self.doneButton.setTitleColor(.white, for: .normal)
+
 
         self.allPerceptibilityScores = loadData()
         self.currentScore = self.allPerceptibilityScores.last ?? 0
