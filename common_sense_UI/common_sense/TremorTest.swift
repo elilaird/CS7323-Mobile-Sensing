@@ -65,6 +65,12 @@ class Tremortest: UIViewController, URLSessionDelegate {
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        let startGrad = UIColor(red: 189/255, green: 234/255, blue: 238/255, alpha: 1.0).cgColor
+        gradientLayer.colors = [startGrad, UIColor.white.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
          
         self.cancelButton.layer.cornerRadius = 9
         self.cancelButton.backgroundColor = self.darkBlue

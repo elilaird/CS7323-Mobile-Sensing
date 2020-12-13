@@ -19,6 +19,12 @@ class VisionResultController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        let startGrad = UIColor(red: 118/255, green: 180/255, blue: 189/255, alpha: 1.0).cgColor
+        gradientLayer.colors = [startGrad, UIColor.white.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
 
         self.allPerceptibilityScores = loadData()
         self.currentScore = self.allPerceptibilityScores.last ?? 0

@@ -19,12 +19,20 @@ class TremorResultController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add gradient background
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        let startGrad = UIColor(red: 189/255, green: 234/255, blue: 238/255, alpha: 1.0).cgColor
+        gradientLayer.colors = [startGrad, UIColor.white.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
 
         self.allTremorValues = loadData()
         self.currentScore = self.allTremorValues.last ?? 0
         
         self.tremorMagLabel.text = String(format: "%.2f", self.currentScore)
         // Do any additional setup after loading the view.
+        
         
         // CHART
         // - Sample Data

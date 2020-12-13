@@ -43,6 +43,13 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        let startGrad = UIColor(red: 118/255, green: 180/255, blue: 189/255, alpha: 1.0).cgColor
+        gradientLayer.colors = [startGrad, UIColor.white.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        
         yesButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         yesButton.layer.cornerRadius = 30
         yesButton.layer.borderWidth = 5
