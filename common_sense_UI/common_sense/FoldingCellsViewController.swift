@@ -150,6 +150,7 @@ extension FoldingCellsViewController {
                 //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
             }
             for unit in cell.scoreUnitsLabels {
+                unit.adjustsFontSizeToFitWidth = true
                 unit.text = "Hz"
             }
             
