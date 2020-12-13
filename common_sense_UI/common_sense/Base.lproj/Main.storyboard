@@ -21,7 +21,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P20-es-POk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-264" y="70"/>
+            <point key="canvasLocation" x="-514" y="4"/>
         </scene>
         <!--Landing Page Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -514,7 +514,7 @@
                                     <action selector="startTests:" destination="qTk-hk-h9G" eventType="touchUpInside" id="vMy-eq-cun"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dj7-QI-fZm">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dj7-QI-fZm">
                                 <rect key="frame" x="20" y="592" width="374" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="735-LN-Rz5"/>
@@ -539,7 +539,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amD-f3-WfN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hearing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABc-R0-Dqk">
+                                <rect key="frame" x="20" y="28" width="374" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amD-f3-WfN">
                                 <rect key="frame" x="20" y="525" width="374" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="EKk-xk-e7l"/>
@@ -550,10 +557,10 @@
                                     <action selector="yesPressed:" destination="qTk-hk-h9G" eventType="touchUpInside" id="OzX-iK-GjG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hearing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABc-R0-Dqk">
-                                <rect key="frame" x="20" y="28" width="374" height="98"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0B-RQ-0YC">
+                                <rect key="frame" x="84" y="284" width="247" height="181"/>
+                                <string key="text">Welcome to the hearing test. This procedure will test your ability to hear high and low frequencies at different volume levels. Please navigate to a quiet environment and press calibrate.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -564,9 +571,13 @@
                             <constraint firstItem="amD-f3-WfN" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="2q0-Ic-Nic"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="top" secondItem="1wU-vU-Nef" secondAttribute="bottom" constant="14" id="7Ua-sY-ARQ"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="Aps-mL-EgA"/>
+                            <constraint firstItem="amD-f3-WfN" firstAttribute="top" secondItem="Q0B-RQ-0YC" secondAttribute="bottom" constant="60" id="K70-VT-lJm"/>
+                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="Q0B-RQ-0YC" secondAttribute="trailing" constant="83" id="UdH-uf-p69"/>
+                            <constraint firstItem="Q0B-RQ-0YC" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="84" id="WF1-2c-JpV"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="dj7-QI-fZm" secondAttribute="bottom" constant="227" id="dn4-U7-n0k"/>
                             <constraint firstItem="dj7-QI-fZm" firstAttribute="top" secondItem="amD-f3-WfN" secondAttribute="bottom" constant="24" id="eFp-GT-E62"/>
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="top" secondItem="THo-mG-9ET" secondAttribute="top" constant="90" id="hDP-le-oDj"/>
+                            <constraint firstItem="Q0B-RQ-0YC" firstAttribute="top" secondItem="Rjl-dX-azG" secondAttribute="bottom" constant="52" id="neo-Ry-jph"/>
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="ogI-wp-crI"/>
                             <constraint firstItem="dj7-QI-fZm" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="wSj-xw-eWR"/>
                         </constraints>
@@ -576,6 +587,7 @@
                         <outlet property="beginCalibrationButton" destination="1wU-vU-Nef" id="DCe-at-eQY"/>
                         <outlet property="noButton" destination="dj7-QI-fZm" id="zfl-zs-k4q"/>
                         <outlet property="queryLabel" destination="GLi-Kv-H2l" id="tRt-Uz-ImD"/>
+                        <outlet property="testSummary" destination="Q0B-RQ-0YC" id="aDr-2E-Vae"/>
                         <outlet property="testingFreqLabel" destination="YzR-TG-o4z" id="SeR-a4-P2D"/>
                         <outlet property="toneTestButton" destination="Rjl-dX-azG" id="iug-Sf-3Ez"/>
                         <outlet property="waitLabel" destination="GJ2-BY-buG" id="0Ed-IA-ZtS"/>
