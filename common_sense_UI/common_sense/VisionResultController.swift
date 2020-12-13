@@ -45,8 +45,17 @@ class VisionResultController: UIViewController {
         // CHART
         let x = Array(stride(from: 0, to: allPerceptibilityScores.count, by:1)).map {Double($0)}
         
+        let percepResults = dataInterface.getPerceptibilityData()
+        let firstTime = percepResults.first?.timeRecorded ?? Date()
+        let mostRecentTime = percepResults.last?.timeRecorded ?? Date()
+        let sinceFirstTime = firstTime.timeAgoDisplay()
+        let sinceMostRecentTime = mostRecentTime.timeAgoDisplay()
+        self.graphRangeLabel.text = "From " + sinceFirstTime + " to " + sinceMostRecentTime
+        self.graphRangeLabel.adjustsFontSizeToFitWidth = true
+        
         // - Function Call, both arrays have to be doubles so you may have to map them
         generateChart(xVals: x, yVals: allPerceptibilityScores.map{Double($0)}, length: x.count)
+        
     }
     
     func loadData() -> [Float]{
