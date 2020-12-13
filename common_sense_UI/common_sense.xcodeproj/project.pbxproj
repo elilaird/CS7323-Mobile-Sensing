@@ -22,8 +22,6 @@
 		05CFD399258571DA00760E22 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD398258571DA00760E22 /* RingBuffer.swift */; };
 		05CFD3DA2585A0C900760E22 /* VisionResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD3D92585A0C900760E22 /* VisionResultController.swift */; };
 		05CFD3DE2585AF2F00760E22 /* TremorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CFD3DD2585AF2F00760E22 /* TremorResultViewController.swift */; };
-		05CFD3EE2586BE2E00760E22 /* logo_374x146.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFD3ED2586BE2E00760E22 /* logo_374x146.png */; };
-		05CFD3F22586BE7600760E22 /* common_sense_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFD3F12586BE7600760E22 /* common_sense_logo.png */; };
 		453DE16E258582B50089DA7B /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DE168258582B50089DA7B /* AudioModel.swift */; };
 		453DE16F258582B50089DA7B /* MPVolumeView-setVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DE169258582B50089DA7B /* MPVolumeView-setVolume.swift */; };
 		453DE170258582B50089DA7B /* AudioViewController-foundDbValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DE16B258582B50089DA7B /* AudioViewController-foundDbValues.swift */; };
@@ -39,6 +37,8 @@
 		E87BA669257EF92300B1281B /* FoldingCellsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */; };
 		E87BA684258007FB00B1281B /* SensePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87BA683258007FB00B1281B /* SensePreviewCell.swift */; };
 		E87FED812586B8C900E9D418 /* AccountCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FED802586B8C900E9D418 /* AccountCreationViewController.swift */; };
+		E87FED8B2586C57D00E9D418 /* logo_374x146.png in Resources */ = {isa = PBXBuildFile; fileRef = E87FED8A2586C57D00E9D418 /* logo_374x146.png */; };
+		E87FED8F2586C59300E9D418 /* common_sense_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E87FED8E2586C59300E9D418 /* common_sense_logo.png */; };
 		E8BE660F258459FD008C1F2B /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE660E258459FD008C1F2B /* LandingPageController.swift */; };
 		E8BE6629258462C9008C1F2B /* TempSenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE6628258462C9008C1F2B /* TempSenseViewController.swift */; };
 		F628A4F6ED0F3DAEBCFB4A1A /* Pods_common_sense.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56F71A755BD7722AD9FE77FE /* Pods_common_sense.framework */; };
@@ -96,8 +96,6 @@
 		05CFD398258571DA00760E22 /* RingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
 		05CFD3D92585A0C900760E22 /* VisionResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionResultController.swift; sourceTree = "<group>"; };
 		05CFD3DD2585AF2F00760E22 /* TremorResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TremorResultViewController.swift; sourceTree = "<group>"; };
-		05CFD3ED2586BE2E00760E22 /* logo_374x146.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_374x146.png; path = ../../../../../../../../logo_374x146.png; sourceTree = "<group>"; };
-		05CFD3F12586BE7600760E22 /* common_sense_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = common_sense_logo.png; path = ../../../../../../../../common_sense_logo.png; sourceTree = "<group>"; };
 		2F01F0282B71C87B56724EFC /* Pods-common_sense.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_sense.release.xcconfig"; path = "Target Support Files/Pods-common_sense/Pods-common_sense.release.xcconfig"; sourceTree = "<group>"; };
 		453DE168258582B50089DA7B /* AudioModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
 		453DE169258582B50089DA7B /* MPVolumeView-setVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MPVolumeView-setVolume.swift"; sourceTree = "<group>"; };
@@ -120,6 +118,8 @@
 		E87BA668257EF92300B1281B /* FoldingCellsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingCellsViewController.swift; sourceTree = "<group>"; };
 		E87BA683258007FB00B1281B /* SensePreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensePreviewCell.swift; sourceTree = "<group>"; };
 		E87FED802586B8C900E9D418 /* AccountCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewController.swift; sourceTree = "<group>"; };
+		E87FED8A2586C57D00E9D418 /* logo_374x146.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_374x146.png; path = Assets.xcassets/logo_374x146.imageset/logo_374x146.png; sourceTree = "<group>"; };
+		E87FED8E2586C59300E9D418 /* common_sense_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = common_sense_logo.png; path = Assets.xcassets/common_sense_logo.imageset/common_sense_logo.png; sourceTree = "<group>"; };
 		E8BE660E258459FD008C1F2B /* LandingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageController.swift; sourceTree = "<group>"; };
 		E8BE6628258462C9008C1F2B /* TempSenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSenseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,7 +183,9 @@
 				453DE176258582C90089DA7B /* Novocaine.h */,
 				453DE178258582C90089DA7B /* Novocaine.m */,
 				453DE168258582B50089DA7B /* AudioModel.swift */,
+				E87FED8A2586C57D00E9D418 /* logo_374x146.png */,
 				453DE16C258582B50089DA7B /* AudioResultViewController.swift */,
+				E87FED8E2586C59300E9D418 /* common_sense_logo.png */,
 				453DE16B258582B50089DA7B /* AudioViewController-foundDbValues.swift */,
 				453DE16D258582B50089DA7B /* AudioViewController.swift */,
 				453DE16A258582B50089DA7B /* common_sense-Bridging-Header.h */,
@@ -196,8 +198,6 @@
 				05CFD390258571A100760E22 /* ColorOps.swift */,
 				05CFD394258571C500760E22 /* TremorTest.swift */,
 				05CFD398258571DA00760E22 /* RingBuffer.swift */,
-				05CFD3F12586BE7600760E22 /* common_sense_logo.png */,
-				05CFD3ED2586BE2E00760E22 /* logo_374x146.png */,
 				051013812578781100DC83E6 /* Assets.xcassets */,
 				051013832578781100DC83E6 /* LaunchScreen.storyboard */,
 				E87BA683258007FB00B1281B /* SensePreviewCell.swift */,
@@ -365,11 +365,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05CFD3EE2586BE2E00760E22 /* logo_374x146.png in Resources */,
+				E87FED8B2586C57D00E9D418 /* logo_374x146.png in Resources */,
 				051013852578781100DC83E6 /* LaunchScreen.storyboard in Resources */,
 				051013822578781100DC83E6 /* Assets.xcassets in Resources */,
-				05CFD3F22586BE7600760E22 /* common_sense_logo.png in Resources */,
 				0510137D2578781000DC83E6 /* Main.storyboard in Resources */,
+				E87FED8F2586C59300E9D418 /* common_sense_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,7 @@ class TremorResultController: UIViewController {
     @IBOutlet weak var tremorMagLabel: UILabel!
     @IBOutlet weak var lineChart: LineChartView!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var graphRangeLabel: UILabel!
     
     let pastelRed = UIColor(red: 255/255, green: 105/255, blue: 97/255, alpha: 1.0)
     let pastelGreen = UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1.0)

@@ -13,6 +13,7 @@ class AudioResultViewController: UIViewController {
 
     @IBOutlet weak var hearingRange: UILabel!
     @IBOutlet weak var lineChart: LineChartView!
+    @IBOutlet weak var graphRangeLabel: UILabel!
     
     var dataInterface: DataInterface = DataInterface()
     
