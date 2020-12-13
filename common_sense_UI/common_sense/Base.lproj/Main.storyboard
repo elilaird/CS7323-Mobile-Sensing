@@ -368,14 +368,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qS1-32-zhH">
-                                <rect key="frame" x="167" y="809" width="80" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Get Started"/>
-                                <connections>
-                                    <action selector="returnToLanding:" destination="8yJ-Ja-ows" eventType="touchUpInside" id="Zav-Bk-H9n"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Common Sense" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngM-2n-RME">
                                 <rect key="frame" x="70.5" y="64" width="273" height="121"/>
                                 <constraints>
@@ -420,22 +412,29 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdt-cx-A5K">
-                                <rect key="frame" x="88" y="523" width="238" height="255.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="238" id="NJw-Uf-IlN"/>
-                                </constraints>
-                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csu-av-kc8">
-                                <rect key="frame" x="181" y="448" width="53" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csu-av-kc8">
+                                <rect key="frame" x="180.5" y="448" width="53" height="30"/>
                                 <state key="normal" title="confirm"/>
                                 <connections>
                                     <action selector="confirmName" destination="8yJ-Ja-ows" eventType="touchUpInside" id="Zgi-dJ-ziO"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Common Sense is about keeping in touch with your senses over time. " textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbM-Du-IZO">
+                                <rect key="frame" x="85" y="568" width="244" height="171"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="171" id="Nd3-J1-ige"/>
+                                    <constraint firstAttribute="width" constant="244" id="rVI-rd-65g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qS1-32-zhH">
+                                <rect key="frame" x="142" y="638" width="130" height="47"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="25"/>
+                                <state key="normal" title="Get Started"/>
+                                <connections>
+                                    <action selector="returnToLanding:" destination="8yJ-Ja-ows" eventType="touchUpInside" id="Zav-Bk-H9n"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -445,23 +444,28 @@
                             <constraint firstItem="4DM-MH-BOG" firstAttribute="top" secondItem="uSA-to-E52" secondAttribute="bottom" constant="53" id="0wh-cd-6AQ"/>
                             <constraint firstItem="ngM-2n-RME" firstAttribute="top" secondItem="3vE-OC-KYX" secondAttribute="top" constant="20" id="35C-BB-Aqd"/>
                             <constraint firstItem="uSA-to-E52" firstAttribute="top" secondItem="ngM-2n-RME" secondAttribute="bottom" constant="32" id="9TC-Yc-bdb"/>
+                            <constraint firstItem="csu-av-kc8" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="9ec-40-YfR"/>
                             <constraint firstItem="ngM-2n-RME" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="BtK-rP-eWo"/>
-                            <constraint firstItem="fdt-cx-A5K" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="DfQ-Zk-83t"/>
-                            <constraint firstItem="fdt-cx-A5K" firstAttribute="top" secondItem="hUY-Mp-aBc" secondAttribute="bottom" constant="83" id="F9n-WT-eT0"/>
                             <constraint firstItem="YLG-7i-6x9" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="HTQ-Yh-lEQ"/>
+                            <constraint firstItem="qS1-32-zhH" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="OGZ-u1-Rr4"/>
                             <constraint firstItem="1hH-KK-KuD" firstAttribute="top" secondItem="YLG-7i-6x9" secondAttribute="bottom" constant="23" id="T6i-XB-L0d"/>
+                            <constraint firstItem="nbM-Du-IZO" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="VQU-Kx-2Oh"/>
                             <constraint firstItem="hUY-Mp-aBc" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="Z9H-s1-F1Z"/>
+                            <constraint firstItem="qS1-32-zhH" firstAttribute="top" secondItem="csu-av-kc8" secondAttribute="bottom" constant="160" id="d50-xq-buI"/>
                             <constraint firstItem="YLG-7i-6x9" firstAttribute="top" secondItem="4DM-MH-BOG" secondAttribute="bottom" constant="8" symbolic="YES" id="gvw-d3-pfb"/>
+                            <constraint firstItem="csu-av-kc8" firstAttribute="top" secondItem="hUY-Mp-aBc" secondAttribute="bottom" constant="8" symbolic="YES" id="iaS-fX-bbv"/>
                             <constraint firstItem="1hH-KK-KuD" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="ikL-HZ-9x9"/>
                             <constraint firstItem="4DM-MH-BOG" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="j2n-f2-W0u"/>
                             <constraint firstItem="uSA-to-E52" firstAttribute="centerX" secondItem="3vE-OC-KYX" secondAttribute="centerX" id="jzl-gZ-h4Z"/>
+                            <constraint firstItem="nbM-Du-IZO" firstAttribute="top" secondItem="csu-av-kc8" secondAttribute="bottom" constant="90" id="qQY-Kz-Gcc"/>
                             <constraint firstItem="hUY-Mp-aBc" firstAttribute="top" secondItem="1hH-KK-KuD" secondAttribute="bottom" constant="8" symbolic="YES" id="s2h-Nq-Rjg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ozH-K2-Uxh"/>
                     <connections>
-                        <outlet property="appDescription" destination="fdt-cx-A5K" id="KgT-Ll-LON"/>
+                        <outlet property="appDescription" destination="nbM-Du-IZO" id="Frd-Vy-w1N"/>
                         <outlet property="firstName" destination="YLG-7i-6x9" id="bkh-Lq-unI"/>
+                        <outlet property="getStartedButton" destination="qS1-32-zhH" id="Z3X-zo-d62"/>
                         <outlet property="lastName" destination="hUY-Mp-aBc" id="K2J-OW-S6F"/>
                     </connections>
                 </viewController>
@@ -723,6 +727,13 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGa-YG-akb" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="20" y="314" width="374" height="267"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="267" id="cGa-JP-q0a"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j7w-CL-Axc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -731,15 +742,21 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                             <constraint firstItem="j7w-CL-Axc" firstAttribute="trailing" secondItem="3GW-Hl-JV6" secondAttribute="trailing" constant="20" id="4gI-Ee-4nw"/>
                             <constraint firstItem="3GW-Hl-JV6" firstAttribute="leading" secondItem="j7w-CL-Axc" secondAttribute="leading" constant="20" id="7qE-eh-72H"/>
                             <constraint firstItem="XyM-Ji-pYP" firstAttribute="top" secondItem="r2d-0L-qHW" secondAttribute="bottom" constant="42" id="8ry-q8-B8N"/>
+                            <constraint firstItem="ZGa-YG-akb" firstAttribute="leading" secondItem="j7w-CL-Axc" secondAttribute="leading" constant="20" id="Cla-gD-rkB"/>
+                            <constraint firstItem="ZGa-YG-akb" firstAttribute="top" secondItem="XyM-Ji-pYP" secondAttribute="bottom" constant="67" id="Fjw-rD-aPq"/>
                             <constraint firstItem="r2d-0L-qHW" firstAttribute="top" secondItem="PHS-dX-BO7" secondAttribute="top" constant="33" id="Gbr-kV-V6l"/>
+                            <constraint firstItem="j7w-CL-Axc" firstAttribute="trailing" secondItem="ZGa-YG-akb" secondAttribute="trailing" constant="20" id="Npj-nh-Ikg"/>
                             <constraint firstItem="j7w-CL-Axc" firstAttribute="trailing" secondItem="r2d-0L-qHW" secondAttribute="trailing" constant="89" id="SxH-3X-bYf"/>
+                            <constraint firstItem="XyM-Ji-pYP" firstAttribute="centerX" secondItem="j7w-CL-Axc" secondAttribute="centerX" id="gdM-ay-xWP"/>
                             <constraint firstItem="XyM-Ji-pYP" firstAttribute="leading" secondItem="j7w-CL-Axc" secondAttribute="leading" constant="113" id="kvd-9z-eU5"/>
                             <constraint firstItem="3GW-Hl-JV6" firstAttribute="bottom" secondItem="j7w-CL-Axc" secondAttribute="bottom" id="nvg-QM-rKi"/>
                             <constraint firstItem="j7w-CL-Axc" firstAttribute="trailing" secondItem="XyM-Ji-pYP" secondAttribute="trailing" constant="113" id="upO-9k-Qt7"/>
+                            <constraint firstItem="ZGa-YG-akb" firstAttribute="centerX" secondItem="j7w-CL-Axc" secondAttribute="centerX" id="vLi-ES-Oqy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fBw-bo-9GG"/>
                     <connections>
+                        <outlet property="lineChart" destination="ZGa-YG-akb" id="XQu-1m-KbF"/>
                         <outlet property="visionScoreLabel" destination="XyM-Ji-pYP" id="ChX-5b-siw"/>
                     </connections>
                 </viewController>
