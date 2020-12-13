@@ -55,8 +55,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test your senses below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-h8-1Gi">
-                                <rect key="frame" x="106" y="169" width="202.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test your senses below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-h8-1Gi">
+                                <rect key="frame" x="104.5" y="169" width="205" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="7a2-ab-cbo"/>
                                 </constraints>
@@ -295,7 +295,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKT-JP-ccu">
-                                <rect key="frame" x="32" y="677" width="350" height="48"/>
+                                <rect key="frame" x="32" y="623" width="350" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Yes"/>
                                 <connections>
@@ -303,22 +303,41 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOY-4d-3GE">
-                                <rect key="frame" x="32" y="760" width="350" height="48"/>
+                                <rect key="frame" x="32" y="706" width="350" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="No"/>
                                 <connections>
                                     <action selector="noClick:" destination="QUq-nc-a4A" eventType="touchUpInside" id="e3w-4B-20a"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can you tell the difference in the colors?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q11-SE-OwD">
-                                <rect key="frame" x="32" y="166" width="350" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vision" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-Sy-Kct">
+                                <rect key="frame" x="161" y="44" width="92" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="92" id="EUA-ax-6ay"/>
+                                    <constraint firstAttribute="height" constant="51" id="gjI-f4-rXw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vision" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-Sy-Kct">
-                                <rect key="frame" x="161" y="44" width="92" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1j-x8-dI0">
+                                <rect key="frame" x="20" y="799" width="374" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="374" id="LSw-vh-FzT"/>
+                                    <constraint firstAttribute="height" constant="42" id="gub-U5-gVh"/>
+                                </constraints>
+                                <state key="normal" title="Cancel Test"/>
+                                <connections>
+                                    <action selector="cancel:" destination="qTk-hk-h9G" eventType="touchUpInside" id="2q3-IQ-nAJ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the vision test.  Here, we will test your ability to distinguish colors.  Can you tell the difference in the colors?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q11-SE-OwD">
+                                <rect key="frame" x="32" y="144" width="350" height="132"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="132" id="UQ0-dj-4mL"/>
+                                    <constraint firstAttribute="width" constant="350" id="vNE-VD-4Q0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -326,26 +345,28 @@
                         <viewLayoutGuide key="safeArea" id="vQM-0x-XvX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="q11-SE-OwD" secondAttribute="trailing" constant="32" id="39Y-X7-GOY"/>
-                            <constraint firstItem="KOY-4d-3GE" firstAttribute="top" secondItem="BKT-JP-ccu" secondAttribute="bottom" constant="35" id="685-yr-FnE"/>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="Yac-Sy-Kct" secondAttribute="trailing" constant="161" id="6lO-Re-Drf"/>
-                            <constraint firstItem="UvC-U5-EKL" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="8gh-3M-auo"/>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="KOY-4d-3GE" secondAttribute="trailing" constant="32" id="BKk-Dr-Ra8"/>
-                            <constraint firstItem="BKT-JP-ccu" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="C7F-dH-GEh"/>
-                            <constraint firstItem="Yac-Sy-Kct" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="161" id="JbS-N5-eMV"/>
-                            <constraint firstItem="KOY-4d-3GE" firstAttribute="top" secondItem="BKT-JP-ccu" secondAttribute="bottom" constant="35" id="LuK-8d-Old"/>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="UvC-U5-EKL" secondAttribute="trailing" constant="20" id="TeR-di-fNF"/>
-                            <constraint firstItem="BKT-JP-ccu" firstAttribute="top" secondItem="UvC-U5-EKL" secondAttribute="bottom" constant="142" id="UfS-xi-bUY"/>
-                            <constraint firstItem="q11-SE-OwD" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="VAc-yp-4FF"/>
-                            <constraint firstItem="q11-SE-OwD" firstAttribute="top" secondItem="Yac-Sy-Kct" secondAttribute="bottom" constant="80" id="VGO-ka-4oO"/>
-                            <constraint firstItem="UvC-U5-EKL" firstAttribute="top" secondItem="q11-SE-OwD" secondAttribute="bottom" constant="161.5" id="YiB-Un-quM"/>
-                            <constraint firstItem="KOY-4d-3GE" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="bTV-9j-0Dc"/>
-                            <constraint firstItem="Yac-Sy-Kct" firstAttribute="top" secondItem="vQM-0x-XvX" secondAttribute="top" id="blm-5x-NUG"/>
-                            <constraint firstItem="q11-SE-OwD" firstAttribute="top" secondItem="Yac-Sy-Kct" secondAttribute="bottom" constant="80" id="c2x-9P-3RZ"/>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="BKT-JP-ccu" secondAttribute="trailing" constant="32" id="mh2-Ou-cdg"/>
-                            <constraint firstItem="UvC-U5-EKL" firstAttribute="top" secondItem="q11-SE-OwD" secondAttribute="bottom" constant="161.5" id="sOW-uQ-2rG"/>
-                            <constraint firstItem="vQM-0x-XvX" firstAttribute="bottom" secondItem="KOY-4d-3GE" secondAttribute="bottom" constant="54" id="x49-z7-xvm"/>
-                            <constraint firstItem="BKT-JP-ccu" firstAttribute="top" secondItem="UvC-U5-EKL" secondAttribute="bottom" constant="142" id="zgc-1W-wxf"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="BKT-JP-ccu" secondAttribute="trailing" constant="32" id="2VE-Ni-sJ4"/>
+                            <constraint firstItem="BKT-JP-ccu" firstAttribute="top" secondItem="UvC-U5-EKL" secondAttribute="bottom" constant="88" id="2ZF-JP-2uc"/>
+                            <constraint firstItem="KOY-4d-3GE" firstAttribute="top" secondItem="BKT-JP-ccu" secondAttribute="bottom" constant="35" id="3r7-6J-R4P"/>
+                            <constraint firstItem="q11-SE-OwD" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="9W8-V5-qGV"/>
+                            <constraint firstItem="Q1j-x8-dI0" firstAttribute="top" secondItem="KOY-4d-3GE" secondAttribute="bottom" constant="45" id="BMm-gR-5Kh"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="bottom" secondItem="Q1j-x8-dI0" secondAttribute="bottom" constant="21" id="M3P-9K-JPa"/>
+                            <constraint firstItem="Q1j-x8-dI0" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="OLD-nP-sRZ"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="q11-SE-OwD" secondAttribute="trailing" constant="32" id="P1h-tw-UR5"/>
+                            <constraint firstItem="KOY-4d-3GE" firstAttribute="top" secondItem="BKT-JP-ccu" secondAttribute="bottom" constant="35" id="SV4-1w-fgK"/>
+                            <constraint firstItem="q11-SE-OwD" firstAttribute="top" secondItem="Yac-Sy-Kct" secondAttribute="bottom" constant="49" id="Vza-Jk-GnR"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="Q1j-x8-dI0" secondAttribute="trailing" constant="20" id="Wjd-r8-qwJ"/>
+                            <constraint firstItem="Q1j-x8-dI0" firstAttribute="top" secondItem="KOY-4d-3GE" secondAttribute="bottom" constant="45" id="Yo2-Mu-xOX"/>
+                            <constraint firstItem="Yac-Sy-Kct" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="161" id="ZHL-W6-9Py"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="UvC-U5-EKL" secondAttribute="trailing" constant="20" id="apv-sW-aA4"/>
+                            <constraint firstItem="UvC-U5-EKL" firstAttribute="top" secondItem="q11-SE-OwD" secondAttribute="bottom" constant="72" id="ekn-1f-9Mg"/>
+                            <constraint firstItem="BKT-JP-ccu" firstAttribute="top" secondItem="UvC-U5-EKL" secondAttribute="bottom" constant="88" id="gMw-eU-mNt"/>
+                            <constraint firstItem="KOY-4d-3GE" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="hBX-fL-26S"/>
+                            <constraint firstItem="BKT-JP-ccu" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="32" id="hgI-FQ-L5l"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="KOY-4d-3GE" secondAttribute="trailing" constant="32" id="k93-uR-Wem"/>
+                            <constraint firstItem="UvC-U5-EKL" firstAttribute="leading" secondItem="vQM-0x-XvX" secondAttribute="leading" constant="20" id="kq7-Rl-me4"/>
+                            <constraint firstItem="Yac-Sy-Kct" firstAttribute="top" secondItem="vQM-0x-XvX" secondAttribute="top" id="u2w-3x-eCt"/>
+                            <constraint firstItem="vQM-0x-XvX" firstAttribute="trailing" secondItem="Yac-Sy-Kct" secondAttribute="trailing" constant="161" id="vLD-mV-ZcI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="60n-3f-CVb"/>
@@ -358,7 +379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keN-7a-sN1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2457" y="71"/>
+            <point key="canvasLocation" x="2456.521739130435" y="70.982142857142847"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="WiZ-Av-avc">
@@ -413,8 +434,8 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csu-av-kc8">
-                                <rect key="frame" x="180.5" y="448" width="53" height="30"/>
-                                <state key="normal" title="confirm"/>
+                                <rect key="frame" x="179.5" y="448" width="55" height="30"/>
+                                <state key="normal" title="Confirm"/>
                                 <connections>
                                     <action selector="confirmName" destination="8yJ-Ja-ows" eventType="touchUpInside" id="Zgi-dJ-ziO"/>
                                 </connections>
@@ -688,44 +709,85 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Onu-vn-Iob">
-                                <rect key="frame" x="95" y="211" width="224" height="82"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">Please pick up the phone and
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Onu-vn-Iob">
+                                <rect key="frame" x="95" y="136" width="224" height="142.5"/>
+                                <string key="text">Welcome to the tremor test.  This procedure will estimate the tremor in your hand. Please pick up the phone and
 hold it parallel to the floor in your hand.  Once you are ready click "Run Test."</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tremors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z3c-yh-qjN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tremors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z3c-yh-qjN">
                                 <rect key="frame" x="126" y="44" width="163" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hand_phone" translatesAutoresizingMaskIntoConstraints="NO" id="7sW-VD-tEl">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand_phone" translatesAutoresizingMaskIntoConstraints="NO" id="7sW-VD-tEl">
                                 <rect key="frame" x="87" y="384" width="240" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbC-89-6WF">
-                                <rect key="frame" x="132" y="750" width="150" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="41"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running the test..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Kea-wd-dGv">
+                                <rect key="frame" x="138" y="197" width="139" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fL3-5n-eik">
+                                <rect key="frame" x="20" y="799" width="374" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="TYe-j3-5Ni"/>
+                                </constraints>
+                                <state key="normal" title="Cancel Test"/>
+                                <connections>
+                                    <action selector="cancel:" destination="qTk-hk-h9G" eventType="touchUpInside" id="z3n-c5-2Wx"/>
+                                    <action selector="cancelTestbuttonClick:" destination="92Z-In-LNJ" eventType="touchUpInside" id="A3B-0h-paI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04u-NJ-j0w">
+                                <rect key="frame" x="152" y="624" width="111" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Run Test"/>
                                 <connections>
-                                    <action selector="runTestButton:" destination="92Z-In-LNJ" eventType="touchUpInside" id="kd7-Pi-oTu"/>
+                                    <action selector="testClick:" destination="92Z-In-LNJ" eventType="touchUpInside" id="7hy-MZ-9Li"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fdu-Ty-sJI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fL3-5n-eik" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="20" id="Ck0-2f-1SK"/>
+                            <constraint firstItem="Kea-wd-dGv" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="111" id="IS8-zl-p8f"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="7sW-VD-tEl" secondAttribute="trailing" constant="87" id="MNa-BT-7dm"/>
+                            <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Kea-wd-dGv" secondAttribute="bottom" constant="166" id="P75-ZW-QdZ"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="04u-NJ-j0w" secondAttribute="trailing" constant="151" id="Pa7-kn-laP"/>
+                            <constraint firstItem="Onu-vn-Iob" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="95" id="RGX-cs-H49"/>
+                            <constraint firstItem="04u-NJ-j0w" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="152" id="RiM-Je-CRp"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="fL3-5n-eik" secondAttribute="trailing" constant="20" id="U40-yq-I8f"/>
+                            <constraint firstItem="Kea-wd-dGv" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="138" id="YcR-By-sCp"/>
+                            <constraint firstItem="04u-NJ-j0w" firstAttribute="top" secondItem="7sW-VD-tEl" secondAttribute="bottom" constant="40" id="YfX-OT-8IB"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Z3c-yh-qjN" secondAttribute="trailing" constant="125" id="bUg-8r-U9A"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Kea-wd-dGv" secondAttribute="trailing" constant="137" id="cOS-pU-lVS"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="bottom" secondItem="fL3-5n-eik" secondAttribute="bottom" constant="21" id="eFD-L7-kxV"/>
+                            <constraint firstItem="7sW-VD-tEl" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="87" id="fpi-qh-4W6"/>
+                            <constraint firstItem="Onu-vn-Iob" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="50" id="i3L-G5-Ziz"/>
+                            <constraint firstItem="Onu-vn-Iob" firstAttribute="top" secondItem="Z3c-yh-qjN" secondAttribute="bottom" constant="50" id="lmH-9y-JM3"/>
+                            <constraint firstItem="7sW-VD-tEl" firstAttribute="top" secondItem="Onu-vn-Iob" secondAttribute="bottom" constant="105.5" id="nT8-Zy-e3E"/>
+                            <constraint firstItem="fdu-Ty-sJI" firstAttribute="trailing" secondItem="Onu-vn-Iob" secondAttribute="trailing" constant="95" id="nWv-N3-p1Z"/>
+                            <constraint firstItem="Z3c-yh-qjN" firstAttribute="top" secondItem="fdu-Ty-sJI" secondAttribute="top" id="r4G-Lh-WqH"/>
+                            <constraint firstItem="Z3c-yh-qjN" firstAttribute="leading" secondItem="fdu-Ty-sJI" secondAttribute="leading" constant="126" id="trT-j7-XwZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AlE-Uu-uJO"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="fL3-5n-eik" id="7Ar-q9-AJ5"/>
+                        <outlet property="directionsLabel" destination="Onu-vn-Iob" id="dCN-QI-Kts"/>
+                        <outlet property="runTestButtonNew" destination="04u-NJ-j0w" id="GeR-cV-5h6"/>
+                        <outlet property="runningTestLabel" destination="Kea-wd-dGv" id="mKq-qT-P96"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gMs-KM-GIO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2457" y="940"/>
+            <point key="canvasLocation" x="2456.521739130435" y="939.50892857142856"/>
         </scene>
         <!--visionResult-->
         <scene sceneID="PZl-Aq-5Dd">
@@ -800,7 +862,7 @@ hold it parallel to the floor in your hand.  Once you are ready click "Run Tes
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tremors Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQ4-co-LnR">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tremor Checkup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FQ4-co-LnR">
                                 <rect key="frame" x="96" y="44" width="222" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
