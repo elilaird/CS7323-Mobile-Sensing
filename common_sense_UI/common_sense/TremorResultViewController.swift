@@ -35,13 +35,10 @@ class TremorResultController: UIViewController {
         
         
         // CHART
-        // - Sample Data
-        let a = [1,2,3,4,5]
-        let b = [6,7,8,9,10]
-        let c = 5
+        let x = Array(stride(from: 0, to: allTremorValues.count, by:1)).map {Double($0)}
         
         // - Function Call, both arrays have to be doubles so you may have to map them
-        generateChart(xVals: a.map{Double($0)}, yVals: b.map{Double($0)}, length: c)
+        generateChart(xVals: x, yVals: allTremorValues.map{Double($0)}, length: x.count)
     }
     
     func loadData() -> [Float]{

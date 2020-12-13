@@ -32,15 +32,11 @@ class VisionResultController: UIViewController {
         self.visionScoreLabel.text = String(Int(self.currentScore))
         // Do any additional setup after loading the view.
         
-        
         // CHART
-        // - Sample Data
-        let a = [1,2,3,4,5]
-        let b = [6,7,8,9,10]
-        let c = 5
+        let x = Array(stride(from: 0, to: allPerceptibilityScores.count, by:1)).map {Double($0)}
         
         // - Function Call, both arrays have to be doubles so you may have to map them
-        generateChart(xVals: a.map{Double($0)}, yVals: b.map{Double($0)}, length: c)
+        generateChart(xVals: x, yVals: allPerceptibilityScores.map{Double($0)}, length: x.count)
     }
     
     func loadData() -> [Float]{

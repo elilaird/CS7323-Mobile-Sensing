@@ -329,6 +329,7 @@
                                 <state key="normal" title="Cancel Test"/>
                                 <connections>
                                     <action selector="cancel:" destination="qTk-hk-h9G" eventType="touchUpInside" id="2q3-IQ-nAJ"/>
+                                    <action selector="cancelButtonclick:" destination="QUq-nc-a4A" eventType="touchUpInside" id="R3C-7A-MmJ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the vision test.  Here, we will test your ability to distinguish colors.  Can you tell the difference in the colors?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q11-SE-OwD">
@@ -371,6 +372,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="60n-3f-CVb"/>
                     <connections>
+                        <outlet property="cancelButton" destination="Q1j-x8-dI0" id="Pa2-y3-Bqr"/>
                         <outlet property="leftColorView" destination="Jqg-OT-JRy" id="wG6-GA-sgD"/>
                         <outlet property="noButton" destination="KOY-4d-3GE" id="nqC-O7-DbN"/>
                         <outlet property="rightColorView" destination="oEC-dG-wFA" id="sN8-bd-YSY"/>

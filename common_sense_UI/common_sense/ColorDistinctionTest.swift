@@ -14,6 +14,7 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     @IBOutlet weak var rightColorView: UIView!
     @IBOutlet weak var yesButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     lazy var session: URLSession = {
         let sessionConfig = URLSessionConfiguration.ephemeral
@@ -36,6 +37,10 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
     var currentDeltaEAffirmativeCount: Int = 0
     var perceptibilityScore: Float = 0
     
+    let darkBlue = UIColor(hex: "#0076b4bd")
+    let pastelRed = UIColor(red: 255/255, green: 105/255, blue: 97/255, alpha: 1.0)
+    let pastelGreen = UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1.0)
+    
     let deAdjustor = DeltaEAdjustor()
     let dataInterface = DataInterface()
     
@@ -50,16 +55,17 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
         self.view.layer.insertSublayer(gradientLayer, at: 0)
         
         
-        yesButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        yesButton.layer.cornerRadius = 30
-        yesButton.layer.borderWidth = 5
-        yesButton.layer.borderColor = UIColor.green.cgColor
-//        yesButton.backgroundColor = .green
+        self.yesButton.layer.cornerRadius = 9
+        self.noButton.layer.cornerRadius = 9
+        self.cancelButton.layer.cornerRadius = 9
         
-        noButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        noButton.layer.cornerRadius = 30
-        noButton.layer.borderWidth = 5
-        noButton.layer.borderColor = UIColor.red.cgColor
+        self.yesButton.backgroundColor = self.pastelGreen
+        self.noButton.backgroundColor = self.pastelRed
+        self.cancelButton.backgroundColor = self.darkBlue
+        
+        self.yesButton.setTitleColor(.white, for: .normal)
+        self.noButton.setTitleColor(.white, for: .normal)
+        self.cancelButton.setTitleColor(.white, for: .normal)
         
         // Get the delta E value that we want to investigate from the DeltaEAdjustor (starts at 1)
         currentDeltaE = deAdjustor.adjustDeltaE()
@@ -83,6 +89,10 @@ class ColorDistinction: UIViewController, URLSessionDelegate {
         // Setup the next comparison
         setupNextComparison()
 
+    }
+    
+    @IBAction func cancelButtonclick(_ sender: Any) {
+        _ = navigationController?.popToRootViewController(animated: true)
     }
     
     func setupNextComparison(){
