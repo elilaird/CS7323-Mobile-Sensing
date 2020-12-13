@@ -48,18 +48,18 @@ class AccountCreationViewController: UIViewController {
         UILabel.animate(withDuration: 1){
             self.appDesc.alpha = 1
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { // Change `2.0` to the desired number of seconds.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             UILabel.animate(withDuration: 1){
                 self.appDesc.alpha = 0
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Change `2.0` to the desired number of seconds.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.appDesc.text = self.descriptionPart2
             UILabel.animate(withDuration: 1){
                 self.appDesc.alpha = 1
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 12.0) { // Change `2.0` to the desired number of seconds.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
             UILabel.animate(withDuration: 1){
                 self.appDesc.alpha = 0
             }
