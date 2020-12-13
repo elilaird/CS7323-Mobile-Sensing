@@ -23,12 +23,8 @@ class AudioViewController: UIViewController, DataDelegate{
     @IBOutlet weak var queryLabel: UILabel!
     @IBOutlet weak var testingFreqLabel: UILabel!
     @IBOutlet weak var waitLabel: UILabel!
-    @IBOutlet weak var testCompleteLabel: UILabel!
     @IBOutlet weak var beginCalibrationButton: UIButton!
     @IBOutlet weak var toneTestButton: UIButton!
-    @IBOutlet weak var resultsLabel: UILabel!
-    @IBOutlet weak var resultsMaxLabel: UILabel!
-    @IBOutlet weak var resultsMinLabel: UILabel!
     
     weak var delegate: AudioModel!
     
@@ -149,11 +145,6 @@ class AudioViewController: UIViewController, DataDelegate{
     func toneTesting(){
         DispatchQueue.global(qos: .userInteractive).async {
             
-            DispatchQueue.main.async {
-                self.testCompleteLabel.isHidden = true
-                self.resultsMaxLabel.isHidden = true
-                self.resultsMinLabel.isHidden = true
-            }
             
             var upperBound:Float
             var lowerBound:Float
@@ -182,15 +173,7 @@ class AudioViewController: UIViewController, DataDelegate{
             print("Max volume lower bound of \(maxVolumeLowerBound)")
             
             DispatchQueue.main.async {
-                self.testCompleteLabel.isHidden = false
                 self.waitLabel.isHidden = true
-//                self.resultsMaxLabel.text = "Max Frequency: " + self.getFormattedFrequency(with: maxVolumeUpperBound)
-//                self.resultsMinLabel.text = "Min Frequency: " + self.getFormattedFrequency(with: maxVolumeLowerBound)
-            
-//                self.resultsMaxLabel.textAlignment = NSTextAlignment.right
-//                self.resultsMinLabel.textAlignment = NSTextAlignment.right
-//                self.resultsMaxLabel.isHidden = false
-//                self.resultsMinLabel.isHidden = false
             }
             
             self.dataInterface.saveAudioData(lowFrequencyAtdB: lowerBound, highFrequencyAtdB: upperBound, dB: self.dbHalf, lowFrequencyAtMaxdB: maxVolumeLowerBound, highFrequencyAtMaxdB: maxVolumeUpperBound, maxdB: self.dbMax)

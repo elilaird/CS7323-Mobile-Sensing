@@ -379,12 +379,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tests Complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WR5-E8-ocy">
-                                <rect key="frame" x="147.5" y="448" width="119" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wU-vU-Nef">
                                 <rect key="frame" x="176" y="133" width="62" height="30"/>
                                 <constraints>
@@ -405,18 +399,6 @@
                                     <action selector="startTests:" destination="qTk-hk-h9G" eventType="touchUpInside" id="vMy-eq-cun"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GT6-Tf-4lC">
-                                <rect key="frame" x="179" y="637" width="56" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min Frequency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXk-bP-Uaf">
-                                <rect key="frame" x="50" y="714" width="117.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dj7-QI-fZm">
                                 <rect key="frame" x="276" y="511" width="30" height="30"/>
                                 <state key="normal" title="No"/>
@@ -424,12 +406,6 @@
                                     <action selector="noPressed:" destination="qTk-hk-h9G" eventType="touchUpInside" id="DQb-pk-an2"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Frequency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICl-mc-ShS">
-                                <rect key="frame" x="50" y="677" width="121.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ2-BY-buG">
                                 <rect key="frame" x="157" y="364" width="100" height="21"/>
                                 <constraints>
@@ -458,28 +434,16 @@
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="1wU-vU-Nef" secondAttribute="trailing" constant="176" id="3Q3-KC-p10"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="dj7-QI-fZm" secondAttribute="trailing" constant="108" id="5HF-PT-0IF"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="GLi-Kv-H2l" secondAttribute="trailing" constant="111" id="5vv-om-f7e"/>
-                            <constraint firstItem="GT6-Tf-4lC" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="6SA-xa-19f"/>
-                            <constraint firstItem="SXk-bP-Uaf" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="50" id="92n-Os-clS"/>
-                            <constraint firstItem="SXk-bP-Uaf" firstAttribute="top" secondItem="ICl-mc-ShS" secondAttribute="bottom" constant="16" id="ASH-66-Yc6"/>
                             <constraint firstItem="YzR-TG-o4z" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="BA7-hh-IPG"/>
-                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="GT6-Tf-4lC" secondAttribute="trailing" constant="179" id="Bme-lx-JfT"/>
-                            <constraint firstItem="dj7-QI-fZm" firstAttribute="top" secondItem="WR5-E8-ocy" secondAttribute="bottom" constant="42" id="Dah-80-DZN"/>
-                            <constraint firstItem="GT6-Tf-4lC" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="179" id="HGP-wP-fhM"/>
                             <constraint firstItem="GLi-Kv-H2l" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="111" id="HWK-yk-gA0"/>
                             <constraint firstItem="YzR-TG-o4z" firstAttribute="top" secondItem="GJ2-BY-buG" secondAttribute="bottom" constant="20" id="Jw4-5w-iLS"/>
-                            <constraint firstItem="WR5-E8-ocy" firstAttribute="top" secondItem="YzR-TG-o4z" secondAttribute="bottom" constant="22" id="Kny-k2-9G9"/>
                             <constraint firstItem="GJ2-BY-buG" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="Kzr-SP-uRO"/>
-                            <constraint firstItem="WR5-E8-ocy" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="147.5" id="Lex-xh-Tlf"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="dj7-QI-fZm" secondAttribute="bottom" constant="321" id="PuO-l7-a2M"/>
-                            <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="WR5-E8-ocy" secondAttribute="trailing" constant="147.5" id="QPr-Tp-WEa"/>
-                            <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="SXk-bP-Uaf" secondAttribute="bottom" constant="127" id="RRo-XF-p09"/>
-                            <constraint firstItem="WR5-E8-ocy" firstAttribute="centerX" secondItem="THo-mG-9ET" secondAttribute="centerX" id="THe-Bb-mUR"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="bottom" secondItem="amD-f3-WfN" secondAttribute="bottom" constant="322" id="YIN-lu-tKD"/>
-                            <constraint firstItem="ICl-mc-ShS" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="50" id="YjN-Ee-AEH"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="YzR-TG-o4z" secondAttribute="trailing" constant="131" id="ZgU-56-Ri5"/>
-                            <constraint firstItem="amD-f3-WfN" firstAttribute="top" secondItem="WR5-E8-ocy" secondAttribute="bottom" constant="41" id="a4a-Dd-kCU"/>
                             <constraint firstItem="GJ2-BY-buG" firstAttribute="top" secondItem="GLi-Kv-H2l" secondAttribute="bottom" constant="67" id="dK7-Po-cIk"/>
                             <constraint firstItem="Rjl-dX-azG" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="173.5" id="gqO-b8-wVD"/>
+                            <constraint firstItem="amD-f3-WfN" firstAttribute="top" secondItem="YzR-TG-o4z" secondAttribute="bottom" constant="84" id="gxS-Z6-hev"/>
                             <constraint firstItem="1wU-vU-Nef" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="176" id="nuA-uL-fsg"/>
                             <constraint firstItem="THo-mG-9ET" firstAttribute="trailing" secondItem="GJ2-BY-buG" secondAttribute="trailing" constant="157" id="og1-8N-ymc"/>
                             <constraint firstItem="amD-f3-WfN" firstAttribute="leading" secondItem="THo-mG-9ET" secondAttribute="leading" constant="108" id="p7N-BA-WSY"/>
@@ -495,10 +459,6 @@
                         <outlet property="beginCalibrationButton" destination="1wU-vU-Nef" id="DCe-at-eQY"/>
                         <outlet property="noButton" destination="dj7-QI-fZm" id="zfl-zs-k4q"/>
                         <outlet property="queryLabel" destination="GLi-Kv-H2l" id="tRt-Uz-ImD"/>
-                        <outlet property="resultsLabel" destination="GT6-Tf-4lC" id="7L9-HP-HSm"/>
-                        <outlet property="resultsMaxLabel" destination="ICl-mc-ShS" id="bKD-2N-h8D"/>
-                        <outlet property="resultsMinLabel" destination="SXk-bP-Uaf" id="o4F-Ky-40s"/>
-                        <outlet property="testCompleteLabel" destination="WR5-E8-ocy" id="fz6-xS-d9B"/>
                         <outlet property="testingFreqLabel" destination="YzR-TG-o4z" id="SeR-a4-P2D"/>
                         <outlet property="toneTestButton" destination="Rjl-dX-azG" id="iug-Sf-3Ez"/>
                         <outlet property="waitLabel" destination="GJ2-BY-buG" id="0Ed-IA-ZtS"/>
