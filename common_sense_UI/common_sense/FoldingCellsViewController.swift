@@ -96,6 +96,7 @@ extension FoldingCellsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! SensePreviewCell
         let durations: [TimeInterval] = [0.26, 0.2, 0.2]
+        var last = Date()
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations
         
@@ -128,20 +129,98 @@ extension FoldingCellsViewController {
             
             for label in cell.latestScoreLabels {
                 cell.latestScoreLabels.first?.adjustsFontSizeToFitWidth = true
-                label.text = String(Int(audioResults.last!.lowFrequencyAtMaxdB))
+                let latestResult = Int(audioResults.last?.lowFrequencyAtMaxdB ?? -1)
+                var displayResult = String(latestResult)
+                if latestResult == -1{
+                    displayResult = "N/A"
+                }
+                label.text = displayResult
                 //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
             }
             for unit in cell.scoreUnitsLabels {
                 unit.text = "Hz"
             }
             
+            if audioResults.count > 0 {
+                last = audioResults.last?.timeRecorded ?? Date()
+                cell.lastCheckupLabel.text = last.timeAgoDisplay()
+            }else{
+                cell.lastCheckupLabel.text = "N/A"
+            }
             
-        }else{ // Call 1 line graph for others
-            //loadSingleLineDataChart(xVals: , // x values array
-            //                        yVals: , // y values array
-            //                        length: ) // number of data points
             
         }
+        
+        if indexPath.row == 1{
+            let visionResults = dataInterface.getPerceptibilityData()
+            var percepScores:[Double] = []
+            let x = Array(stride(from: 0, to: visionResults.count, by:1)).map {Double($0)}
+            
+            for visionRes in visionResults{
+                percepScores.append(Double(visionRes.perceptibilityScore))
+            }
+            
+            cell.loadSingleLineDataChart(xVals: x, yVals: percepScores, length: x.count)
+            
+            
+            for label in cell.latestScoreLabels {
+                cell.latestScoreLabels.first?.adjustsFontSizeToFitWidth = true
+                let latestResult = Int(visionResults.last?.perceptibilityScore ?? -1)
+                var displayResult = String(latestResult)
+                if latestResult == -1{
+                    displayResult = "N/A"
+                }
+                label.text = displayResult
+                //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
+            }
+            for unit in cell.scoreUnitsLabels {
+                cell.scoreUnitsLabels.first?.adjustsFontSizeToFitWidth = true
+                unit.text = "Perceptibility"
+            }
+            
+            if visionResults.count > 0 {
+                last = visionResults.last?.timeRecorded ?? Date()
+                cell.lastCheckupLabel.text = last.timeAgoDisplay()
+            }else{
+                cell.lastCheckupLabel.text = "N/A"
+            }
+            
+        }
+        
+        if indexPath.row == 2{
+            let tremorResults = dataInterface.getTremorData()
+            var tremorMags:[Double] = []
+            let x = Array(stride(from: 0, to: tremorResults.count, by:1)).map {Double($0)}
+            
+            for tremRes in tremorResults{
+                tremorMags.append(Double(tremRes.tremorMagnitude))
+            }
+            
+            cell.loadSingleLineDataChart(xVals: x, yVals: tremorMags, length: x.count)
+            
+            for label in cell.latestScoreLabels {
+                cell.latestScoreLabels.first?.adjustsFontSizeToFitWidth = true
+                let latestResult = tremorResults.last?.tremorMagnitude ?? -1
+                var displayResult = String(format: "%.2f", latestResult)
+                if latestResult == -1{
+                    displayResult = "N/A"
+                }
+                label.text = displayResult
+                //label.text = String(format: "%@ - %@", self.getFormattedFrequency(with: audioResults.last!.lowFrequencyAtMaxdB) , self.getFormattedFrequency(with: audioResults.last!.highFrequencyAtMaxdB))
+            }
+            for unit in cell.scoreUnitsLabels {
+                unit.text = "Tremor"
+            }
+            
+            if tremorResults.count > 0 {
+                last = tremorResults.last?.timeRecorded ?? Date()
+                cell.lastCheckupLabel.text = last.timeAgoDisplay()
+            }else{
+                cell.lastCheckupLabel.text = "N/A"
+            }
+            
+        }
+        
         
         
         cell.takeTestAction = {(cell) in
@@ -151,6 +230,18 @@ extension FoldingCellsViewController {
         }
         return cell
     }
+    
+    func computeNewDate(from fromDate: Date, to toDate: Date) -> Date  {
+        let delta = toDate.timeIntervalSince(fromDate)
+        print("Delta: \(delta)")
+        let today = Date()
+        if delta < 0 {
+            return today
+        }else {
+            return today.addingTimeInterval(delta)
+        }
+    }
+    
 
     override func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeights[indexPath.row]
@@ -187,4 +278,12 @@ extension FoldingCellsViewController {
         }, completion: nil)
     }
 
+}
+
+extension Date {
+    func timeAgoDisplay() -> String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return formatter.localizedString(for: self, relativeTo: Date())
+    }
 }
