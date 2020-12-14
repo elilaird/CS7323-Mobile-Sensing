@@ -340,12 +340,13 @@
                                     <action selector="cancelButtonclick:" destination="QUq-nc-a4A" eventType="touchUpInside" id="R3C-7A-MmJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the vision test.   Here, we will test your ability to distinguish colors. Can you tell the difference in the colors?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q11-SE-OwD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q11-SE-OwD">
                                 <rect key="frame" x="32" y="144" width="350" height="132"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="132" id="UQ0-dj-4mL"/>
                                     <constraint firstAttribute="width" constant="350" id="vNE-VD-4Q0"/>
                                 </constraints>
+                                <string key="text">Welcome to the vision test.   Here, we will test your ability to distinguish colors. Can you tell the difference in the colors in the two squares below?</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
