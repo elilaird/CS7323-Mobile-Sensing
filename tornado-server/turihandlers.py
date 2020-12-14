@@ -59,8 +59,8 @@ class GetColorDeltaE(BaseHandler):
         pair_names = ['PairA', 'PairB', 'PairC']
 
         def pair_constructor(color_pair):
-            color_a, color_b, delta = color_pair
-            return {'colorA': color_a, 'colorB': color_b, 'deltaE': delta}
+            color_a, color_b = color_pair
+            return {'colorA': str(color_a), 'colorB': str(color_b)}
 
         pair_info = {str(pair_name): pair_constructor(color_pair)
                      for pair_name, color_pair in zip(pair_names, colors)}
@@ -81,7 +81,7 @@ class GetColorDeltaE(BaseHandler):
         if delta_e > 40:
             delta_e = 40
 
-        return [_get_color_with_delta_e(delta_e) for _ in range(n_colors)]
+        return [self._get_color_with_delta_e(delta_e) for _ in range(n_colors)]
 
     def _calculate_delta_e(self, colorA, colorB):
         l1, a1, b1 = colorA
@@ -185,7 +185,7 @@ class GetColorDeltaE(BaseHandler):
 
         # Return in random order to avoid patterns
         color_list = [rgb_start, rgb_end]
-        random.shuffle(color_list)
+        np.random.shuffle(color_list)
         return color_list[0], color_list[1]
 
 
