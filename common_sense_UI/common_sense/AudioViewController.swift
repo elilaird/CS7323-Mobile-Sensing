@@ -11,7 +11,7 @@ import MediaPlayer
 let AUDIO_BUFFER_SIZE = 131072
 let CALIBRATION_FREQUENCY:Float = 3000.0
 let MAX_TEST_FREQUENCY:Float = 20000.0
-let MIN_TEST_FREQUENCY:Float = 50.0
+let MIN_TEST_FREQUENCY:Float = 20.0
 
 
 class AudioViewController: UIViewController, DataDelegate{
@@ -56,7 +56,7 @@ class AudioViewController: UIViewController, DataDelegate{
     var dbHalf:Float = 0.0
     
     enum StartingValues:Float {
-        case High = 15000.0, Low = 600.0
+        case High = 5000.0, Low = 600.0
     }
     
     let darkBlue = UIColor(hex: "#0076b4bd")
@@ -105,6 +105,8 @@ class AudioViewController: UIViewController, DataDelegate{
         
         self.audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
         
+        self.audio.pause()
+        
         self.audio.delegate = self
         
         self.testingFreqLabel.adjustsFontSizeToFitWidth = true
@@ -152,13 +154,17 @@ class AudioViewController: UIViewController, DataDelegate{
     }
     
     @IBAction func cancel(_ sender: Any) {
-        self.audio.pause()
+        DispatchQueue.main.async {
+            self.audio.pause()
+        }
+        //self.audio.pause()
         _ = navigationController?.popToRootViewController(animated: true)
     }
     
     
     func segueToResults(){
         DispatchQueue.main.async {
+            self.audio.pause()
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "AudioResults")
             self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -192,35 +198,57 @@ class AudioViewController: UIViewController, DataDelegate{
             
             var upperBound:Float
             var lowerBound:Float
-            
-            upperBound = self.findUpperBound(withStarting: StartingValues.High.rawValue, andStep: 500.0)
-            print("Found upper bound of \(upperBound)")
-            upperBound = self.findUpperBound(withStarting: upperBound - 500, andStep: 250.0)
-            print("Found upper bound of \(upperBound)")
-
-            lowerBound = self.findLowerBound(withStarting: StartingValues.Low.rawValue, andStep: 200.0)
-            print("Found lower bound of \(lowerBound)")
-            lowerBound = self.findLowerBound(withStarting: lowerBound + 100, andStep: 100.0)
-            print("Found lower bound of \(lowerBound)")
-            
-            //find the bounds with max volume
+       
             var maxVolumeUpperBound:Float
             var maxVolumeLowerBound:Float
             
+            
+            var start:Float = StartingValues.High.rawValue
+            var end:Float = MAX_TEST_FREQUENCY
+            var inc:Float = 1000.0
+            
+            while((end - start) > 100 && (start > 3000.0)){
+                end = self.findUpperBound(withStarting: start, andStopping: end, andStep: inc)
+                print("Found upper bound of \(end)")
+                print("start \(start)")
+                start = end - inc
+                inc = inc / 2
+        
+            }
+            
+            upperBound = end - inc
+
+            
+            start = StartingValues.Low.rawValue
+            end = MIN_TEST_FREQUENCY
+            inc = 200
+            while((start - end) > 100 && (start < StartingValues.High.rawValue)){
+                end = self.findLowerBound(withStarting: start, andStopping: end, andStep: inc)
+                print("Found upper bound of \(end)")
+                print("start \(start)")
+                start = end + inc
+                inc = inc / 2
+                
+            }
+            lowerBound = end + inc
+            
+
             DispatchQueue.main.async {
                 MPVolumeView.setVolume(1.0)
             }
             
-            maxVolumeUpperBound = self.findUpperBound(withStarting: upperBound, andStep: 100.0)
-            print("Max volume upper bound of \(maxVolumeUpperBound)")
-            maxVolumeLowerBound = self.findLowerBound(withStarting: lowerBound, andStep: 50.0)
-            print("Max volume lower bound of \(maxVolumeLowerBound)")
+      
             
+            maxVolumeUpperBound = self.findUpperBound(withStarting: upperBound, andStopping: MAX_TEST_FREQUENCY, andStep: 100.0)
+            print("Max volume upper bound of \(maxVolumeUpperBound)")
+            maxVolumeLowerBound = self.findLowerBound(withStarting: lowerBound, andStopping: MIN_TEST_FREQUENCY, andStep: 50.0)
+            print("Max volume lower bound of \(maxVolumeLowerBound)")
+
             DispatchQueue.main.async {
                 self.waitLabel.isHidden = true
             }
             
-            self.dataInterface.saveAudioData(lowFrequencyAtdB: lowerBound, highFrequencyAtdB: upperBound, dB: self.dbHalf, lowFrequencyAtMaxdB: maxVolumeLowerBound, highFrequencyAtMaxdB: maxVolumeUpperBound, maxdB: self.dbMax)
+            self.dataInterface.saveAudioData(lowFrequencyAtdB: lowerBound, highFrequencyAtdB: end, dB: self.dbHalf, lowFrequencyAtMaxdB: maxVolumeLowerBound, highFrequencyAtMaxdB: maxVolumeUpperBound, maxdB: self.dbMax)
 
             self.segueToResults()
         }
@@ -231,7 +259,7 @@ class AudioViewController: UIViewController, DataDelegate{
     var testResults:[(frequency: Float, heard: Bool)] = []
     
     //MARK: Find upper bound
-    func findUpperBound(withStarting frequency:Float, andStep increment:Float) -> (Float) {
+    func findUpperBound(withStarting frequency:Float, andStopping endFreq:Float, andStep increment:Float) -> (Float) {
         var TESTING_HIGH = true
         var TESTING_FREQUENCY:Float = frequency
         let TEST_INCREMENT:Float = increment
@@ -245,7 +273,7 @@ class AudioViewController: UIViewController, DataDelegate{
             
             self.audio.startSinewaveProcessing(withFreq: TESTING_FREQUENCY)
             
-            while(TESTING_HIGH && (TESTING_FREQUENCY <= MAX_TEST_FREQUENCY)){
+            while(TESTING_HIGH && (TESTING_FREQUENCY <= endFreq)){
 
                 //show "Can you hear the sound?", "Yes/No" buttons, and testing frequency
                 DispatchQueue.main.async {
@@ -302,7 +330,7 @@ class AudioViewController: UIViewController, DataDelegate{
     }
     
     //MARK: Find lower bound
-    func findLowerBound(withStarting frequency:Float, andStep increment:Float) -> (Float) {
+    func findLowerBound(withStarting frequency:Float, andStopping end:Float, andStep increment:Float) -> (Float) {
         var TESTING_LOW = true
         var TESTING_FREQUENCY:Float = frequency
         let TEST_INCREMENT:Float = increment
