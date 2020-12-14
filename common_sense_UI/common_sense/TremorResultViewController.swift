@@ -48,10 +48,8 @@ class TremorResultController: UIViewController {
         
         let tremorResults = dataInterface.getTremorData()
         let firstTime = tremorResults.first?.timeRecorded ?? Date()
-        let mostRecentTime = tremorResults.last?.timeRecorded ?? Date()
         let sinceFirstTime = firstTime.timeAgoDisplay()
-        let sinceMostRecentTime = mostRecentTime.timeAgoDisplay()
-        self.graphRangeLabel.text = "From " + sinceFirstTime + " to " + sinceMostRecentTime
+        self.graphRangeLabel.text = "From " + sinceFirstTime + " to now"
         self.graphRangeLabel.adjustsFontSizeToFitWidth = true
         
         // - Function Call, both arrays have to be doubles so you may have to map them

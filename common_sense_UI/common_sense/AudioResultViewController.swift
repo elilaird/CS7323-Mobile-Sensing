@@ -51,10 +51,8 @@ class AudioResultViewController: UIViewController {
         }
         
         let firstTime = audioResults.first?.timeRecorded ?? Date()
-        let mostRecentTime = audioResults.last?.timeRecorded ?? Date()
         let sinceFirstTime = firstTime.timeAgoDisplay()
-        let sinceMostRecentTime = mostRecentTime.timeAgoDisplay()
-        self.graphRangeLabel.text = "From " + sinceFirstTime + " to " + sinceMostRecentTime
+        self.graphRangeLabel.text = "From " + sinceFirstTime + " to now"
         self.graphRangeLabel.adjustsFontSizeToFitWidth = true
         
         generateChart(xValsLow: x, yValsLow: yLow, xValsHigh: x, yValsHigh: yHigh, length: x.count)
